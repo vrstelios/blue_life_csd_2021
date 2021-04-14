@@ -658,7 +658,7 @@ article input[type=submit]:hover {
     background-color: #d4fafa;
 }
 .SignIn .login-img {
-    background-image: url("images/sea-2361247_1920.jpg");
+    background-image: url("images/sup-1838969_1920.jpg");
     min-height: 880px;
     background-position: center;
     background-repeat: no-repeat;
@@ -707,7 +707,7 @@ article input[type=submit]:hover {
     text-align: left;
     position: relative;
     top: -90px;
-    left: 510px;
+    left: 580px;
     width: 100000px;
     padding: 20px 30px;
     margin: 500px  22px ;
@@ -739,7 +739,7 @@ article input[type=submit]:hover {
 .SignIn .btn_login{
     position: relative;
     top: 120px;
-    left: 25px;
+    left: -45px;
     background-color: #1687a7;
     color: white;
     padding: 20px 140px;
@@ -751,7 +751,7 @@ article input[type=submit]:hover {
 
 .SignIn .btn_SignUp{
     top: 200px;
-    left: -320px;
+    left: -380px;
     position: relative;
     white-space: nowrap;
     text-align: center;
@@ -775,7 +775,7 @@ article input[type=submit]:hover {
     text-align: center;
     position: relative;
     top: 240px;
-    left: -648px;
+    left: -710px;
     font-family: "Montserrat", sans-serif;
     border: 0px solid ;
     color: #1687a7;
@@ -808,7 +808,7 @@ article input[type=submit]:hover {
 }
 
 .SignUp .login-img {
-    background-image: url("images/dolphin-203875_1920.jpg");
+    background-image: url("images/water-3109863_1920.jpg");
     min-height: 880px;
     background-position: center;
     background-repeat: no-repeat;
@@ -831,15 +831,15 @@ article input[type=submit]:hover {
     box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
 }
 .SignUp .register{
-    font-size: 40px;
-    top: 0px;
+    font-size: 20px;
+    top: 17px;
     text-align: center;
     position: absolute;
-    letter-spacing: 0.1rem;
+    /*letter-spacing: 0.1rem;
     text-decoration: underline;
     -webkit-transition: color 0.2s ease-in-out;
     transition: color 0.2s ease-in-out;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif;*/
 }
 .SignUp .user{
     font-weight: bold;
@@ -853,7 +853,7 @@ article input[type=submit]:hover {
     text-align: left;
     position: relative;
     top: -135px;
-    left: 381px;
+    left: 681px;
     width: 100000px;
     padding: 13px;
     margin: 500px  22px ;
@@ -876,7 +876,7 @@ article input[type=submit]:hover {
 .SignUp input[type=text_email]{   text-align: left;
     position: relative;
     top: -35px;
-    left: 140px;
+    left: 320px;
     width: 100000px;
     padding: 13px;
     margin: 500px  22px ;
@@ -899,7 +899,7 @@ article input[type=submit]:hover {
 .SignUp .input_pass1{
     position: relative;
     top: 65px;
-    left: -99px;
+    left: -35px;
     width: 100000px;
     padding: 13px;
     margin: 500px  22px ;
@@ -927,7 +927,7 @@ article input[type=submit]:hover {
 .SignUp .input_pass2{
     position: relative;
     top: 170px;
-    left: -339px;
+    left: -394px;
     width: 100000px;
     padding: 13px;
     margin: 500px  22px ;
@@ -939,16 +939,27 @@ article input[type=submit]:hover {
     background: #f7f7f7;
     font-family: Montserrat,Arial, Helvetica, sans-serif;
 }
-
-.SignUp .btn_register {
+.SignUp .btn_back{
+    white-space: nowrap;
+    text-align: center;
     border-radius: 9px;
     position: relative;
     top: 276px;
-    left: -348px;
+    left: -841px;
     background-color: #1687a7;
     color: white;
     padding: 10px 15px;
 }
+.SignUp .btn_register {
+    border-radius: 9px;
+    position: relative;
+    top: 276px;
+    left: -500px;
+    background-color: #1687a7;
+    color: white;
+    padding: 10px 15px;
+}
+
 /*--- Για την εγγραφή ---*/
 
 
