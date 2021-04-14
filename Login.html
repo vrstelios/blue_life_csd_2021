@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blue Life - Είσοδος</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Blue Life</h1>
+</header>
+
+<nav>
+    <div class="navbar">
+        <a href="Home.html#home">Αρχική</a>
+        <div class="dropdown">
+            <button class="dropbtn">Κατηγορίες</button>
+            <div class="dropdown-content">
+                <a href="Oceans.html" target="_self">Ωκεανοί</a>
+                <a href="Lakes-Wetlands.html">Λίμνες/Υδροβιότοποι</a>
+                <a href="Rivers.html">Ποτάμια</a>
+                <a href="Animals.html">Ζώα στο νερό</a>
+                <a href="Fishing.html">Αλιεία/Εμπόριο</a>
+            </div>
+        </div>
+        <a href="Actions.html">Δράσεις</a>
+        <a href="Did-you-know-that.html">Ήξερες ότι...</a>
+        <a href="Contact.html">Επικοινωνία</a>
+        <a href="Login.html">Είσοδος/Εγγραφή</a>
+        <a href="#search"><img src="images/social/magnifying-glass-white.png" height="16" width="16"
+                               onmouseover="this.src='images/social/magnifying-glass-blue.png';"
+                               onmouseout="this.src='images/social/magnifying-glass-white.png';"/></a>
+    </div>
+</nav>
+
+<article>
+    <h2>Είσοδος</h2>
+    <div class="container">
+        <div class="image">
+            <img src="images/dolphin-203875_1920.jpg" height="320" width="405"/>
+        </div>
+        <div class="text">
+            Τι; Δεν έχεις λογαρισμό; Κάνε εγγραφή τώρααααα...
+            <button type="button" onclick="location.href='Register.html';" >Εγγραφή</button>
+            <p> Η ολοένα και μεγαλύτερη αύξηση των θαλάσσιων απορριμμάτων έχει προκαλέσει αύξηση στα επίπεδα της μόλυνσης των
+                υδάτων. Εμείς θα θέλαμε να ενημερώσουμε τον κόσμο και να γίνουμε όλοι μαζί πιο ενεργοί/δραστήριοι στο να μείνουν
+                οι θάλασσές μας καθαρές. Το θέμα της ιστοσελίδας που θα αναπτύξουμε είναι η ζωή στο νερό. Επιλέξαμε το
+                συγκεκριμένο θέμα με σκοπό την ευαισθητοποίηση του κόσμου στην προστασία του υδάτινου κόσμου. Στόχος μας είναι
+                να αναδείξουμε τη σπουδαιότητα του νερού για τη ζωή και την ανάπτυξη του πλανήτη μας. Η ιστοσελίδα θα έχει ως
+                βασικό άξονα την ενημέρωση των χρηστών, καθώς και την ενεργή συμμετοχή τους σε διάφορα projects και δράσεις για
+                την εξασφάλιση της ποιότητας των υδάτινων πόρων μας. Οι ενέργειες αυτές σχετίζονται με κάποιους βασικούς τομείς
+                – κατηγορίες της υδάτινης ζωής, όπως ωκεανοί, αλιεία κτλ. Οι χρήστες θα χωρίζονται σε δύο κατηγορίες: στους
+                απλούς χρήστες/εθελοντές και στους διοργανωτές/υπεύθυνους των δράσεων.</p>
+        </div>
+    </div>
+</article>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<script>
+    //Get the button
+    var mybutton = document.getElementById("myBtn");
+    var rootElement = document.documentElement;
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        rootElement.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+        /*document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+         */
+    }
+</script>
+
+
+<footer>
+    <div class="grid-container">
+        <div class="left">Ποιοι είμαστε <br><br>
+            <a>μπλα μπλα μπλα μπλα</a>                <br>
+        </div>
+
+        <div class="middle">SITEMAP <br>
+            <ul>
+                <li><a href="#"> Αρχική </a></li>
+                <li><a href="#"> Ωκεανοί</a></li>
+                <li><a href="#"> Λίμνες/Ποτάμια</a></li>
+                <li><a href="#"> Υδροβιότοποι</a></li>
+                <li><a href="#"> Ζώα στο νερό</a></li>
+                <li><a href="#"> Αλιεία/Εμπόριο</a></li>
+                <li><a href="#"> Δράσεις </a></li>
+                <li><a href="#"> Ήξερες ότι... </a></li>
+                <li><a href="https://iceless.info/"> Επικοινωνία </a></li>
+                <li><a href="#"> Είσοδος/Εγγραφή </a></li>
+            </ul>
+        </div>
+
+        <div class="right">Βρείτε μας <br><br>
+            <a> Τηλέφωνο 6912345678 </a><br>
+            <a> Email bluelife@gmail.com </a><br>
+            <a href="https://www.facebook.com/">
+                <img src="images/social/icons8-facebook-48.png" alt="facebook" title="facebbok">
+            </a>
+            <a href="https://www.instagram.com/">
+                <img src="images/social/icons8-instagram-48.png" alt="instagram" title="instagram">
+            </a>
+        </div>
+        <div class="footer"><br>
+            <p>BlueLife&copy;</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

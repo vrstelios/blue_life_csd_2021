@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blue Life - Επικοινωνία</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Blue Life</h1>
+</header>
+
+<!---------------Navigation bar--------------->
+<nav>
+    <div class="navbar" id="navbar">
+        <a href="Home.html#home">Αρχική</a>
+        <div class="dropdown">
+            <button class="dropbtn">Κατηγορίες</button>
+            <div class="dropdown-content">
+                <a href="Oceans.html" target="_self">Ωκεανοί</a>
+                <a href="Lakes-Wetlands.html">Λίμνες/Υδροβιότοποι</a>
+                <a href="Rivers.html">Ποτάμια</a>
+                <a href="Animals.html">Ζώα στο νερό</a>
+                <a href="Fishing.html">Αλιεία/Εμπόριο</a>
+            </div>
+        </div>
+        <a href="Actions.html">Δράσεις</a>
+        <a href="Did-you-know-that.html">Ήξερες ότι...</a>
+        <a href="Contact.html">Επικοινωνία</a>
+        <a href="Login.html">Είσοδος/Εγγραφή</a>
+        <div class="search-box">
+            <input type="text" class="search-box-input" placeholder="Αναζήτησε..">
+            <button class="search-box-btn">
+                <i class="search-box-icon material-icons"><img src="images/social/magnifying-glass-white.png" style="width:16px;height:16px "></i>
+            </button>
+        </div>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("navbar");
+            if (x.className === "navbar") {
+                x.className += " responsive";
+            } else {
+                x.className = "navbar";
+            }
+        }
+    </script>
+</nav>
+
+<!---------------Title section--------------->
+<div class="page-title">
+    <div class='vidContain'>
+        <div class='vid'>
+            <img src="images/fish-378286_1920.jpg" width="100%">
+        </div>
+        <h2>Επικοινωνία</h2>
+    </div>
+</div>
+
+<!---------------Επικοινωνία--------------->
+<article>
+    <h2>Με ενδιαφέρον περιμένουμε τις σκέψεις σας</h2>
+    <form action="forma">
+        <label for="fname">Όνομα</label><br>
+        <input type="text" id="fname" placeholder="Το όνομά σου..."><br>
+        <label for="lname">Επώνυμο</label><br>
+        <input type="text" id="lname" placeholder="Το επίθετό σου..."><br>
+        <label for="email">Email</label><br>
+        <input type="text" id="email" placeholder="Το email σου..."><br>
+        <label for="subject">Σχόλια</label><br>
+        <textarea id="subject" name="subject" placeholder="Τα σχόλιά σου..." style="height:160px"></textarea>
+        <input type="submit" value="Υποβολή">
+    </form>
+</article>
+
+<div class="gallery">
+    <div class="box">
+        <span style="--i:1;"><img src="images/gallery%203d/dolphin.jpg"></span>
+        <span style="--i:2;"><img src="images/gallery%203d/dolphin.jpg"></span>
+        <span style="--i:3;"><img src="images/gallery%203d/dolphin.jpg"></span>
+        <span style="--i:4;"><img src="images/gallery%203d/dolphin.jpg"></span>
+        <span style="--i:5;"><img src="images/gallery%203d/dolphin.jpg"></span>
+        <span style="--i:6;"><img src="images/gallery%203d/dolphin.jpg"></span>
+        <span style="--i:7;"><img src="images/gallery%203d/dolphin.jpg"></span>
+        <span style="--i:8;"><img src="images/gallery%203d/dolphin.jpg"></span>
+    </div>
+</div>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Up<img src="images/social/up.png" width="20px"></button>
+<script>
+    //Get the button
+    var mybutton = document.getElementById("myBtn");
+    var rootElement = document.documentElement;
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        rootElement.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+        /*document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+         */
+    }
+</script>
+
+
+<footer>
+    <div class="grid-container">
+        <div class="left">Ποιοι είμαστε <br><br>
+            <a>μπλα μπλα μπλα μπλα</a>                <br>
+        </div>
+
+        <div class="middle">SITEMAP <br>
+            <ul>
+                <li><a href="#"> Αρχική </a></li>
+                <li><a href="#"> Ωκεανοί</a></li>
+                <li><a href="#"> Λίμνες/Ποτάμια</a></li>
+                <li><a href="#"> Υδροβιότοποι</a></li>
+                <li><a href="#"> Ζώα στο νερό</a></li>
+                <li><a href="#"> Αλιεία/Εμπόριο</a></li>
+                <li><a href="#"> Δράσεις </a></li>
+                <li><a href="#"> Ήξερες ότι... </a></li>
+                <li><a href="https://iceless.info/"> Επικοινωνία </a></li>
+                <li><a href="#"> Είσοδος/Εγγραφή </a></li>
+            </ul>
+        </div>
+
+        <div class="right">Βρείτε μας <br><br>
+            <a> Τηλέφωνο 6912345678 </a><br>
+            <a> Email bluelife@gmail.com </a><br>
+            <a href="https://www.facebook.com/">
+                <img src="images/social/icons8-facebook-48.png" alt="facebook" title="facebbok">
+            </a>
+            <a href="https://www.instagram.com/">
+                <img src="images/social/icons8-instagram-48.png" alt="instagram" title="instagram">
+            </a>
+        </div>
+        <div class="footer"><br>
+            <p>BlueLife&copy;</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
