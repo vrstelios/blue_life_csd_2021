@@ -11,15 +11,16 @@
     <h1>Blue Life</h1>
 </header>
 
+<!---------------Navigation bar--------------->
 <nav>
-    <div class="navbar">
+    <div class="navbar" id="navbar">
         <a href="Home.html#home">Αρχική</a>
         <div class="dropdown">
             <button class="dropbtn">Κατηγορίες</button>
             <div class="dropdown-content">
-                <a href="Oceans.html" target="_self">Ωκεανοί</a>
-                <a href="Lakes-Wetlands.html">Λίμνες/Υδροβιότοποι</a>
-                <a href="Rivers.html">Ποτάμια</a>
+                <a href="Oceans.html">Ωκεανοί</a>
+                <a href="Lakes-Rivers.html">Λίμνες/Ποτάμια</a>
+                <a href="Wetlands.html">Υδροβιότοποι</a>
                 <a href="Animals.html">Ζώα στο νερό</a>
                 <a href="Fishing.html">Αλιεία/Εμπόριο</a>
             </div>
@@ -28,33 +29,61 @@
         <a href="Did-you-know-that.html">Ήξερες ότι...</a>
         <a href="Contact.html">Επικοινωνία</a>
         <a href="Login.html">Είσοδος/Εγγραφή</a>
-        <a href="#search"><img src="images/social/magnifying-glass-white.png" height="16" width="16"
-                               onmouseover="this.src='images/social/magnifying-glass-blue.png';"
-                               onmouseout="this.src='images/social/magnifying-glass-white.png';"/></a>
+        <div class="search-box">
+            <input type="text" class="search-box-input" placeholder="Αναζήτησε..">
+            <button class="search-box-btn">
+                <i class="search-box-icon material-icons"><img src="images/social/magnifying-glass-white.png" style="width:16px;height:16px "></i>
+            </button>
+        </div>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
     </div>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("navbar");
+            if (x.className === "navbar") {
+                x.className += " responsive";
+            } else {
+                x.className = "navbar";
+            }
+        }
+    </script>
 </nav>
 
-<article>
-    <h2>Εγγραφή</h2>
-    <div class="container">
-        <div class="image">
-            <img src="images/dolphin-203875_1920.jpg" height="320" width="405"/>
+<!---------------Title section--------------->
+<div class="page-title">
+    <div class='vidContain'>
+        <div class='vid'>
+            <video autoplay muted loop>
+                <source src="images/4.%20Did-you-know-that/Underwater2.mp4">
+            </video>
         </div>
-        <div class="text">
-            Τι; Έχεις λογαρισμό; Ε μπες ντεεεε...
-            <button type="button" onclick="location.href='Login.html';" >Είσοδος</button>
-            <p> Η ολοένα και μεγαλύτερη αύξηση των θαλάσσιων απορριμμάτων έχει προκαλέσει αύξηση στα επίπεδα της μόλυνσης των
-                υδάτων. Εμείς θα θέλαμε να ενημερώσουμε τον κόσμο και να γίνουμε όλοι μαζί πιο ενεργοί/δραστήριοι στο να μείνουν
-                οι θάλασσές μας καθαρές. Το θέμα της ιστοσελίδας που θα αναπτύξουμε είναι η ζωή στο νερό. Επιλέξαμε το
-                συγκεκριμένο θέμα με σκοπό την ευαισθητοποίηση του κόσμου στην προστασία του υδάτινου κόσμου. Στόχος μας είναι
-                να αναδείξουμε τη σπουδαιότητα του νερού για τη ζωή και την ανάπτυξη του πλανήτη μας. Η ιστοσελίδα θα έχει ως
-                βασικό άξονα την ενημέρωση των χρηστών, καθώς και την ενεργή συμμετοχή τους σε διάφορα projects και δράσεις για
-                την εξασφάλιση της ποιότητας των υδάτινων πόρων μας. Οι ενέργειες αυτές σχετίζονται με κάποιους βασικούς τομείς
-                – κατηγορίες της υδάτινης ζωής, όπως ωκεανοί, αλιεία κτλ. Οι χρήστες θα χωρίζονται σε δύο κατηγορίες: στους
-                απλούς χρήστες/εθελοντές και στους διοργανωτές/υπεύθυνους των δράσεων.</p>
-        </div>
+        <h2>Εγγραφή</h2>
     </div>
-</article>
+</div>
+
+<!---------------Εγγραφή--------------->
+<div class="SignUp">
+    <div class="login-img">
+        <form action="/action_page.php" class="container container_page_register">
+            <h3 class="register">Εγγραφή</h3>
+
+            <label class="user">Όνομα χρήστη</label>
+            <input  type="text_name" placeholder="Γράψε όνομα" required?>
+
+            <label class="email_register">Διεύθυνση email</label>
+            <input type="text_email" placeholder="Γράψε email" required>
+
+            <label class="pass1">Κωδικός</label>
+            <input type="password"  class="input_pass1" placeholder="Γράψε κωδικό" required>
+
+            <label class="pass2">Επαλήθευση κωδικού</label>
+            <input type="password" class="input_pass2" placeholder="Γράψε κωδικό" required>
+
+            <button class="btn_register">Εγγραφή</button>
+        </form>
+    </div>
+</div>
 
 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 <script>

@@ -11,15 +11,16 @@
     <h1>Blue Life</h1>
 </header>
 
+<!---------------Navigation bar--------------->
 <nav>
-    <div class="navbar">
+    <div class="navbar" id="navbar">
         <a href="Home.html#home">Αρχική</a>
         <div class="dropdown">
             <button class="dropbtn">Κατηγορίες</button>
             <div class="dropdown-content">
                 <a href="Oceans.html" target="_self">Ωκεανοί</a>
-                <a href="Lakes-Wetlands.html">Λίμνες/Υδροβιότοποι</a>
-                <a href="Rivers.html">Ποτάμια</a>
+                <a href="Lakes-Rivers.html">Λίμνες/Ποτάμια</a>
+                <a href="Wetlands.html">Υδροβιότοποι</a>
                 <a href="Animals.html">Ζώα στο νερό</a>
                 <a href="Fishing.html">Αλιεία/Εμπόριο</a>
             </div>
@@ -28,39 +29,70 @@
         <a href="Did-you-know-that.html">Ήξερες ότι...</a>
         <a href="Contact.html">Επικοινωνία</a>
         <a href="Login.html">Είσοδος/Εγγραφή</a>
-        <a href="#search"><img src="images/social/magnifying-glass-white.png" height="16" width="16"
-                               onmouseover="this.src='images/social/magnifying-glass-blue.png';"
-                               onmouseout="this.src='images/social/magnifying-glass-white.png';"/></a>
+        <div class="search-box">
+            <input type="text" class="search-box-input" placeholder="Αναζήτησε..">
+            <button class="search-box-btn">
+                <i class="search-box-icon material-icons"><img src="images/social/magnifying-glass-white.png" style="width:16px;height:16px "></i>
+            </button>
+        </div>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
     </div>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("navbar");
+            if (x.className === "navbar") {
+                x.className += " responsive";
+            } else {
+                x.className = "navbar";
+            }
+        }
+    </script>
 </nav>
 
-<article>
-    <h2>Ωκεανοί</h2>
-    <div class="container">
-        <div class="image">
-            <img src="images/dolphin-203875_1920.jpg" height="320" width="405"/>
+<!---------------Title section--------------->
+<div class="page-title">
+    <div class='vidContain'>
+        <div class='vid'>
+            <video autoplay muted loop>
+                <source src="images/3.%20Actions/Underwater.mp4">
+            </video>
         </div>
-        <div class="text">
-            <p> Η ολοένα και μεγαλύτερη αύξηση των θαλάσσιων απορριμμάτων έχει προκαλέσει αύξηση στα επίπεδα της μόλυνσης των
-                υδάτων. Εμείς θα θέλαμε να ενημερώσουμε τον κόσμο και να γίνουμε όλοι μαζί πιο ενεργοί/δραστήριοι στο να μείνουν
-                οι θάλασσές μας καθαρές. Το θέμα της ιστοσελίδας που θα αναπτύξουμε είναι η ζωή στο νερό. Επιλέξαμε το
-                συγκεκριμένο θέμα με σκοπό την ευαισθητοποίηση του κόσμου στην προστασία του υδάτινου κόσμου. Στόχος μας είναι
-                να αναδείξουμε τη σπουδαιότητα του νερού για τη ζωή και την ανάπτυξη του πλανήτη μας. Η ιστοσελίδα θα έχει ως
-                βασικό άξονα την ενημέρωση των χρηστών, καθώς και την ενεργή συμμετοχή τους σε διάφορα projects και δράσεις για
-                την εξασφάλιση της ποιότητας των υδάτινων πόρων μας. Οι ενέργειες αυτές σχετίζονται με κάποιους βασικούς τομείς
-                – κατηγορίες της υδάτινης ζωής, όπως ωκεανοί, αλιεία κτλ. Οι χρήστες θα χωρίζονται σε δύο κατηγορίες: στους
-                απλούς χρήστες/εθελοντές και στους διοργανωτές/υπεύθυνους των δράσεων.</p>
-        </div>
+        <h2>Ωκεανοί</h2>
     </div>
-</article>
+</div>
 
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<!---------------Ωκεανοί--------------->
+<div class="category_content">
+    <h2>Ζώα</h2>
+    <p>H αλιεία είναι μια δραστηριότητα ζωτικής σημασίας για τις κοινότητες των νησιωτικών και παράκτιων περιοχών
+        στην Ελλάδα εδώ και πολλές χιλιάδες χρόνια. Αρχαιοζωολογικές μελέτες έχουν δείξει ότι τα είδη των ψαριών
+        που αλιεύονταν από τους ψαράδες του Αιγαίου 10.000 χρόνια πριν, είναι σε μεγάλο βαθμό τα ίδια με τα είδη
+        που αποτελουν στόχο για τους παράκτιους αλιείς έως σήμερα.<br>
+        Ωστόσο, κατά τις τελευταίες δύο δεκαετίες, οι αλιευτικοί πόροι υπεραλιεύονται συχνά με τη χρήση καταστροφικών
+        πρακτικών. Αν δεν ληφθούν δραστικά και αποτελεσματικά μέτρα, ο κλάδος της αλιείας θα αντιμετωπίσει τον κίνδυνο
+        της κατάρρευσης, με σημαντικές κοινωνικό-οικονομικές και οικολογικές επιπτώσεις για τις νησιωτικές και τις
+        παράκτιες κοινωνίες.<br>
+        Οι κύριοι λόγοι για τη δραστική μείωση των ιχθυαποθεμάτων είναι η υπεραλίευση, η καταστροφή των παραγωγικών
+        θαλάσσιων οικοτόπων, η αυξανόμενη χρήση πρακτικών καταστροφικής και παράνομης αλιείας, τα εισβολικά θαλάσσια είδη,
+        η ρύπανση και η κλιματική αλλαγή. Η Μεσόγειος θεωρείται μία από τις πλέον υπεραλιευμένες θάλασσες στον κόσμο.
+        Σύμφωνα με τον Ευρωπαϊκό Οργανισμό Περιβάλλοντος, περισσότερο από το 65% των ιχθυαποθεμάτων της Μεσογείου
+        βρίσκονται εκτός των ασφαλών βιολογικών ορίων.<br>
+        Οι εκφορτώσεις στη Μεσόγειο έχουν μειωθεί κατά 30% τα τελευταία 10 χρόνια. Παρόλο που τα διαθέσιμα δεδομένα
+        για την κατάσταση των ιχθυαποθεμάτων και των εκφορτώσεων για τις ελληνικές θάλασσες είναι περιορισμένα,
+        έρευνα του Αρχιπελάγους στο ανατολικό Αιγαίο κατέγραψε μεταξύ του 2009 και του 2011, δραστική μείωση των
+        εκφορτώσεων της παράκτιας αλιείας που ξεπερνούσε το 50%.
+        Το αποτέλεσμα των δεκαετιών λαθεμένων εθνικών και ευρωπαϊκών πολιτικών στον κλάδο της αλιείας, είναι σήμερα
+        οι αλιείς να χρησιμοποιούν ολοένα μεγαλύτερα και πιο γρήγορα σκάφη, να μεταχειρίζονται σε μεγάλο βαθμό βελτιωμένες
+        μεθόδους και τεχνολογία, για να αλιεύουν ολοένα και λιγότερα ψάρια!</p>
+</div>
+
+<!-----------------Go to top button----------------->
+<button onclick="topFunction()" id="myBtn" title="Go to top"><img src="images/social/up-arrow.png" height="24px"></button>
 <script>
-    //Get the button
     var mybutton = document.getElementById("myBtn");
     var rootElement = document.documentElement;
 
-    // When the user scrolls down 20px from the top of the document, show the button
     window.onscroll = function() {scrollFunction()};
 
     function scrollFunction() {
@@ -71,15 +103,11 @@
         }
     }
 
-    // When the user clicks on the button, scroll to the top of the document
     function topFunction() {
         rootElement.scrollTo({
             top: 0,
             behavior: "smooth"
         })
-        /*document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-         */
     }
 </script>
 

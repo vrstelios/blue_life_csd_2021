@@ -11,6 +11,7 @@
     <br><h1>Blue Life</h1><br>
 </header>
 
+<!---------------Navigation bar--------------->
 <nav>
     <div class="navbar" id="navbar">
         <a href="Home.html#home">Αρχική</a>
@@ -18,8 +19,8 @@
             <button class="dropbtn">Κατηγορίες</button>
             <div class="dropdown-content">
                 <a href="Oceans.html" target="_self">Ωκεανοί</a>
-                <a href="Lakes-Wetlands.html">Λίμνες/Υδροβιότοποι</a>
-                <a href="Rivers.html">Ποτάμια</a>
+                <a href="Lakes-Rivers.html">Λίμνες/Ποτάμια</a>
+                <a href="Wetlands.html">Υδροβιότοποι</a>
                 <a href="Animals.html">Ζώα στο νερό</a>
                 <a href="Fishing.html">Αλιεία/Εμπόριο</a>
             </div>
@@ -49,7 +50,8 @@
     </script>
 </nav>
 
-<div class="page-title">
+<!---------------Title section--------------->
+<div class="home-page-title">
     <div class='vidContain'>
         <div class='vid'>
             <video autoplay muted loop>
@@ -203,13 +205,12 @@
 </article>
 
 
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<!-----------------Go to top button----------------->
+<button onclick="topFunction()" id="myBtn" title="Go to top"><img src="images/social/up-arrow.png" height="24px"></button>
 <script>
-    //Get the button
     var mybutton = document.getElementById("myBtn");
     var rootElement = document.documentElement;
 
-    // When the user scrolls down 20px from the top of the document, show the button
     window.onscroll = function() {scrollFunction()};
 
     function scrollFunction() {
@@ -220,15 +221,11 @@
         }
     }
 
-    // When the user clicks on the button, scroll to the top of the document
     function topFunction() {
         rootElement.scrollTo({
             top: 0,
             behavior: "smooth"
         })
-        /*document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-         */
     }
 </script>
 
