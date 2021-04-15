@@ -66,32 +66,33 @@
 <div class="SignUp">
     <div class="login-img">
         <form action="/action_page.php" class="container container_page_register">
-            <h3 class="register">Εγγραφή</h3>
+             <h3 class="register">Δημιουργίσε τον λογαριασμό σου</h3>
 
             <label class="user">Όνομα χρήστη</label>
-            <input  type="text_name" placeholder="Γράψε όνομα" required?>
+            <input  type="text_name" placeholder="Γράψε όνομα" size="37" required?>
 
             <label class="email_register">Διεύθυνση email</label>
-            <input type="text_email" placeholder="Γράψε email" required>
+            <input type="text_email" placeholder="Γράψε email" size="37" required>
 
             <label class="pass1">Κωδικός</label>
-            <input type="password"  class="input_pass1" placeholder="Γράψε κωδικό" required>
+            <input type="password"  class="input_pass1" placeholder="Γράψε κωδικό" size="37" required>
 
             <label class="pass2">Επαλήθευση κωδικού</label>
-            <input type="password" class="input_pass2" placeholder="Γράψε κωδικό" required>
+            <input type="password" class="input_pass2" placeholder="Γράψε κωδικό" size="37" required>
 
             <button class="btn_register">Εγγραφή</button>
+
+            <button class="btn_back">Σύνδεση με λογαριασμό</button>
         </form>
     </div>
 </div>
 
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<!-----------------Go to top button----------------->
+<button onclick="topFunction()" id="myBtn" title="Go to top"><img src="images/social/up-arrow.png" height="24px"></button>
 <script>
-    //Get the button
     var mybutton = document.getElementById("myBtn");
     var rootElement = document.documentElement;
 
-    // When the user scrolls down 20px from the top of the document, show the button
     window.onscroll = function() {scrollFunction()};
 
     function scrollFunction() {
@@ -102,17 +103,14 @@
         }
     }
 
-    // When the user clicks on the button, scroll to the top of the document
     function topFunction() {
         rootElement.scrollTo({
             top: 0,
             behavior: "smooth"
         })
-        /*document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-         */
     }
 </script>
+
 
 
 <footer>
