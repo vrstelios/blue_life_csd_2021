@@ -318,7 +318,7 @@ article {
     font-family: "Segoe UI";
     text-align: justify;
     font-size: 16px;
-    background-color: #d4fafa;
+    background-color: white;
 }
 
 @media screen and (max-width: 600px) {
@@ -327,7 +327,7 @@ article {
         font-family: "Segoe UI";
         text-align: justify;
         font-size: 16px;
-        background-color: #d4fafa;
+        background-color: white;
     }
 }
 
@@ -466,7 +466,7 @@ img {
     font-family: "Segoe UI";
     text-align: justify;
     font-size: 16px;
-    background-color: #d4fafa;
+    background-color: white;
 }
 
 /*--- Για τις κατηγορίες ---*/
@@ -478,25 +478,11 @@ img {
     justify-content: center;
 }
 
-titlesInPages h2 {
-    padding: 2%;
-    background-color: #d4fafa;
-    font-family: "Segoe UI", serif;
-    color: #1f5362;
-    font-size: 55px;
-    margin-top: 0;
-    background-image: url("images/dolphin-203875_1920.jpg");
-    height:20%;
-}
-
 .action {
-    background-color: #d4fafa;
-    border-style: solid;
-    border-width: thick thick thick thick;
-    border-color: #4361ee;
+    background-color: white;
     height: auto;
     margin-top:3%;
-    text-align: left;
+    text-align: justify;
     padding: 2%;
 }
 
@@ -552,15 +538,14 @@ h3 {
 }
 
 .actionIntro {
-    background-color: #9bf6ff;
+    background-color: white;
     font-size: 20px;
     width: 100%;
     height: auto;
     border-width: 0 0 0 0;
-    padding: 1% 2% 1% 2%;
+    padding: 1% 18% 1% 18%;
     font-family: "Segoe UI";
     text-align: justify;
-    font-size: 16px;
 }
 
 .smallImage {
@@ -578,14 +563,14 @@ h3 {
     font-family: "Segoe UI";
     text-align: justify;
     font-size: 16px;
-    background-color: #d4fafa;
+    background-color: white;
 }
 .did-you-know-that  ul {
     padding: 2%;
     font-family: "Segoe UI";
     text-align: justify;
     font-size: 16px;
-    background-color: #d4fafa;
+    background-color: white;
 }
 .did-you-know-that  li {
     font-family:"Calibri";
@@ -655,7 +640,7 @@ article input[type=submit]:hover {
     font-family: "Segoe UI";
     text-align: justify;
     font-size: 16px;
-    background-color: #d4fafa;
+    background-color: white;
 }
 .SignIn .login-img {
     background-image: url("images/sea-2361247_1920.jpg");
