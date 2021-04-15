@@ -69,10 +69,10 @@
             <h3 class="login">Σύνδεση</h3>
 
             <label class="email"><b>Email</b></label>
-            <input  type="text" placeholder="Εισάγετε Email" name="email" required?>
+            <input  type="text" placeholder="Εισάγετε Email" name="email" size="30" required?>
 
             <label class="pass"><b>Κωδικός</b></label>
-            <input  type="password" placeholder="Εισάγετε Κωδικό" name="pass" required>
+            <input  type="password" placeholder="Εισάγετε Κωδικό" name="pass" size="30" required>
 
             <button class="btn_login">Είσοδος</button>
             <button onclick="document.location='Register.html'" class="btn_SignUp">Δημιουργήστε τον δικό σας λογαριασμό!</button>
@@ -81,14 +81,12 @@
         </form>
     </div>
 </div>
-
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<!-----------------Go to top button----------------->
+<button onclick="topFunction()" id="myBtn" title="Go to top"><img src="images/social/up-arrow.png" height="24px"></button>
 <script>
-    //Get the button
     var mybutton = document.getElementById("myBtn");
     var rootElement = document.documentElement;
 
-    // When the user scrolls down 20px from the top of the document, show the button
     window.onscroll = function() {scrollFunction()};
 
     function scrollFunction() {
@@ -99,17 +97,14 @@
         }
     }
 
-    // When the user clicks on the button, scroll to the top of the document
     function topFunction() {
         rootElement.scrollTo({
             top: 0,
             behavior: "smooth"
         })
-        /*document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-         */
     }
 </script>
+
 
 
 <footer>
