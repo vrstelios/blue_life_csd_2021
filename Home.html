@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Blue Life</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_main.css">
+    <link rel="stylesheet" href="styles_home.css">
 </head>
 <body>
 
@@ -51,25 +52,24 @@
 </nav>
 
 <!---------------Title section--------------->
+<video autoplay muted loop id="myVideo">
+    <source src="images/Sea%20-%20home.mp4" type="video/mp4">
+</video>
 <div class="home-page-title">
     <div class='vidContain'>
-        <div class='vid'>
-            <video autoplay muted loop>
-                <source src="images/1.%20home/Water%20-%201934.mp4">
-            </video>
-        </div>
-        <h3>"Πόσο άστοχο είναι να αποκαλούμε αυτόν τον πλανήτη Γη, ενώ είναι εντελώς ξεκάθαρο ότι είναι Ωκεανός "</h3>
-        <h5>Άρθουρ Κλαρκ&emsp;</h5>
+        <i>
+        <h3>"Πόσο άστοχο είναι να αποκαλούμε αυτόν τον πλανήτη Γη,<br> ενώ είναι εντελώς ξεκάθαρο ότι είναι Ωκεανός "</h3>
+        </i><h5>Άρθουρ Κλαρκ&emsp;</h5>
     </div>
 </div>
 
-
-<article>
-    <div class="container">
-        <div class="image">
-            <img src="images/dolphin-203875_1920.jpg" height="320" width="405"/>
+<!---------------Περιεχόμενο αρχικής σελίδας--------------->
+<div class="home_articles">
+    <div class="row">
+        <div class="column left">
+            <img src="images/dolphin-203875_1920.jpg" alt="A cute dolphin"/>
         </div>
-        <div class="text">
+        <div class="column right">
             <h2>Νερό νερό νερό</h2>
             <p> Η ολοένα και μεγαλύτερη αύξηση των θαλάσσιων απορριμμάτων έχει προκαλέσει αύξηση στα επίπεδα της μόλυνσης των
                 υδάτων. Εμείς θα θέλαμε να ενημερώσουμε τον κόσμο και να γίνουμε όλοι μαζί πιο ενεργοί/δραστήριοι στο να μείνουν
@@ -82,17 +82,21 @@
                 απλούς χρήστες/εθελοντές και στους διοργανωτές/υπεύθυνους των δράσεων.</p>
         </div>
     </div>
-</article>
+</div>
+
 
 <div class="section">
     <br><br>
-    <h3>"Ψυχῇσιν θάνατος ὕδωρ γενέσθαι, ὕδατι δὲ θάνατος γῆν γενέσθαι, ἐκ γῆς δὲ ὕδωρ γίνεται, ἐξ ὕδατος δὲ ψυχή. "</h3>
+    <h3>"Ψυχῇσιν θάνατος ὕδωρ γενέσθαι,<br> ὕδατι δὲ θάνατος γῆν γενέσθαι,<br> ἐκ γῆς δὲ ὕδωρ γίνεται,<br> ἐξ ὕδατος δὲ ψυχή. "</h3>
     <h5>Ηράκλειτος&emsp;</h5><br>
 </div>
 
-<article>
-    <div class="container">
-        <div class="text2">
+<div class="home_articles">
+    <div class="row">
+        <div class="column left">
+            <img src="images/bubbles-230014_1920.jpg" alt="Cute Bubbles"/>
+        </div>
+        <div class="column right">
             <h2>Σημασία του νερού...</h2>
             <p> Το νερό είναι ένας φυσικός πόρος που έχει μεγάλη σημασία γιατί είναι από τους βασικούς παράγοντες για τη
                 ζωή και την ανάπτυξη. Τα τελευταία χρόνια το αγαθό αυτό βρίσκεται σε ανεπάρκεια, παρ’ ότι ένας παρατηρητής
@@ -106,18 +110,12 @@
             <p>Νερό είναι το φυσικό στοιχείο το οποίο προκύπτει από την χημική ένωση των μορίων υδρογόνου και οξυγόνου.
                 Στη Χημεία το νερό συμβολίζεται ως H2O.</p>
         </div>
-        <div class="image">
-            <img src="images/bubbles-230014_1920.jpg" height="360" width="405"/></div>
-
     </div>
-</article>
+</div>
 
-<article>
-    <div class="container">
-        <div class="image">
-            <img src="images/wave-3473335_1920.jpg" height="320" width="405"/>
-        </div>
-        <div class="text">
+<div class="home_articles">
+    <div class="row">
+        <div class="column left2">
             <h2>Αναγκαιότητα της προστασίας του υδάτινου κόσμου</h2>
             <p> Η ολοένα και μεγαλύτερη αύξηση των θαλάσσιων απορριμμάτων έχει προκαλέσει αύξηση στα επίπεδα της μόλυνσης των
                 υδάτων. Εμείς θα θέλαμε να ενημερώσουμε τον κόσμο και να γίνουμε όλοι μαζί πιο ενεργοί/δραστήριοι στο να μείνουν
@@ -129,80 +127,27 @@
                 – κατηγορίες της υδάτινης ζωής, όπως ωκεανοί, αλιεία κτλ. Οι χρήστες θα χωρίζονται σε δύο κατηγορίες: στους
                 απλούς χρήστες/εθελοντές και στους διοργανωτές/υπεύθυνους των δράσεων.</p>
         </div>
+        <div class="column right2">
+            <img src="images/wave-3473335_1920.jpg" alt="Wave"/>
+        </div>
     </div>
-</article>
+</div>
 
-<article>
+<div class="home_articles">
     <hr><h2>Δείτε και καμία εικόνα...</h2>
-    <div class="slideshow-container">
-        <div class="mySlides fade">
-            <div class="numbertext">1 / 6</div>
-            <img src="https://cdn.pixabay.com/photo/2016/12/17/14/33/wave-1913559_960_720.jpg" style="width:100%;height: 50%;">
-            <div class="lezanta">Ωκεανος</div>
-        </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">2 / 6</div>
-            <img src="https://cdn.pixabay.com/photo/2016/11/04/13/53/bled-1797835_960_720.jpg" style="width:100%;height: 50%;">
-            <div class="lezanta">Λίμνη</div>
-        </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">3 / 6</div>
-            <img src="https://cdn.pixabay.com/photo/2017/10/12/03/03/view-2843338_960_720.jpg" style="width:100%;height: 50%;">
-            <div class="lezanta">Ποτάμη</div>
-        </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">4 / 6</div>
-            <img src="https://cdn.pixabay.com/photo/2018/09/25/19/54/wetland-3702961_960_720.jpg" style="width:100%;height: 50%;">
-            <div class="lezanta">Υδροβιότοποι</div>
-        </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">5 / 6</div>
-            <img src="https://cdn.pixabay.com/photo/2012/03/04/00/02/animal-21731_960_720.jpg" style="width:100%;height: 50%;">
-            <div class="lezanta">Ζώα στο νερό</div>
-        </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">6 / 6</div>
-            <img src="https://cdn.pixabay.com/photo/2020/11/12/21/26/fishing-boat-5736839_960_720.jpg" style="width:100%;height: 50%;">
-            <div class="lezanta">Αλιεία/Εμπόριο</div>
+    <div class="gallery">
+        <div class="box">
+            <span style="--i:1;"><img src="images/gallery-3d/wave-1913559_1920.jpg" alt="Κύμα"></span>
+            <span style="--i:2;"><img src="images/gallery-3d/bled-1797835_1920.jpg" alt="Λίμνη"></span>
+            <span style="--i:3;"><img src="images/gallery-3d/view-2843338_1920.jpg" alt="Ποτάμι"></span>
+            <span style="--i:4;"><img src="images/gallery-3d/animal-21731_1920.jpg" alt="Ψάρι"></span>
+            <span style="--i:5;"><img src="images/gallery-3d/wetland-3702961_1920.jpg" alt="Υδροβιότοπος"></span>
+            <span style="--i:6;"><img src="images/gallery-3d/fishing-boat-5736839_1920.jpg" alt="Ψάρεμα"></span>
+            <span style="--i:7;"><img src="images/gallery-3d/alpsee-532864_1920.jpg" alt="Λίμνη"></span>
+            <span style="--i:8;"><img src="images/gallery-3d/fish-378286_1920.jpg" alt="Ψάρια"></span>
         </div>
     </div>
-    <br>
-    <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-        <span class="dot" onclick="currentSlide(4)"></span>
-        <span class="dot" onclick="currentSlide(5)"></span>
-        <span class="dot" onclick="currentSlide(6)"></span>
-    </div>
-
-    <script>
-        var slideIndex = 0;
-        showSlides(slideIndex);
-
-        function showSlides(n) {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("dot");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex-1].style.display = "block";
-            dots[slideIndex-1].className += " active";
-            setTimeout(showSlides, 6000);
-        }
-    </script>
-</article>
+</div>
 
 
 <!-----------------Go to top button----------------->
@@ -231,40 +176,42 @@
 
 
 <footer>
-    <div class="grid-container">
-        <div class="left">Ποιοι είμαστε <br><br>
-            <a>μπλα μπλα μπλα μπλα</a>                <br>
+    <div class="row">
+        <div class="column right">
+            <h3> Ποιοι είμαστε </h3>
+            <p>Είμαστε μία εθελοντική ομάδα αποτελούμενη από φοιτητές του ΑΠΘ. Με πολλή αγάπη για το νερό και τον μπλε πλανήτη, υλοποιήσαμε αυτόν τον ιστότοπο στα πλαίσια μιας εργασίας που
+                αποτέλεσε το εναρκτήριο λάκτισμα για να την συνεχή ενασχόληση μας σε δράσεις για την προστασία του υδάτινου κόσμου.</p>
         </div>
-
-        <div class="middle">SITEMAP <br>
+        <div class="column middle" >
+            <h3>SITEMAP</h3>
             <ul>
-                <li><a href="#"> Αρχική </a></li>
-                <li><a href="#"> Ωκεανοί</a></li>
-                <li><a href="#"> Λίμνες/Ποτάμια</a></li>
-                <li><a href="#"> Υδροβιότοποι</a></li>
-                <li><a href="#"> Ζώα στο νερό</a></li>
-                <li><a href="#"> Αλιεία/Εμπόριο</a></li>
-                <li><a href="#"> Δράσεις </a></li>
-                <li><a href="#"> Ήξερες ότι... </a></li>
-                <li><a href="https://iceless.info/"> Επικοινωνία </a></li>
-                <li><a href="#"> Είσοδος/Εγγραφή </a></li>
+                <li><a href="Home.html"> Αρχική </a></li>
+                <li><a href="Oceans.html"> Ωκεανοί</a></li>
+                <li><a href="Lakes-Rivers.html"> Λίμνες/Ποτάμια</a></li>
+                <li><a href="Wetlands.html"> Υδροβιότοποι</a></li>
+                <li><a href="Animals.html"> Ζώα στο νερό</a></li>
+                <li><a href="Fishing.html"> Αλιεία/Εμπόριο</a></li>
+                <li><a href="Actions.html"> Δράσεις </a></li>
+                <li><a href="Did-you-know-that.html"> Ήξερες ότι... </a></li>
+                <li><a href="Contact.html"> Επικοινωνία </a></li>
+                <li><a href="Login.html"> Είσοδος/Εγγραφή </a></li>
             </ul>
         </div>
-
-        <div class="right">Βρείτε μας <br><br>
-            <a> Τηλέφωνο 6912345678 </a><br>
-            <a> Email bluelife@gmail.com </a><br>
-            <a href="https://www.facebook.com/">
-                <img src="images/social/icons8-facebook-48.png" alt="facebook" title="facebbok">
-            </a>
-            <a href="https://www.instagram.com/">
-                <img src="images/social/icons8-instagram-48.png" alt="instagram" title="instagram">
-            </a>
-        </div>
-        <div class="footer"><br>
-            <p>BlueLife&copy;</p>
+        <div class="column right">
+            <h3> Βρείτε μας </h3>
+            <p>
+                <a> Τηλέφωνο 6912345678 </a><br>
+                <a> Email bluelife@gmail.com </a><br>
+                <a href="https://www.facebook.com/">
+                    <img src="images/social/icons8-facebook-48.png" alt="facebook" title="facebook">
+                </a>
+                <a href="https://www.instagram.com/">
+                    <img src="images/social/icons8-instagram-48.png" alt="instagram" title="instagram">
+                </a>
+            </p>
         </div>
     </div>
+    <div id="copyrights"> BlueLife 2021&copy; </div>
 </footer>
 
 
