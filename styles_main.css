@@ -1,7 +1,7 @@
 body {
-    background-image: url("images/artem-militonian-UYW6FZLlnL8-unsplash.jpg");
+    background-image: url("images/1. home/Sea-background-home.png");
     background-attachment: fixed;
-    background-size: 100%;
+    /*background-size: 100%;*/
     margin: 0;
     padding: 0;
 }
@@ -9,7 +9,6 @@ body {
 p {
     color: black;
 }
-
 
 /* Για το header */
 header {
@@ -51,7 +50,6 @@ nav {
     float: left;
     font-size: 20px;
     color: #1687a7;
-    background-color: #f6f5f5;
     font-weight: bold;
     text-align: center;
     padding: 14px 24px;
@@ -67,7 +65,7 @@ nav {
     border: none;
     outline: none;
     color: #1687a7;
-    background-color: white;
+    background-color: #f6f5f5;
     font-weight: bold;
     padding: 14px 24px;
     margin: 0;
@@ -76,8 +74,8 @@ nav {
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: #f6f5f5;
-    color: #1687a7;
+    background-color: #1687a7;
+    color: #f6f5f5;
 }
 
 .dropdown-content {
@@ -116,7 +114,7 @@ nav {
 .search-box{
     font-size: 17px;
     display: flex;
-    background: white;
+    background: #f6f5f5;
     border-radius: 4em;
 }
 
@@ -147,13 +145,13 @@ nav {
 }
 
 .search-box:hover .search-box-input{
-    background-color: white;
+    background-color: #f6f5f5;
     padding-left: 2em;
     padding-right: 1em;
     width: 260px;
 }
 
-.navbar .icon {
+.navbar .icon, .navbar .title_menu {
     display: none;
 }
 
@@ -164,7 +162,7 @@ nav {
     }
 
     .dropdown .dropbtn {
-        padding: 14px 24px;
+        padding: 14px 16px;
         font-size: 16px;
     }
 
@@ -173,52 +171,70 @@ nav {
     }
 }
 
-@media screen and (max-width: 800px) {
-    .navbar {
-        overflow: hidden;
-        background-color: #333;
-        display: inherit;
-    }
-
-    .navbar a, .dropdown .dropbtn {
+@media screen and (max-width: 750px) {
+    .navbar a, .dropdown .dropbtn, .navbar .search-box {
         display: none;
     }
+
     .navbar a.icon {
         float: right;
         display: block;
+        z-index: 9999;
     }
+    .navbar .title_menu {
+        position: absolute;
+        display: block;
+        width: 80%;
+        left: 10%;
+        top: 0;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        color: #1687a7;
+        font-size: 40px;
+        font-family: "Brush Script MT";
+    }
+}
 
+@media screen and (max-width: 750px) {
+    .navbar {
+        overflow: hidden;
+        background-color: #f6f5f5;
+        display: inherit;
+    }
     .navbar.responsive {
         position: relative;
     }
-
     .navbar.responsive .icon {
         position: absolute;
         right: 0;
         top: 0;
     }
-
     .navbar.responsive a {
         float: none;
         display: block;
         text-align: left;
     }
-
     .navbar.responsive .dropdown {
         float: none;
     }
-
     .navbar.responsive .dropdown-content {
         position: relative;
+        background-color: lavender;
     }
-
     .navbar.responsive .dropdown .dropbtn {
         display: block;
         width: 100%;
         text-align: left;
     }
+    .navbar.responsive .search-box {
+        display: flex;
+    }
+    .navbar.responsive .title_menu {
+        display: none;
+    }
 }
-
 /*--- Για το navigation bar ---*/
 
 /*https://codepen.io/abhinanduN/pen/BaLNPYX*/

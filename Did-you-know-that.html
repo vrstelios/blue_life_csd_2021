@@ -14,7 +14,7 @@
 
 <!---------------Navigation bar--------------->
 <nav>
-    <div class="topnav" id="myTopnav">
+    <div class="navbar" id="navbar">
         <a href="Home.html#home">Αρχική</a>
         <div class="dropdown">
             <button class="dropbtn">Κατηγορίες</button>
@@ -33,7 +33,7 @@
         <div class="search-box">
             <input type="text" class="search-box-input" placeholder="Αναζήτησε..">
             <button class="search-box-btn">
-                <i class="search-box-icon material-icons"><img src="images/social/magnifying-glass-white.png" style="width:16px;height:16px "></i>
+                <i class="search-box-icon material-icons"><img src="images/social/magnifying-glass-blue.png" style="width:16px;height:16px "></i>
             </button>
         </div>
         <div class="title_menu">Blue Life</div>
@@ -42,11 +42,11 @@
 
     <script>
         function myFunction() {
-            var x = document.getElementById("myTopnav");
-            if (x.className === "topnav") {
+            var x = document.getElementById("navbar");
+            if (x.className === "navbar") {
                 x.className += " responsive";
             } else {
-                x.className = "topnav";
+                x.className = "navbar";
             }
         }
     </script>
