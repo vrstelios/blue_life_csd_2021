@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Επικοινωνία</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_main.css">
+    <link rel="stylesheet" href="styles_contact_singin_up.css">
 </head>
 <body>
 
@@ -32,9 +33,10 @@
         <div class="search-box">
             <input type="text" class="search-box-input" placeholder="Αναζήτησε..">
             <button class="search-box-btn">
-                <i class="search-box-icon material-icons"><img src="images/social/magnifying-glass-white.png" style="width:16px;height:16px "></i>
+                <i class="search-box-icon material-icons"><img src="images/social/magnifying-glass-blue.png" style="width:16px;height:16px "></i>
             </button>
         </div>
+        <div class="title_menu">Blue Life</div>
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
     </div>
 
@@ -54,14 +56,16 @@
 <div class="page-title">
     <div class='vidContain'>
         <div class='vid'>
-            <img src="images/fish-378286_1920.jpg" width="100%">
+            <video autoplay muted loop>
+                <source src="images/4.%20Did-you-know-that/Underwater2.mp4">
+            </video>
         </div>
         <h2>Επικοινωνία</h2>
     </div>
 </div>
 
 <!---------------Επικοινωνία--------------->
-<article>
+<div class="contact">
     <h2>Με ενδιαφέρον περιμένουμε τις σκέψεις σας</h2>
     <form action="forma">
         <label for="fname">Όνομα</label><br>
@@ -74,20 +78,8 @@
         <textarea id="subject" name="subject" placeholder="Τα σχόλιά σου..." style="height:160px"></textarea>
         <input type="submit" value="Υποβολή">
     </form>
-</article>
-
-<div class="gallery">
-    <div class="box">
-        <span style="--i:1;"><img src="images/gallery%203d/dolphin.jpg"></span>
-        <span style="--i:2;"><img src="images/gallery%203d/dolphin.jpg"></span>
-        <span style="--i:3;"><img src="images/gallery%203d/dolphin.jpg"></span>
-        <span style="--i:4;"><img src="images/gallery%203d/dolphin.jpg"></span>
-        <span style="--i:5;"><img src="images/gallery%203d/dolphin.jpg"></span>
-        <span style="--i:6;"><img src="images/gallery%203d/dolphin.jpg"></span>
-        <span style="--i:7;"><img src="images/gallery%203d/dolphin.jpg"></span>
-        <span style="--i:8;"><img src="images/gallery%203d/dolphin.jpg"></span>
-    </div>
 </div>
+
 
 <!-----------------Go to top button----------------->
 <button onclick="topFunction()" id="myBtn" title="Go to top"><img src="images/social/up-arrow.png" height="24px"></button>

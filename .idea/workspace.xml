@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="25280f6a-fa29-41a2-aa87-bd80bc2ac368" name="Default Changelist" comment="Initial commit">
+      <change afterPath="$PROJECT_DIR$/images/1. home/Sea-background-home.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Actions.html" beforeDir="false" afterPath="$PROJECT_DIR$/Actions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Animals.html" beforeDir="false" afterPath="$PROJECT_DIR$/Animals.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/Contact.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Did-you-know-that.html" beforeDir="false" afterPath="$PROJECT_DIR$/Did-you-know-that.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fishing.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fishing.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lakes-Rivers.html" beforeDir="false" afterPath="$PROJECT_DIR$/Lakes-Rivers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Oceans.html" beforeDir="false" afterPath="$PROJECT_DIR$/Oceans.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Register.html" beforeDir="false" afterPath="$PROJECT_DIR$/Register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wetlands.html" beforeDir="false" afterPath="$PROJECT_DIR$/Wetlands.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles_dykt.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles_dykt.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles_home.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles_home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles_main.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles_main.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="vrstelios &lt;56134371+vrstelios@users.noreply.github.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Ev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1r8kib6dkrqnytPntB2AocJ0BBe" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="25280f6a-fa29-41a2-aa87-bd80bc2ac368" name="Default Changelist" comment="" />
+      <created>1618365234037</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1618365234037</updated>
+      <workItem from="1618365257229" duration="2604000" />
+      <workItem from="1618401704927" duration="26396000" />
+      <workItem from="1618491327724" duration="7818000" />
+      <workItem from="1618508917211" duration="9910000" />
+      <workItem from="1618835118780" duration="13879000" />
+      <workItem from="1618858992172" duration="12828000" />
+      <workItem from="1618922288660" duration="7867000" />
+      <workItem from="1618931484979" duration="464000" />
+      <workItem from="1618932134206" duration="279000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <created>1618365544911</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1618365544911</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Initial commit">
+      <created>1618365666687</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1618365666687</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Initial commit">
+      <created>1618366082547</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1618366082547</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Initial commit">
+      <created>1618366823329</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1618366823329</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Initial commit">
+      <created>1618367020085</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1618367020085</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Initial commit">
+      <created>1618419849923</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1618419849938</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Initial commit">
+      <created>1618867143069</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1618867143070</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+  </component>
+</project>
