@@ -16,41 +16,32 @@ titlesInPages h2 {
     height:20%;
 }
 
+.actionIntro {
+    background-color: white;
+    height: auto;
+    text-align: justify;
+    padding: 1% 18% 1% 18%;
+    font-size: 20px;
+    margin-bottom: -3%;
+    /*
+    border-bottom-style: solid;
+    border-bottom-width: thick;
+    border-bottom-color: lightblue;
+     */
+}
+
 .action {
-    background-color: #d4fafa;
-    border-style: solid;
-    border-width: thick thick thick thick;
-    border-color: #4361ee;
+    background-color: white;
     height: auto;
     margin-top:3%;
-    text-align: left;
+    text-align: justify;
     padding: 2%;
 }
 
 .action.containerAction.text p {
     text-align: justify;
 }
-/* mallon gia delete pane auta
 
-/* Για τα articles
-article h2 { /*den to sbhnw auto
-    color: #1f5362;
-    font-size: 50px;
-    margin-top: 0;
-}
-
-article { /*den to sbhnw auto
-    padding: 2%;
-    font-family: "Segoe UI";
-    text-align: justify;
-    font-size: 16px;
-    background-color: #d4fafa;
-}
-
-article form{ /*den to sbhnw auto
-    padding-left: 10%;
-    padding-right: 10%;
-}*/
 
 .buttonJoinActions {
     background-color: #4CAF50;
@@ -78,18 +69,6 @@ h3 {
     font-size: 32px;
 }
 
-.actionIntro {
-    background-color: #9bf6ff;
-    font-size: 20px;
-    width: 100%;
-    height: auto;
-    border-width: 0 0 0 0;
-    padding: 1% 2% 1% 2%;
-    font-family: "Segoe UI";
-    text-align: justify;
-    font-size: 16px;
-}
-
 .smallImage {
     /*text-align: right;*/
     display: inline;
@@ -97,3 +76,9 @@ h3 {
     margin: 0;
 }
 /*--- Για τις Δράσεις ---*/
+
+/* 21/4/2021*/
+.text {
+    /*font-size: 20px;*/
+    padding-left: 2%;
+}
