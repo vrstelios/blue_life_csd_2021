@@ -1,0 +1,84 @@
+/* Για τις Δράσεις */
+.containerAction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+titlesInPages h2 {
+    padding: 2%;
+    background-color: #d4fafa;
+    font-family: "Segoe UI", serif;
+    color: #1f5362;
+    font-size: 55px;
+    margin-top: 0;
+    background-image: url("images/dolphin-203875_1920.jpg");
+    height:20%;
+}
+
+.actionIntro {
+    background-color: white;
+    height: auto;
+    text-align: justify;
+    padding: 1% 18% 1% 18%;
+    font-size: 20px;
+    margin-bottom: -3%;
+    /*
+    border-bottom-style: solid;
+    border-bottom-width: thick;
+    border-bottom-color: lightblue;
+     */
+}
+
+.action {
+    background-color: white;
+    height: auto;
+    margin-top:3%;
+    text-align: justify;
+    padding: 2%;
+}
+
+.action.containerAction.text p {
+    text-align: justify;
+}
+
+
+.buttonJoinActions {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: 2%;
+    cursor: pointer;
+    outline: none;
+}
+
+.buttonJoinActions:active {
+    background-color: #3e8e41;
+    transform: translateY(4px);
+
+}
+
+.button50 {border-radius: 20px;}
+
+h3 {
+    font-size: 32px;
+}
+
+.smallImage {
+    /*text-align: right;*/
+    display: inline;
+    float: left;
+    margin: 0;
+}
+/*--- Για τις Δράσεις ---*/
+
+/* 21/4/2021*/
+.text {
+    /*font-size: 20px;*/
+    padding-left: 2%;
+}
