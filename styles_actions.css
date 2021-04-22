@@ -1,9 +1,11 @@
 /* Για τις Δράσεις */
+/*
 .containerAction {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+ */
 
 titlesInPages h2 {
     padding: 2%;
@@ -29,7 +31,7 @@ titlesInPages h2 {
     border-bottom-color: lightblue;
      */
 }
-
+/*
 .action {
     background-color: white;
     height: auto;
@@ -37,6 +39,7 @@ titlesInPages h2 {
     text-align: justify;
     padding: 2%;
 }
+*/
 
 .action.containerAction.text p {
     text-align: justify;
@@ -55,8 +58,9 @@ titlesInPages h2 {
     margin: 2%;
     cursor: pointer;
     outline: none;
-    height: 80px;
-    width: 150px;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
 }
 
 .buttonJoinActions:active {
@@ -64,8 +68,6 @@ titlesInPages h2 {
     transform: translateY(4px);
 
 }
-
-.button50 {border-radius: 20px;}
 
 h3 {
     font-size: 32px;
@@ -82,6 +84,56 @@ h3 {
 .text {
     /*font-size: 20px;*/
     padding-left: 2%;
+}
+
+.action {
+    background-color: white;
+    height: auto;
+    text-align: justify;
+    padding: 1% 2% 1% 2%;
+    font-size: 16px;
+    margin-top:3%;
+}
+
+.action_row .column {
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action_row .image {
+    width: 30%;
+}
+
+.action_row .text {
+    width: 55%;
+    padding: 2%;
+}
+
+.action_row .button {
+    width: 15%;
+}
+
+.action_row.image img {
+    max-width: 100%
+}
+
+.action_row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 800px) {
+    .action_row .column {
+        width: 100%;
+    }
+    .column .image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 @media screen and (max-width: 800px) {
