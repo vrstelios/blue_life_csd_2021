@@ -583,7 +583,11 @@ h3 {
     margin: 10px 20px 10px 20px;
     width: 40%;
 }
-
+.category_content img {
+    float: right;
+    margin: 10px 20px 10px 20px;
+    width: 40%;
+}
 @media screen and (max-width: 800px) {
     .did-you-know-that  img {
         display: flex;
