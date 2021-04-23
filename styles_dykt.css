@@ -11,12 +11,12 @@
     padding: 2%;
     font-family: "Segoe UI";
     text-align: justify;
-    font-size: 16px;
+    font-size: 24px;
     background-color: white;
 }
 .did-you-know-that  li {
     font-family:"Calibri";
-    font-size: 18px;
+    font-size: 26px;
     font-weight: bold;
 }
 .did-you-know-that  img {
@@ -24,6 +24,16 @@
     margin: 10px 0 10px 20px;
     width: 40%;
 }
+
+@media screen and (max-width: 1500px) {
+    .did-you-know-that  ul {
+        font-size: 16px;
+    }
+    .did-you-know-that  li {
+        font-size: 18px;
+    }
+}
+
 
 @media screen and (max-width: 800px) {
     .did-you-know-that {

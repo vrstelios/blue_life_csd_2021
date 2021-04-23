@@ -14,7 +14,7 @@
     padding: 2% 16% 2% 16%;
     font-family: "Segoe UI";
     text-align: justify;
-    font-size: 16px;
+    font-size: 24px;
     background-color: white;
     display: inline-block;
 }
@@ -38,6 +38,12 @@ table {
     float: right;
     margin: 10px 0 10px 20px;
     width: 40%;
+}
+
+@media screen and (max-width: 1500px) {
+    .category_content {
+        font-size: 16px;
+    }
 }
 
 @media screen and (max-width: 800px) {

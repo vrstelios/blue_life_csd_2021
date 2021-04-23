@@ -328,6 +328,9 @@ footer li{
     width: 40%;
     height: auto;
     text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
     padding: 10px 18px;
     max-width: 130px;
     margin-bottom: 2px;
@@ -338,9 +341,11 @@ footer li{
 }
 
 .sitemapButton:active {
-    background-color: #276678;
     transform: translateY(2px);
+}
 
+.sitemapButton:hover {
+    border-color: #1687a7;
 }
 
 footer .column {
@@ -363,6 +368,7 @@ footer .left {
     line-height: 1.6;
 
 }
+
 footer .left ul{
     display: flex;
     align-items: center;
@@ -371,6 +377,9 @@ footer .left ul{
 footer .middle {
     grid-area: middle;
     line-height: 1.6;
+}
+footer .middle p {
+    text-align: justify;
 }
 footer .right {
     grid-area: right;
@@ -407,6 +416,12 @@ footer #copyrights {
 
 footer * {
     box-sizing: border-box;
+}
+
+@media screen and (max-width: 1500px) {
+    .sitemapButton {
+        font-size: 12px;
+    }
 }
 
 @media screen and (max-width: 800px) {
