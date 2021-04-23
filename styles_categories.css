@@ -21,6 +21,10 @@
 }
 
 @media screen and (max-width: 800px) {
+    .category_content {
+        padding: 2% 4% 2% 4%;
+        font-size: 16px;
+    }
     .category_content img {
         display: flex;
         align-items: center;

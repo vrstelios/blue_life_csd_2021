@@ -19,7 +19,7 @@ titlesInPages h2 {
 }
 
 .actionIntro {
-    background-color: white;
+    background-color: lightgray;
     height: auto;
     text-align: justify;
     padding: 1% 18% 1% 18%;
@@ -39,11 +39,12 @@ titlesInPages h2 {
     text-align: justify;
     padding: 2%;
 }
-*/
+
 
 .action.containerAction.text p {
     text-align: justify;
 }
+*/
 
 
 .buttonJoinActions {
@@ -70,6 +71,7 @@ titlesInPages h2 {
 }
 
 h3 {
+    color: #1f5362;
     font-size: 32px;
 }
 
@@ -80,43 +82,56 @@ h3 {
     margin: 0;
 }
 
-/* 21/4/2021*/
+/* 21/4/2021*//*
 .text {
-    /*font-size: 20px;*/
+    /*font-size: 20px;
     padding-left: 2%;
 }
+*/
 
 .action {
     background-color: white;
     height: auto;
-    text-align: justify;
+
     padding: 1% 2% 1% 2%;
     font-size: 16px;
     margin-top:3%;
 }
 
-.action_row .column {
+.action * {
+    box-sizing: border-box;
+}
+
+.action_row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action .column {
     float: left;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.action_row .image {
+.action .image {
     width: 30%;
 }
 
-.action_row .text {
+.action .text {
     width: 55%;
     padding: 2%;
+    text-align: justify;
 }
 
-.action_row .button {
+.action .button {
     width: 15%;
 }
 
-.action_row.image img {
-    max-width: 100%
+.action .image img {
+    max-width: 100%;
+    height: auto;
 }
 
 .action_row:after {
@@ -126,6 +141,17 @@ h3 {
 }
 
 @media screen and (max-width: 800px) {
+    .actionIntro {
+        padding: 1% 4% 1% 4%;
+        font-size: 20px;
+        margin-bottom: -10%;
+    }
+    .action {
+        margin-top:10%;
+    }
+    .action_row {
+        display: unset;
+    }
     .action_row .column {
         width: 100%;
     }
@@ -135,7 +161,7 @@ h3 {
         justify-content: center;
     }
 }
-
+/*
 @media screen and (max-width: 800px) {
     article .actionIntro {
         display: flex;
@@ -158,3 +184,5 @@ h3 {
         padding-left: 0;
     }
 }
+
+ */

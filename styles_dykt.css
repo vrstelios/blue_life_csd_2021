@@ -28,7 +28,11 @@
     margin: 10px 0 10px 20px;
     width: 40%;	
 }	
-@media screen and (max-width: 800px) {	
+@media screen and (max-width: 800px) {
+    .did-you-know-that {
+        padding: 2% 4% 2% 4%;
+        font-size: 16px;
+    }
     .did-you-know-that  img {	
         display: flex;	
         align-items: center;	

@@ -67,21 +67,21 @@
 }
 
 .home_articles .left {
-    width: 34%;
+    width: 25%;
 }
 
 .home_articles .right {
-    width: 66%;
+    width: 75%;
     padding-left: 2%;
 }
 
 .home_articles .left2 {
-    width: 66%;
+    width: 75%;
     padding-right: 2%;
 }
 
 .home_articles .right2 {
-    width: 32%;
+    width: 25%;
 }
 
 .home_articles .row:after {
@@ -99,10 +99,11 @@
         width: 100%;
     }
     .home_articles .right {
-        padding-left: 0;
+        padding: 1% 2% 1% 2%;
     }
+
     .home_articles .left2 {
-        padding-right: 0;
+        padding: 1% 2% 1% 2%;
     }
 }
 
