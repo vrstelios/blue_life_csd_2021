@@ -308,7 +308,7 @@ footer {
     font-size: 20px;
     color: white;
 }
-
+/*
 footer ul {
     height: 160px;
     display: flex;
@@ -321,7 +321,26 @@ footer li{
     display:inline-block;
     padding:2px;
     /* background-color: white;
-    */
+
+}*/
+
+.sitemapButton {
+    width: 40%;
+    height: auto;
+    text-align: center;
+    padding: 10px 18px;
+    max-width: 130px;
+    margin-bottom: 2px;
+    border: 2px solid #F6F5F5;
+    background-color: #276678;
+    border-radius: 16px;
+    color: white;
+}
+
+.sitemapButton:active {
+    background-color: #276678;
+    transform: translateY(2px);
+
 }
 
 footer .column {
@@ -339,12 +358,16 @@ footer .row:after {
     clear: both;
 }
 
-/* Style the left column */
 footer .left {
     grid-area: left;
     line-height: 1.6;
+
 }
-/* Style the middle column */
+footer .left ul{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
 footer .middle {
     grid-area: middle;
     line-height: 1.6;
@@ -380,5 +403,15 @@ footer p {
 footer #copyrights {
     font-size: 16px;
     color: darkcyan;
+}
+
+footer * {
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 800px) {
+    footer .column {
+        width: 100%;
+    }
 }
 /*--- Για το footer ---*/
