@@ -385,6 +385,21 @@
 /*--- Για την εγγραφή ---*/
 
 @supports (-moz-appearance:none) {
+    .SignIn .container_page_login {
+        position: absolute;
+        top: 5%;
+        right: 0px;
+        margin: 20px;
+        height: 600px;
+        width: 350px;
+        padding: 16px;
+        background-color: white;
+        border:1px solid #ccc;
+        border-radius:10px;
+        -webkit-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+        -moz-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+        box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+    }
     .SignIn input[type=text] {
         text-align: left;
         position: relative;

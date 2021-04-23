@@ -18,6 +18,21 @@
     background-color: white;
     display: inline-block;
 }
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+th, td {
+    text-align: left;
+}
+th {
+    cursor: pointer;
+}
+table {
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
 
 .category_content img {
     float: right;
