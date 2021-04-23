@@ -1,40 +1,40 @@
 /* Για το Ήξερες ότι... */
-.did-you-know-that {	
-    padding: 2% 16% 2% 16%;	
-    font-family: "Segoe UI";	
-    text-align: justify;	
-    font-size: 16px;	
+.did-you-know-that {
+    padding: 2% 16% 2% 16%;
+    font-family: "Segoe UI";
+    text-align: justify;
+    font-size: 16px;
     background-color: white;
     display: inline-block;
-}	
-.did-you-know-that  ul {	
-    padding: 2%;	
-    font-family: "Segoe UI";	
-    text-align: justify;	
-    font-size: 16px;	
-    background-color: white;	
-}	
-.did-you-know-that  li {	
-    font-family:"Calibri";	
-    font-size: 18px;	
-    font-weight: bold;	
-}	
-.did-you-know-that  img {	
-    float: right;	
-    margin: 10px 0 10px 20px;	
-    width: 40%;	
-}	
-	
+}
+.did-you-know-that  ul {
+    padding: 2%;
+    font-family: "Segoe UI";
+    text-align: justify;
+    font-size: 16px;
+    background-color: white;
+}
+.did-you-know-that  li {
+    font-family:"Calibri";
+    font-size: 18px;
+    font-weight: bold;
+}
+.did-you-know-that  img {
+    float: right;
+    margin: 10px 0 10px 20px;
+    width: 40%;
+}
+
 @media screen and (max-width: 800px) {
     .did-you-know-that {
         padding: 2% 4% 2% 4%;
         font-size: 16px;
     }
-    .did-you-know-that  img {	
-        display: flex;	
-        align-items: center;	
-        width: 100%;	
-        margin: 2px 2px 2px 2px;	
-    }	
-}	
+    .did-you-know-that  img {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin: 2px 2px 2px 2px;
+    }
+}
 /*--- Για το Ήξερες ότι... ---*/
