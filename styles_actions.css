@@ -71,6 +71,7 @@ titlesInPages h2 {
 }
 
 h3 {
+    margin-top: 0;
     color: #1f5362;
     font-size: 32px;
 }
@@ -115,12 +116,15 @@ h3 {
 
 .action .image {
     width: 30%;
-    padding: 2px;
+    padding: 1% 0 1% 0;
 }
 
 .action .text {
     width: 55%;
     padding: 0 2% 0 2%;
+}
+
+.action .text p {
     text-align: justify;
 }
 
