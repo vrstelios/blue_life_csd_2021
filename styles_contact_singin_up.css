@@ -2,7 +2,6 @@
 .contact {
     padding: 2% 16% 2% 16%;
     font-family: "Segoe UI";
-    text-align: justify;
     font-size: 16px;
     background-color: white;
 }
@@ -12,6 +11,10 @@
     font-size: 30px;
     margin-top: 0;
     text-align: left;
+}
+
+.contact * {
+    box-sizing: border-box;
 }
 
 .contact input[type=text], select, textarea {
@@ -48,7 +51,7 @@
         width: 100%;
     }
     .contact {
-        padding: 2% 12% 2% 12%;
+        padding: 2% 6% 2% 6%;
     }
 }
 /*--- Για το Contact ---*/
@@ -537,5 +540,20 @@
         border-radius: 12px;
         background-color: #1687a7;
         color: white;
+    }
+    .SignIn .container_page_login {
+        position: absolute;
+        top: 5%;
+        right: 0px;
+        margin: 20px;
+        height: 600px;
+        max-width: 347px;
+        padding: 16px;
+        background-color: white;
+        border:1px solid #ccc;
+        border-radius:10px;
+        -webkit-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+        -moz-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+        box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
     }
 }

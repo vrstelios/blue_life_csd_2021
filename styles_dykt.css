@@ -1,10 +1,11 @@
-	/* Για το Ήξερες ότι... */	
+/* Για το Ήξερες ότι... */
 .did-you-know-that {	
     padding: 2% 16% 2% 16%;	
     font-family: "Segoe UI";	
     text-align: justify;	
     font-size: 16px;	
-    background-color: white;	
+    background-color: white;
+    display: inline-block;
 }	
 .did-you-know-that  ul {	
     padding: 2%;	
