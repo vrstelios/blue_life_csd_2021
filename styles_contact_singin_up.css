@@ -1,16 +1,8 @@
 /* Για το Contact */
 .contact {
     padding: 2% 16% 2% 16%;
-    font-family: "Segoe UI";
     font-size: 16px;
     background-color: white;
-}
-
-.contact h2 {
-    color: #1f5362;
-    font-size: 30px;
-    margin-top: 0;
-    text-align: left;
 }
 
 .contact * {
@@ -65,7 +57,6 @@
 /* Για την είσοδο */
 .SignIn {
     padding: 2% 2% 2% 2%;
-    font-family: "Segoe UI";
     text-align: justify;
     font-size: 16px;
     background-color: white;
@@ -81,7 +72,7 @@
 .SignIn .container_page_login {
     position: absolute;
     top: 5%;
-    right: 0px;
+    right: 0;
     margin: 20px;
     height: 600px;
     max-width: 370px;
@@ -169,7 +160,7 @@
     white-space: nowrap;
     text-align: center;
     font-family: "Montserrat", sans-serif;
-    border: 0px solid ;
+    border: 0 solid ;
     color: #1687a7;
     background-color: white;
     padding: 10px 15px;
@@ -190,7 +181,7 @@
     top: 240px;
     left: -760px;
     font-family: "Montserrat", sans-serif;
-    border: 0px solid ;
+    border: 0 solid ;
     color: #1687a7;
     background-color: white;
     padding: 10px 15px;
@@ -214,9 +205,6 @@
 /* Για την εγγραφή */
 .SignUp {
     padding: 2% 2% 2% 2%;
-    font-family: "Segoe UI";
-    text-align: justify;
-    font-size: 16px;
     background-color: white;
 }
 
@@ -372,7 +360,7 @@
     top: 280px;
     left: -935px;
     font-family: "Montserrat", sans-serif;
-    border: 0px solid ;
+    border: 0 solid ;
     color: #1687a7;
     background-color: white;
     padding: 10px 15px;
@@ -381,7 +369,6 @@
     -webkit-transition: color 0.2s ease-in-out;
     transition: color 0.2s ease-in-out;
 }
-
 /*--- Για την εγγραφή ---*/
 
 @supports (-moz-appearance:none) {
@@ -425,7 +412,7 @@
         white-space: nowrap;
         text-align: center;
         font-family: "Montserrat", sans-serif;
-        border: 0px solid ;
+        border: 0 solid ;
         color: #1687a7;
         background-color: white;
         padding: 10px 15px;
@@ -441,7 +428,7 @@
         top: 240px;
         left: -715px;
         font-family: "Montserrat", sans-serif;
-        border: 0px solid ;
+        border: 0 solid ;
         color: #1687a7;
         background-color: white;
         padding: 10px 15px;
@@ -522,7 +509,7 @@
         top: 280px;
         left: -921px;
         font-family: "Montserrat", sans-serif;
-        border: 0px solid ;
+        border: 0 solid ;
         color: #1687a7;
         background-color: white;
         padding: 10px 15px;
@@ -544,7 +531,7 @@
     .SignIn .container_page_login {
         position: absolute;
         top: 5%;
-        right: 0px;
+        right: 0;
         margin: 20px;
         height: 600px;
         max-width: 347px;

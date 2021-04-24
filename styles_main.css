@@ -4,26 +4,91 @@ body {
     /*background-size: 100%;*/
     margin: 0;
     padding: 0;
+    font-family: "Segoe UI", "Calibri", serif;
 }
 
 p {
     color: black;
+    text-align: justify;
+    font-size: 20px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: serif;
+}
+
+h1 {
+    font-size: 150px;
+    margin-top: 12px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 60px;
+    color: white;
+}
+
+h3 {
+    text-align: left;
+    margin-top: 0;
+    color: #1f5362;
+    font-size: 40px;
+}
+
+h4 {
+    font-size: 30px;
+}
+
+h5{
+    color: white;
+    text-align: center;
+    font-size: 40px;
+    -webkit-text-stroke-width: 0.02vw;
+    -webkit-text-stroke-color: #276678;
+}
+
+h6{
+    color: white;
+    text-align: right;
+    font-size: 26px;
+    -webkit-text-stroke-width: 0.01vw;
+    -webkit-text-stroke-color: #276678;
+}
+
+@media screen and (max-width: 1500px) {
+    p {
+        font-size: 16px;
+    }
+    h1 {
+        font-size: 120px;
+    }
+    h2 {
+        font-size: 50px;
+    }
+    h3 {
+        font-size: 32px;
+    }
+    h4 {
+        font-size: 24px;
+    }
+    h5{
+        font-size: 32px;
+    }
+    h6{
+        font-size: 20px;
+    }
 }
 
 /* Για το header */
 header {
     text-align: center;
+    font-family: serif;
     color: #1687a7;
     height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-h1 {
-    font-size: 120px;
-    margin-top: 12px;
-    margin-bottom: 10px;
 }
 /*--- Για το header ---*/
 
@@ -193,7 +258,7 @@ nav {
         margin: auto;
         color: #1687a7;
         font-size: 40px;
-        font-family: "Brush Script MT";
+        font-family: "Brush Script MT", serif;
     }
 }
 
@@ -265,12 +330,6 @@ nav {
     height:auto;
     width:auto;
     z-index: -100;
-}
-
-.page-title h2 {
-    text-align: center;
-    font-size: 50px;
-    color: white;
 }
 /*--- Για τον τίτλο κάθε σελίδας ---*/
 
@@ -378,14 +437,13 @@ footer .middle {
     grid-area: middle;
     line-height: 1.6;
 }
-footer .middle p {
-    text-align: justify;
+footer .middle p{
+    color: white;
 }
 footer .right {
     grid-area: right;
     line-height: 1.6;
 }
-
 footer li a:visited {
     color: blue;
 }
@@ -399,14 +457,6 @@ footer li a:link {
 }
 footer li a:hover {
     color: blue;
-}
-
-footer h3 {
-    font-size: 24px;
-}
-footer p {
-    color: white;
-    font-size: 18px;
 }
 
 footer #copyrights {

@@ -1,44 +1,34 @@
 /* Για το Ήξερες ότι... */
 .did-you-know-that {
     padding: 2% 16% 2% 16%;
-    font-family: "Segoe UI";
     text-align: justify;
-    font-size: 16px;
     background-color: white;
     display: inline-block;
 }
 .did-you-know-that  ul {
     padding: 2%;
-    font-family: "Segoe UI";
     text-align: justify;
-    font-size: 24px;
-    background-color: white;
 }
 .did-you-know-that  li {
-    font-family:"Calibri";
-    font-size: 26px;
     font-weight: bold;
+    font-size: 22px;
 }
+
+@media screen and (max-width: 1500px) {
+    .did-you-know-that  li {
+        font-size: 18px;
+    }
+}
+
 .did-you-know-that  img {
     float: right;
     margin: 10px 0 10px 20px;
     width: 40%;
 }
 
-@media screen and (max-width: 1500px) {
-    .did-you-know-that  ul {
-        font-size: 16px;
-    }
-    .did-you-know-that  li {
-        font-size: 18px;
-    }
-}
-
-
 @media screen and (max-width: 800px) {
     .did-you-know-that {
         padding: 2% 4% 2% 4%;
-        font-size: 16px;
     }
     .did-you-know-that  img {
         display: flex;

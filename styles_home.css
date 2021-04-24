@@ -6,6 +6,7 @@
     overflow: hidden;
     display: flex;
     align-items: center;
+    font-family: serif;
     justify-content: center;
     background-attachment: fixed;
     background-size: 100%;
@@ -23,38 +24,11 @@
     width:auto;
     z-index: -1;
 }
-
-.home-page-title h3{
-    color: white;
-    text-align: center;
-
-    font-size: 32px;
-    -webkit-text-stroke-width: 0.02vw;
-    -webkit-text-stroke-color: #276678;
-}
-
-.home-page-title h5 {
-    text-align: right;
-    font-size: 2vw;
-    -webkit-text-stroke-width: 0.0vw;
-    color: white;
-    -webkit-text-stroke-color: #276678;
-}
 /*--- Για το background video της αρχικής ---*/
 
 /* Για τα κείμενα της αρχικής σελίδας */
-.home_articles h2 {
-    color: #1f5362;
-    font-size: 30px;
-    margin-top: 0;
-    text-align: left;
-}
-
 .home_articles {
     padding: 1.2%;
-    font-family: "Segoe UI";
-    text-align: justify;
-    font-size: 16px;
     background-color: white;
 }
 
@@ -128,20 +102,7 @@
 /*--- Για τα κείμενα της αρχικής σελίδας ---*/
 
 /* Για τα sections με τα ρητά */
-.section h3 {
-    text-align: center;
-    font-size: 36px;
-    -webkit-text-stroke-width: 0.02vw;
-    -webkit-text-stroke-color: #276678;
-}
-
-.section h5 {
-    text-align: right;
-    font-size: 2vw;
-    -webkit-text-stroke-width: 0.0vw;
-    -webkit-text-stroke-color: #276678;
-}
-
+zzz
 .section {
     height: 300px;
     display: flex;

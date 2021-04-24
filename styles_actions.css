@@ -6,7 +6,7 @@
     justify-content: center;
 }
  */
-
+/*
 titlesInPages h2 {
     padding: 2%;
     background-color: #d4fafa;
@@ -17,13 +17,12 @@ titlesInPages h2 {
     background-image: url("images/dolphin-203875_1920.jpg");
     height:20%;
 }
+*/
 
 .actionIntro {
     background-color: lightblue;
     height: auto;
-    text-align: justify;
     padding: 1% 18% 1% 18%;
-    font-size: 20px;
     margin-bottom: -3%;
     /*
     border-bottom-style: solid;
@@ -70,12 +69,6 @@ titlesInPages h2 {
 
 }
 
-.action h3 {
-    margin-top: 0;
-    color: #1f5362;
-    font-size: 32px;
-}
-
 .smallImage {
     /*text-align: right;*/
     display: inline;
@@ -93,8 +86,8 @@ titlesInPages h2 {
 .action {
     background-color: white;
     padding: 1% 2% 1% 2%;
-    font-size: 16px;
     margin-top:3%;
+    font-family: "Segoe UI", "Calibri", serif;
 }
 
 .action * {
@@ -124,10 +117,6 @@ titlesInPages h2 {
     padding: 0 2% 0 2%;
 }
 
-.action .text p {
-    text-align: justify;
-}
-
 .action .button {
     width: 15%;
 }
@@ -146,7 +135,6 @@ titlesInPages h2 {
 @media screen and (max-width: 800px) {
     .actionIntro {
         padding: 1% 4% 1% 4%;
-        font-size: 20px;
         margin-bottom: -10%;
     }
     .action {
