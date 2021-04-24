@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<header>
+<header id="header">
     <h1>Blue Life</h1>
 </header>
 
@@ -36,7 +36,7 @@
                 <i class="search-box-icon material-icons"><img src="images/social/magnifying-glass-blue.png" alt="search" style="width:16px;height:16px "></i>
             </button>
         </div>
-        <div class="title_menu">Blue Life</div>
+        <div class="title_menu hide" id="title_menu">Blue Life</div>
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
     </div>
 
@@ -49,6 +49,17 @@
                 x.className = "navbar";
             }
         }
+
+        myID = document.getElementById("title_menu");
+        var myScrollFunc = function() {
+            var y = document.getElementById("header").offsetHeight;
+            if (window.scrollY >= y) {
+                myID.className = "title_menu show"
+            } else {
+                myID.className = "title_menu hide"
+            }
+        };
+        window.addEventListener("scroll", myScrollFunc);
     </script>
 </nav>
 
@@ -81,7 +92,7 @@
                 <div>
                     <h3><b>Πρόγραμμα Παράκτιων και Υποβρύχιων Καθαρισμών</b></h3>
                     <div class="calendar">
-                        <img class="smallImage" src="images/3.Actions/icons8-event-64.png" alt="Calendar" height="32" width="32"/>
+                        <img class="smallImage" src="images/3.Actions/calendar.png" alt="Calendar" height="32" width="32"/>
                         Ενεργό (2021)
                     </div> <br>
                     <p> Η θαλάσσια ρύπανση χαρακτηρίζεται ως μια από τις μεγάλες κρίσεις της εποχής μας, με καταστροφικές συνέπειες
@@ -114,7 +125,7 @@
             <div>
                 <h3><b>Ενίσχυση της Προστασίας των Αγγελοκαρχαριών στο Νότιο Αιγαίο</b></h3>
                 <div class="calendar">
-                    <img class="smallImage" src="images/3.Actions/icons8-event-64.png" alt="Calendar" height="32" width="32"/>
+                    <img class="smallImage" src="images/3.Actions/calendar.png" alt="Calendar" height="32" width="32"/>
                     Παρασκευή 23 Απριλίου 2021, 21:15-22:30
                 </div><br>
                 <p>
@@ -140,7 +151,7 @@
             <div>
                 <h3><b>Ημέρες Θάλασσας 2021 στο Δήμο Θερμαϊκού</b></h3>
                 <div class="calendar">
-                    <img class="smallImage" src="images/3.Actions/icons8-event-64.png" alt="Calendar" height="32" width="32"/>
+                    <img class="smallImage" src="images/3.Actions/calendar.png" alt="Calendar" height="32" width="32"/>
                     Εθελοντικός Καθαρισμός Παραλίας Αγγελοχωρίου, Κυριακή 25 Απριλίου, 11:00 π.μ. <br>
                     Σημείο έναρξης: παρκινγκ Ριβιέρα beach bar
                 </div><br>
@@ -172,7 +183,7 @@
 
 
 <!-----------------Go to top button----------------->
-<button onclick="topFunction()" id="myBtn" title="Go to top"><img src="images/social/up-arrow.png" alt="up arrow" height="24px"></button>
+<button onclick="topFunction()" id="myBtn" title="Go to top"><img src="images/social/up-arrow.png" alt="up arrow" width="24px" height="24px"></button>
 <script>
     var mybutton = document.getElementById("myBtn");
     var rootElement = document.documentElement;
@@ -224,15 +235,24 @@
             <h4> Βρείτε μας </h4>
             <a> Τηλέφωνο: 6912345678 </a><br>
             <a> Email: bluelife@gmail.com </a><br>
-            <a href="https://www.facebook.com/">
-                <img src="images/social/icons8-facebook-48.png" alt="facebook" title="facebook">
-            </a>
-            <a href="https://www.instagram.com/">
-                <img src="images/social/icons8-instagram-48.png" alt="instagram" title="instagram">
-            </a>
-            <a href="https://www.twitter.com/">
-                <img src="images/social/icons8-twitter-48.png" alt="twitter" title="twitter">
-            </a>
+            <div class="icons">
+                <a href="https://www.facebook.com/" target="_blank">
+                    <img src="images/social/facebook.png"
+                         onmouseover="this.src='images/social/facebook-hover.png';"
+                         onmouseout="this.src='images/social/facebook.png';"
+                         alt="facebook" title="facebook"></a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <img src="images/social/instagram.png"
+                         onmouseover="this.src='images/social/instagram-hover.png';"
+                         onmouseout="this.src='images/social/instagram.png';"
+                         alt="instagram" title="instagram"></a>
+                <a href="https://www.twitter.com/" target="_blank">
+                    <img src="images/social/twitter.png"
+                         onmouseover="this.src='images/social/twitter-hover.png';"
+                         onmouseout="this.src='images/social/twitter.png';"
+                         alt="twitter" title="twitter"></a>
+            </div>
+
         </div>
     </div>
     <div id="copyrights"> BlueLife 2021&copy; </div>

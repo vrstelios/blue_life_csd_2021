@@ -46,7 +46,7 @@ titlesInPages h2 {
 */
 
 
-.buttonJoinActions {
+.action .buttonJoinActions {
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -63,13 +63,18 @@ titlesInPages h2 {
     border-radius: 12px;
 }
 
-.buttonJoinActions:active {
+.action .buttonJoinActions:active {
     background-color: #3e8e41;
     transform: translateY(4px);
 
 }
 
-.smallImage {
+.action .calendar {
+    display: flex;
+    align-items:center;
+}
+
+.action .smallImage {
     /*text-align: right;*/
     display: inline;
     float: left;

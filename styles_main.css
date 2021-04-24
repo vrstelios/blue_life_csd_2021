@@ -80,6 +80,30 @@ h6{
     }
 }
 
+@media screen and (max-width: 800px) {
+    p {
+        font-size: 16px;
+    }
+    h1 {
+        font-size: 100px;
+    }
+    h2 {
+        font-size: 46px;
+    }
+    h3 {
+        font-size: 30px;
+    }
+    h4 {
+        font-size: 24px;
+    }
+    h5{
+        font-size: 1vm;
+    }
+    h6{
+        font-size: 14px;
+    }
+}
+
 /* Για το header */
 header {
     text-align: center;
@@ -95,6 +119,7 @@ header {
 
 /* Για το navigation bar*/
 nav {
+    font-family: serif;
     position: sticky;
     top: 0;
     margin: 0 auto;
@@ -259,6 +284,13 @@ nav {
         color: #1687a7;
         font-size: 40px;
         font-family: "Brush Script MT", serif;
+        transition: all .5s;
+    }
+    .hide {
+        opacity: 0;
+    }
+    .show {
+        opacity: 1;
     }
 }
 
@@ -340,18 +372,16 @@ nav {
     bottom: 20px;
     right: 30px;
     z-index: 99;
-    font-size: 16px;
     border: none;
     outline: none;
     background-color: #1687a7;
-    color: #F4F9F9;
     cursor: pointer;
-    padding: 10px;
+    padding: 9px 10px 9px 10px;
     border-radius: 50px;
 }
 
 #myBtn:hover {
-    background-color: #d4fafa;
+    background-color: white;
     color: #1f5362;
     border: 1px solid #1f5362;
 }
@@ -466,6 +496,10 @@ footer #copyrights {
 
 footer * {
     box-sizing: border-box;
+}
+
+footer .icons {
+    padding: 10px;
 }
 
 @media screen and (max-width: 1500px) {

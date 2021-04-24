@@ -28,7 +28,7 @@
 
 /* Για τα κείμενα της αρχικής σελίδας */
 .home_articles {
-    padding: 1.2%;
+    padding: 2% 10% 2% 10%;
     background-color: white;
 }
 
@@ -41,11 +41,11 @@
 }
 
 .home_articles .left {
-    width: 25%;
+    width: 30%;
 }
 
 .home_articles .right {
-    width: 75%;
+    width: 70%;
     padding-left: 2%;
 }
 
@@ -69,6 +69,9 @@
 }
 
 @media screen and (max-width: 800px) {
+    .home_articles {
+        padding: 1.2%;
+    }
     .home_articles .column {
         width: 100%;
     }
@@ -102,7 +105,6 @@
 /*--- Για τα κείμενα της αρχικής σελίδας ---*/
 
 /* Για τα sections με τα ρητά */
-zzz
 .section {
     height: 300px;
     display: flex;
@@ -111,8 +113,8 @@ zzz
     margin: 0;
     padding: 0;
     color: white;
-    background-image: url("images/1.Home/turtle.jpg");
-    /*background-repeat: no-repeat;*/
+    /*background-image: url("images/1.Home/turtle.jpg");
+    background-repeat: no-repeat;*/
     background-attachment: fixed;
     background-size: 100% 100%;
 }
@@ -123,6 +125,7 @@ zzz
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
     height: 500px;
 }
 
@@ -152,7 +155,7 @@ zzz
     transform-origin: center;
     transform-style: preserve-3d;
     transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
-    -webkit-box-reflect: below 0px -webkit-linear-gradient(transparent, transparent, #0004);
+    -webkit-box-reflect: below 0 -webkit-linear-gradient(transparent, transparent, #0004);
 }
 .box span img {
     position: absolute;
@@ -162,6 +165,12 @@ zzz
     height: 100%;
     border-radius: 10px;
     object-fit: cover;
+}
+
+@media screen and (max-width: 800px) {
+    .box span {
+        transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+    }
 }
 
 /*--- Για την gallery ---*/
