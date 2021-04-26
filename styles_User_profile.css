@@ -1,0 +1,46 @@
+/*Για τπ προγιλ του χρηστη*/
+.page_user{
+    padding: 2% 16% 2% 16%;
+    font-size: 16px;
+    background-color: white;
+}
+p{
+    color: black;
+    font-size: 20px;
+}
+.txt_img{
+    position: absolute;
+    top: 114%;
+    right: 22%;
+}
+.sort{
+    position: absolute;
+    top: 133%;
+    right: 22%;
+    background-color: #1687a7;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 12px;
+}
+.profile_img{
+    position: absolute;
+    right: 20%;
+}
+.special{
+    color: #276678;
+    font-size: 30px;
+}
+table {
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+th, td {
+    text-align: left;
+}
+th {
+    cursor: pointer;
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blue Life - Είσοδος</title>
+    <link rel="stylesheet" href="styles_main.css">
+    <link rel="stylesheet" href="styles_User_profile.css">
+
+</head>
+<body>
+<header id="header">
+    <h1>Blue Life</h1>
+</header>
+
+<!---------------Navigation bar--------------->
+<nav>
+    <div class="navbar" id="navbar">
+        <a href="Home.html">Αρχική</a>
+        <div class="dropdown">
+            <button class="dropbtn">Κατηγορίες</button>
+            <div class="dropdown-content">
+                <a href="Oceans.html" target="_self">Ωκεανοί</a>
+                <a href="Lakes-Rivers.html">Λίμνες/Ποτάμια</a>
+                <a href="Wetlands.html">Υδροβιότοποι</a>
+                <a href="Animals.html">Ζώα στο νερό</a>
+                <a href="Fishing.html">Αλιεία/Εμπόριο</a>
+            </div>
+        </div>
+        <a href="Actions.html">Δράσεις</a>
+        <a href="Did-you-know-that.html">Ήξερες ότι...</a>
+        <a href="Contact.html">Επικοινωνία</a>
+        <a href="Login.html">Είσοδος/Εγγραφή</a>
+        <div class="search-box">
+            <input type="text" class="search-box-input" placeholder="Αναζήτησε..">
+            <button class="search-box-btn">
+                <i class="search-box-icon material-icons"><img src="images/social/magnifying-glass-blue.png" alt="search" style="width:16px;height:16px "></i>
+            </button>
+        </div>
+        <div class="title_menu hide" id="title_menu">Blue Life</div>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("navbar");
+            if (x.className === "navbar") {
+                x.className += " responsive";
+            } else {
+                x.className = "navbar";
+            }
+        }
+
+        myID = document.getElementById("title_menu");
+        var myScrollFunc = function() {
+            var y = document.getElementById("header").offsetHeight;
+            if (window.scrollY >= y) {
+                myID.className = "title_menu show"
+            } else {
+                myID.className = "title_menu hide"
+            }
+        };
+        window.addEventListener("scroll", myScrollFunc);
+    </script>
+</nav>
+
+<!---------------Title section--------------->
+<div class="page-title">
+    <div class='vidContain'>
+        <div class='vid'>
+            <video autoplay muted loop>
+                <source src="images/4.Did-you-know-that/Underwater2.mp4">
+            </video>
+        </div>
+        <h2>Το προφίλ μου</h2>
+    </div>
+</div>
+<!---------------user--------------->
+<div class="page_user">
+    <p class="special"><ins>Ψευδώνυμο</ins></p>
+   <br>
+    <button class="profile_img" ><img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="error_img" style="width:200px;height:200px "></button>
+    <p class="txt_img">προσθέστε εικόνα</p>
+    <p>Όνομα: όνομα_χρήστη</p>
+    <p>Επίθετο: επίθετο_χρήστη</p>
+    <p>email: px@gmail.gr</p>
+    <p>Ηλικία: 25</p>
+    <p>Περιοχή: σέρρες</p>
+    <br>
+
+    <p class="special">Οι δράσεις μου</p>
+    <button class="sort">ταξινόμηση κατά</button>
+
+    <table style="width: 100%">
+        <tr>
+            <th>Τίτλος</th>
+            <th>Ημερομήνια</th>
+            <th>Περιγραφή</th>
+        </tr>
+        <tr>
+            <td>Δράση 1</td>
+            <td>23/2/1999</td>
+            <td>πχ1</td>
+        </tr>
+        <tr>
+            <td>Δράση 2</td>
+            <td>2/9/1998</td>
+            <td>πχ 2</td>
+        </tr>
+        <tr>
+            <td>Δράση 3</td>
+            <td>25/3/1996</td>
+            <td>πχ 3</td>
+        </tr>
+        <tr>
+            <td>Δράση 4</td>
+            <td>18/7/1999</td>
+            <td>πχ 4</td>
+        </tr>
+    </table>
+</div>
+
+
+<!-----------------Go to top button----------------->
+<button onclick="topFunction()" id="myBtn" title="Go to top"><img src="images/social/up-arrow.png" alt="up arrow" width="24px" height="24px"></button>
+<script>
+    var mybutton = document.getElementById("myBtn");
+    var rootElement = document.documentElement;
+
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    function topFunction() {
+        rootElement.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }
+</script>
+<!-----------------Footer----------------->
+<footer>
+    <div class="row">
+        <div class="column left">
+            <h4>SITEMAP</h4>
+            <a href="Home.html"><button class="sitemapButton"> Αρχική </button></a>
+            <a href="Oceans.html"><button class="sitemapButton"> Ωκεανοί </button></a>
+            <a href="Lakes-Rivers.html"><button class="sitemapButton"> Λίμνες/Ποτάμια </button></a>
+            <a href="Wetlands.html"><button class="sitemapButton"> Υδροβιότοποι </button></a>
+            <a href="Animals.html"><button class="sitemapButton"> Ζώα στο νερό </button></a>
+            <a href="Fishing.html"><button class="sitemapButton"> Αλιεία/Εμπόριο </button></a>
+            <a href="Actions.html"><button class="sitemapButton"> Δράσεις </button></a>
+            <a href="Did-you-know-that.html"><button class="sitemapButton"> Ήξερες ότι... </button></a>
+            <a href="Contact.html"><button class="sitemapButton"> Επικοινωνία </button></a>
+            <a href="Login.html"><button class="sitemapButton"> Είσοδος </button></a>
+            <a href="Register.html"><button class="sitemapButton"> Εγγραφή </button></a>
+        </div>
+
+        <div class="column middle" >
+            <h4> Ποιοι είμαστε </h4>
+            <p>Είμαστε μία εθελοντική ομάδα αποτελούμενη από φοιτητές του ΑΠΘ. Με πολλή αγάπη για το νερό και τον μπλε πλανήτη, υλοποιήσαμε αυτόν τον ιστότοπο στα πλαίσια μιας εργασίας που
+                αποτέλεσε το εναρκτήριο λάκτισμα για να την συνεχή ενασχόληση μας σε δράσεις για την προστασία του υδάτινου κόσμου.
+            </p>
+        </div>
+
+        <div class="column right">
+            <h4> Βρείτε μας </h4>
+            <a> Τηλέφωνο: 6912345678 </a><br>
+            <a> Email: bluelife@gmail.com </a><br>
+            <div class="icons">
+                <a href="https://www.facebook.com/" target="_blank">
+                    <img src="images/social/facebook.png"
+                         onmouseover="this.src='images/social/facebook-hover.png';"
+                         onmouseout="this.src='images/social/facebook.png';"
+                         alt="facebook" title="facebook"></a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <img src="images/social/instagram.png"
+                         onmouseover="this.src='images/social/instagram-hover.png';"
+                         onmouseout="this.src='images/social/instagram.png';"
+                         alt="instagram" title="instagram"></a>
+                <a href="https://www.twitter.com/" target="_blank">
+                    <img src="images/social/twitter.png"
+                         onmouseover="this.src='images/social/twitter-hover.png';"
+                         onmouseout="this.src='images/social/twitter.png';"
+                         alt="twitter" title="twitter"></a>
+            </div>
+
+        </div>
+    </div>
+    <div id="copyrights"> BlueLife 2021&copy; </div>
+</footer>
+
+</body>
+</html>
