@@ -94,5 +94,30 @@ table {
 }
 /* ----------------- */
 
-/*--- Για τις κατηγορίες ---*/
 
+/* MAP OCEANS
+.category_content_map h3 {
+    color: #1f5362;
+    font-size: 15px;
+    margin-top: 0;
+    text-align: center;
+}
+.category_content_map {
+    padding: 2% 16% 2% 16%;
+    font-family: "Segoe UI";
+    text-align: justify;
+    font-size: 16px;
+    background-color: white;
+}
+.category_content_map img {
+    margin: 10px 20px 20px 400px;
+}
+@media screen and (max-width: 800px) {
+    .category_content_map img {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin: 2px 2px 2px 2px;
+    }
+}
+ */
