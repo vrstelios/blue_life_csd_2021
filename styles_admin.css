@@ -1,0 +1,74 @@
+/* Για τη σελίδα διαχείρησης */
+.admin-page {
+    background-color: white;
+    padding: 1% 10% 1% 10%;
+}
+
+.page-title {
+    background-color: white;
+    height: 160px;
+}
+
+.page-title h2 {
+    color: #1f5362;
+}
+
+.table_button {
+    float: right;
+    padding: 6px 10px;
+    margin: 4px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.table_button:active {
+    transform: translateY(4px);
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #1687a7;
+    color: white;
+}
+.keno {
+    width: 40px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.admin-page .table_page {
+    text-align: center;
+    padding: 6px;
+}
+
+@media screen and (max-width: 800px) {
+    .admin-page {
+        background-color: white;
+        padding: 1% 2% 1% 2%;
+    }
+    td, th {
+        font-size: 14px;
+        padding: 4px;
+    }
+}
+
+/*--- Για τη σελίδα διαχείρησης ---*/
