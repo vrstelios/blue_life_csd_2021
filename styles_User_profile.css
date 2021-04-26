@@ -10,7 +10,7 @@ p{
 }
 .txt_img{
     position: absolute;
-    top: 114%;
+    top: 117%;
     right: 22%;
 }
 .sort{
@@ -19,11 +19,12 @@ p{
     right: 22%;
     background-color: #1687a7;
     color: white;
-    padding: 10px 20px;
+    padding: 8px 17px;
     border-radius: 12px;
 }
 .profile_img{
     position: absolute;
+    top: 95%;
     right: 20%;
 }
 .special{
