@@ -10,15 +10,14 @@
     display: inline-block;
 }
 
+/* --- πίνακας --- */
 tr:nth-child(even){
     background-color: #f2f2f2;
 }
 th, td {
     text-align: left;
 }
-th {
-    cursor: pointer;
-}
+
 table {
     border-spacing: 0;
     width: 100%;
@@ -43,6 +42,7 @@ table {
         margin: 2px 2px 2px 2px;
     }
 }
+/* ----------------*/
 
 /*--Ζώα gallery--*/
 .animals_gallery {
@@ -92,6 +92,7 @@ table {
         padding: 6% 2% 6% 2%;
     }
 }
+/* ----------------- */
 
 /*--- Για τις κατηγορίες ---*/
 
