@@ -1,60 +1,20 @@
 /* Για τις Δράσεις */
-/*
-.containerAction {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
- */
-/*
-titlesInPages h2 {
-    padding: 2%;
-    background-color: #d4fafa;
-    font-family: "Segoe UI", serif;
-    color: #1f5362;
-    font-size: 55px;
-    margin-top: 0;
-    background-image: url("images/dolphin-203875_1920.jpg");
-    height:20%;
-}
-*/
 
 .actionIntro {
     background-color: lightblue;
     height: auto;
     padding: 1% 18% 1% 18%;
     margin-bottom: -3%;
-    /*
-    border-bottom-style: solid;
-    border-bottom-width: thick;
-    border-bottom-color: lightblue;
-     */
 }
-/*
-.action {
-    background-color: white;
-    height: auto;
-    margin-top:3%;
-    text-align: justify;
-    padding: 2%;
-}
-
-
-.action.containerAction.text p {
-    text-align: justify;
-}
-*/
-
 
 .action .buttonJoinActions {
     background-color: #4CAF50;
     border: none;
     color: white;
-    padding: 16px 32px;
+    padding: 30px 32px;
     text-align: center;
     text-decoration: none;
-    display: block;
-    font-size: 16px;
+    font-size: 20px;
     margin: 2%;
     cursor: pointer;
     outline: none;
@@ -66,7 +26,6 @@ titlesInPages h2 {
 .action .buttonJoinActions:active {
     background-color: #3e8e41;
     transform: translateY(4px);
-
 }
 
 .action .calendar {
@@ -75,24 +34,15 @@ titlesInPages h2 {
 }
 
 .action .smallImage {
-    /*text-align: right;*/
     display: inline;
     float: left;
     margin: 0;
 }
 
-/* 21/4/2021*//*
-.text {
-    /*font-size: 20px;
-    padding-left: 2%;
-}
-*/
-
 .action {
     background-color: white;
     padding: 1% 2% 1% 2%;
     margin-top:3%;
-    font-family: "Segoe UI", "Calibri", serif;
 }
 
 .action * {
@@ -157,28 +107,3 @@ titlesInPages h2 {
         justify-content: center;
     }
 }
-/*
-@media screen and (max-width: 800px) {
-    article .actionIntro {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        margin: 2px 2px 2px 2px;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    article .action img {
-        width: 100%;
-        display: flex;
-        align-items: flex-start;
-    }
-    article .action .text {
-        width: 100%;
-    }
-    article .action .text {
-        padding-left: 0;
-    }
-}
-
- */
