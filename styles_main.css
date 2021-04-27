@@ -317,7 +317,7 @@ nav {
     }
     .navbar.responsive .dropdown-content {
         position: relative;
-        background-color: lavender;
+        background-color: white;
     }
     .navbar.responsive .dropdown .dropbtn {
         display: block;
