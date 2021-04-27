@@ -140,6 +140,7 @@
  /*   left: 8.5%; */
     background-color: #1687a7;
     color: white;
+    cursor: pointer;
     padding: 20px 140px;
     border-radius: 12px;
 }
@@ -157,6 +158,7 @@
     color: #1687a7;
     background-color: white;
     padding: 10px 15px;
+    cursor: pointer;
     letter-spacing: 0.1rem;
     text-decoration: underline;
     -webkit-transition: color 0.2s ease-in-out;
@@ -176,6 +178,7 @@
     color: #1687a7;
     background-color: white;
     padding: 10px 15px;
+    cursor: pointer;
     letter-spacing: 0.1rem;
     text-decoration: underline;
     -webkit-transition: color 0.2s ease-in-out;
@@ -300,6 +303,7 @@
 }
 .SignUp .btn_register {
     position: absolute;
+    cursor: pointer;
     top: 75%;
     /*left: 4.5%;*/
     padding: 15px 130px;
@@ -317,6 +321,7 @@
     color: #1687a7;
     background-color: white;
     padding: 10px 15px;
+    cursor: pointer;
     letter-spacing: 0.1rem;
     text-decoration: underline;
     -webkit-transition: color 0.2s ease-in-out;
