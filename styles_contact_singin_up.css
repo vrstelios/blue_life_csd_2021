@@ -70,6 +70,7 @@
     position: relative;
 }
 .SignIn .container_page_login {
+    text-align: center;
     position: absolute;
     top: 5%;
     right: 0;
@@ -87,7 +88,7 @@
 .SignIn .login{
     color: #1687a7;
     position: absolute;
-    top: 8%;
+    top: 5%;
     left: 20%;
     font-size: 60px;
     font-weight: bold;
@@ -95,20 +96,20 @@
 .SignIn .email{
     position: absolute;
     top: 23%;
-    left: 8%;
+  /*  left: 8%; */
     font-size: 25px;
 }
 .SignIn .pass{
     position: absolute;
     top: 43%;
-    left: 8%;
+   /* left: 8%; */
     font-size: 25px;
 }
 
 .SignIn input[type=text] {
     position: absolute;
     top: 31%;
-    left: 10%;
+   /* left: 10%; */
     background: #F6F5F5;
     border: none;
     color: black;
@@ -118,7 +119,7 @@
 .SignIn input[type=password]{
     position: absolute;
     top: 51%;
-    left: 10%;
+ /*   left: 10%; */
     background: #F6F5F5;
     border: none;
     color: black;
@@ -136,7 +137,7 @@
 .SignIn .btn_login{
     position: absolute;
     top: 65%;
-    left: 8.5%;
+ /*   left: 8.5%; */
     background-color: #1687a7;
     color: white;
     padding: 20px 140px;
@@ -149,7 +150,7 @@
 .SignIn .btn_SignUp{
     position: relative;
     top: 80%;
-    left: 1%;
+ /*   left: 1%; */
     white-space: nowrap;
     text-align: center;
     border: 0 solid ;
@@ -168,7 +169,7 @@
 .SignIn .btn_Forgot_your_Pass{
     position: relative;
     top: 80%;
-    left: 1%;
+    /*left: 1%;*/
     white-space: nowrap;
     text-align: center;
     border: 0 solid ;
@@ -202,8 +203,9 @@
     position: relative;
 }
 .SignUp .container_page_register{
+    text-align: left;
     padding: 20px;
-    width:330px;
+    width:315px;
     height: 550px;
     position: absolute;
     left: 50%;
@@ -219,7 +221,7 @@
 .SignUp .register{
     font-size: 20px;
     top: 5%;
-    left: 10%;
+   /* left: 10%;*/
     text-align: center;
     position: absolute;
     color: #1687a7;
@@ -228,14 +230,14 @@
     position: absolute;
     font-size: 15px;
     top: 15%;
-    left: 10%;
+    /*left: 10%; */
     color: black;
 }
 .SignUp input[type=text_name]{
     position: absolute;
     text-align: left;
     top: 20%;
-    left: 10%;
+    /*left: 10%; */
     padding: 13px;
     color: black;
     border: none;
@@ -245,14 +247,14 @@
     position: absolute;
     font-size: 15px;
     top: 30%;
-    left: 10%;
+    /*left: 10%; */
     color: black;
 }
 .SignUp input[type=text_email]{
     position: absolute;
     text-align: left;
     top: 35%;
-    left: 10%;
+    /*left: 10%; */
     padding: 13px;
     color: black;
     border: none;
@@ -262,14 +264,14 @@
     position: absolute;
     font-size: 15px;
     top: 45%;
-    left: 10%;
+    /*left: 10%;*/
     color: black;
 }
 .SignUp .input_pass1{
     position: absolute;
     text-align: left;
     top: 50%;
-    left: 10%;
+    /*left: 10%;*/
     padding: 13px;
     color: black;
     border: none;
@@ -283,14 +285,14 @@
     position: absolute;
     font-size: 15px;
     top: 60%;
-    left: 10%;
+    /*left: 10%;*/
     color: black;
 }
 .SignUp .input_pass2{
     position: absolute;
     text-align: left;
     top: 65%;
-    left: 10%;
+    /*left: 10%;*/
     padding: 13px;
     color: black;
     border: none;
@@ -299,8 +301,8 @@
 .SignUp .btn_register {
     position: absolute;
     top: 75%;
-    left: 4.5%;
-    padding: 15px 140px;
+    /*left: 4.5%;*/
+    padding: 15px 130px;
     border-radius: 12px;
     background-color: #1687a7;
     color: white;
@@ -310,7 +312,7 @@
     white-space: nowrap;
     text-align: center;
     top: 85%;
-    left: 3%;
+    /*left: 3%; */
     border: 0 solid ;
     color: #1687a7;
     background-color: white;
