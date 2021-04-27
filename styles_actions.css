@@ -15,10 +15,10 @@
     background-color: #4CAF50;
     border: none;
     color: white;
-    padding: 30px 32px;
+    padding: 20px 32px;
     text-align: center;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
     margin: 2%;
     cursor: pointer;
     outline: none;
@@ -97,7 +97,7 @@
 
 @media screen and (max-width: 800px) {
     .actionIntro {
-        padding: 1% 4% 1% 4%;
+        padding: 4%;
         margin-bottom: -10%;
     }
     .action {
