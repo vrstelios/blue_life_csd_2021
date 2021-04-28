@@ -99,6 +99,40 @@
 }
 /*--- Για τα sections με τα ρητά ---*/
 
+/* Για το κουμπί θέλω να βοηθήσω και εγώ */
+.home_articles .youCanHelpHomeButton {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    margin: 5px;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+    width: 30%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.home_articles .youCanHelpHomeButton:active {
+    background-color: #3e8e41;
+    transform: translateY(4px);
+}
+
+.home_articles .text a:visited {
+    color: blue;
+}
+
+@media screen and (max-width: 800px) {
+    .home_articles .youCanHelpHomeButton {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+/*--- Για το κουμπί θέλω να βοηθήσω και εγώ ---*/
+
 /* Για την gallery */
 .gallery {
     display: flex;
@@ -151,38 +185,4 @@
         transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
     }
 }
-
 /*--- Για την gallery ---*/
-
-/*--- Για το κουμπί θέλω να βοηθήσω και εγώ ---*/
-.home_articles .youCanHelpHomeButton {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    margin: 5px;
-    padding: 15px 25px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 18px;
-    cursor: pointer;
-    outline: none;
-    width: 30%;
-    height: auto;
-    border-radius: 12px;
-}
-
-.home_articles .youCanHelpHomeButton:active {
-    background-color: #3e8e41;
-    transform: translateY(4px);
-}
-
-.home_articles .text a:visited {
-    color: blue;
-}
-
-@media screen and (max-width: 800px) {
-    .home_articles .youCanHelpHomeButton {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-}

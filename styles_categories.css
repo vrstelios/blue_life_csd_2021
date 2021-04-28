@@ -10,20 +10,6 @@
     display: inline-block;
 }
 
-/* --- πίνακας --- */
-tr:nth-child(even){
-    background-color: #f2f2f2;
-}
-th, td {
-    text-align: left;
-}
-
-table {
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
-}
-
 .category_content img {
     float: right;
     margin: 10px 0 10px 20px;
@@ -42,9 +28,23 @@ table {
         margin: 2px 2px 2px 2px;
     }
 }
-/* ----------------*/
 
-/*--Ζώα gallery--*/
+/* Πίνακας για τις λίμνες */
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+th, td {
+    text-align: left;
+}
+
+table {
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+/*--- Πίνακας για τις λίμνες ---*/
+
+/* Ζώα gallery */
 .animals_gallery {
     padding: 6% 16% 6% 16%;
     overflow: hidden;
@@ -78,6 +78,7 @@ table {
     transform: scale(1);
     transition: all .25s;
 }
+
 .animals_gallery img:nth-child(7n + 1) {
      grid-column: 2 / span 2;
  }
@@ -92,32 +93,4 @@ table {
         padding: 6% 2% 6% 2%;
     }
 }
-/* ----------------- */
-
-
-/* MAP OCEANS
-.category_content_map h3 {
-    color: #1f5362;
-    font-size: 15px;
-    margin-top: 0;
-    text-align: center;
-}
-.category_content_map {
-    padding: 2% 16% 2% 16%;
-    font-family: "Segoe UI";
-    text-align: justify;
-    font-size: 16px;
-    background-color: white;
-}
-.category_content_map img {
-    margin: 10px 20px 20px 400px;
-}
-@media screen and (max-width: 800px) {
-    .category_content_map img {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        margin: 2px 2px 2px 2px;
-    }
-}
- */
+/*--- Ζώα gallery ---*/

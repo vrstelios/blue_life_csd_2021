@@ -48,13 +48,12 @@
 }
 /*--- Για το Contact ---*/
 
+/* Για την είσοδο */
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-/* Για την είσοδο */
 .SignIn {
     padding: 2% 2% 2% 2%;
     text-align: justify;
@@ -103,7 +102,6 @@
     top: 43%;
     font-size: 25px;
 }
-
 .SignIn input[type=text] {
     position: absolute;
     top: 31%;
@@ -112,7 +110,6 @@
     color: black;
     padding: 20px 30px;
 }
-
 .SignIn input[type=password]{
     position: absolute;
     top: 51%;
@@ -121,7 +118,6 @@
     color: black;
     padding: 20px 30px;
 }
-
 .SignIn input[type=text]:focus {
     background-color: #ddd;
     outline: none
@@ -142,7 +138,6 @@
 .SignIn .btn_login:hover{
     background-color: #276678;
 }
-
 .SignIn .btn_SignUp{
     position: relative;
     top: 80%;
@@ -183,13 +178,11 @@
 }
 /*--- Για την είσοδο ---*/
 
-
 /* Για την εγγραφή */
 .SignUp {
     padding: 2% 2% 2% 2%;
     background-color: white;
 }
-
 .SignUp .login-img {
     background-image: url("images/5.Contact-Login-Register/Register_beach.jpg");
     min-height: 880px;
@@ -310,4 +303,3 @@
     transition: color 0.2s ease-in-out;
 }
 /*--- Για την εγγραφή ---*/
-
