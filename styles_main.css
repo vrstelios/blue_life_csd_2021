@@ -333,8 +333,6 @@ nav {
 }
 /*--- Για το navigation bar ---*/
 
-/*https://codepen.io/abhinanduN/pen/BaLNPYX*/
-
 /* Για τον τίτλο κάθε σελίδας */
 .page-title {
     position: relative;
@@ -344,12 +342,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-attachment: fixed;
-    background-size: 100%;
-    margin: 0;
-    padding: 0;
 
-     */
 }
 
 .page-title .vid {
@@ -387,7 +380,6 @@ nav {
 /*--- Για το Go to top button ---*/
 
 /* Για το footer */
-/* Create three equal columns that floats next to each other */
 footer {
     height: auto;
     background-color: #276678;
@@ -396,21 +388,6 @@ footer {
     font-size: 20px;
     color: white;
 }
-/*
-footer ul {
-    height: 160px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    list-style-type:none;
-}
-
-footer li{
-    display:inline-block;
-    padding:2px;
-    /* background-color: white;
-
-}*/
 
 .sitemapButton {
     width: 40%;
@@ -444,7 +421,6 @@ footer .column {
     box-sizing: border-box;
 }
 
-/* Clear floats after the columns */
 footer .row:after {
     content: "";
     display: table;
@@ -478,11 +454,6 @@ footer li a:visited {
 }
 footer li a:link {
     color: white;
-    /*  border-style: solid;
-      border-width: thin;
-      border-color: red;
-      background-color: #1f5362;
-         */
 }
 footer li a:hover {
     color: blue;
