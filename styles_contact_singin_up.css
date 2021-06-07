@@ -48,12 +48,13 @@
 }
 /*--- Για το Contact ---*/
 
-/* Για την είσοδο */
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
+/* Για την είσοδο */
 .SignIn {
     padding: 2% 2% 2% 2%;
     text-align: justify;
@@ -102,6 +103,7 @@
     top: 43%;
     font-size: 25px;
 }
+
 .SignIn input[type=text] {
     position: absolute;
     top: 31%;
@@ -110,6 +112,7 @@
     color: black;
     padding: 20px 30px;
 }
+
 .SignIn input[type=password]{
     position: absolute;
     top: 51%;
@@ -118,6 +121,7 @@
     color: black;
     padding: 20px 30px;
 }
+
 .SignIn input[type=text]:focus {
     background-color: #ddd;
     outline: none
@@ -138,6 +142,7 @@
 .SignIn .btn_login:hover{
     background-color: #276678;
 }
+
 .SignIn .btn_SignUp{
     position: relative;
     top: 80%;
@@ -176,13 +181,81 @@
     color: #276678;
     outline: none;
 }
+/*-----------forgot_your_pass---------------------*/
+.modal {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0;
+    font-size: 30px;
+    transition: opacity 0.3s;
+    top: 40%;
+    left: 0;
+    right: 0;
+    text-align: left;
+    max-width: 500px;
+    max-height: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+.SignIn .btn_submit{
+    position: absolute;
+    top: 80%;
+    right: 15px;
+    background-color: #1687a7;
+    color: white;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 12px;
+}
+.SignIn.btn_submit:hover{
+    background-color: #276678;
+}
+.SignIn input[type=text_email] {
+    position: absolute;
+    top: 70%;
+    background: #F6F5F5;
+    border: none;
+    color: black;
+    padding: 15px 20px;
+}
+
+.modal-close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+
+}
+.overlay {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
 /*--- Για την είσοδο ---*/
+
 
 /* Για την εγγραφή */
 .SignUp {
     padding: 2% 2% 2% 2%;
     background-color: white;
 }
+
 .SignUp .login-img {
     background-image: url("images/5.Contact-Login-Register/Register_beach.jpg");
     min-height: 880px;
@@ -195,7 +268,7 @@
     text-align: left;
     padding: 20px;
     width:315px;
-    height: 550px;
+    height: 750px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -217,13 +290,13 @@
 .SignUp .user{
     position: absolute;
     font-size: 15px;
-    top: 15%;
+    top: 13%;
     color: black;
 }
 .SignUp input[type=text_name]{
     position: absolute;
     text-align: left;
-    top: 20%;
+    top: 16%;
     padding: 13px;
     color: black;
     border: none;
@@ -232,13 +305,43 @@
 .SignUp .email_register{
     position: absolute;
     font-size: 15px;
-    top: 30%;
+    top: 26%;
     color: black;
 }
 .SignUp input[type=text_email]{
     position: absolute;
     text-align: left;
-    top: 35%;
+    top: 29%;
+    padding: 13px;
+    color: black;
+    border: none;
+    background: #f7f7f7;
+}
+.SignUp .first_name{
+    position: absolute;
+    font-size: 15px;
+    top: 39%;
+    color: black;
+}
+.SignUp input[type=text_first_name]{
+    position: absolute;
+    text-align: left;
+    top: 41%;
+    padding: 13px;
+    color: black;
+    border: none;
+    background: #f7f7f7;
+}
+.SignUp .last_name{
+    position: absolute;
+    font-size: 15px;
+    top: 51%;
+    color: black;
+}
+.SignUp input[type=text_last_name]{
+    position: absolute;
+    text-align: left;
+    top: 54%;
     padding: 13px;
     color: black;
     border: none;
@@ -247,13 +350,13 @@
 .SignUp .pass1{
     position: absolute;
     font-size: 15px;
-    top: 45%;
+    top: 64%;
     color: black;
 }
 .SignUp .input_pass1{
     position: absolute;
     text-align: left;
-    top: 50%;
+    top: 67%;
     padding: 13px;
     color: black;
     border: none;
@@ -266,13 +369,13 @@
 .SignUp .pass2{
     position: absolute;
     font-size: 15px;
-    top: 60%;
+    top: 77%;
     color: black;
 }
 .SignUp .input_pass2{
     position: absolute;
     text-align: left;
-    top: 65%;
+    top: 80%;
     padding: 13px;
     color: black;
     border: none;
@@ -281,7 +384,7 @@
 .SignUp .btn_register {
     position: absolute;
     cursor: pointer;
-    top: 75%;
+    top: 88%;
     padding: 15px 130px;
     border-radius: 12px;
     background-color: #1687a7;
@@ -291,7 +394,7 @@
     position: absolute;
     white-space: nowrap;
     text-align: center;
-    top: 85%;
+    top: 95%;
     border: 0 solid ;
     color: #1687a7;
     background-color: white;
@@ -303,3 +406,4 @@
     transition: color 0.2s ease-in-out;
 }
 /*--- Για την εγγραφή ---*/
+

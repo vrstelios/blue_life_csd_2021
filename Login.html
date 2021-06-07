@@ -79,18 +79,28 @@
 <!---------------Είσοδος--------------->
 <div class="SignIn">
     <div class="login-img">
-        <form class="container_page_login">
+        <form action="px.php" method="post" class="container_page_login">
             <h3 class="login">Σύνδεση</h3>
 
             <label class="username"><b>Username</b></label>
-            <input  type="text" placeholder="Εισάγετε username"  size="35" required>
+            <input  type="text" placeholder="Εισάγετε username"  name="user" size="35" required>
             <label class="pass"><b>Κωδικός</b></label>
-            <input  type="password" placeholder="Εισάγετε Κωδικό" name="pass" size="35" required>
+            <input  type="password"  placeholder="Εισάγετε Κωδικό" name="pass" size="35" required>
 
             <button class="btn_login">Είσοδος</button>
 
             <button onclick="document.location='Register.html'" class="btn_SignUp">Δημιουργήστε τον δικό σας λογαριασμό!</button>
-            <button class="btn_Forgot_your_Pass" >Ξεχάσατε τον κωδικό σας;</button>
+
+            <button class="btn_Forgot_your_Pass" id="btn-modal">Ξεχάσατε τον κωδικό σας;</button>
+            <div class="overlay" id="overlay"></div>
+            <div class="modal" id="modal">
+                <button class="modal-close-btn" id="close-btn"><i class="fa fa-times" ></i></button>
+                <p>Ξέχασες των κωδικό σου κανένα πρόβλημα δώσε μας το email σου και θα σου στείλουμε εμείς τον καινούργιο κωδικό σου.</p>
+                <label class="email_register"><b>Διεύθυνση email</b></label><br/>
+                <input type="text_email" placeholder="Γράψε email" size="37" required><br/><br/>
+                <button class="btn_submit">Υποβολή</button>
+            </div>
+
         </form>
     </div>
 </div>
@@ -118,7 +128,23 @@
         })
     }
 </script>
+<!-----------------dialog-------------->
 
+<script>
+    document.getElementById('btn-modal').addEventListener('click', function() {
+        document.getElementById('overlay').classList.add('is-visible');
+        document.getElementById('modal').classList.add('is-visible');
+    });
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('overlay').classList.remove('is-visible');
+        document.getElementById('modal').classList.remove('is-visible');
+    });
+    document.getElementById('overlay').addEventListener('click', function() {
+        document.getElementById('overlay').classList.remove('is-visible');
+        document.getElementById('modal').classList.remove('is-visible');
+    });
+</script>
 <!-----------------Footer----------------->
 <footer>
     <div class="row">
