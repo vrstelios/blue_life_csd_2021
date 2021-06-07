@@ -16,21 +16,21 @@
 <!---------------Navigation bar--------------->
 <nav>
     <div class="navbar" id="navbar">
-        <a href="Home.html">Αρχική</a>
+        <a href="Home.php">Αρχική</a>
         <div class="dropdown">
             <button class="dropbtn">Κατηγορίες</button>
             <div class="dropdown-content">
-                <a href="Oceans.html" target="_self">Ωκεανοί</a>
-                <a href="Lakes-Rivers.html">Λίμνες/Ποτάμια</a>
-                <a href="Wetlands.html">Υδροβιότοποι</a>
-                <a href="Animals.html">Ζώα στο νερό</a>
-                <a href="Fishing.html">Αλιεία/Εμπόριο</a>
+                <a href="Oceans.php" target="_self">Ωκεανοί</a>
+                <a href="Lakes-Rivers.php">Λίμνες/Ποτάμια</a>
+                <a href="Wetlands.php">Υδροβιότοποι</a>
+                <a href="Animals.php">Ζώα στο νερό</a>
+                <a href="Fishing.php">Αλιεία/Εμπόριο</a>
             </div>
         </div>
-        <a href="Actions.html">Δράσεις</a>
-        <a href="Did-you-know-that.html">Ήξερες ότι...</a>
-        <a href="Contact.html">Επικοινωνία</a>
-        <a href="Login.html">Είσοδος/Εγγραφή</a>
+        <a href="Actions.php">Δράσεις</a>
+        <a href="Did-you-know-that.php">Ήξερες ότι...</a>
+        <a href="Contact.php">Επικοινωνία</a>
+        <a href="Login.php">Είσοδος/Εγγραφή</a>
         <div class="search-box">
             <input type="text" class="search-box-input" placeholder="Αναζήτησε..">
             <button class="search-box-btn">
@@ -180,7 +180,7 @@
     </p>
 
     Πηγές: <br>
-    <a href="https://www.mapsofworld.com/answers/world/named-worlds-oceans/?fbclid=IwAR0Mgnh1ZsiGEodtnuY_KWbS96peGPQOM2cdv4qYAt_XTzsbp23d9P3c0_g#" target="_blank" >Maps Of World</a>,
+    <a href="https://www.mapsofworld.com/answers/world/named-worlds-oceans/?fbclid=IwAR0Mgnh1ZsiGEodtnuY_KWbS96peGPQOM2cdv4qYAt_XTzsbp23d9P3c0_g#Oceans.php" target="_blank" >Maps Of World</a>,
     <a href="https://www.sansimera.gr/worldays/39?fbclid=IwAR1Xn99gzTsOJ9rQp4kq1OshzuaFP1MfBASezTJ9urPFSDomGoPih9b28Qo" target="_blank">Σαν Σήμερα</a>,
     <a href="https://www.efsyn.gr/nisides/159817_giati-ehoyme-anagki-toys-okeanoys" target="_blank">Η Εφημερίδα των Συντακτών</a>
 </div>
@@ -214,17 +214,17 @@
     <div class="row">
         <div class="column left">
             <h4>SITEMAP</h4>
-            <a href="Home.html"><button class="sitemapButton"> Αρχική </button></a>
-            <a href="Oceans.html"><button class="sitemapButton"> Ωκεανοί </button></a>
-            <a href="Lakes-Rivers.html"><button class="sitemapButton"> Λίμνες/Ποτάμια </button></a>
-            <a href="Wetlands.html"><button class="sitemapButton"> Υδροβιότοποι </button></a>
-            <a href="Animals.html"><button class="sitemapButton"> Ζώα στο νερό </button></a>
-            <a href="Fishing.html"><button class="sitemapButton"> Αλιεία/Εμπόριο </button></a>
-            <a href="Actions.html"><button class="sitemapButton"> Δράσεις </button></a>
-            <a href="Did-you-know-that.html"><button class="sitemapButton"> Ήξερες ότι... </button></a>
-            <a href="Contact.html"><button class="sitemapButton"> Επικοινωνία </button></a>
-            <a href="Login.html"><button class="sitemapButton"> Είσοδος </button></a>
-            <a href="Register.html"><button class="sitemapButton"> Εγγραφή </button></a>
+            <a href="Home.php"><button class="sitemapButton"> Αρχική </button></a>
+            <a href="Oceans.php"><button class="sitemapButton"> Ωκεανοί </button></a>
+            <a href="Lakes-Rivers.php"><button class="sitemapButton"> Λίμνες/Ποτάμια </button></a>
+            <a href="Wetlands.php"><button class="sitemapButton"> Υδροβιότοποι </button></a>
+            <a href="Animals.php"><button class="sitemapButton"> Ζώα στο νερό </button></a>
+            <a href="Fishing.php"><button class="sitemapButton"> Αλιεία/Εμπόριο </button></a>
+            <a href="Actions.php"><button class="sitemapButton"> Δράσεις </button></a>
+            <a href="Did-you-know-that.php"><button class="sitemapButton"> Ήξερες ότι... </button></a>
+            <a href="Contact.php"><button class="sitemapButton"> Επικοινωνία </button></a>
+            <a href="Login.php"><button class="sitemapButton"> Είσοδος </button></a>
+            <a href="Register.php"><button class="sitemapButton"> Εγγραφή </button></a>
         </div>
 
         <div class="column middle" >

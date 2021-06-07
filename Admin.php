@@ -16,21 +16,21 @@
 <!---------------Navigation bar--------------->
 <nav>
     <div class="navbar" id="navbar">
-        <a href="Home.html">Αρχική</a>
+        <a href="Home.php">Αρχική</a>
         <div class="dropdown">
             <button class="dropbtn">Κατηγορίες</button>
             <div class="dropdown-content">
-                <a href="Oceans.html" target="_self">Ωκεανοί</a>
-                <a href="Lakes-Rivers.html">Λίμνες/Ποτάμια</a>
-                <a href="Wetlands.html">Υδροβιότοποι</a>
-                <a href="Animals.html">Ζώα στο νερό</a>
-                <a href="Fishing.html">Αλιεία/Εμπόριο</a>
+                <a href="Oceans.php" target="_self">Ωκεανοί</a>
+                <a href="Lakes-Rivers.php">Λίμνες/Ποτάμια</a>
+                <a href="Wetlands.php">Υδροβιότοποι</a>
+                <a href="Animals.php">Ζώα στο νερό</a>
+                <a href="Fishing.php">Αλιεία/Εμπόριο</a>
             </div>
         </div>
-        <a href="Actions.html">Δράσεις</a>
-        <a href="Did-you-know-that.html">Ήξερες ότι...</a>
-        <a href="Contact.html">Επικοινωνία</a>
-        <a href="Admin.html">Admin</a>
+        <a href="Actions.php">Δράσεις</a>
+        <a href="Did-you-know-that.php">Ήξερες ότι...</a>
+        <a href="Contact.php">Επικοινωνία</a>
+        <a href="Admin.php">Admin</a>
         <div class="search-box">
             <input type="text" class="search-box-input" placeholder="Αναζήτησε..">
             <button class="search-box-btn">
@@ -95,8 +95,8 @@
                 <td class="keno">25</td>
                 <td>Θεσσαλονίκη</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -107,8 +107,8 @@
                 <td class="keno">25</td>
                 <td>Καρδίτσα</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -119,8 +119,8 @@
                 <td class="keno">25</td>
                 <td>Σέρρες</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -131,8 +131,8 @@
                 <td class="keno">25</td>
                 <td>Λαμία</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -143,8 +143,8 @@
                 <td class="keno">25</td>
                 <td>Καρδίτσα</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -155,8 +155,8 @@
                 <td class="keno">25</td>
                 <td>Αθήνα</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
         </table>
@@ -183,8 +183,8 @@
                 <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
                 <td>image1.jpg</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -193,8 +193,8 @@
                 <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
                 <td>image2.jpg</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -203,8 +203,8 @@
                 <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
                 <td>image3.jpg</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -213,8 +213,8 @@
                 <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
                 <td>image4.jpg</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -223,8 +223,8 @@
                 <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
                 <td>image5.jpg</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -233,8 +233,8 @@
                 <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
                 <td>image6.jpg</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
         </table>
@@ -258,8 +258,8 @@
                 <td>User1</td>
                 <td>24/04/2021</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -267,8 +267,8 @@
                 <td>User2</td>
                 <td>25/04/2021</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -276,8 +276,8 @@
                 <td>User1</td>
                 <td>28/04/2021</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
             <tr>
@@ -285,8 +285,8 @@
                 <td>User6</td>
                 <td>28/04/2021</td>
                 <td class="keno">
-                    <a href="Admin.html"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.html"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
+                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
         </table>
@@ -323,17 +323,17 @@
     <div class="row">
         <div class="column left">
             <h4>SITEMAP</h4>
-            <a href="Home.html"><button class="sitemapButton"> Αρχική </button></a>
-            <a href="Oceans.html"><button class="sitemapButton"> Ωκεανοί </button></a>
-            <a href="Lakes-Rivers.html"><button class="sitemapButton"> Λίμνες/Ποτάμια </button></a>
-            <a href="Wetlands.html"><button class="sitemapButton"> Υδροβιότοποι </button></a>
-            <a href="Animals.html"><button class="sitemapButton"> Ζώα στο νερό </button></a>
-            <a href="Fishing.html"><button class="sitemapButton"> Αλιεία/Εμπόριο </button></a>
-            <a href="Actions.html"><button class="sitemapButton"> Δράσεις </button></a>
-            <a href="Did-you-know-that.html"><button class="sitemapButton"> Ήξερες ότι... </button></a>
-            <a href="Contact.html"><button class="sitemapButton"> Επικοινωνία </button></a>
-            <a href="Login.html"><button class="sitemapButton"> Είσοδος </button></a>
-            <a href="Register.html"><button class="sitemapButton"> Εγγραφή </button></a>
+            <a href="Home.php"><button class="sitemapButton"> Αρχική </button></a>
+            <a href="Oceans.php"><button class="sitemapButton"> Ωκεανοί </button></a>
+            <a href="Lakes-Rivers.php"><button class="sitemapButton"> Λίμνες/Ποτάμια </button></a>
+            <a href="Wetlands.php"><button class="sitemapButton"> Υδροβιότοποι </button></a>
+            <a href="Animals.php"><button class="sitemapButton"> Ζώα στο νερό </button></a>
+            <a href="Fishing.php"><button class="sitemapButton"> Αλιεία/Εμπόριο </button></a>
+            <a href="Actions.php"><button class="sitemapButton"> Δράσεις </button></a>
+            <a href="Did-you-know-that.php"><button class="sitemapButton"> Ήξερες ότι... </button></a>
+            <a href="Contact.php"><button class="sitemapButton"> Επικοινωνία </button></a>
+            <a href="Login.php"><button class="sitemapButton"> Είσοδος </button></a>
+            <a href="Register.php"><button class="sitemapButton"> Εγγραφή </button></a>
         </div>
 
         <div class="column middle" >

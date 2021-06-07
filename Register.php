@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blue Life - Επικοινωνία</title>
+    <title>Blue Life - Εγγραφή</title>
     <link rel="icon" href="images/Main/BlueLife-icon.ico">
     <link rel="stylesheet" href="styles_main.css">
     <link rel="stylesheet" href="styles_contact_singin_up.css">
@@ -16,21 +16,21 @@
 <!---------------Navigation bar--------------->
 <nav>
     <div class="navbar" id="navbar">
-        <a href="Home.html">Αρχική</a>
+        <a href="Home.php">Αρχική</a>
         <div class="dropdown">
             <button class="dropbtn">Κατηγορίες</button>
             <div class="dropdown-content">
-                <a href="Oceans.html" target="_self">Ωκεανοί</a>
-                <a href="Lakes-Rivers.html">Λίμνες/Ποτάμια</a>
-                <a href="Wetlands.html">Υδροβιότοποι</a>
-                <a href="Animals.html">Ζώα στο νερό</a>
-                <a href="Fishing.html">Αλιεία/Εμπόριο</a>
+                <a href="Oceans.php" target="_self">Ωκεανοί</a>
+                <a href="Lakes-Rivers.php">Λίμνες/Ποτάμια</a>
+                <a href="Wetlands.php">Υδροβιότοποι</a>
+                <a href="Animals.php">Ζώα στο νερό</a>
+                <a href="Fishing.php">Αλιεία/Εμπόριο</a>
             </div>
         </div>
-        <a href="Actions.html">Δράσεις</a>
-        <a href="Did-you-know-that.html">Ήξερες ότι...</a>
-        <a href="Contact.html">Επικοινωνία</a>
-        <a href="Login.html">Είσοδος/Εγγραφή</a>
+        <a href="Actions.php">Δράσεις</a>
+        <a href="Did-you-know-that.php">Ήξερες ότι...</a>
+        <a href="Contact.php">Επικοινωνία</a>
+        <a href="Login.php">Είσοδος/Εγγραφή</a>
         <div class="search-box">
             <input type="text" class="search-box-input" placeholder="Αναζήτησε..">
             <button class="search-box-btn">
@@ -72,25 +72,38 @@
                 <source src="images/Main/Underwater2.mp4">
             </video>
         </div>
-        <h2>Επικοινωνία</h2>
+        <h2>Εγγραφή</h2>
     </div>
 </div>
 
-<!---------------Επικοινωνία--------------->
-<div class="contact">
-    <div>
-    <h3>Με ενδιαφέρον περιμένουμε τις σκέψεις σας</h3>
-    <form>
-        <label for="fname">Όνομα</label><br>
-        <input type="text" id="fname" placeholder="Το όνομά σου..."><br>
-        <label for="lname">Επώνυμο</label><br>
-        <input type="text" id="lname" placeholder="Το επίθετό σου..."><br>
-        <label for="email">Email</label><br>
-        <input type="text" id="email" placeholder="Το email σου..."><br>
-        <label for="subject">Σχόλια</label><br>
-        <textarea id="subject" name="subject" placeholder="Τα σχόλιά σου..." style="height:160px"></textarea>
-        <a href="Contact.html"><input type="submit" value="Υποβολή"></a>
-    </form>
+<!---------------Εγγραφή--------------->
+<div class="SignUp">
+    <div class="login-img">
+        <form  class="container_page_register">
+             <h3 class="register">Δημιούργησε τον λογαριασμό σου</h3>
+
+            <label class="user"><b>Username</b></label>
+            <input  type="text_name" placeholder="Γράψε username" size="37" required>
+
+            <label class="email_register"><b>Διεύθυνση email</b></label>
+            <input type="text_email" placeholder="Γράψε email" size="37" required>
+
+            <label class="first_name"><b>Όνομα</b></label>
+            <input  type="text_first_name" placeholder="Γράψε Όνομα" size="37" required>
+
+            <label class="last_name"><b>Επίθετο</b></label>
+            <input  type="text_last_name" placeholder="Γράψε Επίθετο" size="37" required>
+
+            <label class="pass1"><b>Κωδικός</b></label>
+            <input type="password"  class="input_pass1" placeholder="Γράψε κωδικό" size="37" required>
+
+            <label class="pass2"><b>Επαλήθευση κωδικού</b></label>
+            <input type="password" class="input_pass2" placeholder="Γράψε κωδικό" size="37" required>
+
+            <button class="btn_register" >Εγγραφή</button>
+
+            <button class="btn_back" onclick="document.location='Login.html'">Μήπως έχεις ήδη λογαριασμό;</button>
+        </form>
     </div>
 </div>
 
@@ -123,17 +136,17 @@
     <div class="row">
         <div class="column left">
             <h4>SITEMAP</h4>
-            <a href="Home.html"><button class="sitemapButton"> Αρχική </button></a>
-            <a href="Oceans.html"><button class="sitemapButton"> Ωκεανοί </button></a>
-            <a href="Lakes-Rivers.html"><button class="sitemapButton"> Λίμνες/Ποτάμια </button></a>
-            <a href="Wetlands.html"><button class="sitemapButton"> Υδροβιότοποι </button></a>
-            <a href="Animals.html"><button class="sitemapButton"> Ζώα στο νερό </button></a>
-            <a href="Fishing.html"><button class="sitemapButton"> Αλιεία/Εμπόριο </button></a>
-            <a href="Actions.html"><button class="sitemapButton"> Δράσεις </button></a>
-            <a href="Did-you-know-that.html"><button class="sitemapButton"> Ήξερες ότι... </button></a>
-            <a href="Contact.html"><button class="sitemapButton"> Επικοινωνία </button></a>
-            <a href="Login.html"><button class="sitemapButton"> Είσοδος </button></a>
-            <a href="Register.html"><button class="sitemapButton"> Εγγραφή </button></a>
+            <a href="Home.php"><button class="sitemapButton"> Αρχική </button></a>
+            <a href="Oceans.php"><button class="sitemapButton"> Ωκεανοί </button></a>
+            <a href="Lakes-Rivers.php"><button class="sitemapButton"> Λίμνες/Ποτάμια </button></a>
+            <a href="Wetlands.php"><button class="sitemapButton"> Υδροβιότοποι </button></a>
+            <a href="Animals.php"><button class="sitemapButton"> Ζώα στο νερό </button></a>
+            <a href="Fishing.php"><button class="sitemapButton"> Αλιεία/Εμπόριο </button></a>
+            <a href="Actions.php"><button class="sitemapButton"> Δράσεις </button></a>
+            <a href="Did-you-know-that.php"><button class="sitemapButton"> Ήξερες ότι... </button></a>
+            <a href="Contact.php"><button class="sitemapButton"> Επικοινωνία </button></a>
+            <a href="Login.php"><button class="sitemapButton"> Είσοδος </button></a>
+            <a href="Register.php"><button class="sitemapButton"> Εγγραφή </button></a>
         </div>
 
         <div class="column middle" >
