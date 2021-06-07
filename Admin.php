@@ -70,14 +70,59 @@
 </div>
 
 <!---------------Σελίδα διαχείρησης--------------->
+<?php
+$link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+include("connect_to_database.php");
+?>
 <div class="admin-page">
     <h3>Χρήστες</h3>
     <div class="users-table">
-        <p>ΟΛΟΙ ΟΙ ΧΡΗΣΤΕΣ (6)
+        <p>ΟΛΟΙ ΟΙ ΧΡΗΣΤΕΣ
+            <?php //εμφανίζουμε το πλήθος των χρηστών
+            $query = "SELECT COUNT(*) FROM user";
+            $results = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($results);
+            echo '(' . $row[0] . ')';
+            ?>
         <button class="table_button">προσθήκη χρήστη</button>
         <button class="table_button">Ταξινόμηση</button>
         </p>
+
         <table>
+            <tr>
+                <th>Username</th>
+                <th>first_name</th>
+                <th>last_name</th>
+                <th>Email</th>
+                <th>age</th>
+                <th>region</th>
+                <th>image</th>
+                <th class="keno"></th>
+            </tr>
+            <?php //εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους
+            $query = "SELECT * FROM user";
+            $results = mysqli_query($link, $query);
+            while  ($row = mysqli_fetch_array($results)) {
+                echo '<tr>';
+                echo '<td>' . $row['username'] . '</td>';
+                echo '<td>' . $row['first_name'] . '</td>';
+                echo '<td>' . $row['last_name'] . '</td>';
+                echo '<td>' . $row['email'] . '</td>';
+                echo '<td>' . $row['age'] . '</td>';
+                echo '<td>' . $row['region'] . '</td>';
+                echo '<td>' . $row['image'] . '</td>';
+                echo "<td class='keno'>
+                    <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                </td>";
+                echo '</tr>';
+            }
+
+            @mysqli_free_result($results);
+            @mysqli_close($link);
+
+            ?>
+            <!--asd>
             <tr>
                 <th>Username</th>
                 <th>Όνομα</th>
@@ -159,6 +204,7 @@
                     <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
                 </td>
             </tr>
+            </asd-->
         </table>
         <div class="table_page">Σελίδα 1/1</div>
     </div>
