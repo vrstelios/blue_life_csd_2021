@@ -181,8 +181,8 @@
 }
 
 @media screen and (max-width: 800px) {
-    .box span {
-        transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+    .gallery {
+        max-width: 800px;
     }
 }
 /*--- Για την gallery ---*/

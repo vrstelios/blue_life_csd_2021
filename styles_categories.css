@@ -39,8 +39,13 @@ th, td {
 
 table {
     border-spacing: 0;
-    width: 100%;
+    width: 56%;
     border: 1px solid #ddd;
+}
+@media screen and (max-width: 800px) {
+    table {
+        width: 100%;
+    }
 }
 /*--- Πίνακας για τις λίμνες ---*/
 
