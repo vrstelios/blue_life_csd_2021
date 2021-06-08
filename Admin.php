@@ -25,16 +25,22 @@
 <?php
 $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
 include("connect_to_database.php");
+
+function print_size_of_table($link, $table){
+    //εμφανίζουμε το πλήθος των συνολικών συμμετοχών στις δράσεις
+    $query = "SELECT COUNT(*) FROM $table";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo '(' . $row[0] . ')';
+}
 ?>
+
 <div class="admin-page">
     <h3>Χρήστες</h3>
     <div class="users-table">
         <p>ΟΛΟΙ ΟΙ ΧΡΗΣΤΕΣ
             <?php //εμφανίζουμε το πλήθος των χρηστών
-            $query = "SELECT COUNT(*) FROM user";
-            $results = mysqli_query($link, $query);
-            $row = mysqli_fetch_array($results);
-            echo '(' . $row[0] . ')';
+            print_size_of_table($link,'user');
             ?>
         <button class="table_button">προσθήκη χρήστη</button>
         <button class="table_button">Ταξινόμηση</button>
@@ -42,13 +48,14 @@ include("connect_to_database.php");
 
         <table>
             <tr>
+                <th>id</th>
                 <th>Username</th>
-                <th>first_name</th>
-                <th>last_name</th>
+                <th>Όνομα</th>
+                <th>Επίθετο</th>
                 <th>Email</th>
-                <th>age</th>
-                <th>region</th>
-                <th>image</th>
+                <th>Ηλικία</th>
+                <th>Περιοχή</th>
+                <th>Εικόνα</th>
                 <th class="keno"></th>
             </tr>
             <?php //εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους
@@ -56,6 +63,7 @@ include("connect_to_database.php");
             $results = mysqli_query($link, $query);
             while  ($row = mysqli_fetch_array($results)) {
                 echo '<tr>';
+                echo '<td>' . $row['id'] . '</td>';
                 echo '<td>' . $row['username'] . '</td>';
                 echo '<td>' . $row['first_name'] . '</td>';
                 echo '<td>' . $row['last_name'] . '</td>';
@@ -69,224 +77,98 @@ include("connect_to_database.php");
                 </td>";
                 echo '</tr>';
             }
-
             @mysqli_free_result($results);
-            @mysqli_close($link);
 
             ?>
-            <!--asd>
-            <tr>
-                <th>Username</th>
-                <th>Όνομα</th>
-                <th>Επίθετο</th>
-                <th>Email</th>
-                <th class="keno">Ηλικία</th>
-                <th>Περιοχή</th>
-                <th class="keno"></th>
-            </tr>
-            <tr>
-                <td>user1</td>
-                <td>Ον1</td>
-                <td>Επ1</td>
-                <td>u1@csd.auth.gr</td>
-                <td class="keno">25</td>
-                <td>Θεσσαλονίκη</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>user2</td>
-                <td>Ον2</td>
-                <td>Επ2</td>
-                <td>u2@csd.auth.gr</td>
-                <td class="keno">25</td>
-                <td>Καρδίτσα</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>user3</td>
-                <td>Ον3</td>
-                <td>Επ3</td>
-                <td>u3@csd.auth.gr</td>
-                <td class="keno">25</td>
-                <td>Σέρρες</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>user4</td>
-                <td>Ον4</td>
-                <td>Επ4</td>
-                <td>u4@csd.auth.gr</td>
-                <td class="keno">25</td>
-                <td>Λαμία</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>user5</td>
-                <td>Ον5</td>
-                <td>Επ5</td>
-                <td>u5@csd.auth.gr</td>
-                <td class="keno">25</td>
-                <td>Καρδίτσα</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>user6</td>
-                <td>Ον6</td>
-                <td>Επ6</td>
-                <td>u6@csd.auth.gr</td>
-                <td class="keno">25</td>
-                <td>Αθήνα</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            </asd-->
         </table>
         <div class="table_page">Σελίδα 1/1</div>
     </div>
 
     <h3>Δράσεις</h3>
     <div class="actions-table">
-        <p>ΟΛΕΣ ΟΙ ΔΡΑΣΕΙΣ (6)
+        <p>ΟΛΕΣ ΟΙ ΔΡΑΣΕΙΣ
+            <?php //εμφανίζουμε το πλήθος των δράσεων
+            print_size_of_table($link,'action');
+            ?>
             <button class="table_button">προσθήκη δράσης</button>
             <button class="table_button">Ταξινόμηση</button>
         </p>
         <table>
             <tr>
+                <th>id</th>
                 <th>Τίτλος</th>
                 <th>Ημερομηνία</th>
-                <th>Πριγραφή</th>
+                <th>Τοποθεσία</th>
+                <th>Περιγραφή</th>
                 <th>Εικόνα</th>
+                <th>Σύνδεσμος</th>
                 <th class="keno"></th>
             </tr>
-            <tr>
-                <td>Δράση1</td>
-                <td>26/04/2021</td>
-                <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
-                <td>image1.jpg</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Δράση2</td>
-                <td>26/04/2021</td>
-                <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
-                <td>image2.jpg</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Δράση3</td>
-                <td>26/04/2021</td>
-                <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
-                <td>image3.jpg</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Δράση4</td>
-                <td>26/04/2021</td>
-                <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
-                <td>image4.jpg</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Δράση5</td>
-                <td>26/04/2021</td>
-                <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
-                <td>image5.jpg</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Δράση6</td>
-                <td>26/04/2021</td>
-                <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
-                <td>image6.jpg</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
+            <?php //εμφανίζουμε τον πίνακα όλων των δράσεων
+            $query = "SELECT id, title, date, location, description, image, link 
+                      FROM action";
+            $results = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_array($results)) {
+                echo '<tr>';
+                echo '<td>' . $row['id'] . '</td>';
+                echo '<td>' . $row['title'] . '</td>';
+                echo '<td>' . $row['date'] . '</td>';
+                echo '<td>' . $row['location'] . '</td>';
+                echo '<td>' . $row['description'] . '</td>';
+                echo '<td>' . $row['image'] . '</td>';
+                echo '<td>' . $row['link'] . '</td>';
+                echo "<td class='keno'>
+                    <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                </td>";
+                echo '</tr>';
+            }
+
+            @mysqli_free_result($results);
+            ?>
         </table>
         <div class="table_page">Σελίδα 1/1</div>
     </div>
 
     <h3>Χρήστης στη δράση</h3>
     <div class="user-actions-table">
-        <p>ΟΛΕΣ ΟΙ ΔΗΛΩΣΕΙΣ ΣΥΜΜΕΤΟΧΗΣ (4)
+        <p>ΟΛΕΣ ΟΙ ΔΗΛΩΣΕΙΣ ΣΥΜΜΕΤΟΧΗΣ
+            <?php //εμφανίζουμε το πλήθος των συνολικών συμμετοχών στις δράσεις
+            print_size_of_table($link,'user_in_action');;
+            ?>
             <button class="table_button">Ταξινόμηση</button>
         </p>
         <table>
             <tr>
-                <th>Τίτλος δράσης</th>
+                <th>id χρήστη</th>
+                <th>id δράσης</th>
                 <th>Username συμμετέχοντα</th>
-                <th>Ημερομηνία δήλωσης</th>
+                <th>Τίτλος δράσης</th>
+                <th>Ημερομηνία δήλωσης συμμετοχής</th>
                 <th class="keno"></th>
             </tr>
-            <tr>
-                <td>Δράση2</td>
-                <td>User1</td>
-                <td>24/04/2021</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Δράση4</td>
-                <td>User2</td>
-                <td>25/04/2021</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Δράση1</td>
-                <td>User1</td>
-                <td>28/04/2021</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Δράση1</td>
-                <td>User6</td>
-                <td>28/04/2021</td>
-                <td class="keno">
-                    <a href="Admin.php"><img src="images/6.Admin/edit.png" alt="edit"></a>
-                    <a href="Admin.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
+            <?php //εμφανίζουμε τους συμμετέχοντες στις δράσεις
+            $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
+                      FROM user, user_in_action, action
+                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id";
+            $results = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_array($results)) {
+                echo '<tr>';
+                echo '<td>' . $row['user_id'] . '</td>';
+                echo '<td>' . $row['action_id'] . '</td>';
+                echo '<td>' . $row['username'] . '</td>';
+                echo '<td>' . $row['title'] . '</td>';
+                echo '<td>' . $row['date_joined'] . '</td>';
+                echo "<td class='keno'>
+                    <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                </td>";
+                echo '</tr>';
+            }
+
+            @mysqli_free_result($results);
+            @mysqli_close($link);
+            ?>
         </table>
         <div class="table_page">Σελίδα 1/1</div>
     </div>
