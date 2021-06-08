@@ -13,7 +13,7 @@
 </header>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.html")?>
+<?php include("navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">

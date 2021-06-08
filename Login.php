@@ -14,7 +14,7 @@
 </header>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.html")?>
+<?php include("navigation.php") ?>
 
 
 <!---------------Title section--------------->
@@ -32,23 +32,74 @@
 <!---------------Είσοδος--------------->
 <div class="SignIn">
     <div class="login-img">
-        <form action="px.php" method="post" class="container_page_login">
+        <form action="Login.php" method="post" class="container_page_login">
             <h3 class="login"> Σύνδεση </h3>
 
             <label class="username">
                 <b> Username </b>
             </label>
-            <input  type="text" placeholder="Εισάγετε username"  name="user" size="35" required>
+            <input type="text" placeholder="Εισάγετε username"  name="user" size="35" required>
 
             <label class="pass">
                 <b> Κωδικός </b>
             </label>
-            <input  type="password" placeholder="Εισάγετε Κωδικό" name="pass" size="35" required>
+            <input type="password" placeholder="Εισάγετε Κωδικό" name="pass" size="35" required>
 
-            <button class="btn_login">Είσοδος</button>
+            <!--button class="btn_login">Είσοδος</button   Παλιό-->
+            <!--input type="submit" name="submit" value="Είσοδος" class="btn_login"/ Αυτό ή-->
+            <input type="submit" value="Είσοδος" class="btn_login"/> <!-- ...αυτό;-->
 
             <button onclick="document.location='Register.php'" class="btn_SignUp">Δημιουργήστε τον δικό σας λογαριασμό!</button>
 
+            <?php
+            session_start();
+            //global $user_is_connected;
+            //$user_is_connected = false;
+            $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+            include("connect_to_database.php");
+            //global $username;
+            if (isset($_POST['user'])) {
+                //echo '<br>' . $username . '<br>';
+                $username = $_POST['user'];
+            } else {
+                $username = 'Είσοδος/Εγγραφή';
+            }
+            if (isset($_POST['pass'])){
+                //echo $password . '<br>';
+                $password = $_POST['pass'];
+            } else {
+                $password = null;
+            }
+
+            $query = "SELECT id, password FROM user WHERE username LIKE '$username' "; // έλεγχος του username αν υπάρχει στη βάση
+
+            if ($results = mysqli_query($link, $query)){ // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                $num_results = mysqli_num_rows($results);
+                if ($num_results > 0){
+                    $row = mysqli_fetch_array($results);
+                    $right_password = $row['password'];
+                    if ($password == $right_password) { // έλεγχος του password που έδωσε ο χρήστης αν ταυτίζεται με αυτόν που υπάρχει στη βάση
+                        //echo 'CONNECTED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!';
+                        global $connected_username; // καθολική μεταβλητή σε όλες τις σελίδες για το username του χρήστη στο navigation menu
+                        //$connected_username = $username;
+                        //$GLOBALS['connected_username'] = $username;
+                        //$_GET['connected_username'] = $username;
+                        $_SESSION['connected_username'] = $username;
+                        echo '<h1>' . $GLOBALS['connected_username'] . ' connected</h1>' . $row[0] . ' ole<br>';
+                        //echo '<h1>connected</h1>' . $row[0] . ' ole<br>';
+                        //echo '<script type="text/javascript">' . 'jsfunction();' . '</script>';
+                    }
+
+                    //$user_is_connected = true;
+                }
+                else {
+                    echo '<h1>not connected</h1> ole<br>';
+                }
+            }
+
+            ?>
+
+            <!--
             <button class="btn_Forgot_your_Pass" id="btn-modal">Ξεχάσατε τον κωδικό σας;</button>
             <div class="overlay" id="overlay"></div>
             <div class="modal" id="modal">
@@ -58,10 +109,14 @@
                 <input type="text_email" placeholder="Γράψε email" size="37" required><br/><br/>
                 <button class="btn_submit">Υποβολή</button>
             </div>
+            -->
 
         </form>
     </div>
 </div>
+<?php
+echo 'nai    ----------' . $row[0] . '<br>';
+?>
 
 <!-----------------dialog-------------->
 <script>

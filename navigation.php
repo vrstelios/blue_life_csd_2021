@@ -15,7 +15,35 @@
     <a href="Actions.php">Δράσεις</a>
     <a href="Did-you-know-that.php">Ήξερες ότι...</a>
     <a href="Contact.php">Επικοινωνία</a>
-    <a href="Login.php">Είσοδος/Εγγραφή</a>
+    <a href="Login.php">
+        <?php
+        session_start();
+        include("connect_to_database.php");
+        //$var_value = $_SESSION['connected_username'];
+
+        echo $_SESSION['connected_username'];
+        /*
+        if (isset($_SESSION['connected_username'])) {
+            echo $_SESSION['connected_username'];
+            //echo '<br>' . $username . '<br>';
+            //$connected_username = $username;
+        } else {
+            //$connected_username = 'Είσοδος/Εγγραφή';
+            echo 'Είσοδος/Εγγραφή';
+        }
+
+        /*if (isset($connected_username)) {
+            echo $connected_username;
+            //echo '<br>' . $username . '<br>';
+            //$connected_username = $username;
+        } else {
+            //$connected_username = 'Είσοδος/Εγγραφή';
+            echo 'Είσοδος/Εγγραφή';
+        }*/
+
+        //echo $connected_username;
+        ?>
+    </a>
     <div class="search-box">
       <input type="text" class="search-box-input" placeholder="Αναζήτησε..">
       <button class="search-box-btn">
