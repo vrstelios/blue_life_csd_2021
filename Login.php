@@ -33,12 +33,17 @@
 <div class="SignIn">
     <div class="login-img">
         <form action="px.php" method="post" class="container_page_login">
-            <h3 class="login">Σύνδεση</h3>
+            <h3 class="login"> Σύνδεση </h3>
 
-            <label class="username"><b>Username</b></label>
+            <label class="username">
+                <b> Username </b>
+            </label>
             <input  type="text" placeholder="Εισάγετε username"  name="user" size="35" required>
-            <label class="pass"><b>Κωδικός</b></label>
-            <input  type="password"  placeholder="Εισάγετε Κωδικό" name="pass" size="35" required>
+
+            <label class="pass">
+                <b> Κωδικός </b>
+            </label>
+            <input  type="password" placeholder="Εισάγετε Κωδικό" name="pass" size="35" required>
 
             <button class="btn_login">Είσοδος</button>
 
@@ -48,7 +53,7 @@
             <div class="overlay" id="overlay"></div>
             <div class="modal" id="modal">
                 <button class="modal-close-btn" id="close-btn"><i class="fa fa-times" ></i></button>
-                <p>Ξέχασες των κωδικό σου κανένα πρόβλημα δώσε μας το email σου και θα σου στείλουμε εμείς τον καινούργιο κωδικό σου.</p>
+                <p>Ξέχασες τον κωδικό σου; Κανένα πρόβλημα! Γράψε το email σου και θα λάβεις τον καινούργιο κωδικό σου εκεί.</p>
                 <label class="email_register"><b>Διεύθυνση email</b></label><br/>
                 <input type="text_email" placeholder="Γράψε email" size="37" required><br/><br/>
                 <button class="btn_submit">Υποβολή</button>
