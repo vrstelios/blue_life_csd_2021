@@ -7,9 +7,9 @@ if (!$link) {
     exit();
 }
 
-$result = @mysqli_select_db($link, 'bluelife_database');
+$result_of_connection = @mysqli_select_db($link, 'bluelife_database');
 
-if (!$result) {
+if (!$result_of_connection) {
     echo '<p> Error connecting to the database! <br>';
     echo 'Please try again.</p>';
     exit();
