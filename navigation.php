@@ -18,7 +18,13 @@
     <!--a href='Login.php'-->
     <?php
         if (isset($_SESSION['connected_username'])){
-            echo "<a href='Login.php'> ". $_SESSION['connected_username'] . "</a>";
+            echo "<div class='dropdown'>
+                    <button class='dropbtn'>" . $_SESSION['connected_username'] . "</button>
+                    <div class='dropdown-content'>";
+            echo        "<a href='Profile.php' target='_self'> ". 'Το προφίλ μου' . "</a>";
+            echo        "<a href='Login.php'> ". 'Αποσύνδεση' . "</a>";
+            echo   "</div>";
+            echo "</div>";
             /* // Όταν ο χρήστης είναι συνδεδεμένος, στο μενού εμφανίζεται το όνομα του χρήστη στο σημείο που έλεγε πριν Είσοδος/Εγγραφή.
                // Τότε όταν ο κέρσορας του ποντικιού περάσει πάνω από αυτή τη στήλη εμφανίζεται ένα καινούργιο «υπομενού»: ‘Το προφίλ μου,
                // Αποσύνδεση’. Αν ο χρήστης είναι ο διαχειριστής τότε υπάρχει και η επιπλέον επιλογή: ‘Σελίδα διαχείρισης’.

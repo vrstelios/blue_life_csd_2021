@@ -28,7 +28,8 @@ session_start();
                     $row = mysqli_fetch_array($results);
                     $right_password = $row['password'];
                     if ($password == $right_password) { // έλεγχος του password που έδωσε ο χρήστης αν ταυτίζεται με αυτόν που υπάρχει στη βάση
-                        $_SESSION['connected_username'] = $username;
+                        $_SESSION['connected_username'] = $username; // ΟΡΙΖΟΥΜΕ ΤΗΝ "ΚΑΘΟΛΙΚΗ" ΜΕΤΑΒΛΗΤΗ ΓΙΑ ΤΟ USERNAME ΤΟΥ ΧΡΗΣΤΗ
+                        $_SESSION['connected_id'] = $row['id'];
                     }
                 } //else { echo '<h1>not connected</h1> <br>'; }
             }

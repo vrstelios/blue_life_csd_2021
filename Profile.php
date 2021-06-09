@@ -45,7 +45,7 @@ session_start();
         $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include("connect_to_database.php");
 
-        $current_user_id = 2;//'kogal';
+        $current_user_id = $_SESSION['connected_id'];//'kogal';
 
         $query = "SELECT * FROM user WHERE id=$current_user_id";
         $results = mysqli_query($link, $query);
