@@ -12,7 +12,8 @@ session_start();
     <?php
     //$link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
     include_once("connect_to_database.php");
-    if (isset($_POST['user'])) { // ο χρήστης έχει δώσει κάποια τιμή στο πεδίο username του Login.php (και στο password και έχει πατήσει το κουμπί Είσοδος)
+    //$_SESSION['connected_id'] = 0; //temporary μόνο και μόνο για να μην εμφανίζεται warning στο navigation.php
+    if (isset($_POST['user'])) { // ο χρήστης έχει δώσει κάποια τιμή στο πεδίο username του Login.php ( και έχει πατήσει το κουμπί Είσοδος)
         //echo '<br>' . $username . '<br>';
         $username = $_POST['user'];
         if (isset($_POST['pass'])){ // ο χρήστης έχει δώσει επίσης κάποια τιμή στο πεδίο password του Login.php
@@ -30,6 +31,7 @@ session_start();
                     if ($password == $right_password) { // έλεγχος του password που έδωσε ο χρήστης αν ταυτίζεται με αυτόν που υπάρχει στη βάση
                         $_SESSION['connected_username'] = $username; // ΟΡΙΖΟΥΜΕ ΤΗΝ "ΚΑΘΟΛΙΚΗ" ΜΕΤΑΒΛΗΤΗ ΓΙΑ ΤΟ USERNAME ΤΟΥ ΧΡΗΣΤΗ
                         $_SESSION['connected_id'] = $row['id'];
+                        header("Location: Home.php"); // Ανακατεύθυνση από την σελίδα Login στην Home μόλις κάνει επιτυχή σύνδεση ο χρήστης
                     }
                 } //else { echo '<h1>not connected</h1> <br>'; }
             }
