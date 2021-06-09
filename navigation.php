@@ -15,7 +15,6 @@
     <a href="Actions.php">Δράσεις</a>
     <a href="Did-you-know-that.php">Ήξερες ότι...</a>
     <a href="Contact.php">Επικοινωνία</a>
-    <!--a href='Login.php'-->
     <?php
         if (isset($_GET['logout'])) { // αν ο συνδεδεμένος χρήστης πατήσει τον σύνδεσμο 'Αποσύνδεση’ στο naxigation menu τότε προστήθεται το ?logout στο τέλος του url και έτσι αποσυνδέεται
             $_SESSION['connected_username'] = null;
@@ -29,30 +28,17 @@
             if ($_SESSION['connected_id'] == 1){
                 echo    "<a href='Admin.php' target='_self'> ". 'Σελίδα Διαχείρισης' . "</a>";
             }
-            echo        "<a href='Profile.php' target='_self'> ". 'Το προφίλ μου' . "</a>";
+            if ($_SESSION['connected_id'] != 1){
+                echo        "<a href='Profile.php' target='_self'> ". 'Το προφίλ μου' . "</a>";
+            }
             echo        "<a href='Login.php?logout'> ". 'Αποσύνδεση' . "</a>";
             echo   "</div>";
             echo "</div>";
-            /* // Όταν ο χρήστης είναι συνδεδεμένος, στο μενού εμφανίζεται το όνομα του χρήστη στο σημείο που έλεγε πριν Είσοδος/Εγγραφή.
-               // Τότε όταν ο κέρσορας του ποντικιού περάσει πάνω από αυτή τη στήλη εμφανίζεται ένα καινούργιο «υπομενού»: ‘Το προφίλ μου,
-               // Αποσύνδεση’. Αν ο χρήστης είναι ο διαχειριστής τότε υπάρχει και η επιπλέον επιλογή: ‘Σελίδα διαχείρισης’.
-
-               // 1ο Βήμα: Όταν ο συνδεδεμένος χρήστης πατήσει την επιλογή αποσύνδεση (πχ kogal) στο navigation menu, θέλουμε να κάνει αποσύνδεση.
-               // Αυτό το κομμάτι κώδικα δεν λειτουργεί αποδοτικά, είναι απλά η "βάση" για να υλοποιηθεί η λειτουργία
-            function set_connected_Username_to_null()
-            {
-                $_SESSION['connected_username'] = null;
-            }
-            if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['someAction']))
-            {
-                set_connected_Username_to_null();
-            }*/
         } else {
             echo "<a href='Login.php'> ". 'Είσοδος/Εγγραφή' . "</a>";
         }
     ?>
 
-    <!--/a-->
     <div class="search-box">
       <input type="text" class="search-box-input" placeholder="Αναζήτησε..">
       <button class="search-box-btn">

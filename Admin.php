@@ -26,6 +26,10 @@ session_start();
 
 <!---------------Σελίδα διαχείρησης--------------->
 <?php
+// αν ο χρήστης δεν είναι ο admin και προσπαθήσει να φορτώσει την σελίδα Admin.php τότε φορτώνεται η σελίδα UnauthorizedProfile.php για την ασφάλεια και απόκρυψη των στοιχείων
+if ($_SESSION['connected_id'] != 1){
+    header("Location: UnauthorizedProfile.php");
+}
 $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
 include("connect_to_database.php");
 
