@@ -1,4 +1,7 @@
 /* Για τη σελίδα διαχείρησης */
+* {
+    box-sizing: border-box;
+}
 .admin-page {
     background-color: white;
     padding: 1% 10% 1% 10%;
@@ -70,4 +73,81 @@ tr:nth-child(even) {
         padding: 4px;
     }
 }
+
+/* Για την popup form */
+.form-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    border: 3px solid #f1f1f1;
+    z-index: 99999999;
+}
+
+/* Add styles to the form container */
+.form-container {
+    max-width: 100%;
+    padding: 6px;
+    background-color: white;
+}
+
+.form-container p {
+    float: left;
+    width: 33%;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], input[type=password], input[type=date],
+ input[type=url], input[type=email], input[type=file], textarea[name=subject] {
+    /* width: 100%; */
+    padding: 10px;
+    margin: 2px 0 6px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, input[type=password]:focus, input[type=date]:focus,
+ input[type=url]:focus, input[type=email]:focus, input[type=file]:focus, textarea[name=subject]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .btn_cancel {
+    background-color: red;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 0;
+    right: 0;
+    opacity: 0.8;
+    margin: 4px;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
+
+
 /*--- Για τη σελίδα διαχείρησης ---*/

@@ -36,7 +36,7 @@ include("connect_to_database.php");
             $row = mysqli_fetch_array($results);
             echo '(' . $row[0] . ')';
             ?>
-        <button class="table_button">προσθήκη χρήστη</button>
+        <button class="table_button" onclick="openForm1()">προσθήκη χρήστη</button>
         <button class="table_button">Ταξινόμηση</button>
         </p>
 
@@ -161,10 +161,101 @@ include("connect_to_database.php");
         <div class="table_page">Σελίδα 1/1</div>
     </div>
 
+    <!-- pop up form για προσθήκη νέου χρήστη από τον διαχειριστή -->
+    <div class="form-popup" id="myForm1" role="dialog">
+        <form action="Admin.php" method="post" class="form-container">
+            <h3>Δημιουργία χρήστη</h3>
+            <p>
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Γράψε username" name="username" required>
+            </p>
+            <p>
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Γράψε Email" name="email" required>
+            </p>
+            <p>
+            <label for="first_name"><b>Όνομα</b></label>
+            <input type="text" placeholder="Γράψε Όνομα" name="firstname" required>
+            </p>
+            <p>
+            <label for="last_name"><b>Επίθετο</b></label>
+            <input type="text" placeholder="Γράψε Επίθετο"  name="lastname" required>
+            </p>
+            <p>
+            <label for="password"><b>Κωδικός</b></label>
+            <input type="password" placeholder="Γράψε κωδικό" name="pass" required>
+            </p>
+            <a href="Admin.php"><input type="submit" value="Δημιουργία" class="btn"/></a>
+            <button type="button" class="btn_cancel" onclick="closeForm1()">Ακύρωση</button>
+
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+                include("connect_to_database.php");
+
+                if (isset($_POST['username'])) {
+                    $username = $_POST['username'];
+                } else {
+                    $username = null;
+                }
+                if (isset($_POST['email'])) {
+                    $email = $_POST['email'];
+                } else {
+                    $email = null;
+                }
+                if (isset($_POST['firstname'])) {
+                    $firstname = $_POST['firstname'];
+                } else {
+                    $firstname = null;
+                }
+                if (isset($_POST['lastname'])) {
+                    $lastname = $_POST['lastname'];
+                } else {
+                    $lastname = null;
+                }
+                if (isset($_POST['pass'])) {
+                    $password = $_POST['pass'];
+                } else {
+                    $password = null;
+                }
+
+                $query = "SELECT id FROM user WHERE username LIKE '$username' ";
+
+                if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                    $num_results = mysqli_num_rows($results);
+                    if ($num_results > 0) {
+                        echo '<script type="text/javascript">' . 'alert("Υπάρχει ήδη λογαριασμός με αυτό το username!");' . '</script>';
+                    } else {
+                        $query = "INSERT INTO user (username, password, first_name, last_name, email)
+                                  VALUES ('$username', '$password', '$firstname', '$lastname', '$email');";
+                        if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                            echo '<script type="text/javascript">' . 'closeForm1();' . '</script>';
+                        }
+                    }
+                }
+            }
+            ?>
+
+        </form>
+    </div>
+
+    <script>
+        function openForm1() {
+            document.getElementById("myForm1").style.display = "block";
+        }
+        function closeForm1() {
+            document.getElementById("myForm1").style.display = "none";
+        }
+        function saveData1() {
+
+        }
+    </script>
+
+
     <h3>Δράσεις</h3>
     <div class="actions-table">
         <p>ΟΛΕΣ ΟΙ ΔΡΑΣΕΙΣ (6)
-            <button class="table_button">προσθήκη δράσης</button>
+            <button class="table_button" onclick="openForm2()">προσθήκη δράσης</button>
             <button class="table_button">Ταξινόμηση</button>
         </p>
         <table>
@@ -238,6 +329,100 @@ include("connect_to_database.php");
         </table>
         <div class="table_page">Σελίδα 1/1</div>
     </div>
+
+    <!-- pop up form για προσθήκη νέας δράσης από τον διαχειριστή -->
+    <div class="form-popup" id="myForm2" role="dialog">
+        <form action="/Admin.php" method="post" class="form-container">
+            <h3>Δημιουργία δράσης</h3>
+            <p>
+                <label for="title"><b>Τίτλος</b></label>
+                <input type="text" placeholder="Δώσε τίτλο" name="title" required>
+            </p>
+            <p>
+                <label for="location"><b>Τοποθεσία</b></label>
+                <input type="text" placeholder="Δώσε τοποθεσία" name="location" required>
+            </p>
+            <p>
+                <label for="link"><b>Link</b></label>
+                <input type="text" placeholder="Δώσε link" name="link">
+            </p>
+            <p>
+                <label for="date"><b>Ημερομηνία</b></label>
+                <input type="date" placeholder="Δώσε ημερομηνία" name="date" required>
+            </p>
+            <p>
+                <label for="image"><b>Εικόνα</b></label>
+                <input type="file" id="img" name="img" accept="image/*" placeholder="Δώσε εικόνα">
+            </p>
+            <p style="width: 100%">
+                <label for="subject"><b>Λεπτομέρειες</b></label>
+                <textarea placeholder="Δώσε περισσότερες πληροφορίες..." style="height:100px; width: 100%; resize: none;" name="subject" id="subject"></textarea>
+            </p>
+            <a href="Admin.php"><input type="submit" value="Δημιουργία" class="btn"/></a>
+            <button type="button" class="btn_cancel" onclick="closeForm2()">Ακύρωση</button>
+
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+                include("connect_to_database.php");
+
+                if (isset($_POST['title'])) {
+                    $title = $_POST['title'];
+                } else {
+                    $title = null;
+                }
+                if (isset($_POST['location'])) {
+                    $location = $_POST['location'];
+                } else {
+                    $location = null;
+                }
+                /*
+                if (isset($_POST['link'])) {
+                    $link = $_POST['link'];
+                } else {
+                    $link = null;
+                }
+                */
+                if (isset($_POST['date'])) {
+                    $date = $_POST['date'];
+                } else {
+                    $date = null;
+                }
+                /*
+                if (isset($_POST['img'])) {
+                    $image = $_POST['img'];
+                } else {
+                    $image = null;
+                }
+                */
+                if (isset($_POST['subject'])) {
+                    $description = $_POST['subject'];
+                } else {
+                    $description = null;
+                }
+
+                $query = "INSERT INTO action (title, date, location, description)
+                          VALUES ('$title','$date','$location','$description');";
+                if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                    echo '<script type="text/javascript">' . 'closeForm2();' . '</script>';
+                }
+            }
+            ?>
+
+        </form>
+    </div>
+
+    <script>
+        function openForm2() {
+            document.getElementById("myForm2").style.display = "block";
+        }
+        function closeForm2() {
+            document.getElementById("myForm2").style.display = "none";
+        }
+        function saveData2() {
+
+        }
+    </script>
 
     <h3>Χρήστης στη δράση</h3>
     <div class="user-actions-table">
