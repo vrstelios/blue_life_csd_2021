@@ -45,29 +45,33 @@ session_start();
         $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include("connect_to_database.php");
 
-        $current_user_id = $_SESSION['connected_id'];//'kogal';
+        if (isset($_SESSION['connected_id'])){
+            $current_user_id = $_SESSION['connected_id'];//'kogal';
 
-        $query = "SELECT * FROM user WHERE id=$current_user_id";
-        $results = mysqli_query($link, $query);
-        $num_results = mysqli_num_rows($results);
-        if ($num_results != 0){ //υπάρχει ο χρήστης στην βάση
-            $row = mysqli_fetch_array($results);
-            echo '<p> Username: ' . $row['username']. '</p>';
-            echo '<p> Όνομα: ' . $row['first_name']. '</p>';
-            echo '<p> Επίθετο: ' . $row['last_name']. '</p>';
-            echo '<p> email: ' . $row['email']. '</p>';
-            echo '<p> Ηλικία: ' . $row['age']. '</p>';
-            echo '<p> Περιοχή: ' . $row['region']. '</p>';
+            $query = "SELECT * FROM user WHERE id=$current_user_id";
+            $results = mysqli_query($link, $query);
+            $num_results = mysqli_num_rows($results);
+            if ($num_results != 0){ //υπάρχει ο χρήστης στην βάση
+                $row = mysqli_fetch_array($results);
+                echo '<p> Username: ' . $row['username']. '</p>';
+                echo '<p> Όνομα: ' . $row['first_name']. '</p>';
+                echo '<p> Επίθετο: ' . $row['last_name']. '</p>';
+                echo '<p> email: ' . $row['email']. '</p>';
+                echo '<p> Ηλικία: ' . $row['age']. '</p>';
+                echo '<p> Περιοχή: ' . $row['region']. '</p>';
+            } else {
+                echo '<p> Username: </p>';
+                echo '<p> Όνομα: </p>';
+                echo '<p> Επίθετο: </p>';
+                echo '<p> email: </p>';
+                echo '<p> Ηλικία: </p>';
+                echo '<p> Περιοχή: </p>';
+            }
+            @mysqli_free_result($results);
         } else {
-            echo '<p> Username: </p>';
-            echo '<p> Όνομα: </p>';
-            echo '<p> Επίθετο: </p>';
-            echo '<p> email: </p>';
-            echo '<p> Ηλικία: </p>';
-            echo '<p> Περιοχή: </p>';
+            header("Location: UnauthorizedProfile.php");
         }
 
-        @mysqli_free_result($results);
         ?>
     </div>
     <br>
@@ -75,10 +79,12 @@ session_start();
 
     <h3>Οι Δράσεις μου
         <?php //εμφανίζουμε το πλήθος των δράσεων που συμμετέχει ο συγκεκριμένος χρήστης
-        $query = "SELECT COUNT(*) FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id WHERE user_in_action.user_id = $current_user_id";
-        $results = mysqli_query($link, $query);
-        $row = mysqli_fetch_array($results);
-        echo '(' . $row[0] . ')';
+        if (isset($_SESSION['connected_id'])) {
+            $query = "SELECT COUNT(*) FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id WHERE user_in_action.user_id = $current_user_id";
+            $results = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($results);
+            echo '(' . $row[0] . ')';
+        }
         ?>
     </h3>
     <div class="actions-table">
@@ -96,68 +102,27 @@ session_start();
                 <th class="keno"></th>
             </tr>
             <?php //εμφανίζουμε τον πίνακα των δράσεων που συμμετέχει ο συγκεκριμένος χρήστης
-            $query = "SELECT action.title, action.date, action.location, action.description, action.link 
+            if (isset($_SESSION['connected_id'])) {
+                $query = "SELECT action.title, action.date, action.location, action.description, action.link 
                       FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id 
                       WHERE user_in_action.user_id = $current_user_id";
-            $results = mysqli_query($link, $query);
-            while ($row = mysqli_fetch_array($results)) {
-                echo '<tr>';
-                echo '<td>' . $row['title'] . '</td>';
-                echo '<td>' . $row['date'] . '</td>';
-                echo '<td>' . $row['location'] . '</td>';
-                echo '<td>' . $row['description'] . '</td>';
-                echo '<td>' . $row['link'] . '</td>';
-                echo "<td class='keno'>
+                $results = mysqli_query($link, $query);
+                while ($row = mysqli_fetch_array($results)) {
+                    echo '<tr>';
+                    echo '<td>' . $row['title'] . '</td>';
+                    echo '<td>' . $row['date'] . '</td>';
+                    echo '<td>' . $row['location'] . '</td>';
+                    echo '<td>' . $row['description'] . '</td>';
+                    echo '<td>' . $row['link'] . '</td>';
+                    echo "<td class='keno'>
                     <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
                     <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                 </td>";
-                echo '</tr>';
+                    echo '</tr>';
+                }
+                @mysqli_free_result($results);
             }
-
-            @mysqli_free_result($results);
             ?>
-            <!--
-            <tr>
-                <td>Δράση1</td>
-                <td>26/04/2021</td>
-                <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
-                <td class="keno">
-                    <a href="Profile.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Δράση2</td>
-                <td>26/04/2021</td>
-                <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
-                <td class="keno">
-                    <a href="Profile.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Δράση3</td>
-                <td>26/04/2021</td>
-                <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
-                <td class="keno">
-                    <a href="Profile.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Δράση4</td>
-                <td>26/04/2021</td>
-                <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
-                <td class="keno">
-                    <a href="Profile.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Δράση5</td>
-                <td>26/04/2021</td>
-                <td>Μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα μπλα...</td>
-                <td class="keno">
-                    <a href="Profile.php"><img src="images/6.Admin/delete-bin.png" alt="delete"></a>
-                </td>
-            </tr>
-            -->
         </table>
         <div class="table_page">Σελίδα 1/1</div>
     </div>
