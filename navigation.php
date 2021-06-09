@@ -19,7 +19,19 @@
     <?php
         if (isset($_SESSION['connected_username'])){
             echo "<a href='Login.php'> ". $_SESSION['connected_username'] . "</a>";
-            $_SESSION['connected_username'] = null;
+            /* // Όταν ο χρήστης είναι συνδεδεμένος, στο μενού εμφανίζεται το όνομα του χρήστη στο σημείο που έλεγε πριν Είσοδος/Εγγραφή.
+               // Τότε όταν ο κέρσορας του ποντικιού περάσει πάνω από αυτή τη στήλη εμφανίζεται ένα καινούργιο «υπομενού»: ‘Το προφίλ μου,
+               // Αποσύνδεση’. Αν ο χρήστης είναι ο διαχειριστής τότε υπάρχει και η επιπλέον επιλογή: ‘Σελίδα διαχείρισης’.
+               // 1ο Βήμα: Όταν ο συνδεδεμένος χρήστης πατήσει την επιλογή username (πχ kogal) στο navigation menu, θέλουμε να κάνει αποσύνδεση.
+               // Αυτό το κομμάτι κώδικα δεν λειτουργεί αποδοτικά, είναι απλά η "βάση" για να υλοποιηθεί η λειτουργία
+            function set_connected_Username_to_null()
+            {
+                $_SESSION['connected_username'] = null;
+            }
+            if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['someAction']))
+            {
+                set_connected_Username_to_null();
+            }*/
         } else {
             echo "<a href='Login.php'> ". 'Είσοδος/Εγγραφή' . "</a>";
         }

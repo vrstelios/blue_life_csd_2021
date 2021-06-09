@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +9,32 @@
     <link rel="icon" href="images/Main/BlueLife-icon.ico">
     <link rel="stylesheet" href="styles_main.css">
     <link rel="stylesheet" href="styles_home.css">
+    <?php
+    //$link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+    include_once("connect_to_database.php");
+    if (isset($_POST['user'])) { // ο χρήστης έχει δώσει κάποια τιμή στο πεδίο username του Login.php (και στο password και έχει πατήσει το κουμπί Είσοδος)
+        //echo '<br>' . $username . '<br>';
+        $username = $_POST['user'];
+        if (isset($_POST['pass'])){ // ο χρήστης έχει δώσει επίσης κάποια τιμή στο πεδίο password του Login.php
+            //echo $password . '<br>';
+            //echo '<h1>' ."YPARXEI TO \$_POST['pass']!!!!!!!" . '</h1>';
+            $password = $_POST['pass'];
+
+            $query = "SELECT id, password FROM user WHERE username LIKE '$username' "; // έλεγχος του username αν υπάρχει στη βάση
+
+            if ($results = mysqli_query($link, $query)){ // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                $num_results = mysqli_num_rows($results);
+                if ($num_results > 0){
+                    $row = mysqli_fetch_array($results);
+                    $right_password = $row['password'];
+                    if ($password == $right_password) { // έλεγχος του password που έδωσε ο χρήστης αν ταυτίζεται με αυτόν που υπάρχει στη βάση
+                        $_SESSION['connected_username'] = $username;
+                    }
+                } //else { echo '<h1>not connected</h1> <br>'; }
+            }
+        }
+    }
+    ?>
 </head>
 <body>
 
