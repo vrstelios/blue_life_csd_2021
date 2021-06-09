@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +9,32 @@
     <link rel="icon" href="images/Main/BlueLife-icon.ico">
     <link rel="stylesheet" href="styles_main.css">
     <link rel="stylesheet" href="styles_contact_singin_up.css">
+    <?php
+    //$link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+    include_once("connect_to_database.php");
+    if (isset($_POST['user'])) { // ο χρήστης έχει δώσει κάποια τιμή στο πεδίο username του Login.php (και στο password και έχει πατήσει το κουμπί Είσοδος)
+        //echo '<br>' . $username . '<br>';
+        $username = $_POST['user'];
+        if (isset($_POST['pass'])){ // ο χρήστης έχει δώσει επίσης κάποια τιμή στο πεδίο password του Login.php
+            //echo $password . '<br>';
+            //echo '<h1>' ."YPARXEI TO \$_POST['pass']!!!!!!!" . '</h1>';
+            $password = $_POST['pass'];
+
+            $query = "SELECT id, password FROM user WHERE username LIKE '$username' "; // έλεγχος του username αν υπάρχει στη βάση
+
+            if ($results = mysqli_query($link, $query)){ // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                $num_results = mysqli_num_rows($results);
+                if ($num_results > 0){
+                    $row = mysqli_fetch_array($results);
+                    $right_password = $row['password'];
+                    if ($password == $right_password) { // έλεγχος του password που έδωσε ο χρήστης αν ταυτίζεται με αυτόν που υπάρχει στη βάση
+                        $_SESSION['connected_username'] = $username;
+                    }
+                } //else { echo '<h1>not connected</h1> <br>'; }
+            }
+        }
+    }
+    ?>
 </head>
 <body>
 
@@ -14,8 +43,9 @@
 </header>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
-
+<?php include("navigation.php");
+//echo "Session started !";
+?>
 
 <!---------------Title section--------------->
 <div class="page-title">
@@ -51,54 +81,6 @@
 
             <button onclick="document.location='Register.php'" class="btn_SignUp">Δημιουργήστε τον δικό σας λογαριασμό!</button>
 
-            <?php
-            session_start();
-            //global $user_is_connected;
-            //$user_is_connected = false;
-            $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-            include("connect_to_database.php");
-            //global $username;
-            if (isset($_POST['user'])) {
-                //echo '<br>' . $username . '<br>';
-                $username = $_POST['user'];
-            } else {
-                $username = 'Είσοδος/Εγγραφή';
-            }
-            if (isset($_POST['pass'])){
-                //echo $password . '<br>';
-                $password = $_POST['pass'];
-            } else {
-                $password = null;
-            }
-
-            $query = "SELECT id, password FROM user WHERE username LIKE '$username' "; // έλεγχος του username αν υπάρχει στη βάση
-
-            if ($results = mysqli_query($link, $query)){ // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                $num_results = mysqli_num_rows($results);
-                if ($num_results > 0){
-                    $row = mysqli_fetch_array($results);
-                    $right_password = $row['password'];
-                    if ($password == $right_password) { // έλεγχος του password που έδωσε ο χρήστης αν ταυτίζεται με αυτόν που υπάρχει στη βάση
-                        //echo 'CONNECTED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!';
-                        global $connected_username; // καθολική μεταβλητή σε όλες τις σελίδες για το username του χρήστη στο navigation menu
-                        //$connected_username = $username;
-                        //$GLOBALS['connected_username'] = $username;
-                        //$_GET['connected_username'] = $username;
-                        $_SESSION['connected_username'] = $username;
-                        echo '<h1>' . $GLOBALS['connected_username'] . ' connected</h1>' . $row[0] . ' ole<br>';
-                        //echo '<h1>connected</h1>' . $row[0] . ' ole<br>';
-                        //echo '<script type="text/javascript">' . 'jsfunction();' . '</script>';
-                    }
-
-                    //$user_is_connected = true;
-                }
-                else {
-                    echo '<h1>not connected</h1> ole<br>';
-                }
-            }
-
-            ?>
-
             <!--
             <button class="btn_Forgot_your_Pass" id="btn-modal">Ξεχάσατε τον κωδικό σας;</button>
             <div class="overlay" id="overlay"></div>
@@ -114,9 +96,6 @@
         </form>
     </div>
 </div>
-<?php
-echo 'nai    ----------' . $row[0] . '<br>';
-?>
 
 <!-----------------dialog-------------->
 <script>
