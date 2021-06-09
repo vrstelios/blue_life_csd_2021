@@ -33,16 +33,52 @@
 <div class="contact">
     <div>
     <h3>Με ενδιαφέρον περιμένουμε τις σκέψεις σας</h3>
-    <form>
+    <form method="post">
         <label for="fname">Όνομα</label><br>
-        <input type="text" id="fname" placeholder="Το όνομά σου..."><br>
+        <input type="text" id="fname" placeholder="Το όνομά σου..." name="firstname"><br>
         <label for="lname">Επώνυμο</label><br>
-        <input type="text" id="lname" placeholder="Το επίθετό σου..."><br>
+        <input type="text" id="lname" placeholder="Το επίθετό σου..." name="lastname"><br>
         <label for="email">Email</label><br>
-        <input type="text" id="email" placeholder="Το email σου..."><br>
+        <input type="email" id="email" placeholder="Το email σου..." name="email" required><br>
         <label for="subject">Σχόλια</label><br>
-        <textarea id="subject" name="subject" placeholder="Τα σχόλιά σου..." style="height:160px"></textarea>
+        <textarea id="subject" name="subject" placeholder="Τα σχόλιά σου..." style="height:160px" required></textarea>
         <a href="Contact.php"><input type="submit" value="Υποβολή"></a>
+
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+            include("connect_to_database.php");
+
+            if (isset($_POST['firstname'])) {
+                $firstname = $_POST['firstname'];
+            } else {
+                $firstname = null;
+            }
+            if (isset($_POST['lastname'])) {
+                $lastname = $_POST['lastname'];
+            } else {
+                $lastname = null;
+            }
+            if (isset($_POST['email'])) {
+                $email = $_POST['email'];
+            } else {
+                $email = null;
+            }
+            if (isset($_POST['subject'])) {
+                $subject = $_POST['subject'];
+            } else {
+                $subject = null;
+            }
+
+            $query = "INSERT INTO contact (first_name,last_name,email,comment)
+                  VALUES ('$firstname','$lastname','$email','$subject');";
+            if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+            }
+        }
+
+
+        ?>
+
     </form>
     </div>
 </div>
