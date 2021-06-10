@@ -121,23 +121,19 @@
             <input  type="text" name="last_name" placeholder="Γράψε Επίθετο" size="37" required>
 
             <label class="pass1"><b>Κωδικός</b></label>
-            <input type="password" class="input_pass1" name="password" placeholder="Γράψε κωδικό" size="37" onkeyup='check()'>
+            <input type="password" class="input_pass1" id="password" name="password" placeholder="Γράψε κωδικό" size="37" onkeyup='check()'>
 
             <label class="pass2"><b>Επαλήθευση κωδικού</b></label>
-            <input type="password" name="checkPassword" class="input_pass2" placeholder="Γράψε κωδικό" size="37" onkeyup='check()'>
+            <input type="password" id="checkPassword" name="checkPassword" class="input_pass2" placeholder="Γράψε κωδικό" size="37" onkeyup='check()'>
 
             <p id="alertPassword"></p>
 
             <button class="btn_register" >Εγγραφή</button>
 
             <button class="btn_back" onclick="document.location='Login.php'">Μήπως έχεις ήδη λογαριασμό;</button>
-
-
         </form>
     </div>
 </div>
-
-
 
 <script>
     var check = function() {
