@@ -9,7 +9,7 @@
     box-sizing: border-box;
 }
 
-.contact input[type=text], select, textarea {
+.contact input[type=text], input[type=email], select, textarea {
     padding: 12px;
     border: 1px solid #1687a7;
     color: #1f5362;
@@ -18,7 +18,7 @@
     resize: vertical;
 }
 
-.contact input[type=text], select {
+.contact input[type=text], input[type=email], select {
     width: 40%;
 }
 
@@ -39,7 +39,7 @@
 }
 
 @media screen and (max-width: 800px) {
-    .contact input[type=text], select {
+    .contact input[type=text], input[type=email], select {
         width: 100%;
     }
     .contact {
