@@ -8,32 +8,34 @@ session_start();
     <title>Blue Life - Είσοδος</title>
     <link rel="icon" href="images/Main/BlueLife-icon.ico">
     <link rel="stylesheet" href="styles_main.css">
-    <link rel="stylesheet" href="styles_contact_singin_up.css">
+    <link rel="stylesheet" href="styles_signin.css">
     <?php
-    //$link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-    include_once("connect_to_database.php");
-    //$_SESSION['connected_id'] = 0; //temporary μόνο και μόνο για να μην εμφανίζεται warning στο navigation.php
-    if (isset($_POST['user'])) { // ο χρήστης έχει δώσει κάποια τιμή στο πεδίο username του Login.php ( και έχει πατήσει το κουμπί Είσοδος)
-        //echo '<br>' . $username . '<br>';
-        $username = $_POST['user'];
-        if (isset($_POST['pass'])){ // ο χρήστης έχει δώσει επίσης κάποια τιμή στο πεδίο password του Login.php
-            //echo $password . '<br>';
-            //echo '<h1>' ."YPARXEI TO \$_POST['pass']!!!!!!!" . '</h1>';
-            $password = $_POST['pass'];
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        //$link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+        include_once("connect_to_database.php");
+        //$_SESSION['connected_id'] = 0; //temporary μόνο και μόνο για να μην εμφανίζεται warning στο navigation.php
+        if (isset($_POST['user'])) { // ο χρήστης έχει δώσει κάποια τιμή στο πεδίο username του Login.php ( και έχει πατήσει το κουμπί Είσοδος)
+            //echo '<br>' . $username . '<br>';
+            $username = $_POST['user'];
+            if (isset($_POST['pass'])) { // ο χρήστης έχει δώσει επίσης κάποια τιμή στο πεδίο password του Login.php
+                //echo $password . '<br>';
+                //echo '<h1>' ."YPARXEI TO \$_POST['pass']!!!!!!!" . '</h1>';
+                $password = $_POST['pass'];
 
-            $query = "SELECT id, password FROM user WHERE username LIKE '$username' "; // έλεγχος του username αν υπάρχει στη βάση
+                $query = "SELECT id, password FROM user WHERE username LIKE '$username' "; // έλεγχος του username αν υπάρχει στη βάση
 
-            if ($results = mysqli_query($link, $query)){ // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                $num_results = mysqli_num_rows($results);
-                if ($num_results > 0){
-                    $row = mysqli_fetch_array($results);
-                    $right_password = $row['password'];
-                    if ($password == $right_password) { // έλεγχος του password που έδωσε ο χρήστης αν ταυτίζεται με αυτόν που υπάρχει στη βάση
-                        $_SESSION['connected_username'] = $username; // ΟΡΙΖΟΥΜΕ ΤΗΝ "ΚΑΘΟΛΙΚΗ" ΜΕΤΑΒΛΗΤΗ ΓΙΑ ΤΟ USERNAME ΤΟΥ ΧΡΗΣΤΗ
-                        $_SESSION['connected_id'] = $row['id'];
-                        header("Location: Home.php"); // Ανακατεύθυνση από την σελίδα Login στην Home μόλις κάνει επιτυχή σύνδεση ο χρήστης
-                    }
-                } //else { echo '<h1>not connected</h1> <br>'; }
+                if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                    $num_results = mysqli_num_rows($results);
+                    if ($num_results > 0) {
+                        $row = mysqli_fetch_array($results);
+                        $right_password = $row['password'];
+                        if ($password == $right_password) { // έλεγχος του password που έδωσε ο χρήστης αν ταυτίζεται με αυτόν που υπάρχει στη βάση
+                            $_SESSION['connected_username'] = $username; // ΟΡΙΖΟΥΜΕ ΤΗΝ "ΚΑΘΟΛΙΚΗ" ΜΕΤΑΒΛΗΤΗ ΓΙΑ ΤΟ USERNAME ΤΟΥ ΧΡΗΣΤΗ
+                            $_SESSION['connected_id'] = $row['id'];
+                            header("Location: Home.php"); // Ανακατεύθυνση από την σελίδα Login στην Home μόλις κάνει επιτυχή σύνδεση ο χρήστης
+                        }
+                    } //else { echo '<h1>not connected</h1> <br>'; }
+                }
             }
         }
     }
@@ -62,6 +64,12 @@ session_start();
     </div>
 </div>
 
+<?php
+// αν ο χρήστης είναι ο admin και προσπαθήσει να φορτώσει την σελίδα Admin.php τότε φορτώνεται η σελίδα UnauthorizedProfile.php για την ασφάλεια και απόκρυψη των στοιχείων
+if (isset($_SESSION['connected_id'])){
+    header("Location: Home.php");
+}
+?>
 <!---------------Είσοδος--------------->
 <div class="SignIn">
     <div class="login-img">

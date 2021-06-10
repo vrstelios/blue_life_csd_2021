@@ -8,7 +8,7 @@ session_start();
     <title>Blue Life - Επικοινωνία</title>
     <link rel="icon" href="images/Main/BlueLife-icon.ico">
     <link rel="stylesheet" href="styles_main.css">
-    <link rel="stylesheet" href="styles_contact_singin_up.css">
+    <link rel="stylesheet" href="styles_contact.css">
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
@@ -74,7 +74,7 @@ session_start();
     <form method="post">
         <label for="fname">Όνομα</label><br>
         <input type="text" id="fname" placeholder="Το όνομά σου..." name="firstname"><br>
-        <label for="lname">Επώνυμο</label><br>
+        <label for="lname">Επίθετο</label><br>
         <input type="text" id="lname" placeholder="Το επίθετό σου..." name="lastname"><br>
         <label for="email">Email</label><br>
         <input type="email" id="email" placeholder="Το email σου..." name="email" required><br>

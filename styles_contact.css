@@ -1,0 +1,49 @@
+/* Για το Contact */
+.contact {
+    padding: 2% 16% 2% 16%;
+    font-size: 16px;
+    background-color: white;
+}
+
+.contact * {
+    box-sizing: border-box;
+}
+
+.contact input[type=text], input[type=email], select, textarea {
+    padding: 12px;
+    border: 1px solid #1687a7;
+    color: #1f5362;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+.contact input[type=text], input[type=email], select {
+    width: 40%;
+}
+
+.contact textarea {
+    width: 100%;
+}
+
+.contact input[type=submit] {
+    background-color: #1f5362;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.contact input[type=submit]:hover {
+    background-color: #1687a7;
+}
+
+@media screen and (max-width: 800px) {
+    .contact input[type=text], input[type=email], select {
+        width: 100%;
+    }
+    .contact {
+        padding: 2% 6% 2% 6%;
+    }
+}
+/*--- Για το Contact ---*/

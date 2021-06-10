@@ -46,11 +46,11 @@
       </button>
     </div>
     <div class="title_menu hide" id="title_menu">Blue Life</div>
-    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="displayMobileMenuButton()">&#9776;</a>
   </div>
 
   <script>
-    function myFunction() {
+    function displayMobileMenuButton() { // για κινητό, εμφανίζει το μενού πάνω δεξιά με 3 γραμμές
       var x = document.getElementById("navbar");
       if (x.className === "navbar") {
         x.className += " responsive";
@@ -59,6 +59,7 @@
       }
     }
 
+    // για κινητό, όταν κάνεις scroll προς τα κάτω να εμφανίζεται το όνομα του Blue Life πάνω στο μενού
     myID = document.getElementById("title_menu");
     var myScrollFunc = function() {
       var y = document.getElementById("header").offsetHeight;

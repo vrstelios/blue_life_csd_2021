@@ -8,7 +8,7 @@ session_start();
     <title>Blue Life - Εγγραφή</title>
     <link rel="icon" href="images/Main/BlueLife-icon.ico">
     <link rel="stylesheet" href="styles_main.css">
-    <link rel="stylesheet" href="styles_contact_singin_up.css">
+    <link rel="stylesheet" href="styles_signup.css">
 </head>
 <body>
 
