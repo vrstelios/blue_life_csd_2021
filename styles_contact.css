@@ -38,6 +38,10 @@
     background-color: #1687a7;
 }
 
+span {
+    color: red;
+}
+
 @media screen and (max-width: 800px) {
     .contact input[type=text], input[type=email], select {
         width: 100%;

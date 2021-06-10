@@ -70,18 +70,21 @@ session_start();
 <!---------------Επικοινωνία--------------->
 <div class="contact">
     <div>
-    <h3>Με ενδιαφέρον περιμένουμε τις σκέψεις σας</h3>
+    <h3>Στείλτε μας τις ιδέες σας!</h3>
     <form method="post">
         <label for="fname">Όνομα</label><br>
         <input type="text" id="fname" placeholder="Το όνομά σου..." name="firstname"><br>
         <label for="lname">Επίθετο</label><br>
         <input type="text" id="lname" placeholder="Το επίθετό σου..." name="lastname"><br>
-        <label for="email">Email</label><br>
+        <label for="email">Email <span>*</span> </label><br>
         <input type="email" id="email" placeholder="Το email σου..." name="email" required><br>
-        <label for="subject">Σχόλια</label><br>
+        <label for="subject">Σχόλια <span>*</span> </label><br>
         <textarea id="subject" name="subject" placeholder="Τα σχόλιά σου..." style="height:160px" required></textarea>
         <input type="submit" value="Υποβολή">
+        <br><br>
+        <label><span>*</span> Υποχρεωτικά πεδία  </label>
     </form>
+
     </div>
 </div>
 
