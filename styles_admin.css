@@ -76,19 +76,20 @@ tr:nth-child(even) {
 
 /* Για την popup form */
 .form-popup {
+    overflow:auto;
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
+    width: 60%;
+    max-height: 96%;
     border: 3px solid #f1f1f1;
     z-index: 99999999;
 }
 
-/* Add styles to the form container */
 .form-container {
-    max-width: 100%;
+    width: 100%;
     padding: 6px;
     background-color: white;
 }
@@ -96,26 +97,38 @@ tr:nth-child(even) {
 .form-container p {
     float: left;
     width: 33%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.form-container .input_image {
+    width: 66%;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-/* Full-width input fields */
+textarea {
+    height:100px;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    resize: none;
+}
+
 .form-container input[type=text], input[type=password], input[type=date],
  input[type=url], input[type=email], input[type=file], textarea[name=subject] {
-    /* width: 100%; */
+    width: 100%;
     padding: 10px;
     margin: 2px 0 6px 0;
     border: none;
     background: #f1f1f1;
 }
 
-/* When the inputs get focus, do something */
 .form-container input[type=text]:focus, input[type=password]:focus, input[type=date]:focus,
  input[type=url]:focus, input[type=email]:focus, input[type=file]:focus, textarea[name=subject]:focus {
     background-color: #ddd;
     outline: none;
 }
 
-/* Set a style for the submit/login button */
 .form-container .btn {
     background-color: #4CAF50;
     color: white;
@@ -127,7 +140,6 @@ tr:nth-child(even) {
     opacity: 0.8;
 }
 
-/* Add a red background color to the cancel button */
 .form-container .btn_cancel {
     background-color: red;
     color: white;
@@ -135,8 +147,8 @@ tr:nth-child(even) {
     border: none;
     cursor: pointer;
     position: fixed;
-    top: 0;
-    right: 0;
+    top: 2px;
+    right: 2px;
     opacity: 0.8;
     margin: 4px;
     border-radius: 6px;
@@ -144,10 +156,55 @@ tr:nth-child(even) {
     text-decoration: none;
 }
 
-/* Add some hover effects to buttons */
 .form-container .btn:hover, .open-button:hover {
     opacity: 1;
 }
 
+span {
+    color: red;
+}
 
+@media screen and (max-width: 800px) {
+    .form-popup {
+        width: 90%;
+    }
+    .form-container p {
+        width: 50%;
+    }
+    .form-container .input_image {
+        width: 100%;
+    }
+}
+
+.alert {
+    padding: 20px;
+    background-color: #04AA6D;
+    color: white;
+    display: none;
+    position: fixed;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    z-index: 99999999;
+}
+
+.red{
+    background-color: #f44336;
+}
+
+.closeBtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closeBtn:hover {
+    color: black;
+}
 /*--- Για τη σελίδα διαχείρησης ---*/

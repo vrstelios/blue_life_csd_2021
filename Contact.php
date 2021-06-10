@@ -38,7 +38,9 @@ session_start();
         $query = "INSERT INTO contact (first_name,last_name,email,comment)
                   VALUES ('$firstname','$lastname','$email','$subject');";
         if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-            header("Location: Contact.php");
+            $_SESSION['submit_contact_form'] = "YES";
+            //header("Location: Contact.php");
+            //echo '<script>' . 'openAlertMessage();' . '</script>';
         }
         @mysqli_free_result($results);
         @mysqli_close($link);
@@ -53,7 +55,6 @@ session_start();
 
 <!---------------Navigation bar--------------->
 <?php include("navigation.php") ?>
-
 
 <!---------------Title section--------------->
 <div class="page-title">
@@ -71,7 +72,8 @@ session_start();
 <div class="contact">
     <div>
     <h3>Στείλτε μας τις ιδέες σας!</h3>
-    <form method="post">
+    <form method="post" action="Contact.php">
+        <label><span>* Υποχρεωτικά πεδία</span></label><br><br>
         <label for="fname">Όνομα</label><br>
         <input type="text" id="fname" placeholder="Το όνομά σου..." name="firstname"><br>
         <label for="lname">Επίθετο</label><br>
@@ -81,11 +83,32 @@ session_start();
         <label for="subject">Σχόλια <span>*</span> </label><br>
         <textarea id="subject" name="subject" placeholder="Τα σχόλιά σου..." style="height:160px" required></textarea>
         <input type="submit" value="Υποβολή">
-        <br><br>
-        <label><span>*</span> Υποχρεωτικά πεδία  </label>
     </form>
-
     </div>
+
+    <div class="alert" id="alertMessage">
+        <span class="closeBtn" onclick="closeAlertMessage()">&times;</span>
+        <strong>Έγινε!</strong> Επιτυχής καταχώρηση της φόρμας επικοινωνίας
+    </div>
+
+    <script>
+        function openAlertMessage() {
+            document.getElementById("alertMessage").style.display = "block";
+            setTimeout(hideElement, 3000) //milliseconds
+            function hideElement() {
+                closeAlertMessage();
+            }
+        }
+        function closeAlertMessage() {
+            document.getElementById("alertMessage").style.display = "none";
+        }
+    </script>
+    <?php
+        if(isset($_SESSION['submit_contact_form'])){
+            echo '<script  type="text/javascript">openAlertMessage();</script>';
+            $_SESSION['submit_contact_form'] = null;
+        }
+    ?>
 </div>
 
 <!-----------------Go to top button----------------->
