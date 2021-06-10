@@ -111,7 +111,7 @@ textarea {
     width: 100%;
     padding-left: 10px;
     padding-right: 10px;
-    resize: none;
+    resize: vertical;
 }
 
 .form-container input[type=text], input[type=password], input[type=date],
@@ -136,7 +136,6 @@ textarea {
     border: none;
     cursor: pointer;
     width: 100%;
-    margin-bottom:10px;
     opacity: 0.8;
 }
 
