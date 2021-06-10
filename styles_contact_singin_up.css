@@ -290,13 +290,13 @@
 .SignUp .user{
     position: absolute;
     font-size: 15px;
-    top: 13%;
+    top: 10%;
     color: black;
 }
-.SignUp input[type=text_name]{
+.SignUp input[name="username"]{
     position: absolute;
     text-align: left;
-    top: 16%;
+    top: 13%;
     padding: 13px;
     color: black;
     border: none;
@@ -305,13 +305,13 @@
 .SignUp .email_register{
     position: absolute;
     font-size: 15px;
-    top: 26%;
+    top: 23%;
     color: black;
 }
-.SignUp input[type=text_email]{
+.SignUp input[type=email]{
     position: absolute;
     text-align: left;
-    top: 29%;
+    top: 26%;
     padding: 13px;
     color: black;
     border: none;
@@ -320,13 +320,13 @@
 .SignUp .first_name{
     position: absolute;
     font-size: 15px;
-    top: 39%;
+    top: 36%;
     color: black;
 }
-.SignUp input[type=text_first_name]{
+.SignUp input[name="first_name"]{
     position: absolute;
     text-align: left;
-    top: 41%;
+    top: 39%;
     padding: 13px;
     color: black;
     border: none;
@@ -335,13 +335,13 @@
 .SignUp .last_name{
     position: absolute;
     font-size: 15px;
-    top: 51%;
+    top: 49%;
     color: black;
 }
-.SignUp input[type=text_last_name]{
+.SignUp input[name="last_name"]{
     position: absolute;
     text-align: left;
-    top: 54%;
+    top: 51%;
     padding: 13px;
     color: black;
     border: none;
@@ -350,32 +350,28 @@
 .SignUp .pass1{
     position: absolute;
     font-size: 15px;
-    top: 64%;
+    top: 61%;
     color: black;
 }
 .SignUp .input_pass1{
     position: absolute;
     text-align: left;
-    top: 67%;
+    top: 64%;
     padding: 13px;
     color: black;
     border: none;
     background: #f7f7f7;
 }
-.SignUp input[type=password]:focus,input[type=text_name]:focus,input[type=text_email]:focus,input[type=pass2]:focus{
-    background-color: #ddd;
-    outline: none;
-}
 .SignUp .pass2{
     position: absolute;
     font-size: 15px;
-    top: 77%;
+    top: 74%;
     color: black;
 }
 .SignUp .input_pass2{
     position: absolute;
     text-align: left;
-    top: 80%;
+    top: 77%;
     padding: 13px;
     color: black;
     border: none;
@@ -384,7 +380,7 @@
 .SignUp .btn_register {
     position: absolute;
     cursor: pointer;
-    top: 88%;
+    top: 86.5%;
     padding: 15px 130px;
     border-radius: 12px;
     background-color: #1687a7;
@@ -394,7 +390,7 @@
     position: absolute;
     white-space: nowrap;
     text-align: center;
-    top: 95%;
+    top: 93%;
     border: 0 solid ;
     color: #1687a7;
     background-color: white;
@@ -405,5 +401,20 @@
     -webkit-transition: color 0.2s ease-in-out;
     transition: color 0.2s ease-in-out;
 }
+.SignUp input[type=password]:focus,input[type=text_name]:focus,input[type=text_email]:focus,input[type=pass2]:focus{
+    background-color: #ddd;
+    outline: none;
+}
+span {
+    position: absolute;
+    top: 83.5%;
+    left: 30px;
+    width: 100%;
+    display: flex;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
 /*--- Για την εγγραφή ---*/
 
