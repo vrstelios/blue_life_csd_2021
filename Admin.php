@@ -160,7 +160,6 @@ function print_size_of_table($link, $table){
             $query = "SELECT * FROM user";
             $results = mysqli_query($link, $query);
             while  ($row = mysqli_fetch_array($results)) {
-                $edit_id = $row['id'];
                 echo '<tr>';
                 echo '<td>' . $row['id'] . '</td>';
                 echo '<td>' . $row['username'] . '</td>';
@@ -171,7 +170,7 @@ function print_size_of_table($link, $table){
                 echo '<td>' . $row['region'] . '</td>';
                 echo '<td>' . $row['image'] . '</td>';
                 echo "<td class='keno'>
-                    <img class='pencil' src='images/6.Admin/edit.png' alt='edit' onclick='javascript:openEditForm($edit_id)'>
+                    <img class='pencil' src='images/6.Admin/edit.png' alt='edit' onclick='javascript:openEditForm(".$row['id'].")'>
                     <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                 </td>";
                 echo '</tr>';
@@ -225,9 +224,10 @@ function print_size_of_table($link, $table){
             <h3>Τροποποίηση των δεδομένων του χρήστη</h3>
 
             <?php
-                $_SESSION["o"]=null;
-                echo '<script type="text/javascript">["o"]=sessionStorage.user_id;</script>';
                 echo $_SESSION["o"];
+                //$_SESSION["o"]=null;
+                //echo '<script type="text/javascript">["o"]=sessionStorage.user_id;</script>';
+                //echo $_SESSION["o"];
             ?>
             <p>
                 <label for="username"><b>Username</b>
@@ -275,7 +275,8 @@ function print_size_of_table($link, $table){
 
     <script>
         function openEditForm(user_id) {
-            sessionStorage.user_id = user_id;
+            <?php $_SESSION['o']=user_id ?>
+            //sessionStorage.user_id = user_id;
             document.getElementById('FORM_FOR_EDIT_USER').style.display = "block";
             window.onkeydown = function(event) {
                 if ( event.keyCode === 27 ) {
