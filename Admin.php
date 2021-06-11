@@ -13,7 +13,6 @@ session_start();
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include("connect_to_database.php");
-        echo $_POST['submit'];
         if ($_POST['submit'] == 'Καταχώρηση χρήστη'){
             if (isset($_POST['username'])) {
                 $username = $_POST['username'];
@@ -41,18 +40,17 @@ session_start();
                 $password = null;
             }
 
-            $query = "SELECT id FROM user WHERE username LIKE '$username' ";
+            $query = "SELECT id FROM user WHERE ((username LIKE '$username')OR(email LIKE '$email'))  ";
 
             if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
                 $num_results = mysqli_num_rows($results);
                 if ($num_results > 0) {
-                    echo '<script type="text/javascript">' . 'alert("Υπάρχει ήδη λογαριασμός με αυτό το username!");' . '</script>';
+                    $_SESSION['submit'] = "NOT AVAILABLE USERNAME";
                 } else {
                     $query = "INSERT INTO user (username, password, first_name, last_name, email)
                                       VALUES ('$username', '$password', '$firstname', '$lastname', '$email');";
                     if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                        echo '<script type="text/javascript">' . 'closeFormForUser();' . '</script>';
-                        header("Location: Admin.php");
+                        $_SESSION['submit'] = "USER_CREATED";
                     }
                 }
             }
@@ -80,16 +78,11 @@ session_start();
             } else {
                 $date = null;
             }
-            /*
-            $image = $_FILES['image']['tmp_name'];
-            $img = file_get_contents($image);
-            */
-            if (isset($_POST['img'])) {
-                $image = $_POST['img'];
+            if (isset($_FILES['image']['name'])) {
+                $image = $_FILES['image']['name'];
             } else {
                 $image = null;
             }
-
             if (isset($_POST['subject'])) {
                 $description = $_POST['subject'];
             } else {
@@ -99,8 +92,7 @@ session_start();
             $query = "INSERT INTO action (title,date,location,description,image,link)
                   VALUES ('$title','$date','$location','$description','$image','$link_info');";
             if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                echo '<script type="text/javascript">' . 'closeFormForAction();' . '</script>';
-                header("Location: Admin.php");
+                $_SESSION['submit'] = "ACTION_CREATED";
             }
         }
         @mysqli_free_result($results);
@@ -148,7 +140,7 @@ function print_size_of_table($link, $table){
             <?php //εμφανίζουμε το πλήθος των χρηστών
             print_size_of_table($link,'user');
             ?>
-        <button class="table_button" onclick="openFormForUser()">προσθήκη χρήστη</button>
+        <button class="table_button" onclick="openForm('FORM_FOR_USER')">προσθήκη χρήστη</button>
         <button class="table_button">Ταξινόμηση</button>
         </p>
 
@@ -182,6 +174,7 @@ function print_size_of_table($link, $table){
                     <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                 </td>";
                 echo '</tr>';
+
             }
             @mysqli_free_result($results);
 
@@ -191,40 +184,69 @@ function print_size_of_table($link, $table){
     </div>
 
     <!-- pop up form για προσθήκη νέου χρήστη από τον διαχειριστή -->
-    <div class="form-popup" id="myForm1" role="dialog">
+    <div class="form-popup" id="FORM_FOR_USER" role="dialog">
         <form action="Admin.php" method="post" class="form-container">
             <h3>Δημιουργία χρήστη</h3>
+            <span>* Υποχρεωτικά πεδία</span><br>
             <p>
-            <label for="username"><b>Username</b></label>
+            <label for="username"><b>Username</b><span>*</span></label>
             <input type="text" placeholder="Γράψε username" name="username" required>
             </p>
             <p>
-            <label for="email"><b>Email</b></label>
+            <label for="email"><b>Email</b><span>*</span></label>
             <input type="email" placeholder="Γράψε Email" name="email" required>
             </p>
             <p>
-            <label for="first_name"><b>Όνομα</b></label>
+            <label for="first_name"><b>Όνομα</b><span>*</span></label>
             <input type="text" placeholder="Γράψε Όνομα" name="firstname" required>
             </p>
             <p>
-            <label for="last_name"><b>Επίθετο</b></label>
+            <label for="last_name"><b>Επίθετο</b><span>*</span></label>
             <input type="text" placeholder="Γράψε Επίθετο"  name="lastname" required>
             </p>
             <p>
-            <label for="password"><b>Κωδικός</b></label>
+            <label for="password"><b>Κωδικός</b><span>*</span></label>
             <input type="password" placeholder="Γράψε κωδικό" name="pass" required>
             </p>
             <input name="submit" type="submit" value="Καταχώρηση χρήστη" class="btn"/>
-            <button type="button" class="btn_cancel" onclick="closeFormForUser()">Ακύρωση</button>
+            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_USER')">Ακύρωση</button>
         </form>
     </div>
 
     <script>
-        function openFormForUser() {
-            document.getElementById("myForm1").style.display = "block";
+        function openForm(id) {
+            document.getElementById(id).style.display = "block";
+            window.onkeydown = function(event) {
+                if ( event.keyCode === 27 ) {
+                    closeForm(id);
+                }
+            };
         }
-        function closeFormForUser() {
-            document.getElementById("myForm1").style.display = "none";
+        function closeForm(id) {
+            document.getElementById(id).style.display = "none";
+        }
+    </script>
+
+    <div class="alert red" id="NOT_AVAILABLE_USERNAME">
+        <span class="closeBtn" onclick="closeAlertMessage('NOT_AVAILABLE_USERNAME')">&times;</span>
+        <strong>Αποτυχία δημιουργίας χρήστη!</strong> Το συγκεκριμένο username ή email υπάρχει ήδη
+    </div>
+
+    <div class="alert" id="USER_CREATED">
+        <span class="closeBtn" onclick="closeAlertMessage('USER_CREATED')">&times;</span>
+        <strong>Επιτυχία!</strong> Ο χρήστης δημιουργήθηκε
+    </div>
+
+    <script>
+        function openAlertMessage(id) {
+            document.getElementById(id).style.display = "block";
+            setTimeout(hideElement, 5000) //milliseconds
+            function hideElement() {
+                closeAlertMessage(id);
+            }
+        }
+        function closeAlertMessage(id) {
+            document.getElementById(id).style.display = "none";
         }
     </script>
 
@@ -235,7 +257,7 @@ function print_size_of_table($link, $table){
             <?php //εμφανίζουμε το πλήθος των δράσεων
             print_size_of_table($link,'action');
             ?>
-            <button class="table_button" onclick="openFormForAction()">προσθήκη δράσης</button>
+            <button class="table_button" onclick="openForm('FORM_FOR_ACTION')">προσθήκη δράσης</button>
             <button class="table_button">Ταξινόμηση</button>
         </p>
         <table>
@@ -276,49 +298,43 @@ function print_size_of_table($link, $table){
     </div>
 
     <!-- pop up form για προσθήκη νέας δράσης από τον διαχειριστή -->
-    <div class="form-popup" id="myForm2">
-        <form action="Admin.php" method="post" class="form-container">
+    <div class="form-popup" id="FORM_FOR_ACTION">
+        <form action="Admin.php" method="post" enctype="multipart/form-data" class="form-container">
             <h3>Δημιουργία δράσης</h3>
+            <span>* Υποχρεωτικά πεδία</span><br>
             <p>
-                <label for="title"><b>Τίτλος</b></label>
+                <label for="title"><b>Τίτλος</b></label><span>*</span>
                 <input type="text" placeholder="Δώσε τίτλο" name="title" required>
             </p>
             <p>
-                <label for="location"><b>Τοποθεσία</b></label>
-                <input type="text" placeholder="Δώσε τοποθεσία" name="location">
+                <label for="location"><b>Τοποθεσία</b><span>*</span></label>
+                <input type="text" placeholder="Δώσε τοποθεσία" name="location" required>
             </p>
             <p>
                 <label for="link"><b>Link</b></label>
                 <input type="url" placeholder="Δώσε link" name="link">
             </p>
             <p>
-                <label for="date"><b>Ημερομηνία</b></label>
-                <input type="date" placeholder="Δώσε ημερομηνία" name="date">
+                <label for="date"><b>Ημερομηνία</b><span>*</span></label>
+                <input type="date" placeholder="Δώσε ημερομηνία" name="date" required>
             </p>
-            <p>
-                <label for="image"><b>Εικόνα</b></label>
-                <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα">
+            <p class="input_image">
+                <label for="image"><b>Εικόνα</b><span>*</span></label>
+                <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" required>
             </p>
             <p style="width: 100%">
-                <label for="subject"><b>Λεπτομέρειες</b></label>
-                <textarea placeholder="Δώσε περισσότερες πληροφορίες..." style="height:100px; width: 100%; resize: none;" name="subject" id="subject"></textarea>
+                <label for="subject"><b>Λεπτομέρειες</b><span>*</span></label>
+                <textarea placeholder="Δώσε περισσότερες πληροφορίες..." name="subject" id="subject" required></textarea>
             </p>
             <input name="submit" type="submit" value="Καταχώρηση δράσης" class="btn"/>
-            <button type="button" class="btn_cancel" onclick="closeFormForAction()">Ακύρωση</button>
+            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_ACTION')">Ακύρωση</button>
         </form>
     </div>
 
-    <script>
-        function openFormForAction() {
-            document.getElementById("myForm2").style.display = "block";
-        }
-        function closeFormForAction() {
-            document.getElementById("myForm2").style.display = "none";
-        }
-        function saveData2() {
-
-        }
-    </script>
+    <div class="alert" id="ACTION_CREATED">
+        <span class="closeBtn" onclick="closeAlertMessage('ACTION_CREATED')">&times;</span>
+        <strong>Επιτυχία!</strong> Η δράση καταχωρήθηκε
+    </div>
 
     <h3>Χρήστης στη δράση</h3>
     <div class="user-actions-table">
@@ -391,7 +407,7 @@ function print_size_of_table($link, $table){
                 echo '<td>' . $row['email'] . '</td>';
                 echo '<td>' . $row['date_of_comment'] . '</td>';
                 echo "<td class='keno'>
-                    <a href='javascript:void(0);' onclick='openForm3()'>Read</a>
+                    <a href='javascript:void(0);' >Read</a>
                 </td>";
                 echo '</tr>';
             }
@@ -404,7 +420,7 @@ function print_size_of_table($link, $table){
     </div>
 
     <!-- pop up form για προσθήκη νέας δράσης από τον διαχειριστή -->
-    <div class="form-popup" id="myForm3">
+    <div class="form-popup" id="FORM_FOR_CONTACT">
         <form action="Admin.php" class="form-container">
             <h3>Προβολή φόρμας</h3>
             <?php
@@ -414,18 +430,23 @@ function print_size_of_table($link, $table){
                 echo "Ημερομηνία:";
                 echo "Σχόλια:";
             ?>
-            <button type="button" class="btn_cancel" onclick="closeForm3()">κλείσιμο</button>
+            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_CONTACT')">κλείσιμο</button>
         </form>
     </div>
 
-    <script>
-        function openForm3() {
-            document.getElementById("myForm3").style.display = "block";
+
+    <?php
+        if($_SESSION['submit']=="NOT AVAILABLE USERNAME"){
+            echo '<script  type="text/javascript">openAlertMessage("NOT_AVAILABLE_USERNAME");</script>';
+            $_SESSION['submit'] = null;
+        } else if($_SESSION['submit']=="USER_CREATED"){
+            echo '<script  type="text/javascript">openAlertMessage("USER_CREATED");</script>';
+            $_SESSION['submit'] = null;
+        } else if($_SESSION['submit']=="ACTION_CREATED"){
+            echo '<script  type="text/javascript">openAlertMessage("ACTION_CREATED");</script>';
+            $_SESSION['submit'] = null;
         }
-        function closeForm3() {
-            document.getElementById("myForm3").style.display = "none";
-        }
-    </script>
+    ?>
 
 </div>
 
@@ -434,6 +455,7 @@ function print_size_of_table($link, $table){
 
 <!-----------------Footer----------------->
 <?php include("footer.html");?>
-
+<?php //echo date("Y");?>
+<!--https://www.allphptricks.com/create-simple-pagination-using-php-and-mysqli/-->
 </body>
 </html>
