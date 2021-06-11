@@ -66,7 +66,7 @@ session_start();
 </div>
 
 <?php
-// αν ο χρήστης είναι ο admin και προσπαθήσει να φορτώσει την σελίδα Admin.php τότε φορτώνεται η σελίδα UnauthorizedProfile.php για την ασφάλεια και απόκρυψη των στοιχείων
+// αν ο χρήστης είναι συνδεδεμένος και προσπαθήσει να φορτώσει την σελίδα Login.php τότε φορτώνεται η σελίδα Home.php
 if (isset($_SESSION['connected_id'])){
     header("Location: Home.php");
 }

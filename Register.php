@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,6 +104,13 @@
         <h2>Εγγραφή</h2>
     </div>
 </div>
+
+<?php
+// αν ο χρήστης είναι συνδεδεμένος και προσπαθήσει να φορτώσει την σελίδα Register.php τότε φορτώνεται η σελίδα Home.php
+if (isset($_SESSION['connected_id'])){
+    header("Location: Home.php");
+}
+?>
 
 <!---------------Εγγραφή--------------->
 <div class="SignUp">
