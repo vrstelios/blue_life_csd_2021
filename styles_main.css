@@ -356,6 +356,40 @@ nav {
 }
 /*--- Για τον τίτλο κάθε σελίδας ---*/
 
+/* Για τα alert μηνύματα */
+.alert {
+    padding: 20px;
+    background-color: #04AA6D;
+    color: white;
+    display: none;
+    position: fixed;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    z-index: 99999999;
+}
+
+.red{
+    background-color: #f44336;
+}
+
+.closeBtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closeBtn:hover {
+    color: black;
+}
+/*--- Για τα alert μηνύματα ---*/
+
 /* Για το Go to top button*/
 #myBtn {
     display: none;

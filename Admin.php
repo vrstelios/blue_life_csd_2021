@@ -5,7 +5,7 @@ session_start();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blue Life - Σελίδα διαχείρησης</title>
+    <title>Blue Life - Σελίδα διαχείρισης</title>
     <link rel="icon" href="images/Main/BlueLife-icon.ico">
     <link rel="stylesheet" href="styles_main.css">
     <link rel="stylesheet" href="styles_admin.css">
@@ -40,18 +40,21 @@ session_start();
                 $password = null;
             }
 
-            $query = "SELECT id FROM user WHERE ((username LIKE '$username')OR(email LIKE '$email'))  ";
+            $query1 = "SELECT id FROM user WHERE username='$username'";
+            $query2 = "SELECT id FROM user WHERE email='$email'";
+            $results1 = mysqli_query($link, $query1);
+            $results2 = mysqli_query($link, $query2);
 
-            if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                $num_results = mysqli_num_rows($results);
-                if ($num_results > 0) {
-                    $_SESSION['submit'] = "NOT AVAILABLE USERNAME";
-                } else {
-                    $query = "INSERT INTO user (username, password, first_name, last_name, email)
-                                      VALUES ('$username', '$password', '$firstname', '$lastname', '$email');";
-                    if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                        $_SESSION['submit'] = "USER_CREATED";
-                    }
+            if (mysqli_num_rows($results1) > 0) {
+                $_SESSION['submit'] = "NOT AVAILABLE USERNAME";
+            } else if (mysqli_num_rows($results2) > 0) {
+                $_SESSION['submit'] = "NOT AVAILABLE EMAIL";
+            }
+            else {
+                $query = "INSERT INTO user (username, password, first_name, last_name, email)
+                          VALUES ('$username', '$password', '$firstname', '$lastname', '$email');";
+                if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                    $_SESSION['submit'] = "USER CREATED";
                 }
             }
         }
@@ -61,7 +64,6 @@ session_start();
             } else {
                 $title = null;
             }
-
             if (isset($_POST['location'])) {
                 $location = $_POST['location'];
             } else {
@@ -91,7 +93,7 @@ session_start();
             $query = "INSERT INTO action (title,date,location,description,image,link)
                   VALUES ('$title','$date','$location','$description','$image','$link_info');";
             if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                $_SESSION['submit'] = "ACTION_CREATED";
+                $_SESSION['submit'] = "ACTION CREATED";
             }
         }
         @mysqli_close($link);
@@ -110,7 +112,7 @@ session_start();
 
 <!---------------Title section--------------->
 <div class="page-title">
-    <h2>Σελίδα διαχείρησης</h2>
+    <h2>Σελίδα διαχείρισης</h2>
 </div>
 
 <!---------------Σελίδα διαχείρησης--------------->
@@ -158,6 +160,7 @@ function print_size_of_table($link, $table){
             $query = "SELECT * FROM user";
             $results = mysqli_query($link, $query);
             while  ($row = mysqli_fetch_array($results)) {
+                $edit_id = $row['id'];
                 echo '<tr>';
                 echo '<td>' . $row['id'] . '</td>';
                 echo '<td>' . $row['username'] . '</td>';
@@ -168,7 +171,7 @@ function print_size_of_table($link, $table){
                 echo '<td>' . $row['region'] . '</td>';
                 echo '<td>' . $row['image'] . '</td>';
                 echo "<td class='keno'>
-                    <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                    <img class='pencil' src='images/6.Admin/edit.png' alt='edit' onclick='javascript:openEditForm($edit_id)'>
                     <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                 </td>";
                 echo '</tr>';
@@ -187,29 +190,103 @@ function print_size_of_table($link, $table){
             <h3>Δημιουργία χρήστη</h3>
             <span>* Υποχρεωτικά πεδία</span><br>
             <p>
-            <label for="username"><b>Username</b><span>*</span></label>
-            <input type="text" placeholder="Γράψε username" name="username" required>
+                <label for="username"><b>Username</b><span>*</span>
+                    <input type="text" placeholder="Γράψε username" name="username" required>
+                </label>
             </p>
             <p>
-            <label for="email"><b>Email</b><span>*</span></label>
-            <input type="email" placeholder="Γράψε Email" name="email" required>
+                <label for="email"><b>Email</b><span>*</span>
+                    <input type="email" placeholder="Γράψε Email" name="email" required>
+                </label>
             </p>
             <p>
-            <label for="first_name"><b>Όνομα</b><span>*</span></label>
-            <input type="text" placeholder="Γράψε Όνομα" name="firstname" required>
+                <label for="first_name"><b>Όνομα</b><span>*</span>
+                    <input type="text" placeholder="Γράψε Όνομα" name="firstname" required>
+                </label>
             </p>
             <p>
-            <label for="last_name"><b>Επίθετο</b><span>*</span></label>
-            <input type="text" placeholder="Γράψε Επίθετο"  name="lastname" required>
+                <label for="last_name"><b>Επίθετο</b><span>*</span>
+                    <input type="text" placeholder="Γράψε Επίθετο" name="lastname" required>
+                </label>
             </p>
             <p>
-            <label for="password"><b>Κωδικός</b><span>*</span></label>
-            <input type="password" placeholder="Γράψε κωδικό" name="pass" required>
+                <label for="password"><b>Κωδικός</b><span>*</span>
+                    <input type="password" placeholder="Γράψε κωδικό" name="pass" required>
+                </label>
             </p>
             <input name="submit" type="submit" value="Καταχώρηση χρήστη" class="btn"/>
             <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_USER')">Ακύρωση</button>
         </form>
     </div>
+
+    <!-- pop up form για την τροποποίηση των στοιχείων ενός χρήστη -->
+    <div class="form-popup" id="FORM_FOR_EDIT_USER" role="dialog">
+        <form action="Admin.php" method="post" class="form-container">
+            <h3>Τροποποίηση των δεδομένων του χρήστη</h3>
+
+            <?php
+                $_SESSION["o"]=null;
+                echo '<script type="text/javascript">["o"]=sessionStorage.user_id;</script>';
+                echo $_SESSION["o"];
+            ?>
+            <p>
+                <label for="username"><b>Username</b>
+                    <input type="text" placeholder="Γράψε username" name="username" required>
+                </label>
+            </p>
+            <p>
+                <label for="email"><b>Email</b>
+                    <input type="email" placeholder="Γράψε Email" name="email" required>
+                </label>
+            </p>
+            <p>
+                <label for="first_name"><b>Όνομα</b>
+                    <input type="text" placeholder="Γράψε Όνομα" name="firstname" required>
+                </label>
+            </p>
+            <p>
+                <label for="last_name"><b>Επίθετο</b>
+                    <input type="text" placeholder="Γράψε Επίθετο" name="lastname" required>
+                </label>
+            </p>
+            <p>
+                <label for="age"><b>Ηλικία</b>
+                    <input type="number" placeholder="Γράψε Ηλικία" name="age">
+                </label>
+            </p>
+            <p>
+                <label for="region"><b>Περιοχή</b>
+                    <input type="text" placeholder="Γράψε Περιοχή" name="region">
+                </label>
+            </p>
+            <p>
+                <label for="password"><b>Κωδικός</b>
+                    <input type="password" placeholder="Γράψε κωδικό" name="pass" required>
+                </label>
+            </p>
+            <p class="input_image">
+                <label for="image"><b>Εικόνα</b></label>
+                <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα">
+            </p>
+            <input name="submit" type="submit" value="Αποθήκευση" class="btn"/>
+            <button type="button" class="btn_cancel" onclick="closeEditForm()">Ακύρωση</button>
+        </form>
+    </div>
+
+    <script>
+        function openEditForm(user_id) {
+            sessionStorage.user_id = user_id;
+            document.getElementById('FORM_FOR_EDIT_USER').style.display = "block";
+            window.onkeydown = function(event) {
+                if ( event.keyCode === 27 ) {
+                    closeEditForm();
+                }
+            };
+        }
+        function closeEditForm() {
+            document.getElementById('FORM_FOR_EDIT_USER').style.display = "none";
+        }
+    </script>
 
     <script>
         function openForm(id) {
@@ -227,7 +304,12 @@ function print_size_of_table($link, $table){
 
     <div class="alert red" id="NOT_AVAILABLE_USERNAME">
         <span class="closeBtn" onclick="closeAlertMessage('NOT_AVAILABLE_USERNAME')">&times;</span>
-        <strong>Αποτυχία δημιουργίας χρήστη!</strong> Το συγκεκριμένο username ή email υπάρχει ήδη
+        <strong>Αποτυχία δημιουργίας χρήστη!</strong> Το συγκεκριμένο username χρησιμοποιείται
+    </div>
+
+    <div class="alert red" id="NOT_AVAILABLE_EMAIL">
+        <span class="closeBtn" onclick="closeAlertMessage('NOT_AVAILABLE_EMAIL')">&times;</span>
+        <strong>Αποτυχία δημιουργίας χρήστη!</strong> Το συγκεκριμένο email χρησιμοποιείται
     </div>
 
     <div class="alert" id="USER_CREATED">
@@ -301,20 +383,24 @@ function print_size_of_table($link, $table){
             <h3>Δημιουργία δράσης</h3>
             <span>* Υποχρεωτικά πεδία</span><br>
             <p>
-                <label for="title"><b>Τίτλος</b></label><span>*</span>
-                <input type="text" placeholder="Δώσε τίτλο" name="title" required>
+                <label for="title"><b>Τίτλος</b><span>*</span>
+                    <input type="text" placeholder="Δώσε τίτλο" name="title" required>
+                </label>
             </p>
             <p>
-                <label for="location"><b>Τοποθεσία</b><span>*</span></label>
-                <input type="text" placeholder="Δώσε τοποθεσία" name="location" required>
+                <label for="location"><b>Τοποθεσία</b><span>*</span>
+                    <input type="text" placeholder="Δώσε τοποθεσία" name="location" required>
+                </label>
             </p>
             <p>
-                <label for="link"><b>Link</b></label>
-                <input type="url" placeholder="Δώσε link" name="link">
+                <label for="link"><b>Link</b>
+                    <input type="url" placeholder="Δώσε link" name="link">
+                </label>
             </p>
             <p>
-                <label for="date"><b>Ημερομηνία</b><span>*</span></label>
-                <input type="date" placeholder="Δώσε ημερομηνία" name="date" required>
+                <label for="date"><b>Ημερομηνία</b><span>*</span>
+                    <input type="date" placeholder="Δώσε ημερομηνία" name="date" required>
+                </label>
             </p>
             <p class="input_image">
                 <label for="image"><b>Εικόνα</b><span>*</span></label>
@@ -338,7 +424,7 @@ function print_size_of_table($link, $table){
     <div class="user-actions-table">
         <p>ΟΛΕΣ ΟΙ ΔΗΛΩΣΕΙΣ ΣΥΜΜΕΤΟΧΗΣ
             <?php //εμφανίζουμε το πλήθος των συνολικών συμμετοχών στις δράσεις
-            print_size_of_table($link,'user_in_action');;
+                print_size_of_table($link,'user_in_action');;
             ?>
             <button class="table_button">Ταξινόμηση</button>
         </p>
@@ -352,25 +438,25 @@ function print_size_of_table($link, $table){
                 <th class="keno"></th>
             </tr>
             <?php //εμφανίζουμε τους συμμετέχοντες στις δράσεις
-            $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
-                      FROM user, user_in_action, action
-                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id";
-            $results = mysqli_query($link, $query);
-            while ($row = mysqli_fetch_array($results)) {
-                echo '<tr>';
-                echo '<td>' . $row['user_id'] . '</td>';
-                echo '<td>' . $row['action_id'] . '</td>';
-                echo '<td>' . $row['username'] . '</td>';
-                echo '<td>' . $row['title'] . '</td>';
-                echo '<td>' . $row['date_joined'] . '</td>';
-                echo "<td class='keno'>
-                    <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
-                </td>";
-                echo '</tr>';
-            }
+                $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
+                          FROM user, user_in_action, action
+                          WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id";
+                $results = mysqli_query($link, $query);
+                while ($row = mysqli_fetch_array($results)) {
+                    echo '<tr>';
+                    echo '<td>' . $row['user_id'] . '</td>';
+                    echo '<td>' . $row['action_id'] . '</td>';
+                    echo '<td>' . $row['username'] . '</td>';
+                    echo '<td>' . $row['title'] . '</td>';
+                    echo '<td>' . $row['date_joined'] . '</td>';
+                    echo "<td class='keno'>
+                        <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                        <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                    </td>";
+                    echo '</tr>';
+                }
 
-            @mysqli_free_result($results);
+                @mysqli_free_result($results);
             ?>
         </table>
         <div class="table_page">Σελίδα 1/1</div>
@@ -380,7 +466,7 @@ function print_size_of_table($link, $table){
     <div class="contact-table">
         <p>ΟΛΕΣ ΟΙ ΦΟΡΜΕΣ
             <?php //εμφανίζουμε το πλήθος των σχόλιων των χρηστών
-            print_size_of_table($link,'contact');
+                print_size_of_table($link,'contact');
             ?>
             <button class="table_button">Ταξινόμηση</button>
         </p>
@@ -394,24 +480,23 @@ function print_size_of_table($link, $table){
                 <th class="keno"></th>
             </tr>
             <?php //εμφανίζουμε τον πίνακα των σχόλιων των χρηστών
-            $query = "SELECT id, first_name, last_name, email, comment, date_of_comment 
-                      FROM contact";
-            $results = mysqli_query($link, $query);
-            while ($row = mysqli_fetch_array($results)) {
-                echo '<tr>';
-                echo '<td>' . $row['id'] . '</td>';
-                echo '<td>' . $row['first_name'] . '</td>';
-                echo '<td>' . $row['last_name'] . '</td>';
-                echo '<td>' . $row['email'] . '</td>';
-                echo '<td>' . $row['date_of_comment'] . '</td>';
-                echo "<td class='keno'>
-                    <a href='javascript:void(0);' >Read</a>
-                </td>";
-                echo '</tr>';
-            }
-
-            @mysqli_free_result($results);
-            @mysqli_close($link);
+                $query = "SELECT id, first_name, last_name, email, comment, date_of_comment 
+                          FROM contact";
+                $results = mysqli_query($link, $query);
+                while ($row = mysqli_fetch_array($results)) {
+                    echo '<tr>';
+                    echo '<td>' . $row['id'] . '</td>';
+                    echo '<td>' . $row['first_name'] . '</td>';
+                    echo '<td>' . $row['last_name'] . '</td>';
+                    echo '<td>' . $row['email'] . '</td>';
+                    echo '<td>' . $row['date_of_comment'] . '</td>';
+                    echo "<td class='keno'>
+                        <a href='javascript:void(0);' >Read</a>
+                    </td>";
+                    echo '</tr>';
+                }
+                @mysqli_free_result($results);
+                @mysqli_close($link);
             ?>
         </table>
         <div class="table_page">Σελίδα 1/1</div>
@@ -432,20 +517,21 @@ function print_size_of_table($link, $table){
         </form>
     </div>
 
-
     <?php
         if($_SESSION['submit']=="NOT AVAILABLE USERNAME"){
-            echo '<script  type="text/javascript">openAlertMessage("NOT_AVAILABLE_USERNAME");</script>';
+            echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_USERNAME");</script>';
             $_SESSION['submit'] = null;
-        } else if($_SESSION['submit']=="USER_CREATED"){
-            echo '<script  type="text/javascript">openAlertMessage("USER_CREATED");</script>';
+        } else if($_SESSION['submit']=="NOT AVAILABLE EMAIL"){
+            echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_EMAIL");</script>';
             $_SESSION['submit'] = null;
-        } else if($_SESSION['submit']=="ACTION_CREATED"){
-            echo '<script  type="text/javascript">openAlertMessage("ACTION_CREATED");</script>';
+        } else if($_SESSION['submit']=="USER CREATED"){
+            echo '<script type="text/javascript">openAlertMessage("USER_CREATED");</script>';
+            $_SESSION['submit'] = null;
+        } else if($_SESSION['submit']=="ACTION CREATED"){
+            echo '<script type="text/javascript">openAlertMessage("ACTION_CREATED");</script>';
             $_SESSION['submit'] = null;
         }
     ?>
-
 </div>
 
 <!-----------------Go to top button----------------->

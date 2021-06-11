@@ -153,7 +153,8 @@
     background-color: #ddd;
     outline: none;
 }
-span {
+
+.match {
     position: absolute;
     top: 83.5%;
     left: 30px;
@@ -163,5 +164,4 @@ span {
     font-size: 16px;
     letter-spacing: 2px;
 }
-
 /*--- Για την εγγραφή ---*/

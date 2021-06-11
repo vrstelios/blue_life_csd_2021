@@ -114,8 +114,8 @@ textarea {
     resize: vertical;
 }
 
-.form-container input[type=text], input[type=password], input[type=date],
- input[type=url], input[type=email], input[type=file], textarea[name=subject] {
+.form-container input[type=text], input[type=password], input[type=date], input[type=url],
+ input[type=email], input[type=file], input[type=number], textarea[name=subject] {
     width: 100%;
     padding: 10px;
     margin: 2px 0 6px 0;
@@ -123,8 +123,8 @@ textarea {
     background: #f1f1f1;
 }
 
-.form-container input[type=text]:focus, input[type=password]:focus, input[type=date]:focus,
- input[type=url]:focus, input[type=email]:focus, input[type=file]:focus, textarea[name=subject]:focus {
+.form-container input[type=text]:focus, input[type=password]:focus, input[type=date]:focus, input[type=url]:focus,
+ input[type=email]:focus, input[type=file]:focus, input[type=number]:focus, textarea[name=subject]:focus {
     background-color: #ddd;
     outline: none;
 }
@@ -159,6 +159,10 @@ textarea {
     opacity: 1;
 }
 
+.pencil:hover {
+    cursor: pointer;
+}
+
 span {
     color: red;
 }
@@ -173,37 +177,5 @@ span {
     .form-container .input_image {
         width: 100%;
     }
-}
-
-.alert {
-    padding: 20px;
-    background-color: #04AA6D;
-    color: white;
-    display: none;
-    position: fixed;
-    top: 90%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    z-index: 99999999;
-}
-
-.red{
-    background-color: #f44336;
-}
-
-.closeBtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.closeBtn:hover {
-    color: black;
 }
 /*--- Για τη σελίδα διαχείρησης ---*/

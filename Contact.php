@@ -105,7 +105,7 @@ session_start();
     </script>
     <?php
         if(isset($_SESSION['submit_contact_form'])){
-            echo '<script  type="text/javascript">openAlertMessage();</script>';
+            echo '<script type="text/javascript">openAlertMessage();</script>';
             $_SESSION['submit_contact_form'] = null;
         }
     ?>
