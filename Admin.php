@@ -56,7 +56,6 @@ session_start();
             }
         }
         if ($_POST['submit'] == 'Καταχώρηση δράσης') {
-            echo $_POST['submit'];
             if (isset($_POST['title'])) {
                 $title = $_POST['title'];
             } else {
