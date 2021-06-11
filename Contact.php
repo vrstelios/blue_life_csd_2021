@@ -38,11 +38,11 @@ session_start();
         $query = "INSERT INTO contact (first_name,last_name,email,comment)
                   VALUES ('$firstname','$lastname','$email','$subject');";
         if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+            //echo '<h1>' . 'PAOK' . '</h1>';
             $_SESSION['submit_contact_form'] = "YES";
             //header("Location: Contact.php");
             //echo '<script>' . 'openAlertMessage();' . '</script>';
         }
-        @mysqli_free_result($results);
         @mysqli_close($link);
     }
     ?>

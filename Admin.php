@@ -95,7 +95,6 @@ session_start();
                 $_SESSION['submit'] = "ACTION_CREATED";
             }
         }
-        @mysqli_free_result($results);
         @mysqli_close($link);
     }
 

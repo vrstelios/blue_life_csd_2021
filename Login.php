@@ -35,6 +35,7 @@ session_start();
                             header("Location: Home.php"); // Ανακατεύθυνση από την σελίδα Login στην Home μόλις κάνει επιτυχή σύνδεση ο χρήστης
                         }
                     } //else { echo '<h1>not connected</h1> <br>'; }
+                    @mysqli_free_result($results);
                 }
             }
         }
