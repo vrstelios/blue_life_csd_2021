@@ -94,7 +94,7 @@ session_start();
     <script>
         function openAlertMessage() {
             document.getElementById("alertMessage").style.display = "block";
-            setTimeout(hideElement, 3000) //milliseconds
+            setTimeout(hideElement, 7000) //milliseconds
             function hideElement() {
                 closeAlertMessage();
             }

@@ -239,7 +239,7 @@ function print_size_of_table($link, $table){
     <script>
         function openAlertMessage(id) {
             document.getElementById(id).style.display = "block";
-            setTimeout(hideElement, 5000) //milliseconds
+            setTimeout(hideElement, 7000) //milliseconds
             function hideElement() {
                 closeAlertMessage(id);
             }
