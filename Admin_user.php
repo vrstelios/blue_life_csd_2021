@@ -116,8 +116,9 @@ session_start();
 </div>
 
 <!---------------Σελίδα διαχείρησης--------------->
+
 <?php
-// αν ο χρήστης δεν είναι ο admin και προσπαθήσει να φορτώσει την σελίδα Admin.php τότε φορτώνεται η σελίδα UnauthorizedProfile.php για την ασφάλεια και απόκρυψη των στοιχείων
+// αν ο χρήστης δεν είναι ο admin και προσπαθήσει να φορτώσει την σελίδα Admin_user.php τότε φορτώνεται η σελίδα UnauthorizedProfile.php για την ασφάλεια και απόκρυψη των στοιχείων
 if ($_SESSION['connected_id'] != 1){
     header("Location: UnauthorizedProfile.php");
 }
@@ -125,7 +126,6 @@ $link=1; // άχρηστη γραμμή κώδικα, απλά για να μη�
 include("connect_to_database.php");
 
 function print_size_of_table($link, $table){
-    //εμφανίζουμε το πλήθος των συνολικών συμμετοχών στις δράσεις
     $query = "SELECT COUNT(*) FROM $table";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
@@ -134,6 +134,14 @@ function print_size_of_table($link, $table){
 ?>
 
 <div class="admin-page">
+
+    <div class="navbar" id="navbar_admin">
+        <a href="Admin_user.php">Χρήστες</a>
+        <a href="Admin_action.php">Δράσεις</a>
+        <a href="Admin_user_in_action.php">Χρήστες σε Δράσεις</a>
+        <a href="Admin_contact.php">Επικοινωνία</a>
+    </div>
+
     <h3>Χρήστες</h3>
     <div class="users-table">
         <p>ΟΛΟΙ ΟΙ ΧΡΗΣΤΕΣ
@@ -193,115 +201,31 @@ function print_size_of_table($link, $table){
                      <td>".$row['age']."</td>
                      <td>".$row['region']."</td>
                      <td>".$row['image']."</td>";
-                echo "<td class='keno'>
+                if ($row['id'] == 1){ //ο admin δεν μπορεί να αλλάξει τον κωδικό ή/και τα στοιχεία του
+                    echo "<td class='keno'> </tr>";
+                } else {
+                    echo "<td class='keno'>
                     <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
                     <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                      </tr>";
+                }
             }
             //mysqli_close($link);
-            ?>
-
-            <!--9-->
-
-            <?php //εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους
-            /*
-            $query = "SELECT * FROM user";
-            $results = mysqli_query($link, $query);
-            while  ($row = mysqli_fetch_array($results)) {
-                echo '<tr>';
-                echo '<td>' . $row['id'] . '</td>';
-                echo '<td>' . $row['username'] . '</td>';
-                echo '<td>' . $row['first_name'] . '</td>';
-                echo '<td>' . $row['last_name'] . '</td>';
-                echo '<td>' . $row['email'] . '</td>';
-                echo '<td>' . $row['age'] . '</td>';
-                echo '<td>' . $row['region'] . '</td>';
-                echo '<td>' . $row['image'] . '</td>';
-                echo "<td class='keno'>
-                    <img class='pencil' src='images/6.Admin/edit.png' alt='edit' onclick='javascript:openEditForm(".$row['id'].")'>
-                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
-                </td>";
-                echo '</tr>';
-
-            }
-            @mysqli_free_result($results);
-*/
             ?>
         </table>
 
         <?php //εμφανίζουμε τη λίστα των σελίδων
-        echo "<div class='my_table'>";
-        echo "<ul>";
-        if ($total_no_of_pages <= 10){
-            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                if ($counter == $page_no) {
-                    echo "<li class='active'><a>$counter</a></li>";
-                }else{
-                    echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                }
-            }
-        }elseif ($total_no_of_pages > 10){
-            if($page_no <= 4) {
-                for ($counter = 1; $counter < 8; $counter++){
-                    if ($counter == $page_no) {
-                        echo "<li class='active'><a>$counter</a></li>";
-                    }else{
-                        echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                    }
-                }
-                echo "<li><a>...</a></li>";
-                echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-            } elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {
-                echo "<li><a href='?page_no=1'>1</a></li>";
-                echo "<li><a href='?page_no=2'>2</a></li>";
-                echo "<li><a>...</a></li>";
-                for (
-                    $counter = $page_no - $adjacents;
-                    $counter <= $page_no + $adjacents;
-                    $counter++
-                ) {
-                    if ($counter == $page_no) {
-                        echo "<li class='active'><a>$counter</a></li>";
-                    }else{
-                        echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                    }
-                }
-                echo "<li><a>...</a></li>";
-                echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-            } else {
-                echo "<li><a href='?page_no=1'>1</a></li>";
-                echo "<li><a href='?page_no=2'>2</a></li>";
-                echo "<li><a>...</a></li>";
-                for (
-                    $counter = $total_no_of_pages - 6;
-                    $counter <= $total_no_of_pages;
-                    $counter++
-                ) {
-                    if ($counter == $page_no) {
-                        echo "<li class='active'><a>$counter</a></li>";
-                    }else{
-                        echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                    }
-                }
-            }
-        }
-        echo "</ul>";
-        echo "</div>";
+        include("show_number_of_pages.php");
         ?>
 
-
-        <!--8-->
-        <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-            <strong>Page <?php echo $page_no."/".$total_no_of_pages; ?></strong>
+        <div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+            <strong>Σελίδα <?php echo $page_no."/".$total_no_of_pages; ?></strong>
         </div>
-        <div class="table_page">Σελίδα 1/1</div>
     </div>
 
     <!-- pop up form για προσθήκη νέου χρήστη από τον διαχειριστή -->
     <div class="form-popup" id="FORM_FOR_USER" role="dialog">
-        <form action="Admin.php" method="post" class="form-container">
+        <form action="Admin_user.php" method="post" class="form-container">
             <h3>Δημιουργία χρήστη</h3>
             <span>* Υποχρεωτικά πεδία</span><br>
             <p>
@@ -336,7 +260,7 @@ function print_size_of_table($link, $table){
 
     <!-- pop up form για την τροποποίηση των στοιχείων ενός χρήστη -->
     <div class="form-popup" id="FORM_FOR_EDIT_USER" role="dialog">
-        <form action="Admin.php" method="post" class="form-container">
+        <form action="Admin_user.php" method="post" class="form-container">
             <h3>Τροποποίηση των δεδομένων του χρήστη</h3>
 
             <p>
@@ -440,191 +364,6 @@ function print_size_of_table($link, $table){
     </script>
 
 
-    <h3>Δράσεις</h3>
-    <div class="actions-table">
-        <p>ΟΛΕΣ ΟΙ ΔΡΑΣΕΙΣ
-            <?php //εμφανίζουμε το πλήθος των δράσεων
-            print_size_of_table($link,'action');
-            ?>
-            <button class="table_button" onclick="openForm('FORM_FOR_ACTION')">προσθήκη δράσης</button>
-            <button class="table_button">Ταξινόμηση</button>
-        </p>
-        <table>
-            <tr>
-                <th>id</th>
-                <th>Τίτλος</th>
-                <th>Ημερομηνία</th>
-                <th>Τοποθεσία</th>
-                <th>Περιγραφή</th>
-                <th>Εικόνα</th>
-                <th>Σύνδεσμος</th>
-                <th class="keno"></th>
-            </tr>
-            <?php //εμφανίζουμε τον πίνακα όλων των δράσεων
-            $query = "SELECT id, title, date, location, description, image, link 
-                      FROM action";
-            $results = mysqli_query($link, $query);
-            while ($row = mysqli_fetch_array($results)) {
-                echo '<tr>';
-                echo '<td>' . $row['id'] . '</td>';
-                echo '<td>' . $row['title'] . '</td>';
-                echo '<td>' . $row['date'] . '</td>';
-                echo '<td>' . $row['location'] . '</td>';
-                echo '<td>' . $row['description'] . '</td>';
-                echo '<td>' . $row['image'] . '</td>';
-                echo '<td>' . $row['link'] . '</td>';
-                echo "<td class='keno'>
-                    <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
-                </td>";
-                echo '</tr>';
-            }
-
-            @mysqli_free_result($results);
-            ?>
-        </table>
-        <div class="table_page">Σελίδα 1/1</div>
-    </div>
-
-    <!-- pop up form για προσθήκη νέας δράσης από τον διαχειριστή -->
-    <div class="form-popup" id="FORM_FOR_ACTION">
-        <form action="Admin.php" method="post" enctype="multipart/form-data" class="form-container">
-            <h3>Δημιουργία δράσης</h3>
-            <span>* Υποχρεωτικά πεδία</span><br>
-            <p>
-                <label for="title"><b>Τίτλος</b><span>*</span>
-                    <input type="text" placeholder="Δώσε τίτλο" name="title" required>
-                </label>
-            </p>
-            <p>
-                <label for="location"><b>Τοποθεσία</b><span>*</span>
-                    <input type="text" placeholder="Δώσε τοποθεσία" name="location" required>
-                </label>
-            </p>
-            <p>
-                <label for="link"><b>Link</b>
-                    <input type="url" placeholder="Δώσε link" name="link">
-                </label>
-            </p>
-            <p>
-                <label for="date"><b>Ημερομηνία</b><span>*</span>
-                    <input type="date" placeholder="Δώσε ημερομηνία" name="date" required>
-                </label>
-            </p>
-            <p class="input_image">
-                <label for="image"><b>Εικόνα</b><span>*</span></label>
-                <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" required>
-            </p>
-            <p style="width: 100%">
-                <label for="subject"><b>Λεπτομέρειες</b><span>*</span></label>
-                <textarea placeholder="Δώσε περισσότερες πληροφορίες..." name="subject" id="subject" required></textarea>
-            </p>
-            <input name="submit" type="submit" value="Καταχώρηση δράσης" class="btn"/>
-            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_ACTION')">Ακύρωση</button>
-        </form>
-    </div>
-
-    <div class="alert" id="ACTION_CREATED">
-        <span class="closeBtn" onclick="closeAlertMessage('ACTION_CREATED')">&times;</span>
-        <strong>Επιτυχία!</strong> Η δράση καταχωρήθηκε
-    </div>
-
-    <h3>Χρήστης στη δράση</h3>
-    <div class="user-actions-table">
-        <p>ΟΛΕΣ ΟΙ ΔΗΛΩΣΕΙΣ ΣΥΜΜΕΤΟΧΗΣ
-            <?php //εμφανίζουμε το πλήθος των συνολικών συμμετοχών στις δράσεις
-            print_size_of_table($link,'user_in_action');;
-            ?>
-            <button class="table_button">Ταξινόμηση</button>
-        </p>
-        <table>
-            <tr>
-                <th>id χρήστη</th>
-                <th>id δράσης</th>
-                <th>Username συμμετέχοντα</th>
-                <th>Τίτλος δράσης</th>
-                <th>Ημερομηνία δήλωσης συμμετοχής</th>
-                <th class="keno"></th>
-            </tr>
-            <?php //εμφανίζουμε τους συμμετέχοντες στις δράσεις
-            $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
-                          FROM user, user_in_action, action
-                          WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id";
-            $results = mysqli_query($link, $query);
-            while ($row = mysqli_fetch_array($results)) {
-                echo '<tr>';
-                echo '<td>' . $row['user_id'] . '</td>';
-                echo '<td>' . $row['action_id'] . '</td>';
-                echo '<td>' . $row['username'] . '</td>';
-                echo '<td>' . $row['title'] . '</td>';
-                echo '<td>' . $row['date_joined'] . '</td>';
-                echo "<td class='keno'>
-                        <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                        <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
-                    </td>";
-                echo '</tr>';
-            }
-
-            @mysqli_free_result($results);
-            ?>
-        </table>
-        <div class="table_page">Σελίδα 1/1</div>
-    </div>
-
-    <h3>Επικοινωνία χρηστών</h3>
-    <div class="contact-table">
-        <p>ΟΛΕΣ ΟΙ ΦΟΡΜΕΣ
-            <?php //εμφανίζουμε το πλήθος των σχόλιων των χρηστών
-            print_size_of_table($link,'contact');
-            ?>
-            <button class="table_button">Ταξινόμηση</button>
-        </p>
-        <table>
-            <tr>
-                <th>id</th>
-                <th>Όνομα</th>
-                <th>Επίθετο</th>
-                <th>Email</th>
-                <th>Ημερομηνία</th>
-                <th class="keno"></th>
-            </tr>
-            <?php //εμφανίζουμε τον πίνακα των σχόλιων των χρηστών
-            $query = "SELECT id, first_name, last_name, email, comment, date_of_comment 
-                          FROM contact";
-            $results = mysqli_query($link, $query);
-            while ($row = mysqli_fetch_array($results)) {
-                echo '<tr>';
-                echo '<td>' . $row['id'] . '</td>';
-                echo '<td>' . $row['first_name'] . '</td>';
-                echo '<td>' . $row['last_name'] . '</td>';
-                echo '<td>' . $row['email'] . '</td>';
-                echo '<td>' . $row['date_of_comment'] . '</td>';
-                echo "<td class='keno'>
-                        <a href='javascript:void(0);' >Read</a>
-                    </td>";
-                echo '</tr>';
-            }
-            @mysqli_free_result($results);
-            @mysqli_close($link);
-            ?>
-        </table>
-        <div class="table_page">Σελίδα 1/1</div>
-    </div>
-
-    <!-- pop up form για προσθήκη νέας δράσης από τον διαχειριστή -->
-    <div class="form-popup" id="FORM_FOR_CONTACT">
-        <form action="Admin.php" class="form-container">
-            <h3>Προβολή φόρμας</h3>
-            <?php
-            echo "Όνομα:";
-            echo "Επίθετο:";
-            echo "Email:";
-            echo "Ημερομηνία:";
-            echo "Σχόλια:";
-            ?>
-            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_CONTACT')">κλείσιμο</button>
-        </form>
-    </div>
 
     <?php
     if (isset($_SESSION['submit'])) {

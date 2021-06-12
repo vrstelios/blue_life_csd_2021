@@ -100,3 +100,28 @@ tr:nth-child(even) {
         top: 87%;
     }
 }
+
+/**/
+ul {
+    outline: 1px solid #aaa;
+//list-style-type: none;
+    display: table;
+    width: 50px;
+    padding: 10px 3px 3px;
+    text-align: center;
+    list-style: inside;
+}
+
+ul > li {
+    display: table-cell;
+    vertical-align: bottom;
+}
+
+ul > li:before {
+    display: inline-block;
+    width: 100%;
+    padding: 0 5%;
+    text-align: center;
+    list-style: inside;
+
+}

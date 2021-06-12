@@ -120,11 +120,34 @@ session_start();
                 <th>Σύνδεσμος</th>
                 <th class="keno"></th>
             </tr>
-            <?php //εμφανίζουμε τον πίνακα των δράσεων που συμμετέχει ο συγκεκριμένος χρήστης
+
+            <?php //εμφανίζουμε τον πίνακα των δράσεων που συμμετέχει ο συγκεκριμένος χρήστης, σελιδοποιημένο κατά 10
+            include ("connect_to_database.php");
             if (isset($_SESSION['connected_id'])) {
+                if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
+                    $page_no = $_GET['page_no'];
+                } else {
+                    $page_no = 1;
+                }
+
+                $total_records_per_page = 10;
+
+                $offset = ($page_no - 1) * $total_records_per_page;
+                $previous_page = $page_no - 1;
+                $next_page = $page_no + 1;
+                $adjacents = "2";
+
+                $query = "SELECT COUNT(*) As total_records FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id 
+                      WHERE user_in_action.user_id = $current_user_id";
+                $result_count = mysqli_query($link, $query);
+                $total_records = mysqli_fetch_array($result_count);
+                $total_records = $total_records['total_records'];
+                $total_no_of_pages = ceil($total_records / $total_records_per_page);
+                $second_last = $total_no_of_pages - 1; // total pages minus 1
+
                 $query = "SELECT action.id, action.title, action.date, action.location, action.description, action.link 
                       FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id 
-                      WHERE user_in_action.user_id = $current_user_id";
+                      WHERE user_in_action.user_id = $current_user_id LIMIT $offset, $total_records_per_page";
                 $results = mysqli_query($link, $query);
                 while ($row = mysqli_fetch_array($results)) {
                     echo '<tr>';
@@ -141,8 +164,16 @@ session_start();
                 }
             }
             ?>
+
         </table>
-        <div class="table_page">Σελίδα 1/1</div>
+
+        <?php //εμφανίζουμε τη λίστα των σελίδων
+        include("show_number_of_pages.php");
+        ?>
+
+        <div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+            <strong>Σελίδα <?php echo $page_no."/".$total_no_of_pages; ?></strong>
+        </div>
     </div>
 </div>
 

@@ -134,169 +134,12 @@ function print_size_of_table($link, $table){
 ?>
 
 <div class="admin-page">
-    <h3>Χρήστες</h3>
-    <div class="users-table">
-        <p>ΟΛΟΙ ΟΙ ΧΡΗΣΤΕΣ
-            <?php //εμφανίζουμε το πλήθος των χρηστών
-            print_size_of_table($link,'user');
-            ?>
-            <button class="table_button" onclick="openForm('FORM_FOR_USER')">προσθήκη χρήστη</button>
-            <button class="table_button">Ταξινόμηση</button>
-        </p>
 
-        <table>
-            <tr>
-                <th>id</th>
-                <th>Username</th>
-                <th>Κωδικός</th>
-                <th>Όνομα</th>
-                <th>Επίθετο</th>
-                <th>Email</th>
-                <th>Ηλικία</th>
-                <th>Περιοχή</th>
-                <th>Εικόνα</th>
-                <th class="keno"></th>
-            </tr>
-
-            <?php // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
-            include ("connect_to_database.php");
-            if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                $page_no = $_GET['page_no'];
-            } else {
-                $page_no = 1;
-            }
-
-            $total_records_per_page = 10;
-
-            $offset = ($page_no-1) * $total_records_per_page;
-            $previous_page = $page_no - 1;
-            $next_page = $page_no + 1;
-            $adjacents = "2";
-
-            //6
-            $result_count = mysqli_query($link, "SELECT COUNT(*) As total_records FROM `user`");
-            $total_records = mysqli_fetch_array($result_count);
-            $total_records = $total_records['total_records'];
-            $total_no_of_pages = ceil($total_records / $total_records_per_page);
-            $second_last = $total_no_of_pages - 1; // total pages minus 1
-
-            //7
-            $result = mysqli_query($link, "SELECT * FROM `user` LIMIT $offset, $total_records_per_page");
-            while($row = mysqli_fetch_array($result)){
-                echo "<tr>
-                     <td>".$row['id']."</td>
-                     <td>".$row['username']."</td>
-                     <td>".$row['password']."</td>
-                     <td>".$row['first_name']."</td>
-                     <td>".$row['last_name']."</td>
-                     <td>".$row['email']."</td>
-                     <td>".$row['age']."</td>
-                     <td>".$row['region']."</td>
-                     <td>".$row['image']."</td>";
-                echo "<td class='keno'>
-                    <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
-                     </tr>";
-            }
-            //mysqli_close($link);
-            ?>
-
-            <!--9-->
-
-            <?php //εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους
-            /*
-            $query = "SELECT * FROM user";
-            $results = mysqli_query($link, $query);
-            while  ($row = mysqli_fetch_array($results)) {
-                echo '<tr>';
-                echo '<td>' . $row['id'] . '</td>';
-                echo '<td>' . $row['username'] . '</td>';
-                echo '<td>' . $row['first_name'] . '</td>';
-                echo '<td>' . $row['last_name'] . '</td>';
-                echo '<td>' . $row['email'] . '</td>';
-                echo '<td>' . $row['age'] . '</td>';
-                echo '<td>' . $row['region'] . '</td>';
-                echo '<td>' . $row['image'] . '</td>';
-                echo "<td class='keno'>
-                    <img class='pencil' src='images/6.Admin/edit.png' alt='edit' onclick='javascript:openEditForm(".$row['id'].")'>
-                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
-                </td>";
-                echo '</tr>';
-
-            }
-            @mysqli_free_result($results);
-*/
-            ?>
-        </table>
-
-        <?php //εμφανίζουμε τη λίστα των σελίδων
-        echo "<div class='my_table'>";
-        echo "<ul>";
-        if ($total_no_of_pages <= 10){
-            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                if ($counter == $page_no) {
-                    echo "<li class='active'><a>$counter</a></li>";
-                }else{
-                    echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                }
-            }
-        }elseif ($total_no_of_pages > 10){
-            if($page_no <= 4) {
-                for ($counter = 1; $counter < 8; $counter++){
-                    if ($counter == $page_no) {
-                        echo "<li class='active'><a>$counter</a></li>";
-                    }else{
-                        echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                    }
-                }
-                echo "<li><a>...</a></li>";
-                echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-            } elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {
-                echo "<li><a href='?page_no=1'>1</a></li>";
-                echo "<li><a href='?page_no=2'>2</a></li>";
-                echo "<li><a>...</a></li>";
-                for (
-                    $counter = $page_no - $adjacents;
-                    $counter <= $page_no + $adjacents;
-                    $counter++
-                ) {
-                    if ($counter == $page_no) {
-                        echo "<li class='active'><a>$counter</a></li>";
-                    }else{
-                        echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                    }
-                }
-                echo "<li><a>...</a></li>";
-                echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-            } else {
-                echo "<li><a href='?page_no=1'>1</a></li>";
-                echo "<li><a href='?page_no=2'>2</a></li>";
-                echo "<li><a>...</a></li>";
-                for (
-                    $counter = $total_no_of_pages - 6;
-                    $counter <= $total_no_of_pages;
-                    $counter++
-                ) {
-                    if ($counter == $page_no) {
-                        echo "<li class='active'><a>$counter</a></li>";
-                    }else{
-                        echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                    }
-                }
-            }
-        }
-        echo "</ul>";
-        echo "</div>";
-        ?>
-
-
-        <!--8-->
-        <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-            <strong>Page <?php echo $page_no."/".$total_no_of_pages; ?></strong>
-        </div>
-        <div class="table_page">Σελίδα 1/1</div>
+    <div class="navbar" id="navbar_admin">
+        <a href="Admin_user.php">Χρήστες</a>
+        <a href="Admin_action.php">Δράσεις</a>
+        <a href="Admin_user_in_action.php">Χρήστες σε Δράσεις</a>
+        <a href="Admin_contact.php">Επικοινωνία</a>
     </div>
 
     <!-- pop up form για προσθήκη νέου χρήστη από τον διαχειριστή -->
@@ -449,6 +292,7 @@ function print_size_of_table($link, $table){
             <button class="table_button" onclick="openForm('FORM_FOR_ACTION')">προσθήκη δράσης</button>
             <button class="table_button">Ταξινόμηση</button>
         </p>
+
         <table>
             <tr>
                 <th>id</th>
@@ -460,35 +304,63 @@ function print_size_of_table($link, $table){
                 <th>Σύνδεσμος</th>
                 <th class="keno"></th>
             </tr>
-            <?php //εμφανίζουμε τον πίνακα όλων των δράσεων
-            $query = "SELECT id, title, date, location, description, image, link 
-                      FROM action";
-            $results = mysqli_query($link, $query);
-            while ($row = mysqli_fetch_array($results)) {
-                echo '<tr>';
-                echo '<td>' . $row['id'] . '</td>';
-                echo '<td>' . $row['title'] . '</td>';
-                echo '<td>' . $row['date'] . '</td>';
-                echo '<td>' . $row['location'] . '</td>';
-                echo '<td>' . $row['description'] . '</td>';
-                echo '<td>' . $row['image'] . '</td>';
-                echo '<td>' . $row['link'] . '</td>';
-                echo "<td class='keno'>
-                    <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
-                </td>";
-                echo '</tr>';
+
+        <?php // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
+        include ("connect_to_database.php");
+            if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+                $page_no = $_GET['page_no'];
+            } else {
+                $page_no = 1;
             }
 
-            @mysqli_free_result($results);
-            ?>
+            $total_records_per_page = 10;
+
+            $offset = ($page_no-1) * $total_records_per_page;
+            $previous_page = $page_no - 1;
+            $next_page = $page_no + 1;
+            $adjacents = "2";
+
+            $result_count = mysqli_query($link, "SELECT COUNT(*) As total_records FROM `action`");
+            $total_records = mysqli_fetch_array($result_count);
+            $total_records = $total_records['total_records'];
+            $total_no_of_pages = ceil($total_records / $total_records_per_page);
+            $second_last = $total_no_of_pages - 1; // total pages minus 1
+
+        $query = "SELECT * FROM `action` LIMIT $offset, $total_records_per_page";
+        $results = mysqli_query($link, $query);
+        while ($row = mysqli_fetch_array($results)) {
+            echo '<tr>';
+            echo '<td>' . $row['id'] . '</td>';
+            echo '<td>' . $row['title'] . '</td>';
+            echo '<td>' . $row['date'] . '</td>';
+            echo '<td>' . $row['location'] . '</td>';
+            echo '<td>' . $row['description'] . '</td>';
+            echo '<td>' . $row['image'] . '</td>';
+            echo '<td>' . $row['link'] . '</td>';
+            echo "<td class='keno'>
+                   <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                   <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+               </td>";
+            echo '</tr>';
+        }
+        //mysqli_close($link);
+        ?>
+
         </table>
-        <div class="table_page">Σελίδα 1/1</div>
+
+        <?php //εμφανίζουμε τη λίστα των σελίδων
+        include("show_number_of_pages.php");
+        ?>
+
+        <div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+            <strong>Σελίδα <?php echo $page_no."/".$total_no_of_pages; ?></strong>
+        </div>
     </div>
+
 
     <!-- pop up form για προσθήκη νέας δράσης από τον διαχειριστή -->
     <div class="form-popup" id="FORM_FOR_ACTION">
-        <form action="Admin.php" method="post" enctype="multipart/form-data" class="form-container">
+        <form action="Admin_action.php" method="post" enctype="multipart/form-data" class="form-container">
             <h3>Δημιουργία δράσης</h3>
             <span>* Υποχρεωτικά πεδία</span><br>
             <p>
@@ -529,91 +401,10 @@ function print_size_of_table($link, $table){
         <strong>Επιτυχία!</strong> Η δράση καταχωρήθηκε
     </div>
 
-    <h3>Χρήστης στη δράση</h3>
-    <div class="user-actions-table">
-        <p>ΟΛΕΣ ΟΙ ΔΗΛΩΣΕΙΣ ΣΥΜΜΕΤΟΧΗΣ
-            <?php //εμφανίζουμε το πλήθος των συνολικών συμμετοχών στις δράσεις
-            print_size_of_table($link,'user_in_action');;
-            ?>
-            <button class="table_button">Ταξινόμηση</button>
-        </p>
-        <table>
-            <tr>
-                <th>id χρήστη</th>
-                <th>id δράσης</th>
-                <th>Username συμμετέχοντα</th>
-                <th>Τίτλος δράσης</th>
-                <th>Ημερομηνία δήλωσης συμμετοχής</th>
-                <th class="keno"></th>
-            </tr>
-            <?php //εμφανίζουμε τους συμμετέχοντες στις δράσεις
-            $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
-                          FROM user, user_in_action, action
-                          WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id";
-            $results = mysqli_query($link, $query);
-            while ($row = mysqli_fetch_array($results)) {
-                echo '<tr>';
-                echo '<td>' . $row['user_id'] . '</td>';
-                echo '<td>' . $row['action_id'] . '</td>';
-                echo '<td>' . $row['username'] . '</td>';
-                echo '<td>' . $row['title'] . '</td>';
-                echo '<td>' . $row['date_joined'] . '</td>';
-                echo "<td class='keno'>
-                        <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                        <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
-                    </td>";
-                echo '</tr>';
-            }
-
-            @mysqli_free_result($results);
-            ?>
-        </table>
-        <div class="table_page">Σελίδα 1/1</div>
-    </div>
-
-    <h3>Επικοινωνία χρηστών</h3>
-    <div class="contact-table">
-        <p>ΟΛΕΣ ΟΙ ΦΟΡΜΕΣ
-            <?php //εμφανίζουμε το πλήθος των σχόλιων των χρηστών
-            print_size_of_table($link,'contact');
-            ?>
-            <button class="table_button">Ταξινόμηση</button>
-        </p>
-        <table>
-            <tr>
-                <th>id</th>
-                <th>Όνομα</th>
-                <th>Επίθετο</th>
-                <th>Email</th>
-                <th>Ημερομηνία</th>
-                <th class="keno"></th>
-            </tr>
-            <?php //εμφανίζουμε τον πίνακα των σχόλιων των χρηστών
-            $query = "SELECT id, first_name, last_name, email, comment, date_of_comment 
-                          FROM contact";
-            $results = mysqli_query($link, $query);
-            while ($row = mysqli_fetch_array($results)) {
-                echo '<tr>';
-                echo '<td>' . $row['id'] . '</td>';
-                echo '<td>' . $row['first_name'] . '</td>';
-                echo '<td>' . $row['last_name'] . '</td>';
-                echo '<td>' . $row['email'] . '</td>';
-                echo '<td>' . $row['date_of_comment'] . '</td>';
-                echo "<td class='keno'>
-                        <a href='javascript:void(0);' >Read</a>
-                    </td>";
-                echo '</tr>';
-            }
-            @mysqli_free_result($results);
-            @mysqli_close($link);
-            ?>
-        </table>
-        <div class="table_page">Σελίδα 1/1</div>
-    </div>
 
     <!-- pop up form για προσθήκη νέας δράσης από τον διαχειριστή -->
     <div class="form-popup" id="FORM_FOR_CONTACT">
-        <form action="Admin.php" class="form-container">
+        <form action="Admin_action.php" class="form-container">
             <h3>Προβολή φόρμας</h3>
             <?php
             echo "Όνομα:";

@@ -26,7 +26,7 @@
                     <button class='dropbtn'>" . $_SESSION['connected_username'] . "</button>
                     <div class='dropdown-content'>";
             if ($_SESSION['connected_id'] == 1){
-                echo    "<a href='Admin.php' target='_self'> ". 'Σελίδα Διαχείρισης' . "</a>";
+                echo    "<a href='Admin_user.php' target='_self'> ". 'Σελίδα Διαχείρισης' . "</a>";
             }
             if ($_SESSION['connected_id'] != 1){
                 echo        "<a href='Profile.php' target='_self'> ". 'Το προφίλ μου' . "</a>";
