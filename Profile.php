@@ -26,6 +26,72 @@ session_start();
             $_SESSION['user_leaves_action'] = "user_leaves_action_";
         }
     }
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        include("connect_to_database.php");
+        if ($_POST['submit'] == 'Ενημέρωση των δεδομένων του χρήστη') {
+            if (isset($_POST['username'])) {
+                $username = $_POST['username'];
+            } else {
+                $username = null;
+            }
+            if (isset($_POST['email'])) {
+                $email = $_POST['email'];
+            } else {
+                $email = null;
+            }
+            if (isset($_POST['firstname'])) {
+                $firstname = $_POST['firstname'];
+            } else {
+                $firstname = null;
+            }
+            if (isset($_POST['lastname'])) {
+                $lastname = $_POST['lastname'];
+            } else {
+                $lastname = null;
+            }
+            if (isset($_POST['age'])) {
+                $age = $_POST['age'];
+            } else {
+                $age = null;
+            }
+            if (isset($_POST['region'])) {
+                $region = $_POST['region'];
+            } else {
+                $region = null;
+            }
+            if (isset($_POST['pass'])) {
+                $password = $_POST['pass'];
+            } else {
+                $password = null;
+            }
+            if (isset($_FILES['image']['name'])) {
+                $image = $_FILES['image']['name'];
+            } else {
+                $image = null;
+            }
+
+            $id = $_SESSION['connected_id'];
+
+            $query1 = "SELECT id FROM user WHERE username='$username' AND id!=$id";
+            $query2 = "SELECT id FROM user WHERE email='$email' AND id!=$id";
+            $results1 = mysqli_query($link, $query1);
+            $results2 = mysqli_query($link, $query2);
+
+            if (mysqli_num_rows($results1) > 0) {
+                $_SESSION['submit'] = "EDIT NOT AVAILABLE USERNAME";
+            } else if (mysqli_num_rows($results2) > 0) {
+                $_SESSION['submit'] = "EDIT NOT AVAILABLE EMAIL";
+            } else {
+                $query = "UPDATE user SET username='$username', password='$password', first_name='$firstname',
+                  last_name='$lastname', email='$email', age='$age', region='$region', image='$image' WHERE id=$id;";
+                if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                    $_SESSION['submit'] = "EDIT USER SAVED";
+                }
+            }
+        }
+    }
+
     ?>
 </head>
 <body>
@@ -58,7 +124,14 @@ session_start();
     </div>
 
     <div class="mydata">
-        <h3>Στοιχεία Λογαριασμού&emsp;<a href="Profile.php"><img src="images/6.Admin/edit.png" alt="edit"></a></h3>
+        <h3>Στοιχεία Λογαριασμού&emsp;
+        <?php
+        if($_SESSION['connected_id']!=1){
+            echo '<a href="?edit_my_profile='.$_SESSION['connected_id'].'"><img src="images/6.Admin/edit.png" alt="edit"></a>';
+        }
+        echo '</h3>';
+        ?>
+
         <?php
         $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include("connect_to_database.php");
@@ -175,6 +248,114 @@ if (isset($_SESSION['user_leaves_action'])) {
 }
 ?>
 <!--τέλος εμφάνισης μηνύματος-->
+
+<!-- pop up form για την τροποποίηση των στοιχείων ενός χρήστη -->
+<div class="form-popup" id="FORM_FOR_EDIT_USER" role="dialog">
+    <form action="Profile.php" method="post" class="form-container">
+        <h3>Τροποποίηση των δεδομένων του χρήστη</h3>
+        <?php
+        if (isset($_GET['edit_my_profile'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
+            include("connect_to_database.php");
+            $id = $_GET['edit_my_profile'];
+            $query = "SELECT * FROM user WHERE id=$id;";
+            $results = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($results);
+            echo '<p>
+                <label for="username"><b>Username</b><br>
+                    <input type="text" placeholder="Γράψε username" name="username" value="'.$row['username'].'" required>
+                </label>
+                </p>
+                <p>
+                    <label for="email"><b>Email</b><br>
+                        <input type="email" placeholder="Γράψε Email" name="email" value="'.$row['email'].'" required>
+                    </label>
+                </p>
+                <p>
+                    <label for="first_name"><b>Όνομα</b><br>
+                        <input type="text" placeholder="Γράψε Όνομα" name="firstname" value="'.$row['first_name'].'" required>
+                    </label>
+                </p>
+                <p>
+                    <label for="last_name"><b>Επίθετο</b><br>
+                        <input type="text" placeholder="Γράψε Επίθετο" name="lastname" value="'.$row['last_name'].'" required>
+                    </label>
+                </p>
+                <p>
+                    <label for="age"><b>Ηλικία</b><br>
+                        <input type="number" placeholder="Γράψε Ηλικία" value="'.$row['age'].'" name="age">
+                    </label>
+                </p>
+                <p>
+                    <label for="region"><b>Περιοχή</b><br>
+                        <input type="text" placeholder="Γράψε Περιοχή" name="region" value="'.$row['region'].'">
+                    </label>
+                </p>
+                <p>
+                    <label for="password"><b>Κωδικός</b><br>
+                        <input type="text" placeholder="Γράψε κωδικό" name="pass" value="'.$row['password'].'" required>
+                    </label>
+                </p>
+                <p class="input_image">
+                    <label for="image"><b>Εικόνα</b></label><br>
+                    <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" value="'.$row['image'].'">
+                </p>';
+        }
+        ?>
+        <input name="submit" type="submit" value="Ενημέρωση των δεδομένων του χρήστη" class="btn"/>
+        <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_EDIT_USER')">Ακύρωση</button>
+    </form>
+</div>
+
+<script>
+    function openForm(id) {
+        document.getElementById(id).style.display = "block";
+        window.onkeydown = function(event) {
+            if ( event.keyCode === 27 ) {
+                closeForm(id);
+            }
+        };
+    }
+    function closeForm(id) {
+        document.getElementById(id).style.display = "none";
+    }
+</script>
+
+<?php
+if (isset($_GET['edit_my_profile'])) { // ο χρήστης έχει πατήσει το μολύβι για τροποιήσει τα δεδομένα του και η μεταβλητή $_GET['edit_my_profile'] έχει το id του
+    echo '<script type="text/javascript">'."openForm('FORM_FOR_EDIT_USER');".'</script>';
+}
+?>
+
+<div class="alert red" id="EDIT_NOT_AVAILABLE_USERNAME">
+    <span class="closeBtn" onclick="closeAlertMessage('EDIT_NOT_AVAILABLE_USERNAME')">&times;</span>
+    <strong>Αποτυχία τροποίησης του χρήστη!</strong> Το συγκεκριμένο username χρησιμοποιείται
+</div>
+
+<div class="alert red" id="EDIT_NOT_AVAILABLE_EMAIL">
+    <span class="closeBtn" onclick="closeAlertMessage('EDIT_NOT_AVAILABLE_EMAIL')">&times;</span>
+    <strong>Αποτυχία τροποίησης του χρήστη!</strong> Το συγκεκριμένο email χρησιμοποιείται
+</div>
+
+<div class="alert" id="EDIT_USER_SAVED">
+    <span class="closeBtn" onclick="closeAlertMessage('EDIT_USER_SAVED')">&times;</span>
+    <strong>Επιτυχία!</strong> Τα δεδομένα του χρήστη τροποποιήθηκαν
+</div>
+
+<?php
+if (isset($_SESSION['submit'])) {
+    if ($_SESSION['submit'] == "EDIT NOT AVAILABLE USERNAME") {
+        echo '<script type="text/javascript">openAlertMessage("EDIT_NOT_AVAILABLE_USERNAME");</script>';
+        $_SESSION['submit'] = null;
+    } else if ($_SESSION['submit'] == "EDIT NOT AVAILABLE EMAIL") {
+        echo '<script type="text/javascript">openAlertMessage("EDIT_NOT_AVAILABLE_EMAIL");</script>';
+        $_SESSION['submit'] = null;
+    } else if ($_SESSION['submit'] == "EDIT USER SAVED") {
+        echo '<script type="text/javascript">openAlertMessage("EDIT_USER_SAVED");</script>';
+        $_SESSION['submit'] = null;
+    }
+}
+?>
+
 
 <!-----------------Go to top button----------------->
 <?php include("go_top_button.html"); ?>

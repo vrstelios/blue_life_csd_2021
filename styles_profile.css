@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .page_user{
     padding: 1% 10% 1% 10%;
     background-color: white;
@@ -100,3 +104,105 @@ tr:nth-child(even) {
         top: 87%;
     }
 }
+
+/* Για την popup form */
+.form-popup {
+    overflow:auto;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    max-height: 96%;
+    border: 3px solid #f1f1f1;
+    z-index: 99999999;
+}
+
+.form-container {
+    width: 100%;
+    padding: 6px;
+    background-color: white;
+}
+
+.form-container p {
+    float: left;
+    width: 33%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.form-container .input_image {
+    width: 66%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+textarea {
+    height:100px;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    resize: vertical;
+}
+
+.form-container input[type=text], input[type=password], input[type=date], input[type=url],
+input[type=email], input[type=file], input[type=number], textarea[name=subject] {
+    width: 100%;
+    padding: 10px;
+    margin: 2px 0 6px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+.form-container input[type=text]:focus, input[type=password]:focus, input[type=date]:focus, input[type=url]:focus,
+input[type=email]:focus, input[type=file]:focus, input[type=number]:focus, textarea[name=subject]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.form-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.8;
+}
+
+.form-container .btn_cancel {
+    background-color: red;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 2px;
+    right: 2px;
+    opacity: 0.8;
+    margin: 4px;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
+
+span {
+    color: red;
+}
+
+@media screen and (max-width: 800px) {
+    .form-popup {
+        width: 90%;
+    }
+    .form-container p {
+        width: 50%;
+    }
+    .form-container .input_image {
+        width: 100%;
+    }
+}
+/*--- Για την popup form ---*/

@@ -773,7 +773,7 @@ function print_size_of_table($link, $table){
                 <b>Επίθετο:</b> ".$row['last_name']."<br>
                 <b>Email:</b> ".$row['email']."<br>
                 <b>Ημερομηνία:</b> ".$row['date_of_comment']."<br>
-                <b>Σχόλια:</b><br>".$row['comment']."</div>";
+                <b>Σχόλιο:</b><br>".$row['comment']."</div>";
             }
             ?>
             <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_CONTACT')">κλείσιμο</button>
