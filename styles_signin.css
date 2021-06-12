@@ -175,13 +175,16 @@
 }
 
 .modal-close-btn {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 16px;
+    line-height: 18px;
+    cursor: pointer;
+    transition: 0.3s;
     background-color: #1687a7;
-
 }
+
 .overlay {
     pointer-events: none;
     opacity: 0;
