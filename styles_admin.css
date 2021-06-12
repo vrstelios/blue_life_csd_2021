@@ -159,10 +159,6 @@ input[type=email]:focus, input[type=file]:focus, input[type=number]:focus, texta
     opacity: 1;
 }
 
-.pencil:hover {
-    cursor: pointer;
-}
-
 span {
     color: red;
 }
