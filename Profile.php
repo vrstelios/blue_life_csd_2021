@@ -9,6 +9,23 @@ session_start();
     <link rel="icon" href="images/Main/BlueLife-icon.ico">
     <link rel="stylesheet" href="styles_main.css">
     <link rel="stylesheet" href="styles_profile.css">
+    <?php
+    if (isset($_GET['leave_action'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
+        user_leaves_action($_GET['leave_action']);
+    }
+
+    function user_leaves_action($leave_action_id)
+    {
+        include("connect_to_database.php");
+        if (!isset($_SESSION['connected_id'])){ // αν ο χρήστης δεν είναι συνδεδεμένος πρέπει πρώτα να συνδεθεί
+            echo '<script  type="text/javascript">openAlertMessage_connect_first();</script>';
+        } else {
+            $id = $_SESSION['connected_id'];
+            $query = "DELETE FROM user_in_action WHERE user_id='$id' AND action_id=$leave_action_id";
+            mysqli_query($link, $query);
+        }
+    }
+    ?>
 </head>
 <body>
 <header id="header">
@@ -89,11 +106,12 @@ session_start();
     </h3>
     <div class="actions-table">
         <p>
-            <button class="table_button">Συμμετοχή σε δράση</button>
+            <a href="Actions.php"> <button class="table_button">Συμμετοχή σε δράση</button></a>
             <button class="table_button">Ταξινόμηση</button>
         </p>
         <table>
             <tr>
+                <th>ID</th>
                 <th>Τίτλος</th>
                 <th>Ημερομηνία</th>
                 <th>Τοποθεσία</th>
@@ -103,30 +121,28 @@ session_start();
             </tr>
             <?php //εμφανίζουμε τον πίνακα των δράσεων που συμμετέχει ο συγκεκριμένος χρήστης
             if (isset($_SESSION['connected_id'])) {
-                $query = "SELECT action.title, action.date, action.location, action.description, action.link 
+                $query = "SELECT action.id, action.title, action.date, action.location, action.description, action.link 
                       FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id 
                       WHERE user_in_action.user_id = $current_user_id";
                 $results = mysqli_query($link, $query);
                 while ($row = mysqli_fetch_array($results)) {
                     echo '<tr>';
+                    echo '<td>' . $row['id'] . '</td>';
                     echo '<td>' . $row['title'] . '</td>';
                     echo '<td>' . $row['date'] . '</td>';
                     echo '<td>' . $row['location'] . '</td>';
                     echo '<td>' . $row['description'] . '</td>';
                     echo '<td>' . $row['link'] . '</td>';
                     echo "<td class='keno'>
-                    <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
-                </td>";
+                    <a href='?leave_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                    </td>";
                     echo '</tr>';
                 }
-                @mysqli_free_result($results);
             }
             ?>
         </table>
         <div class="table_page">Σελίδα 1/1</div>
     </div>
-
 </div>
 
 <!-----------------Go to top button----------------->
