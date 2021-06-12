@@ -88,27 +88,22 @@ session_start();
 
             <button onclick="document.location='Register.php'" class="btn_SignUp">Δημιουργήστε τον δικό σας λογαριασμό!</button>
 
-
             <button class="btn_Forgot_your_Pass" id="btn-modal" name="forgot" onclick="showPopUp()">Ξεχάσατε τον κωδικό σας;</button>
-            <div class="overlay" id="overlay"></div>
-            <div class="modal" id="modal">
-                <button class="modal-close-btn" id="close-btn" onclick="ClosePopUp()">&times;</i></button>
-                <p>Ξέχασες τον κωδικό σου; Κανένα πρόβλημα! Στείλε μας μήνυμα στο email <i>bluelifeauth@gmail.com</i> και θα σου στείλουμε εμείς τον καινούριο σου κωδικό.</p>
-               <!-- <label class="email_register"><b>Διεύθυνση email</b></label><br/>
-                <input type="text_email" placeholder="Γράψε email" size="37"><br/><br/>
-                <button class="btn_submit" onclick="ClosePopUp()">Υποβολή</button>-->
+            <div class="overlay" id="overlay">
+                <div class="modal" id="modal">
+                    <button class="modal-close-btn" id="close-btn" onclick="ClosePopUp()">&times;</button>
+                    <p>Ξέχασες τον κωδικό σου; Κανένα πρόβλημα! Στείλε μας μήνυμα στο email <a href="mailto:bluelifeauth@gmail.com"><i>bluelifeauth@gmail.com</i></a> και θα σου στείλουμε εμείς τον καινούριο σου κωδικό.</p>
+                   <!-- <label class="email_register"><b>Διεύθυνση email</b></label><br/>
+                    <input type="text_email" placeholder="Γράψε email" size="37"><br/><br/>
+                    <button class="btn_submit" onclick="ClosePopUp()">Υποβολή</button>-->
+                </div>
             </div>
-
-
-
-
         </form>
     </div>
 </div>
 <script>
     function showPopUp(){
-        var popup_box = document.getElementById('modal');
-        popup_box.style.display="block";
+        document.getElementById('modal').style.display="block";
         document.addEventListener('invalid', (function () {
             return function (e) {
                 e.preventDefault();
@@ -118,9 +113,7 @@ session_start();
     }
 
     function ClosePopUp(){
-        var popup_box = document.getElementById('modal');
-        popup_box.style.display="none";
-        onclick(document.location='Login.php');
+        document.getElementById('modal').style.display="none";
     }
 </script>
 
@@ -130,17 +123,16 @@ session_start();
         document.getElementById('overlay').classList.add('is-visible');
         document.getElementById('modal').classList.add('is-visible');
     });
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('overlay').classList.remove('is-visible');
+        document.getElementById('modal').classList.remove('is-visible');
+    });
+    document.getElementById('overlay').addEventListener('click', function() {
+        document.getElementById('overlay').classList.remove('is-visible');
+        document.getElementById('modal').classList.remove('is-visible');
+    });
+</script>
 
-            document.getElementById('close-btn').addEventListener('click', function() {
-                document.getElementById('overlay').classList.remove('is-visible');
-                document.getElementById('modal').classList.remove('is-visible');
-            });
-            document.getElementById('overlay').addEventListener('click', function() {
-                document.getElementById('overlay').classList.remove('is-visible');
-                document.getElementById('modal').classList.remove('is-visible');
-            });
-        </script>
-    </div>
 
     <div class="alert red" id="FALSE_LOGIN_DATA">
         <span class="closeBtn" onclick="closeAlertMessage('FALSE_LOGIN_DATA')">&times;</span>
