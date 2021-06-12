@@ -53,10 +53,9 @@
         $res1 = mysqli_query($link,$sql1);
         $res2 = mysqli_query($link,$sql2);
         if(mysqli_num_rows($res2)>0){
-            echo '<script language="javascript">';
-            echo 'alert("Υπάρχει ήδη λογαριασμός με αυτό το username!");';
-            echo '</script>';
-            exit;
+             echo '<script language="javascript">';
+             echo 'alert("Υπάρχει ήδη λογαριασμός με αυτό το username!");';
+             echo '</script>';
         }elseif(mysqli_num_rows($res1)>0){
             echo '<script language="javascript">';
             echo 'alert("Υπάρχει ήδη λογαριασμός με αυτό το email!");';
@@ -69,16 +68,14 @@
             exit;
         }else{
             $query = "INSERT INTO user (username,password,first_name,last_name,email)VALUES ('$username','$password','$firstname','$lastname','$email');";
+            if ($results = mysqli_query($link, $query)) {
+                // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                header("Location:Login.php");
+            }
         }
 
-        if ($results = mysqli_query($link, $query)) {
-            // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-            header("Location:Login.php");
-        }
 
     }
-
-
     ?>
 </head>
 <body>

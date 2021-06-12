@@ -10,6 +10,7 @@ session_start();
     <link rel="stylesheet" href="styles_main.css">
     <link rel="stylesheet" href="styles_signin.css">
     <?php
+    $link = 1;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //$link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include_once("connect_to_database.php");
@@ -76,14 +77,10 @@ if (isset($_SESSION['connected_id'])){
         <form action="Login.php" method="post" class="container_page_login">
             <h3 class="login"> Σύνδεση </h3>
 
-            <label class="username">
-                <b> Username </b>
-            </label>
-            <input type="text" placeholder="Εισάγετε username"  name="user" size="35" required>
+            <label class="username"><b> Username </b></label>
+            <input type="text" placeholder="Εισάγετε username" id="users" name="user" size="35" required>
 
-            <label class="pass">
-                <b> Κωδικός </b>
-            </label>
+            <label class="pass"><b> Κωδικός </b></label>
             <input type="password" placeholder="Εισάγετε Κωδικό" name="pass" size="35" required>
 
             <!--button class="btn_login">Είσοδος</button   Παλιό-->
@@ -92,21 +89,41 @@ if (isset($_SESSION['connected_id'])){
 
             <button onclick="document.location='Register.php'" class="btn_SignUp">Δημιουργήστε τον δικό σας λογαριασμό!</button>
 
-            <!--
-            <button class="btn_Forgot_your_Pass" id="btn-modal">Ξεχάσατε τον κωδικό σας;</button>
+
+            <button class="btn_Forgot_your_Pass" id="btn-modal" name="forgot" onclick="showPopUp()">Ξεχάσατε τον κωδικό σας;</button>
             <div class="overlay" id="overlay"></div>
             <div class="modal" id="modal">
-                <button class="modal-close-btn" id="close-btn"><i class="fa fa-times" ></i></button>
-                <p>Ξέχασες τον κωδικό σου; Κανένα πρόβλημα! Γράψε το email σου και θα λάβεις τον καινούργιο κωδικό σου εκεί.</p>
-                <label class="email_register"><b>Διεύθυνση email</b></label><br/>
-                <input type="text_email" placeholder="Γράψε email" size="37" required><br/><br/>
-                <button class="btn_submit">Υποβολή</button>
+                <button class="modal-close-btn" id="close-btn" onclick="ClosePopUp()">&times;</i></button>
+                <p>Ξέχασες τον κωδικό σου; Κανένα πρόβλημα!Στειλε μας μυνημα στο email μας( bluelifeauth@gmail.com) και θα σου στειλουμε εμεις τον καινουριο κωδικο σου.</p>
+               <!-- <label class="email_register"><b>Διεύθυνση email</b></label><br/>
+                <input type="text_email" placeholder="Γράψε email" size="37"><br/><br/>
+                <button class="btn_submit" onclick="ClosePopUp()">Υποβολή</button>-->
             </div>
-            -->
+
+
+
 
         </form>
     </div>
 </div>
+<script>
+    function showPopUp(){
+        var popup_box = document.getElementById('modal');
+        popup_box.style.display="block";
+        /*document.addEventListener('invalid', (function () {
+            return function (e) {
+                e.preventDefault();
+                document.getElementById("forgot").focus();
+            };
+        })(), true);*/
+    }
+
+    function ClosePopUp(){
+        var popup_box = document.getElementById('modal');
+        popup_box.style.display="none";
+        //onclick(document.location='Login.php');
+    }
+</script>
 
 <!-----------------dialog-------------->
 <script>
