@@ -102,23 +102,24 @@ session_start();
     <div class="login-img">
         <form action="Register.php" method="post" class="container_page_register">
             <h3 class="register">Δημιούργησε τον λογαριασμό σου</h3>
+            <h1 class="necessary">* Υποχρεωτικά πεδία </h1>
 
-            <label class="user"><b>Username</b></label>
+            <label class="user"><b>Username <span class="necessary_fields">*</span> </b></label>
             <input  type="text" name="username" placeholder="Γράψε username" size="37" required>
 
-            <label class="email_register"><b>Διεύθυνση email</b></label>
+            <label class="email_register"><b>Διεύθυνση email <span class="necessary_fields">*</span> </b></label>
             <input type="email" name="email" placeholder="Γράψε email" size="37" required>
 
-            <label class="first_name"><b>Όνομα</b></label>
+            <label class="first_name"><b>Όνομα <span class="necessary_fields">*</span> </b></label>
             <input  type="text" name="first_name" placeholder="Γράψε Όνομα" size="37" required>
 
-            <label class="last_name"><b>Επίθετο</b></label>
+            <label class="last_name"><b>Επίθετο <span class="necessary_fields">*</span> </b></label>
             <input  type="text" name="last_name" placeholder="Γράψε Επίθετο" size="37" required>
 
-            <label class="pass1"><b>Κωδικός</b></label>
+            <label class="pass1"><b>Κωδικός <span class="necessary_fields">*</span> </b></label>
             <input type="password" class="input_pass1" id="password" name="password" placeholder="Γράψε κωδικό" size="37" onkeyup='check()' required>
 
-            <label class="pass2"><b>Επαλήθευση κωδικού</b></label>
+            <label class="pass2"><b>Επαλήθευση κωδικού <span class="necessary_fields">*</span> </b></label>
             <input type="password" id="checkPassword" name="checkPassword" class="input_pass2" placeholder="Γράψε κωδικό" size="37" onkeyup='check()' required>
 
             <p id="alertPassword"></p>
@@ -133,10 +134,10 @@ session_start();
             if(document.getElementById('checkPassword').value !== "") {
                 if (document.getElementById('password').value === document.getElementById('checkPassword').value) {
                     document.getElementById('alertPassword').style.color = '#3e8e41';
-                    document.getElementById('alertPassword').innerHTML = '<span class="match">Matched password!</span>';
+                    document.getElementById('alertPassword').innerHTML = '<span class="match">Αποδεκτός κωδικός!</span>';
                 } else {
                     document.getElementById('alertPassword').style.color = '#f10516';
-                    document.getElementById('alertPassword').innerHTML = '<span class="match">Not matching passwords</span>';
+                    document.getElementById('alertPassword').innerHTML = '<span class="match">Ο κωδικός πρόσβασης δεν ταιριάζει!</span>';
                 }
             }else {
                 document.getElementById('alertPassword').innerHTML = '';
@@ -173,16 +174,18 @@ session_start();
     </script>
 
     <?php
-        if ($_SESSION['submit']=="NOT AVAILABLE USERNAME"){
+    if (isset($_SESSION['submit'])) {
+        if ($_SESSION['submit'] == "NOT AVAILABLE USERNAME") {
             echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_USERNAME");</script>';
             $_SESSION['submit'] = null;
-        } else if($_SESSION['submit']=="NOT AVAILABLE EMAIL"){
+        } else if ($_SESSION['submit'] == "NOT AVAILABLE EMAIL") {
             echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_EMAIL");</script>';
             $_SESSION['submit'] = null;
-        } else if($_SESSION['submit']=="DIFFERENT PASSWORDS"){
+        } else if ($_SESSION['submit'] == "DIFFERENT PASSWORDS") {
             echo '<script type="text/javascript">openAlertMessage("DIFFERENT_PASSWORDS");</script>';
             $_SESSION['submit'] = null;
         }
+    }
     ?>
 </div>
 

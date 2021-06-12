@@ -29,12 +29,21 @@
     box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
 }
 .SignUp .register{
-    font-size: 20px;
-    top: 5%;
+    font-size: 22px;
+    top: 2%;
     text-align: center;
     position: absolute;
     color: #1687a7;
 }
+
+.SignUp .necessary {
+    top: 4.5%;
+    text-align: left;
+    color: red;
+    position: absolute;
+    font-size: 13px;
+}
+
 .SignUp .user{
     position: absolute;
     font-size: 15px;
@@ -163,5 +172,9 @@
     font-weight: 400;
     font-size: 16px;
     letter-spacing: 2px;
+}
+
+.necessary_fields {
+    color: red;
 }
 /*--- Για την εγγραφή ---*/

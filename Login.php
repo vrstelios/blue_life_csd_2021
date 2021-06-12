@@ -93,7 +93,7 @@ session_start();
             <div class="overlay" id="overlay"></div>
             <div class="modal" id="modal">
                 <button class="modal-close-btn" id="close-btn" onclick="ClosePopUp()">&times;</i></button>
-                <p>Ξέχασες τον κωδικό σου; Κανένα πρόβλημα!Στειλε μας μυνημα στο email μας( bluelifeauth@gmail.com) και θα σου στειλουμε εμεις τον καινουριο κωδικο σου.</p>
+                <p>Ξέχασες τον κωδικό σου; Κανένα πρόβλημα! Στείλε μας μήνυμα στο email <i>bluelifeauth@gmail.com</i> και θα σου στείλουμε εμείς τον καινούριο σου κωδικό.</p>
                <!-- <label class="email_register"><b>Διεύθυνση email</b></label><br/>
                 <input type="text_email" placeholder="Γράψε email" size="37"><br/><br/>
                 <button class="btn_submit" onclick="ClosePopUp()">Υποβολή</button>-->
@@ -109,18 +109,18 @@ session_start();
     function showPopUp(){
         var popup_box = document.getElementById('modal');
         popup_box.style.display="block";
-        /*document.addEventListener('invalid', (function () {
+        document.addEventListener('invalid', (function () {
             return function (e) {
                 e.preventDefault();
                 document.getElementById("forgot").focus();
             };
-        })(), true);*/
+        })(), true);
     }
 
     function ClosePopUp(){
         var popup_box = document.getElementById('modal');
         popup_box.style.display="none";
-        //onclick(document.location='Login.php');
+        onclick(document.location='Login.php');
     }
 </script>
 

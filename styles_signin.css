@@ -135,8 +135,8 @@
 
 .modal {
     position: fixed;
-    pointer-events: none;
-    opacity: 0;
+    /*pointer-events: none;
+    opacity: 0;*/
     font-size: 30px;
     transition: opacity 0.3s;
     top: 40%;
@@ -179,7 +179,7 @@
     right: 10px;
     top: 10px;
     font-size: 20px;
-    background-color: red;
+    background-color: #1687a7;
 
 }
 .overlay {
