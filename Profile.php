@@ -23,6 +23,7 @@ session_start();
             $id = $_SESSION['connected_id'];
             $query = "DELETE FROM user_in_action WHERE user_id='$id' AND action_id=$leave_action_id";
             mysqli_query($link, $query);
+            $_SESSION['user_leaves_action'] = "user_leaves_action_";
         }
     }
     ?>
@@ -144,6 +145,34 @@ session_start();
         <div class="table_page">Σελίδα 1/1</div>
     </div>
 </div>
+
+<div class="alert" id="user_leaves_action">
+    <span class="closeBtn" onclick="closeAlertMessage('user_leaves_action')">&times;</span>
+    <strong>Αποχώρησες από τη δράση!</strong>
+</div>
+
+<script>
+    function openAlertMessage(id) {
+        document.getElementById(id).style.display = "block";
+        setTimeout(hideElement, 7000) //milliseconds
+        function hideElement() {
+            closeAlertMessage(id);
+        }
+    }
+    function closeAlertMessage(id) {
+        document.getElementById(id).style.display = "none";
+    }
+</script>
+
+
+<?php
+if (isset($_SESSION['user_leaves_action'])) {
+    if ($_SESSION['user_leaves_action'] == "user_leaves_action_") {
+        echo '<script  type="text/javascript">openAlertMessage("user_leaves_action");</script>';
+        $_SESSION['user_leaves_action'] = null;
+    }
+}
+?>
 
 <!-----------------Go to top button----------------->
 <?php include("go_top_button.html"); ?>
