@@ -16,6 +16,7 @@ session_start();
 </header>
 
 <!---------------Navigation bar--------------->
+<?php include("navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">

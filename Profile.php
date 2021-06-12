@@ -146,6 +146,7 @@ session_start();
     </div>
 </div>
 
+<!--Εμφάνιση μηνύματος ότι ο χρήστης αποχώρησε από την δράση-->
 <div class="alert" id="user_leaves_action">
     <span class="closeBtn" onclick="closeAlertMessage('user_leaves_action')">&times;</span>
     <strong>Αποχώρησες από τη δράση!</strong>
@@ -173,6 +174,7 @@ if (isset($_SESSION['user_leaves_action'])) {
     }
 }
 ?>
+<!--τέλος εμφάνισης μηνύματος-->
 
 <!-----------------Go to top button----------------->
 <?php include("go_top_button.html"); ?>
