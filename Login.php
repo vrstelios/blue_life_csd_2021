@@ -147,13 +147,15 @@ session_start();
     </script>
 
     <?php
-        if ($_SESSION['submit']=="FALSE LOGIN DATA"){
+    if (isset($_SESSION['submit'])) {
+        if ($_SESSION['submit'] == "FALSE LOGIN DATA") {
             echo '<script type="text/javascript">openAlertMessage("FALSE_LOGIN_DATA");</script>';
             $_SESSION['submit'] = null;
-        } else if($_SESSION['submit']=="USER CREATED"){
+        } else if ($_SESSION['submit'] == "USER CREATED") {
             echo '<script type="text/javascript">openAlertMessage("USER_CREATED");</script>';
             $_SESSION['submit'] = null;
         }
+    }
     ?>
 </div>
 

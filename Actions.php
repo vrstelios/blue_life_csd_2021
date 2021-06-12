@@ -43,109 +43,112 @@ session_start();
     </p>
 </article>
 
-<article class="action">
-    <div class="action_row">
-        <div class="column image">
-            <img src="images/3.Actions/Δράση2.jpg" alt="Άνθωπος κάτω από το νερό!"/>
-        </div>
-        <div class="column text" >
-            <div>
-                <h3><b>Πρόγραμμα Παράκτιων και Υποβρύχιων Καθαρισμών</b></h3>
-                <div class="calendar">
-                    <img class="smallImage" src="images/3.Actions/calendar.png" alt="Calendar"/>
-                    Ενεργό (2021)
-                </div> <br>
-                <p> Η θαλάσσια ρύπανση χαρακτηρίζεται ως μια από τις μεγάλες κρίσεις της εποχής μας, με καταστροφικές συνέπειες
-                    για την υγεία των ανθρώπων και των οικοσυστημάτων, για τις τοπικές οικονομίες, για την αισθητική του περιβάλλοντος
-                    και για την ποιότητα ζωής. Η πρόληψη, η ενημέρωση και οι παρεμβάσεις στο παράκτιο και θαλάσσιο περιβάλλον χρειάζονται
-                    τη συμμετοχή όλων. Κατά συνέπεια, η συνεργασία ανάμεσα σε φορείς με κοινές επιδιώξεις είναι αναγκαία για να ενισχυθούν
-                    και να επιταχυνθούν οι σχετικές δράσεις. <br>
-                    Σε αυτό το πλαίσιο, το Κοινωφελές Ίδρυμα Αθανασίου Κ. Λασκαρίδη, εκτός από τους καθαρισμούς που πραγματοποιεί ως μέρος
-                    των δικών του προγραμμάτων, ενισχύει άλλες περιβαλλοντικές οργανώσεις στην προσπάθεια να καθαρίσουν τις ακτές όλης της χώρας.
-                    Όλοι οι καθαρισμοί πραγματοποιούνται χρησιμοποιώντας κοινή μεθοδολογία με χρήση ενιαίου πρωτοκόλλου καταγραφής απορριμμάτων
-                    και υλικά φιλικά προς το περιβάλλον και τις αρχές της αειφορίας. <br>
-                    Μέχρι σήμερα, το Ίδρυμα έχει ενισχύσει πολλές οργανώσεις για την πραγματοποίηση παράκτιων και υποβρύχιων καθαρισμών, όπως την
-                    Ελληνική Εταιρεία Προστασίας της Φύσης, Ελληνική Εταιρεία Περιβάλλοντος και Πολιτισμού, HELMEPA κ.α.
-                </p>
-                <a href=" https://www.aclcf.org/thalassa/programma-paraktion-ke-ipovrichion-katharismon/" target="_blank"> Περισσότερες πληροφορίες</a> (άνοιγμα σε νέα καρτέλα)
-            </div>
-        </div>
-        <div class="column button">
-            <button class="buttonJoinActions" onclick="alert_function()"> Θέλω να συμμετέχω και εγώ </button>
-        </div>
-    </div>
-</article>
+<?php
+$link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+include("connect_to_database.php");
 
-<article class="action">
-    <div class="action_row">
-        <div class="column image">
-            <img src="images/3.Actions/ΔράσηΚαρχαρίες.png" alt="Αγγελοκαρχαρίας"/>
-        </div>
-        <div class="column text" >
-            <div>
-                <h3><b>Ενίσχυση της Προστασίας των Αγγελοκαρχαριών στο Νότιο Αιγαίο</b></h3>
-                <div class="calendar">
-                    <img class="smallImage" src="images/3.Actions/calendar.png" alt="Calendar"/>
-                    Παρασκευή 23 Απριλίου 2021, 21:15-22:30
-                </div><br>
-                <p>
-                    Στόχος του έργου είναι η βελτίωση και η ενίσχυση της διατήρησης των αγγελοκαρχαρίων στην Ελλάδα, και η προώθηση
-                    της διατήρηση των ελασμοβράχιων στη χώρα. Μέσω αυτου του προγράμματος θα πραγματοποιηθεί περαιτέρω έρευνα για την
-                    υποστήριξη δράσεων προστασίας και πολιτικών διατήρησης του είδους.
-                </p>
-                <a href="https://isea.com.gr/angelsharksgr/" target="_blank"> Περισσότερες πληροφορίες</a> (άνοιγμα σε νέα καρτέλα)
-            </div>
-        </div>
-        <div class="column button">
-            <button class="buttonJoinActions" onclick="alert_function()"> Θέλω να συμμετέχω και εγώ </button>
-        </div>
-    </div>
-</article>
+$query = "SELECT id, title, date, location, description, image, link 
+                      FROM action";//" where id>9 or id=1";
+$results = mysqli_query($link, $query);
+while ($row = mysqli_fetch_array($results)) {
+    echo '<article class="action">
+             <div class="action_row">
+                <div class="column image">';
+    echo            '<img src="' . $row['image'] . '" alt="Άνθωπος κάτω από το νερό!"/>';
+    echo        '</div>
+                <div class="column text" >
+                    <div>';
+    echo                '<h3><b>' . $row['title'] . '</b></h3>';
+    echo            "<div class='calendar'>
+                        <img class='smallImage' src='images/3.Actions/calendar.png' alt='Calendar'>";
+    echo                $row['date'] . ', ' . $row['location'];
+    echo            "</div> <br>";
+    echo            "<p>" . $row['description'] . "</p>";
+    echo            "<a href=" . $row['link'] . " target='_blank'> Περισσότερες πληροφορίες</a>";
+    echo            "</div>
+                </div>";
 
-<article class="action">
-    <div class="action_row">
-        <div class="column image">
-            <img src="images/3.Actions/ΔράσηΗμέραΘάλασσας.jpg" alt="Πρόγραμμα δράσεων"/>
-        </div>
-        <div class="column text" >
-            <div>
-                <h3><b>Ημέρες Θάλασσας 2021 στο Δήμο Θερμαϊκού</b></h3>
-                <div class="calendar">
-                    <img class="smallImage" src="images/3.Actions/calendar.png" alt="Calendar"/>
-                    Εθελοντικός Καθαρισμός Παραλίας Αγγελοχωρίου, Κυριακή 25 Απριλίου, 11:00 π.μ. <br>
-                    Σημείο έναρξης: παρκινγκ Ριβιέρα beach bar
-                </div><br>
-                <p>Όπως γνωρίζετε, η 20η Μαΐου έχει καθιερωθεί, με πρωτοβουλία της Ευρωπαϊκής Ένωσης, ως «Ευρωπαϊκή Ημέρα για τη Θάλασσα»,
-                    με στόχο να τονίσει το σημαντικό ρόλο που παίζουν οι ωκεανοί και οι θάλασσες στην καθημερινή ζωή των πολιτών
-                    της Ευρωπαϊκής Ένωσης και στην Ευρωπαϊκή προσπάθεια για τη βιώσιμη ανάπτυξή τους. Φέτος, το Ευρωπαϊκό Συνέδριο
-                    Ναυτιλίας και Αλιείας  λαμβάνει χώρα στην Ολλανδία.<br>
-                    Στο πλαίσιο, λοιπόν, του εορτασμού της Ευρωπαϊκής ημέρας Θάλασσας για το 2021, ο Δήμος Θερμαϊκού και συγκεκριμένα το ΝΠΔΔ
-                    «Δημοτικές, Πολιτιστικές, Περιβαλλοντικές, Αθλητικές, Κοινωνικές Υπηρεσίες Θερμαϊκού (δ.τ. ΔΗ.Π.Π.Α.Κ.Υ.Θ.)», θα διοργανώσει και
-                    φέτος για έκτη φορά, δράσεις οι οποίες έχουν άμεση σχέση με τη θάλασσα. Οι δράσεις μας είναι μέρος του συνεδρίου,
-                    στο «EMD in My Country 2021».
-                    <br>
-                    Ο Δήμαρχος Θερμαϊκού, Γιώργος Τσαμασλής, αναφέρει σχετικά:
-                    «Καθώς η κρίση του COVID-19 δεν έχει τελειώσει, με προσεγμένες δράσεις καλωσορίζουμε για 6η  φορά το θεσμό της Ευρωπαϊκής
-                    Ημέρα Θάλασσας 2021 στο Δήμο μας! Οι εκδηλώσεις μας είναι εννιά (9) στο σύνολο από τις εικοσιπέντε (25) της Ελληνικής Συμμετοχής
-                    και αυτό μας κάνει ιδιαίτερα χαρούμενους που μπορούμε να στηρίξουμε όλοι μαζί  οικολογικές  δράσεις και εκδηλώσεις με θέμα τη Θάλασσα.
-                    Η συμβολή των υπαλλήλων της καθαριότητας και του περιβάλλοντος, των  κατοίκων και των εθελοντικών ομάδων στην καθαριότητα
-                    των ακτών τον τελευταίο καιρό, μας δίνει τη χαρά, ότι η περιβαλλοντική  συνείδηση ωριμάζει.
-                    Η Θάλασσα μας πρέπει να αγαπηθεί όπως της αξίζει.  Είμαστε κοντά της!»
-                </p>
-                <a href="https://www.facebook.com/SeaThermaikos/" target="_blank"> Περισσότερες πληροφορίες</a> (άνοιγμα σε νέα καρτέλα)
-            </div>
-        </div>
-        <div class="column button">
-            <button class="buttonJoinActions" onclick="alert_function()"> Θέλω να συμμετέχω και εγώ </button>
-        </div>
-    </div>
-</article>
+    echo            "<form method='post' class='column button'>";
+    echo                "<input type='submit' name='button_user_joins_action#" . $row['id'] . "' value=' Θέλω να συμμετέχω και εγώ ' class='buttonJoinActions'/>";
+
+    echo            "</form>";
+    echo    "</div>";
+    echo "</article>";
+    $action_id = $row['id'];
+    $action_button_pressed = 'button_user_joins_action#' . $action_id;
+
+    if(array_key_exists($action_button_pressed, $_POST)) { // αν ο χρήστης πατήσει το κουμπί join action με name = $action_button_pressed
+        user_joins_action($action_id);
+    }
+}
+
+?>
+
+<div class="alert" id="joined_action">
+    <span class="closeBtn" onclick="closeAlertMessage('joined_action')">&times;</span>
+    <strong>Έγινε!</strong> Συμμετέχεις στην δράση!
+</div>
+
+<div class="alert red" id="connect_first">
+    <span class="closeBtn" onclick="closeAlertMessage('connect_first')">&times;</span>
+    <strong>Ουπς!</strong> Για να δηλώσεις συμμετοχή σε μια δράση πρέπει πρώτα να συνδεθείς!
+</div>
+
+<div class="alert" id="already_joined">
+    <span class="closeBtn" onclick="closeAlertMessage('already_joined')">&times;</span>
+    <strong>Συμμετέχεις ήδη στην δράση!</strong>
+</div>
 
 <script>
-    function alert_function() {
-        alert("Για να δηλώσεις συμμετοχή σε μια δράση πρέπει να συνδεθείς!");
+    function openAlertMessage(id) {
+        document.getElementById(id).style.display = "block";
+        setTimeout(hideElement, 7000) //milliseconds
+        function hideElement() {
+            closeAlertMessage(id);
+        }
+    }
+    function closeAlertMessage(id) {
+        document.getElementById(id).style.display = "none";
     }
 </script>
+
+<?php
+function user_joins_action($action_id) {
+    $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+    include("connect_to_database.php");
+    if (!isset($_SESSION['connected_id'])){ // αν ο χρήστης δεν είναι συνδεδεμένος πρέπει πρώτα να συνδεθεί
+        $_SESSION['submit_action'] = "connect_first";
+    } else {
+        $id = $_SESSION['connected_id'];
+        $query = "SELECT user_id FROM user_in_action WHERE user_id=$id AND action_id=$action_id";
+        $results = mysqli_query($link, $query);
+        $num_results = mysqli_num_rows($results);
+
+        if ($num_results == 0){ //ο χρήστης δεν συμμετέχει ήδη σε αυτή την δράση
+            $_SESSION['submit_action'] = "joined_action";
+            $query = "INSERT INTO user_in_action (user_id, action_id, date_joined) 
+                  VALUES ('$id', '$action_id', CURRENT_DATE())";
+            mysqli_query($link, $query);
+        } else {
+            $_SESSION['submit_action'] = "already_joined";
+        }
+    }
+}
+
+if (isset($_SESSION['submit_action'])) {
+    if ($_SESSION['submit_action'] == "connect_first") {
+        echo '<script  type="text/javascript">openAlertMessage("connect_first");</script>';
+        $_SESSION['submit_action'] = null;
+    } else if ($_SESSION['submit_action'] == "joined_action") {
+        echo '<script  type="text/javascript">openAlertMessage("joined_action");</script>';
+        $_SESSION['submit_action'] = null;
+    } else if ($_SESSION['submit_action'] == "already_joined") {
+        echo '<script  type="text/javascript">openAlertMessage("already_joined");</script>';
+        $_SESSION['submit_action'] = null;
+    }
+}
+
+?>
 
 <!-----------------Go to top button----------------->
 <?php include("go_top_button.html"); ?>

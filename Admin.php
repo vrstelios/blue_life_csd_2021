@@ -140,8 +140,8 @@ function print_size_of_table($link, $table){
             <?php //εμφανίζουμε το πλήθος των χρηστών
             print_size_of_table($link,'user');
             ?>
-        <button class="table_button" onclick="openForm('FORM_FOR_USER')">προσθήκη χρήστη</button>
-        <button class="table_button">Ταξινόμηση</button>
+            <button class="table_button" onclick="openForm('FORM_FOR_USER')">προσθήκη χρήστη</button>
+            <button class="table_button">Ταξινόμηση</button>
         </p>
 
         <table>
@@ -223,12 +223,6 @@ function print_size_of_table($link, $table){
         <form action="Admin.php" method="post" class="form-container">
             <h3>Τροποποίηση των δεδομένων του χρήστη</h3>
 
-            <?php
-                echo $_SESSION["o"];
-                //$_SESSION["o"]=null;
-                //echo '<script type="text/javascript">["o"]=sessionStorage.user_id;</script>';
-                //echo $_SESSION["o"];
-            ?>
             <p>
                 <label for="username"><b>Username</b>
                     <input type="text" placeholder="Γράψε username" name="username" required>
@@ -275,8 +269,6 @@ function print_size_of_table($link, $table){
 
     <script>
         function openEditForm(user_id) {
-            <?php $_SESSION['o']=user_id ?>
-            //sessionStorage.user_id = user_id;
             document.getElementById('FORM_FOR_EDIT_USER').style.display = "block";
             window.onkeydown = function(event) {
                 if ( event.keyCode === 27 ) {
@@ -425,7 +417,7 @@ function print_size_of_table($link, $table){
     <div class="user-actions-table">
         <p>ΟΛΕΣ ΟΙ ΔΗΛΩΣΕΙΣ ΣΥΜΜΕΤΟΧΗΣ
             <?php //εμφανίζουμε το πλήθος των συνολικών συμμετοχών στις δράσεις
-                print_size_of_table($link,'user_in_action');;
+            print_size_of_table($link,'user_in_action');;
             ?>
             <button class="table_button">Ταξινόμηση</button>
         </p>
@@ -439,25 +431,25 @@ function print_size_of_table($link, $table){
                 <th class="keno"></th>
             </tr>
             <?php //εμφανίζουμε τους συμμετέχοντες στις δράσεις
-                $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
+            $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
                           FROM user, user_in_action, action
                           WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id";
-                $results = mysqli_query($link, $query);
-                while ($row = mysqli_fetch_array($results)) {
-                    echo '<tr>';
-                    echo '<td>' . $row['user_id'] . '</td>';
-                    echo '<td>' . $row['action_id'] . '</td>';
-                    echo '<td>' . $row['username'] . '</td>';
-                    echo '<td>' . $row['title'] . '</td>';
-                    echo '<td>' . $row['date_joined'] . '</td>';
-                    echo "<td class='keno'>
+            $results = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_array($results)) {
+                echo '<tr>';
+                echo '<td>' . $row['user_id'] . '</td>';
+                echo '<td>' . $row['action_id'] . '</td>';
+                echo '<td>' . $row['username'] . '</td>';
+                echo '<td>' . $row['title'] . '</td>';
+                echo '<td>' . $row['date_joined'] . '</td>';
+                echo "<td class='keno'>
                         <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
                         <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                     </td>";
-                    echo '</tr>';
-                }
+                echo '</tr>';
+            }
 
-                @mysqli_free_result($results);
+            @mysqli_free_result($results);
             ?>
         </table>
         <div class="table_page">Σελίδα 1/1</div>
@@ -467,7 +459,7 @@ function print_size_of_table($link, $table){
     <div class="contact-table">
         <p>ΟΛΕΣ ΟΙ ΦΟΡΜΕΣ
             <?php //εμφανίζουμε το πλήθος των σχόλιων των χρηστών
-                print_size_of_table($link,'contact');
+            print_size_of_table($link,'contact');
             ?>
             <button class="table_button">Ταξινόμηση</button>
         </p>
@@ -481,23 +473,23 @@ function print_size_of_table($link, $table){
                 <th class="keno"></th>
             </tr>
             <?php //εμφανίζουμε τον πίνακα των σχόλιων των χρηστών
-                $query = "SELECT id, first_name, last_name, email, comment, date_of_comment 
+            $query = "SELECT id, first_name, last_name, email, comment, date_of_comment 
                           FROM contact";
-                $results = mysqli_query($link, $query);
-                while ($row = mysqli_fetch_array($results)) {
-                    echo '<tr>';
-                    echo '<td>' . $row['id'] . '</td>';
-                    echo '<td>' . $row['first_name'] . '</td>';
-                    echo '<td>' . $row['last_name'] . '</td>';
-                    echo '<td>' . $row['email'] . '</td>';
-                    echo '<td>' . $row['date_of_comment'] . '</td>';
-                    echo "<td class='keno'>
+            $results = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_array($results)) {
+                echo '<tr>';
+                echo '<td>' . $row['id'] . '</td>';
+                echo '<td>' . $row['first_name'] . '</td>';
+                echo '<td>' . $row['last_name'] . '</td>';
+                echo '<td>' . $row['email'] . '</td>';
+                echo '<td>' . $row['date_of_comment'] . '</td>';
+                echo "<td class='keno'>
                         <a href='javascript:void(0);' >Read</a>
                     </td>";
-                    echo '</tr>';
-                }
-                @mysqli_free_result($results);
-                @mysqli_close($link);
+                echo '</tr>';
+            }
+            @mysqli_free_result($results);
+            @mysqli_close($link);
             ?>
         </table>
         <div class="table_page">Σελίδα 1/1</div>
@@ -508,30 +500,32 @@ function print_size_of_table($link, $table){
         <form action="Admin.php" class="form-container">
             <h3>Προβολή φόρμας</h3>
             <?php
-                echo "Όνομα:";
-                echo "Επίθετο:";
-                echo "Email:";
-                echo "Ημερομηνία:";
-                echo "Σχόλια:";
+            echo "Όνομα:";
+            echo "Επίθετο:";
+            echo "Email:";
+            echo "Ημερομηνία:";
+            echo "Σχόλια:";
             ?>
             <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_CONTACT')">κλείσιμο</button>
         </form>
     </div>
 
     <?php
-        if($_SESSION['submit']=="NOT AVAILABLE USERNAME"){
+    if (isset($_SESSION['submit'])) {
+        if ($_SESSION['submit'] == "NOT AVAILABLE USERNAME") {
             echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_USERNAME");</script>';
             $_SESSION['submit'] = null;
-        } else if($_SESSION['submit']=="NOT AVAILABLE EMAIL"){
+        } else if ($_SESSION['submit'] == "NOT AVAILABLE EMAIL") {
             echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_EMAIL");</script>';
             $_SESSION['submit'] = null;
-        } else if($_SESSION['submit']=="USER CREATED"){
+        } else if ($_SESSION['submit'] == "USER CREATED") {
             echo '<script type="text/javascript">openAlertMessage("USER_CREATED");</script>';
             $_SESSION['submit'] = null;
-        } else if($_SESSION['submit']=="ACTION CREATED"){
+        } else if ($_SESSION['submit'] == "ACTION CREATED") {
             echo '<script type="text/javascript">openAlertMessage("ACTION_CREATED");</script>';
             $_SESSION['submit'] = null;
         }
+    }
     ?>
 </div>
 
