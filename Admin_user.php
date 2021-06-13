@@ -119,13 +119,28 @@ session_start();
                 $password = null;
             }
 
-            //if (isset($_FILES['image']['name'])) {
-             //   $image = $_FILES['image']['name'];
-            //} else {
-            //    $image = null;
-            //}
+            $id = $_SESSION['user_id'];
 
+            $query1 = "SELECT id FROM user WHERE username='$username' AND id!=$id";
+            $query2 = "SELECT id FROM user WHERE email='$email' AND id!=$id";
+            $results1 = mysqli_query($link, $query1);
+            $results2 = mysqli_query($link, $query2);
 
+            if (mysqli_num_rows($results1) > 0) {
+                $_SESSION['submit'] = "EDIT NOT AVAILABLE USERNAME";
+            } else if (mysqli_num_rows($results2) > 0) {
+                $_SESSION['submit'] = "EDIT NOT AVAILABLE EMAIL";
+            }
+            else {
+                $query = "UPDATE user SET username='$username', password='$password', first_name='$firstname',
+                  last_name='$lastname', email='$email', age='$age', region='$region' WHERE id=$id;";
+                if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                    $_SESSION['submit'] = "EDIT USER SAVED";
+                }
+            }
+        }
+
+        if ($_POST['submit'] == 'Ενημέρωση της εικόνας του χρήστη') {
             // Αποθήκευση εικόνας στον server στο directory images/Uploads/User_Images/ και ονόματος της εικόνας στην βάση δεδομένων
             $targetDir = "images/Uploads/User_Images/";
             $fileName = basename($_FILES["image"]["name"]);
@@ -143,40 +158,18 @@ session_start();
                 }
             }
 
+            $id = $_SESSION['user_id'];
 
-            $query = "SELECT id FROM user WHERE username='$username'";
-            $results = mysqli_query($link, $query);
-            $row = mysqli_fetch_array($results);
-            $id = $row['id'];
-
-            $query1 = "SELECT id FROM user WHERE username='$username' AND id!=$id";
-            $query2 = "SELECT id FROM user WHERE email='$email' AND id!=$id";
-            $results1 = mysqli_query($link, $query1);
-            $results2 = mysqli_query($link, $query2);
-
-            if (mysqli_num_rows($results1) > 0) {
-                $_SESSION['submit'] = "EDIT NOT AVAILABLE USERNAME";
-            } else if (mysqli_num_rows($results2) > 0) {
-                $_SESSION['submit'] = "EDIT NOT AVAILABLE EMAIL";
+            $query = "UPDATE user SET image='$fileName' WHERE id=$id;";
+            if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                $_SESSION['submit'] = "EDIT USER IMAGE SAVED";
             }
-            else {
-                $query = "UPDATE user SET username='$username', password='$password', first_name='$firstname',
-                  last_name='$lastname', email='$email', age='$age', region='$region', image='$fileName' WHERE id=$id;";
-                if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                    $_SESSION['submit'] = "EDIT USER SAVED";
-                }
-                // τροποποιούμε το name της εικόνας με βάση το id της δράσης για να είναι το όνομα μοναδικό
-                $query = "SELECT id FROM user WHERE username='$username'";
-                $results = mysqli_query($link, $query);
-                $row = mysqli_fetch_array($results);
 
-                $_FILES["image"]["name"] = 'U' . $row['id'] . $fileName;;
-                $new_filename = $_FILES["image"]["name"];
+            $_FILES["image"]["name"] = 'U' . $id . $fileName;;
+            $new_filename = $_FILES["image"]["name"];
 
-                $query = "UPDATE user SET image=$new_filename WHERE username=$username";
-                mysqli_query($link, $query);
-                //echo "The file ".$new_filename. " has been uploaded.";
-            }
+            $query = "UPDATE user SET image=$new_filename WHERE id=$id;";
+            mysqli_query($link, $query);
         }
 
         @mysqli_close($link);
@@ -289,6 +282,7 @@ function print_size_of_table($link, $table){
                 } else {
                     echo "<td class='keno'>
                     <a href='?edit_user=" . $row['id'] . "'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                    <a href='?edit_user_image=" . $row['id'] . "'><img src='images/6.Admin/camera.png' alt='camera'></a>
                     <a href='?delete_user=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                      </tr>";
                 }
@@ -352,6 +346,7 @@ function print_size_of_table($link, $table){
                 $query = "SELECT * FROM user WHERE id=$id;";
                 $results = mysqli_query($link, $query);
                 $row = mysqli_fetch_array($results);
+                $_SESSION['user_id'] = $id;
                 echo '<p>
                 <label for="username"><b>Username</b><br>
                     <input type="text" placeholder="Γράψε username" name="username" value="'.$row['username'].'" required>
@@ -386,15 +381,34 @@ function print_size_of_table($link, $table){
                     <label for="password"><b>Κωδικός</b><br>
                         <input type="text" placeholder="Γράψε κωδικό" name="pass" value="'.$row['password'].'" required>
                     </label>
-                </p>
-                <p class="input_image">
-                    <label for="image"><b>Εικόνα</b></label><br>
-                    <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" value="'.$row['image'].'">
                 </p>';
             }
             ?>
             <input name="submit" type="submit" value="Ενημέρωση των δεδομένων του χρήστη" class="btn"/>
             <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_EDIT_USER')">Ακύρωση</button>
+        </form>
+    </div>
+
+    <!-- pop up form για την τροποποίηση της εικόνας ενός χρήστη -->
+    <div class="form-popup" id="FORM_FOR_EDIT_USER_IMAGE" role="dialog">
+        <form action="Admin_user.php" method="post" enctype="multipart/form-data" class="form-container">
+            <h3>Τροποποίηση της εικόνας του χρήστη</h3>
+            <?php
+            if (isset($_GET['edit_user_image'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
+                include("connect_to_database.php");
+                $id = $_GET['edit_user_image'];
+                $query = "SELECT image FROM user WHERE id=$id;";
+                $results = mysqli_query($link, $query);
+                $row = mysqli_fetch_array($results);
+                $_SESSION['user_id'] = $id;
+                echo '<p class="input_image">
+                    <label for="image"><b>Εικόνα</b></label><br>
+                    <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" value="'.$row['image'].'">
+                </p>';
+            }
+            ?>
+            <input name="submit" type="submit" value="Ενημέρωση της εικόνας του χρήστη" class="btn"/>
+            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_EDIT_USER_IMAGE')">Ακύρωση</button>
         </form>
     </div>
 
@@ -456,6 +470,11 @@ function print_size_of_table($link, $table){
         <strong>Επιτυχία!</strong> Τα δεδομένα του χρήστη τροποποιήθηκαν
     </div>
 
+    <div class="alert" id="EDIT_USER_IMAGE_SAVED">
+        <span class="closeBtn" onclick="closeAlertMessage('EDIT_USER_IMAGE_SAVED')">&times;</span>
+        <strong>Επιτυχία!</strong> Η εικόνα του χρήστη τροποποιήθηκε
+    </div>
+
     <!--Εμφάνιση μηνύματος όταν διαγραφεί ένας χρήστης-->
     <div class="alert" id="DELETE_USER">
         <span class="closeBtn" onclick="closeAlertMessage('DELETE_USER')">&times;</span>
@@ -465,6 +484,9 @@ function print_size_of_table($link, $table){
     <?php
     if (isset($_GET['edit_user'])) { // ο χρήστης έχει πατήσει το μολύβι για τροποιήσει τα δεδομένα ενός χρήστη και η μεταβλητή $_GET['edit_user'] έχει το id αυτού του χρήστη
         echo '<script type="text/javascript">'."openForm('FORM_FOR_EDIT_USER');".'</script>';
+    }
+    if (isset($_GET['edit_user_image'])) { // ο χρήστης έχει πατήσει το μολύβι για τροποιήσει τα δεδομένα ενός χρήστη και η μεταβλητή $_GET['edit_user'] έχει το id αυτού του χρήστη
+        echo '<script type="text/javascript">'."openForm('FORM_FOR_EDIT_USER_IMAGE');".'</script>';
     }
     ?>
 
@@ -492,7 +514,8 @@ function print_size_of_table($link, $table){
                 $results = mysqli_query($link, $query);
                 $row = mysqli_fetch_array($results);
                 echo '<h3>Προβολή εικόνας του χρήστη '.$row["username"].'</h3><br>
-                <img height="400px" alt="user image" src="images/Uploads/User_Images/'.$row["image"].'/">';
+                <div style="display: flex;align-items: center;justify-content: center;">
+                <img height="400px" alt="user image" src="images/Uploads/User_Images/'.$row["image"].'/"></div>';
             }
             ?>
             <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_USER_IMAGE')">κλείσιμο</button>
@@ -523,6 +546,9 @@ function print_size_of_table($link, $table){
             $_SESSION['submit'] = null;
         } else if ($_SESSION['submit'] == "EDIT USER SAVED") {
             echo '<script type="text/javascript">openAlertMessage("EDIT_USER_SAVED");</script>';
+            $_SESSION['submit'] = null;
+        } else if ($_SESSION['submit'] == "EDIT USER IMAGE SAVED") {
+            echo '<script type="text/javascript">openAlertMessage("EDIT_USER_IMAGE_SAVED");</script>';
             $_SESSION['submit'] = null;
         }
     }

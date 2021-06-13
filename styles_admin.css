@@ -196,7 +196,7 @@ span {
 
 ul {
     outline: 1px solid #aaa;
-    //list-style-type: none;
+    /*list-style-type: none;*/
     display: table;
     width: 50px;
     padding: 10px 3px 3px;
@@ -216,6 +216,12 @@ ul > li:before {
     text-align: center;
     list-style: inside;
 
+}
+
+.my_table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* to pio kalo apo ta katw
