@@ -296,9 +296,9 @@ function print_size_of_table($link, $table){
                             <th>Τίτλος</th>
                             <th>Ημερομηνία</th>
                             <th>Τοποθεσία</th>
-                            <th>Περιγραφή</th>
                             <th>Εικόνα</th>
                             <th>Σύνδεσμος</th>
+                            <th></th>
                             <th class='keno'></th>
                         </tr>";
                 while ($row = mysqli_fetch_array($results)) {
@@ -307,9 +307,9 @@ function print_size_of_table($link, $table){
                     echo '<td>' . $row['title'] . '</td>';
                     echo '<td>' . $row['date'] . '</td>';
                     echo '<td>' . $row['location'] . '</td>';
-                    echo '<td>' . $row['description'] . '</td>';
                     echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
                     echo '<td>' . $row['link'] . '</td>';
+                    echo "<td><a href='?action_id=".$row['id']."'><button class='table_button cyan'>Προβολή</button></a>";
                     echo "<td class='keno'>
                    <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
                    <a href='?edit_action_image=".$row['id']."'><img src='images/6.Admin/camera.png' alt='camera'></a>
@@ -330,9 +330,9 @@ function print_size_of_table($link, $table){
                             <th>Τίτλος</th>
                             <th>Ημερομηνία</th>
                             <th>Τοποθεσία</th>
-                            <th>Περιγραφή</th>
                             <th>Εικόνα</th>
                             <th>Σύνδεσμος</th>
+                            <th></th>
                             <th class='keno'></th>
                         </tr>";
             // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
@@ -357,11 +357,12 @@ function print_size_of_table($link, $table){
                 echo '<td>' . $row['title'] . '</td>';
                 echo '<td>' . $row['date'] . '</td>';
                 echo '<td>' . $row['location'] . '</td>';
-                echo '<td>' . $row['description'] . '</td>';
                 echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
                 echo '<td>' . $row['link'] . '</td>';
+                echo "<td><a href='?action_id=".$row['id']."'><button class='table_button cyan'>Προβολή</button></a>";
                 echo "<td class='keno'>
                            <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                           <a href='?edit_action_image=".$row['id']."'><img src='images/6.Admin/camera.png' alt='camera'></a>
                            <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
                       </td>";
                 echo '</tr>';
