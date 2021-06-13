@@ -22,6 +22,16 @@ session_start();
         $_SESSION['action_deleted'] = "ACTION DELETED";
     }
 
+    function generateRandomString($length) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
@@ -52,15 +62,6 @@ session_start();
             $targetDir = "images/Uploads/Action_Images/";
             $fileName = basename($_FILES["image"]["name"]);
 
-            function generateRandomString($length) {
-                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                $charactersLength = strlen($characters);
-                $randomString = '';
-                for ($i = 0; $i < $length; $i++) {
-                    $randomString .= $characters[rand(0, $charactersLength - 1)];
-                }
-                return $randomString;
-            }
             $fileName =  generateRandomString(5) . $fileName;
 
             $targetFilePath = $targetDir . $fileName;
@@ -236,6 +237,115 @@ function print_size_of_table($link, $table){
         <a href="Admin_contact.php">Επικοινωνία χρηστών</a>
     </div>
 
+    <h3>Δράσεις</h3>
+    <div class="actions-table">
+        <p>ΟΛΕΣ ΟΙ ΔΡΑΣΕΙΣ
+            <?php //εμφανίζουμε το πλήθος των δράσεων
+            print_size_of_table($link,'action');
+            ?>
+            <button class="table_button" onclick="openForm('FORM_FOR_ACTION')">προσθήκη δράσης</button>
+            <button class="table_button">Ταξινόμηση</button>
+        </p>
+
+        <form action="Admin_action.php" method="post">
+            <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
+            <button type="submit" name="submit">Αναζήτηση</button>
+        </form>
+
+        <?php
+            // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
+            include ("connect_to_database.php");
+            if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+                $page_no = $_GET['page_no'];
+            } else {
+                $page_no = 1;
+            }
+
+            $total_records_per_page = 10;
+
+            $offset = ($page_no-1) * $total_records_per_page;
+            $previous_page = $page_no - 1;
+            $next_page = $page_no + 1;
+            $adjacents = "2";
+
+            //6
+            $result_count = mysqli_query($link, "SELECT COUNT(*) As total_records FROM `action`");
+            $total_records = mysqli_fetch_array($result_count);
+            $total_records = $total_records['total_records'];
+            $total_no_of_pages = ceil($total_records / $total_records_per_page);
+            $second_last = $total_no_of_pages - 1; // total pages minus 1
+
+            echo "<div class='sort_dropdown'>
+                    <button class='sort_dropbtn'>Ταξινόμηση</button>
+                        <div class='sort_dropdown-content'>";
+            echo       "<a href='Admin_action.php?page_no=".$page_no."&sortBy_id_action'> ". 'id' . "</a>";
+            echo       "<a href='Admin_action.php?page_no=".$page_no."&sortBy_title'> ". 'Τίτλος' . "</a>";
+            echo       "<a href='Admin_action.php?page_no=".$page_no."&sortBy_date'> ". 'Ημερομηνία' . "</a>";
+            echo       "<a href='Admin_action.php?page_no=".$page_no."&sortBy_location'> ". 'Τοποθεσία' . "</a>";
+            echo   "</div>";
+            echo "</div>";
+        ?>
+
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Τίτλος</th>
+                <th>Ημερομηνία</th>
+                <th>Τοποθεσία</th>
+                <th>Περιγραφή</th>
+                <th>Εικόνα</th>
+                <th>Σύνδεσμος</th>
+                <th class="keno"></th>
+            </tr>
+
+        <?php // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
+        //include ("connect_to_database.php");
+        if (isset($_GET['sortBy_id_action'])) {
+            $query = "SELECT * FROM action ORDER BY id LIMIT $offset, $total_records_per_page";
+        }elseif (isset($_GET['sortBy_title'])) {
+            $query = "SELECT * FROM action ORDER BY title LIMIT $offset, $total_records_per_page";
+        }elseif (isset($_GET['sortBy_date'])) {
+            $query = "SELECT * FROM action ORDER BY date LIMIT $offset, $total_records_per_page";
+        }elseif (isset($_GET['sortBy_location'])) {
+            $query = "SELECT * FROM action ORDER BY location LIMIT $offset, $total_records_per_page";
+        }else {
+            $query = "SELECT * FROM action LIMIT $offset, $total_records_per_page";
+        }
+
+        $results = mysqli_query($link, $query);
+        while ($row = mysqli_fetch_array($results)) {
+            echo '<tr>';
+            echo '<td>' . $row['id'] . '</td>';
+            echo '<td>' . $row['title'] . '</td>';
+            echo '<td>' . $row['date'] . '</td>';
+            echo '<td>' . $row['location'] . '</td>';
+            echo '<td>' . $row['description'] . '</td>';
+            echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
+            echo '<td>' . $row['link'] . '</td>';
+            echo "<td class='keno'>
+                   <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                   <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
+               </td>";
+            echo '</tr>';
+        }
+        ?>
+        </table>
+
+        <?php //εμφανίζουμε τη λίστα των σελίδων
+        $uri =$_SERVER["REQUEST_URI"];
+        if (strpos($uri, '&') !== false) {
+            $cur = substr($uri,strrpos($uri,"&")+1);
+        } else {
+            $cur = "";
+        }
+        include("show_number_of_pages.php");
+        ?>
+
+        <div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+            <strong>Σελίδα <?php echo $page_no."/".$total_no_of_pages; ?></strong>
+        </div>
+    </div>
+
     <script>
         function openForm(id) {
             document.getElementById(id).style.display = "block";
@@ -263,80 +373,6 @@ function print_size_of_table($link, $table){
             document.getElementById(id).style.display = "none";
         }
     </script>
-
-
-    <h3>Δράσεις</h3>
-    <div class="actions-table">
-        <p>ΟΛΕΣ ΟΙ ΔΡΑΣΕΙΣ
-            <?php //εμφανίζουμε το πλήθος των δράσεων
-            print_size_of_table($link,'action');
-            ?>
-            <button class="table_button" onclick="openForm('FORM_FOR_ACTION')">προσθήκη δράσης</button>
-            <button class="table_button">Ταξινόμηση</button>
-        </p>
-
-        <table>
-            <tr>
-                <th>id</th>
-                <th>Τίτλος</th>
-                <th>Ημερομηνία</th>
-                <th>Τοποθεσία</th>
-                <th>Περιγραφή</th>
-                <th>Εικόνα</th>
-                <th>Σύνδεσμος</th>
-                <th class="keno"></th>
-            </tr>
-
-        <?php // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
-        include ("connect_to_database.php");
-            if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                $page_no = $_GET['page_no'];
-            } else {
-                $page_no = 1;
-            }
-
-            $total_records_per_page = 10;
-
-            $offset = ($page_no-1) * $total_records_per_page;
-            $previous_page = $page_no - 1;
-            $next_page = $page_no + 1;
-            $adjacents = "2";
-
-            $result_count = mysqli_query($link, "SELECT COUNT(*) As total_records FROM `action`");
-            $total_records = mysqli_fetch_array($result_count);
-            $total_records = $total_records['total_records'];
-            $total_no_of_pages = ceil($total_records / $total_records_per_page);
-            $second_last = $total_no_of_pages - 1; // total pages minus 1
-
-        $query = "SELECT * FROM `action` LIMIT $offset, $total_records_per_page";
-        $results = mysqli_query($link, $query);
-        while ($row = mysqli_fetch_array($results)) {
-            echo '<tr>';
-            echo '<td>' . $row['id'] . '</td>';
-            echo '<td>' . $row['title'] . '</td>';
-            echo '<td>' . $row['date'] . '</td>';
-            echo '<td>' . $row['location'] . '</td>';
-            echo '<td>' . $row['description'] . '</td>';
-            echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
-            echo '<td>' . $row['link'] . '</td>';
-            echo "<td class='keno'>
-                   <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                   <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
-               </td>";
-            echo '</tr>';
-        }
-        ?>
-
-        </table>
-
-        <?php //εμφανίζουμε τη λίστα των σελίδων
-        include("show_number_of_pages.php");
-        ?>
-
-        <div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-            <strong>Σελίδα <?php echo $page_no."/".$total_no_of_pages; ?></strong>
-        </div>
-    </div>
 
 
     <!-- pop up form για προσθήκη νέας δράσης από τον διαχειριστή -->

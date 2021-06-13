@@ -119,13 +119,6 @@ session_start();
                 $password = null;
             }
 
-            //if (isset($_FILES['image']['name'])) {
-             //   $image = $_FILES['image']['name'];
-            //} else {
-            //    $image = null;
-            //}
-
-
             // Αποθήκευση εικόνας στον server στο directory images/Uploads/User_Images/ και ονόματος της εικόνας στην βάση δεδομένων
             $targetDir = "images/Uploads/User_Images/";
             $fileName = basename($_FILES["image"]["name"]);
@@ -235,21 +228,13 @@ function print_size_of_table($link, $table){
             <button class="table_button">Ταξινόμηση</button>
         </p>
 
-        <table>
-            <tr>
-                <th>id</th>
-                <th>Username</th>
-                <th>Κωδικός</th>
-                <th>Όνομα</th>
-                <th>Επίθετο</th>
-                <th>Email</th>
-                <th>Ηλικία</th>
-                <th>Περιοχή</th>
-                <th>Εικόνα</th>
-                <th class="keno"></th>
-            </tr>
+        <form action="Admin_user.php" method="post">
+            <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
+            <button type="submit" name="submit">Αναζήτηση</button>
+        </form>
 
-            <?php // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
+        <?php
+            // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
             include ("connect_to_database.php");
             if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                 $page_no = $_GET['page_no'];
@@ -271,8 +256,58 @@ function print_size_of_table($link, $table){
             $total_no_of_pages = ceil($total_records / $total_records_per_page);
             $second_last = $total_no_of_pages - 1; // total pages minus 1
 
+            echo "<div class='sort_dropdown'>
+                            <button class='sort_dropbtn'>Ταξινόμηση</button>                    
+                            <div class='sort_dropdown-content'>";
+            echo       "<a href='Admin_user.php?page_no=".$page_no."&sortBy_id'> ". 'id' . "</a>";
+            echo       "<a href='Admin_user.php?page_no=".$page_no."&sortBy_username'> ". 'Username' . "</a>";
+            echo       "<a href='Admin_user.php?page_no=".$page_no."&sortBy_firstname'> ". 'Όνομα' . "</a>";
+            echo       "<a href='Admin_user.php?page_no=".$page_no."&sortBy_lastname'> ". 'Επίθετο' . "</a>";
+            echo       "<a href='Admin_user.php?page_no=".$page_no."&sortBy_email'> ". 'Email' . "</a>";
+            echo       "<a href='Admin_user.php?page_no=".$page_no."&sortBy_age'> ". 'Ηλικία' . "</a>";
+            echo       "<a href='Admin_user.php?page_no=".$page_no."&sortBy_region'> ". 'Περιοχή' . "</a>";
+            echo   "</div>";
+            echo "</div>";
+
+        ?>
+
+
+
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Username</th>
+                <th>Κωδικός</th>
+                <th>Όνομα</th>
+                <th>Επίθετο</th>
+                <th>Email</th>
+                <th>Ηλικία</th>
+                <th>Περιοχή</th>
+                <th>Εικόνα</th>
+                <th class="keno"></th>
+            </tr>
+
+            <?php // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
             //7
-            $result = mysqli_query($link, "SELECT * FROM `user` LIMIT $offset, $total_records_per_page");
+            if (isset($_GET['sortBy_id'])) {
+                $query = "SELECT * FROM user ORDER BY id LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_username'])) {
+                $query = "SELECT * FROM user ORDER BY username LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_firstname'])) {
+                $query = "SELECT * FROM user ORDER BY first_name LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_lastname'])) {
+                $query = "SELECT * FROM user ORDER BY last_name LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_email'])) {
+                $query = "SELECT * FROM user ORDER BY email LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_age'])) {
+                $query = "SELECT * FROM user ORDER BY age LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_region'])) {
+                $query = "SELECT * FROM user ORDER BY region LIMIT $offset, $total_records_per_page";
+            } else {
+                $query = "SELECT * FROM `user` LIMIT $offset, $total_records_per_page";
+            }
+
+            $result = mysqli_query($link, $query);
             while($row = mysqli_fetch_array($result)){
                 echo "<tr>
                      <td>".$row['id']."</td>
@@ -293,7 +328,6 @@ function print_size_of_table($link, $table){
                      </tr>";
                 }
             }
-            //mysqli_close($link);
             ?>
         </table>
 

@@ -60,6 +60,48 @@ function print_size_of_table($link, $table){
             ?>
             <button class="table_button">Ταξινόμηση</button>
         </p>
+
+        <form action="Admin_user.php" method="post">
+            <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
+            <button type="submit" name="submit">Αναζήτηση</button>
+        </form>
+
+        <?php
+        // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
+        include ("connect_to_database.php");
+        if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+            $page_no = $_GET['page_no'];
+        } else {
+            $page_no = 1;
+        }
+
+        $total_records_per_page = 10;
+
+        $offset = ($page_no-1) * $total_records_per_page;
+        $previous_page = $page_no - 1;
+        $next_page = $page_no + 1;
+        $adjacents = "2";
+
+        //6
+        $result_count = mysqli_query($link, "SELECT COUNT(*) As total_records FROM `contact`");
+        $total_records = mysqli_fetch_array($result_count);
+        $total_records = $total_records['total_records'];
+        $total_no_of_pages = ceil($total_records / $total_records_per_page);
+        $second_last = $total_no_of_pages - 1; // total pages minus 1
+
+        echo "<div class='sort_dropdown'>
+                <button class='sort_dropbtn'>Ταξινόμηση</button>
+                <div class='sort_dropdown-content'>";
+        echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_id'> ". 'id' . "</a>";
+        echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_firstname'> ". 'Όνομα' . "</a>";
+        echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_lastname'> ". 'Επίθετο' . "</a>";
+        echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_email'> ". 'Email' . "</a>";
+        echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_date'> ". 'Ημερομηνία' . "</a>";
+        echo   "</div>";
+        echo "</div>";
+
+        ?>
+
         <table>
             <tr>
                 <th>id</th>
@@ -71,30 +113,24 @@ function print_size_of_table($link, $table){
             </tr>
 
             <?php // εμφανίζουμε τον πίνακα των σχόλιων με τα στοιχεία τους, σελιδοποιημένο κατά 10
-            include ("connect_to_database.php");
-            if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                $page_no = $_GET['page_no'];
+            //include ("connect_to_database.php");
+            if (isset($_GET['sortBy_contact_id'])) {
+                $query = "SELECT * FROM contact ORDER BY id LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_contact_firstname'])) {
+                $query = "SELECT * FROM contact ORDER BY first_name LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_contact_lastname'])) {
+                $query = "SELECT * FROM contact ORDER BY last_name LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_contact_email'])) {
+                $query = "SELECT * FROM contact ORDER BY email LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_contact_date'])) {
+                $query = "SELECT * FROM contact ORDER BY date_of_comment LIMIT $offset, $total_records_per_page";
             } else {
-                $page_no = 1;
+                $query = "SELECT * FROM contact LIMIT $offset, $total_records_per_page";
             }
 
-            $total_records_per_page = 10;
-
-            $offset = ($page_no-1) * $total_records_per_page;
-            $previous_page = $page_no - 1;
-            $next_page = $page_no + 1;
-            $adjacents = "2";
-
-            //6
-            $result_count = mysqli_query($link, "SELECT COUNT(*) As total_records FROM `contact`");
-            $total_records = mysqli_fetch_array($result_count);
-            $total_records = $total_records['total_records'];
-            $total_no_of_pages = ceil($total_records / $total_records_per_page);
-            $second_last = $total_no_of_pages - 1; // total pages minus 1
-
             //7
-            $query = "SELECT id, first_name, last_name, email, comment, date_of_comment 
-                          FROM contact LIMIT $offset, $total_records_per_page";
+            //$query = "SELECT id, first_name, last_name, email, comment, date_of_comment
+            //              FROM contact LIMIT $offset, $total_records_per_page";
             $results = mysqli_query($link, $query);
             while ($row = mysqli_fetch_array($results)) {
                 echo '<tr>';
@@ -108,12 +144,10 @@ function print_size_of_table($link, $table){
                     </td>";
                 echo '</tr>';
             }
-            //mysqli_close($link);
             ?>
         </table>
 
-        <?php //εμφανίζουμε τη λίστα των σελίδων για το contact
-        //εμφανίζουμε τη λίστα των σελίδων
+        <?php //εμφανίζουμε τη λίστα των σελίδων σαν μενού κάτω από τον πίνακα
         include("show_number_of_pages.php");
         ?>
 
