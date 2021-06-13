@@ -25,6 +25,24 @@
     display: block;
 }
 
+.image_profile {
+    max-width: 500px;
+    max-height: 400px;
+}
+
+@media screen and (max-width: 500px) {
+    .image_profile {
+        max-width: 350px;
+        max-height: 300px;
+    }
+}
+@media screen and (max-width: 350px) {
+    .image_profile {
+        max-width: 200px;
+        max-height: 200px;
+    }
+}
+
 .special{
     color: #276678;
     font-size: 30px;

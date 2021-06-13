@@ -70,8 +70,7 @@ session_start();
             if(!empty($_FILES["image"]["name"])) {
                 $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
                 if (in_array($fileType, $allowTypes)) {
-                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
-                    }
+                    move_uploaded_file($_FILES["image"]["name"], $targetFilePath);
                 }
             }
 
@@ -135,34 +134,7 @@ session_start();
                 $description = null;
             }
 
-            $query = "SELECT id,image FROM action WHERE title='$title'";
-            $results = mysqli_query($link, $query);
-            $row = mysqli_fetch_array($results);
-            $id = $row['id'];
-
-            if (isset($_FILES['image']['name'])) {
-                $image = $_FILES['image']['name'];
-            } else {
-                $image = $row['image'];
-            }
-
-
-            // Αποθήκευση εικόνας στον server στο directory images/Uploads/Action_Images/ και ονόματος της εικόνας στην βάση δεδομένων
-            $targetDir = "images/Uploads/Action_Images/";
-            $fileName = basename($_FILES["image"]["name"]);
-
-            $fileName =  generateRandomString(5) . $fileName;
-
-            $targetFilePath = $targetDir . $fileName;
-            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-
-            if(!empty($_FILES["image"]["name"])) {
-                $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
-                if (in_array($fileType, $allowTypes)) {
-                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
-                    }
-                }
-            }
+            $id = $_SESSION['action_id'];
 
             $query = "SELECT id FROM action WHERE title='$title' AND id!=$id";
             $results = mysqli_query($link, $query);
@@ -176,24 +148,43 @@ session_start();
                 if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
                     $_SESSION['submit'] = "EDIT ACTION SAVED";
                 }
-                // τροποποιούμε το name της εικόνας με βάση το id της δράσης για να είναι το όνομα μοναδικό
-                $query = "SELECT id FROM action WHERE title='$title'";
-                $results = mysqli_query($link, $query);
-                $row = mysqli_fetch_array($results);
-
-                $_FILES["image"]["name"] = 'A' . $row['id'] . $fileName;;
-                $new_filename = $_FILES["image"]["name"];
-
-                $query = "UPDATE action SET image=$new_filename WHERE title=$title";
-                mysqli_query($link, $query);
-                //echo "The file ".$new_filename. " has been uploaded (for edit).";
             }
 
         }
 
+        if ($_POST['submit'] == 'Ενημέρωση της εικόνας της δράσης') {
+            // Αποθήκευση εικόνας στον server στο directory images/Uploads/Action_Images/ και ονόματος της εικόνας στην βάση δεδομένων
+            $targetDir = "images/Uploads/Action_Images/";
+            $fileName = basename($_FILES["image"]["name"]);
+
+            $fileName =  generateRandomString(5) . $fileName;
+
+            $targetFilePath = $targetDir . $fileName;
+            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+
+            if(!empty($_FILES["image"]["name"])) {
+                $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
+                if (in_array($fileType, $allowTypes)) {
+                    move_uploaded_file($_FILES["image"]["name"], $targetFilePath);
+                }
+            }
+
+            $id = $_SESSION['action_id'];
+
+            $query = "UPDATE action SET image='$fileName' WHERE id=$id";
+            if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                $_SESSION['submit'] = "EDIT ACTION IMAGE SAVED";
+            }
+
+            // τροποποιούμε το name της εικόνας με βάση το id της δράσης για να είναι το όνομα μοναδικό
+            $_FILES["image"]["name"] = 'A' . $id . $fileName;;
+            $new_filename = $_FILES["image"]["name"];
+
+            $query = "UPDATE action SET image=$new_filename WHERE id=$id";
+            mysqli_query($link, $query);
+        }
         @mysqli_close($link);
     }
-
     ?>
 </head>
 <body>
@@ -321,6 +312,7 @@ function print_size_of_table($link, $table){
                     echo '<td>' . $row['link'] . '</td>';
                     echo "<td class='keno'>
                    <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                   <a href='?edit_action_image=".$row['id']."'><img src='images/6.Admin/camera.png' alt='camera'></a>
                    <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
                </td>";
                     echo '</tr>';
@@ -427,7 +419,7 @@ function print_size_of_table($link, $table){
             echo '<td>' . $row['link'] . '</td>';
             echo "<td class='keno'>
                    <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                   <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
+                   <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                </td>";
             echo '</tr>';
         }*/
@@ -521,6 +513,7 @@ function print_size_of_table($link, $table){
                 $query = "SELECT * FROM action WHERE id=$id;";
                 $results = mysqli_query($link, $query);
                 $row = mysqli_fetch_array($results);
+                $_SESSION['action_id'] = $id;
                 echo '<p>
                     <label for="title"><b>Τίτλος</b><br>
                         <input type="text" placeholder="Δώσε τίτλο" name="title" value="'.$row['title'].'" required>
@@ -541,10 +534,6 @@ function print_size_of_table($link, $table){
                         <input type="date" placeholder="Δώσε ημερομηνία" name="date" value="'.$row['date'].'" required>
                     </label>
                 </p>
-                <p class="input_image">
-                    <label for="image"><b>Εικόνα</b></label><br>
-                    <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" value="'.$row['image'].'" required>
-                </p>
                 <p style="width: 100%">
                     <label for="subject"><b>Λεπτομέρειες</b></label><br>
                     <textarea placeholder="Δώσε περισσότερες πληροφορίες..." name="subject" id="subject" required>'.$row['description'].'</textarea>
@@ -557,6 +546,51 @@ function print_size_of_table($link, $table){
         </form>
     </div>
 
+    <!-- pop up form για την τροποποίηση των δεδομένων μιας δράσης από τον διαχειριστή -->
+    <div class="form-popup" id="FORM_FOR_EDIT_ACTION_IMAGE">
+        <form action="Admin_action.php" method="post" enctype="multipart/form-data" class="form-container">
+            <h3>Τροποποίηση της εικόνας της δράσης</h3>
+            <?php
+            if (isset($_GET['edit_action_image'])) {
+                include("connect_to_database.php");
+                $id = $_GET['edit_action_image'];
+                $query = "SELECT image FROM action WHERE id=$id;";
+                $results = mysqli_query($link, $query);
+                $row = mysqli_fetch_array($results);
+                $_SESSION['action_id'] = $id;
+                echo '<p class="input_image">
+                    <label for="image"><b>Εικόνα</b></label><br>
+                    <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" value="'.$row['image'].'" required>
+                </p>';
+            }
+            ?>
+            <input name="submit" type="submit" value="Ενημέρωση της εικόνας της δράσης" class="btn"/>
+            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_EDIT_ACTION_IMAGE')">Ακύρωση</button>
+        </form>
+    </div>
+
+    <!-- pop up form για την προβολή μιας δράσης -->
+    <div class="form-popup" id="FORM_FOR_ACTION_VIEW">
+        <form class="form-container">
+            <h3>Προβολή δράσης</h3>
+            <?php
+            if (isset($_GET['action_id'])) {
+                include("connect_to_database.php");
+                $id = $_GET['action_id'];
+                $query = "SELECT * FROM action WHERE id=$id;";
+                $results = mysqli_query($link, $query);
+                $row = mysqli_fetch_array($results);
+                echo "<div style='font-size: 20px'><b>Τίτλος:</b> ".$row['title']."<br>
+                <b>Εικόνα:</b><br><img src='images/Uploads/Action_Images/".$row["image"]."' alt='action image' style='max-width: 300px; max-height: 300px'><br>
+                <b>Ημερομηνία:</b> ".$row['date']."<br>
+                <b>Σύνδεσμος:</b> ".$row['link']."<br>
+                <b>Περιγραφή:</b><br>".$row['description']."</div>";
+            }
+            ?>
+            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_ACTION_VIEW')">κλείσιμο</button>
+        </form>
+    </div>
+
     <div class="alert" id="ACTION_CREATED">
         <span class="closeBtn" onclick="closeAlertMessage('ACTION_CREATED')">&times;</span>
         <strong>Επιτυχία!</strong> Η δράση καταχωρήθηκε
@@ -565,6 +599,11 @@ function print_size_of_table($link, $table){
     <div class="alert" id="EDIT_ACTION_SAVED">
         <span class="closeBtn" onclick="closeAlertMessage('EDIT_ACTION_SAVED')">&times;</span>
         <strong>Επιτυχία!</strong> Τα δεδομένα της δράσης τροποποιήθηκαν
+    </div>
+
+    <div class="alert" id="EDIT_ACTION_IMAGE_SAVED">
+        <span class="closeBtn" onclick="closeAlertMessage('EDIT_ACTION_IMAGE_SAVED')">&times;</span>
+        <strong>Επιτυχία!</strong> H εικόνα της δράσης τροποποιήθηκε
     </div>
 
     <div class="alert red" id="NOT_AVAILABLE_TITLE">
@@ -587,22 +626,13 @@ function print_size_of_table($link, $table){
     if (isset($_GET['edit_action'])) { // ο χρήστης έχει πατήσει το μολύβι για τροποιήσει τα δεδομένα ενός χρήστη και η μεταβλητή $_GET['edit_user'] έχει το id αυτού του χρήστη
         echo '<script type="text/javascript">'."openForm('FORM_FOR_EDIT_ACTION');".'</script>';
     }
+    if (isset($_GET['edit_action_image'])) { // ο χρήστης έχει πατήσει το μολύβι για τροποιήσει τα δεδομένα ενός χρήστη και η μεταβλητή $_GET['edit_user'] έχει το id αυτού του χρήστη
+        echo '<script type="text/javascript">'."openForm('FORM_FOR_EDIT_ACTION_IMAGE');".'</script>';
+    }
+    if (isset($_GET['action_id'])) {
+        echo '<script type="text/javascript">'."openForm('FORM_FOR_ACTION_VIEW');".'</script>';
+    }
     ?>
-
-    <!-- pop up form για προσθήκη νέας δράσης από τον διαχειριστή -->
-    <div class="form-popup" id="FORM_FOR_CONTACT">
-        <form action="Admin_action.php" class="form-container">
-            <h3>Προβολή φόρμας</h3>
-            <?php
-            echo "Όνομα:";
-            echo "Επίθετο:";
-            echo "Email:";
-            echo "Ημερομηνία:";
-            echo "Σχόλια:";
-            ?>
-            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_CONTACT')">κλείσιμο</button>
-        </form>
-    </div>
 
     <!-- pop up παράθυρο για την προβολή μιας εικόνας μιας δράσης -->
     <div class="form-popup" id="FORM_FOR_ACTION_IMAGE">
@@ -615,7 +645,8 @@ function print_size_of_table($link, $table){
                 $results = mysqli_query($link, $query);
                 $row = mysqli_fetch_array($results);
                 echo '<h3>Προβολή εικόνας της δράσης '.$row["title"].'</h3><br>
-                <img height="400px" alt="action image" src="images/Uploads/Action_Images/'.$row["image"].'">';
+                <div style="display: flex;align-items: center;justify-content: center;">
+                <img height="400px" alt="action image" src="images/Uploads/Action_Images/'.$row["image"].'"></div>';
             }
             ?>
             <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_ACTION_IMAGE')">κλείσιμο</button>
@@ -639,8 +670,11 @@ function print_size_of_table($link, $table){
         } else if ($_SESSION['submit'] == "EDIT ACTION SAVED") {
             echo '<script type="text/javascript">openAlertMessage("EDIT_ACTION_SAVED");</script>';
             $_SESSION['submit'] = null;
-        }else if ($_SESSION['submit'] == "EDIT NOT AVAILABLE TITLE") {
+        } else if ($_SESSION['submit'] == "EDIT NOT AVAILABLE TITLE") {
             echo '<script type="text/javascript">openAlertMessage("EDIT_NOT_AVAILABLE_TITLE");</script>';
+            $_SESSION['submit'] = null;
+        } else if ($_SESSION['submit'] == "EDIT ACTION IMAGE SAVED") {
+            echo '<script type="text/javascript">openAlertMessage("EDIT_ACTION_IMAGE_SAVED");</script>';
             $_SESSION['submit'] = null;
         }
     }
