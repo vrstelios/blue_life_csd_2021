@@ -202,6 +202,49 @@ if (!isset($_SESSION['connected_id'])){
             <a href="Actions.php"> <button class="table_button">Συμμετοχή σε δράση</button></a>
             <button class="table_button">Ταξινόμηση</button>
         </p>
+
+        <form action="Admin_user.php" method="post">
+            <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
+            <button type="submit" name="submit">Αναζήτηση</button>
+        </form>
+
+        <?php
+        // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
+        include ("connect_to_database.php");
+        //?if (isset($_SESSION['connected_id'])) {
+        if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+            $page_no = $_GET['page_no'];
+        } else {
+            $page_no = 1;
+        }
+
+        $total_records_per_page = 10;
+
+        $offset = ($page_no-1) * $total_records_per_page;
+        $previous_page = $page_no - 1;
+        $next_page = $page_no + 1;
+        $adjacents = "2";
+
+        //6
+        $result_count = mysqli_query($link, "SELECT COUNT(*) As total_records FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id 
+                      WHERE user_in_action.user_id = $current_user_id");
+        $total_records = mysqli_fetch_array($result_count);
+        $total_records = $total_records['total_records'];
+        $total_no_of_pages = ceil($total_records / $total_records_per_page);
+        $second_last = $total_no_of_pages - 1; // total pages minus 1
+
+        echo "<div class='sort_dropdown'>
+                    <button class='sort_dropbtn'>Ταξινόμηση</button>
+                        <div class='sort_dropdown-content'>";
+        echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_id_action'> ". 'id' . "</a>";
+        echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_title'> ". 'Τίτλος' . "</a>";
+        echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_date'> ". 'Ημερομηνία' . "</a>";
+        echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_location'> ". 'Τοποθεσία' . "</a>";
+        echo   "</div>";
+        echo "</div>";
+
+        ?>
+
         <table>
             <tr>
                 <th>ID</th>
@@ -214,8 +257,10 @@ if (!isset($_SESSION['connected_id'])){
             </tr>
 
             <?php //εμφανίζουμε τον πίνακα των δράσεων που συμμετέχει ο συγκεκριμένος χρήστης, σελιδοποιημένο κατά 10
-            include ("connect_to_database.php");
-            if (isset($_SESSION['connected_id'])) {
+            //include ("connect_to_database.php");
+            //if (isset($_SESSION['connected_id'])) {
+            /*
+
                 if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
                     $page_no = $_GET['page_no'];
                 } else {
@@ -229,17 +274,34 @@ if (!isset($_SESSION['connected_id'])){
                 $next_page = $page_no + 1;
                 $adjacents = "2";
 
-                $query = "SELECT COUNT(*) As total_records FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id 
+                $query = "SELECT action.id, action.title, action.date, action.location, action.description, action.link 
+                      FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id 
                       WHERE user_in_action.user_id = $current_user_id";
+                //$query = "SELECT COUNT(*) As total_records FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id
+                //      WHERE user_in_action.user_id = $current_user_id";
                 $result_count = mysqli_query($link, $query);
                 $total_records = mysqli_fetch_array($result_count);
                 $total_records = $total_records['total_records'];
                 $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                $second_last = $total_no_of_pages - 1; // total pages minus 1
-
+                $second_last = $total_no_of_pages - 1; // total pages minus 1 */
                 $query = "SELECT action.id, action.title, action.date, action.location, action.description, action.link 
                       FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id 
-                      WHERE user_in_action.user_id = $current_user_id LIMIT $offset, $total_records_per_page";
+                      WHERE user_in_action.user_id = $current_user_id";
+                if (isset($_GET['sortBy_id_action'])) {
+                    $query = $query . " ORDER BY id LIMIT $offset, $total_records_per_page";
+                }elseif (isset($_GET['sortBy_title'])) {
+                    $query = $query . " ORDER BY title LIMIT $offset, $total_records_per_page";
+                }elseif (isset($_GET['sortBy_date'])) {
+                    $query = $query . " ORDER BY date LIMIT $offset, $total_records_per_page";
+                }elseif (isset($_GET['sortBy_location'])) {
+                    $query = $query . " ORDER BY location LIMIT $offset, $total_records_per_page";
+                }else {
+                    $query = $query . " LIMIT $offset, $total_records_per_page";
+                }
+
+                //$query = "SELECT action.id, action.title, action.date, action.location, action.description, action.link
+                //      FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id
+                //      WHERE user_in_action.user_id = $current_user_id LIMIT $offset, $total_records_per_page";
                 $results = mysqli_query($link, $query);
                 while ($row = mysqli_fetch_array($results)) {
                     echo '<tr>';
@@ -254,7 +316,7 @@ if (!isset($_SESSION['connected_id'])){
                     </td>";
                     echo '</tr>';
                 }
-            }
+
             ?>
 
         </table>

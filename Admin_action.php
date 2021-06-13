@@ -332,12 +332,6 @@ function print_size_of_table($link, $table){
         </table>
 
         <?php //εμφανίζουμε τη λίστα των σελίδων
-        $uri =$_SERVER["REQUEST_URI"];
-        if (strpos($uri, '&') !== false) {
-            $cur = substr($uri,strrpos($uri,"&")+1);
-        } else {
-            $cur = "";
-        }
         include("show_number_of_pages.php");
         ?>
 

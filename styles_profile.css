@@ -231,3 +231,71 @@ ul > li:before {
     list-style: inside;
 
 }
+
+/* sort and search */
+.sort_dropdown {
+    float: right;
+    overflow: hidden;
+}
+
+.sort_dropdown .sort_dropbtn {
+    float: right;
+    padding: 6px 10px;
+    margin: 4px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+.sort_dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 100px;
+    box-shadow: 0 8px 16px 0 #4CAF50;
+    z-index: 1;
+}
+
+.sort_dropdown-content a {
+    float: none;
+    color: #4CAF50;
+    padding: 6px 10px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.sort_dropdown-content a:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.sort_dropdown:hover .sort_dropdown-content {
+    display: block;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    float: right;
+    padding: 6px 10px;
+    margin: 4px;
+    border-radius: 6px;
+    text-align: center;
+
+}
+.form-button[type=submit]{
+    background-color: #4CAF50;
+}
