@@ -29,6 +29,10 @@
     cursor: pointer;
 }
 
+.cyan {
+    background-color: #1f5362;
+}
+
 .table_button:active {
     transform: translateY(4px);
 }
@@ -176,7 +180,7 @@ span {
 }
 /*--- Για τη σελίδα διαχείρησης ---*/
 #navbar_admin {
-    width: 42%;
+    width: 48%;
     margin: auto;
     height: auto;
 }

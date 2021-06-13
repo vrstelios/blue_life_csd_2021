@@ -139,10 +139,10 @@ function print_size_of_table($link, $table){
         <a href="Admin_user.php">Χρήστες</a>
         <a href="Admin_action.php">Δράσεις</a>
         <a href="Admin_user_in_action.php">Χρήστες σε Δράσεις</a>
-        <a href="Admin_contact.php">Επικοινωνία</a>
+        <a href="Admin_contact.php">Επικοινωνία χρηστών</a>
     </div>
 
-    <h3>Χρήστης στη δράση</h3>
+    <h3>Χρήστες σε δράσεις</h3>
     <div class="user-actions-table">
         <p>ΟΛΕΣ ΟΙ ΔΗΛΩΣΕΙΣ ΣΥΜΜΕΤΟΧΗΣ
             <?php //εμφανίζουμε το πλήθος των συνολικών συμμετοχών στις δράσεις
@@ -196,8 +196,7 @@ function print_size_of_table($link, $table){
                      <td>".$row['title']."</td>
                      <td>".$row['date_joined']."</td>";
                 echo "<td class='keno'>
-                    <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                     <a href='Admin_user_in_action.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                      </tr>";
             }
             //mysqli_close($link);

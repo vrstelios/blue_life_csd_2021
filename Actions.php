@@ -54,9 +54,7 @@ while ($row = mysqli_fetch_array($results)) {
     echo '<article class="action">
              <div class="action_row">
                 <div class="column image">';
-    echo'<img height="300" width="300" src="data:image;base64,'.$row['image'].'">';
-    //echo '<img src="data:image/jpeg;base64,'.base64_encode( $row['image'] ).'"/>';
-    //echo            '<img src="' . $row['image'] . '" alt="Άνθωπος κάτω από το νερό!"/>';
+    echo            '<img src="images/Uploads/Action_Images/' . $row['image'] . '/" alt="Άνθωπος κάτω από το νερό!"/>';
     echo        '</div>
                 <div class="column text" >
                     <div>';

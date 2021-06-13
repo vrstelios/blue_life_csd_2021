@@ -10,96 +10,6 @@ session_start();
     <link rel="stylesheet" href="styles_main.css">
     <link rel="stylesheet" href="styles_admin.css">
     <?php
-    /*
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-        include("connect_to_database.php");
-        if ($_POST['submit'] == 'Καταχώρηση χρήστη'){
-            if (isset($_POST['username'])) {
-                $username = $_POST['username'];
-            } else {
-                $username = null;
-            }
-            if (isset($_POST['email'])) {
-                $email = $_POST['email'];
-            } else {
-                $email = null;
-            }
-            if (isset($_POST['firstname'])) {
-                $firstname = $_POST['firstname'];
-            } else {
-                $firstname = null;
-            }
-            if (isset($_POST['lastname'])) {
-                $lastname = $_POST['lastname'];
-            } else {
-                $lastname = null;
-            }
-            if (isset($_POST['pass'])) {
-                $password = $_POST['pass'];
-            } else {
-                $password = null;
-            }
-
-            $query1 = "SELECT id FROM user WHERE username='$username'";
-            $query2 = "SELECT id FROM user WHERE email='$email'";
-            $results1 = mysqli_query($link, $query1);
-            $results2 = mysqli_query($link, $query2);
-
-            if (mysqli_num_rows($results1) > 0) {
-                $_SESSION['submit'] = "NOT AVAILABLE USERNAME";
-            } else if (mysqli_num_rows($results2) > 0) {
-                $_SESSION['submit'] = "NOT AVAILABLE EMAIL";
-            }
-            else {
-                $query = "INSERT INTO user (username, password, first_name, last_name, email)
-                          VALUES ('$username', '$password', '$firstname', '$lastname', '$email');";
-                if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                    $_SESSION['submit'] = "USER CREATED";
-                }
-            }
-        }
-        if ($_POST['submit'] == 'Καταχώρηση δράσης') {
-            if (isset($_POST['title'])) {
-                $title = $_POST['title'];
-            } else {
-                $title = null;
-            }
-            if (isset($_POST['location'])) {
-                $location = $_POST['location'];
-            } else {
-                $location = null;
-            }
-            if (isset($_POST['link'])) {
-                $link_info = $_POST['link'];
-            } else {
-                $link_info = null;
-            }
-            if (isset($_POST['date'])) {
-                $date = $_POST['date'];
-            } else {
-                $date = null;
-            }
-            if (isset($_FILES['image']['name'])) {
-                $image = $_FILES['image']['name'];
-            } else {
-                $image = null;
-            }
-            if (isset($_POST['subject'])) {
-                $description = $_POST['subject'];
-            } else {
-                $description = null;
-            }
-
-            $query = "INSERT INTO action (title,date,location,description,image,link)
-                  VALUES ('$title','$date','$location','$description','$image','$link_info');";
-            if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                $_SESSION['submit'] = "ACTION CREATED";
-            }
-        }
-        @mysqli_close($link);
-    }
-*/
     ?>
 </head>
 <body>
@@ -139,7 +49,7 @@ function print_size_of_table($link, $table){
         <a href="Admin_user.php">Χρήστες</a>
         <a href="Admin_action.php">Δράσεις</a>
         <a href="Admin_user_in_action.php">Χρήστες σε Δράσεις</a>
-        <a href="Admin_contact.php">Επικοινωνία</a>
+        <a href="Admin_contact.php">Επικοινωνία χρηστών</a>
     </div>
 
     <h3>Επικοινωνία χρηστών</h3>
@@ -194,7 +104,7 @@ function print_size_of_table($link, $table){
                 echo '<td>' . $row['email'] . '</td>';
                 echo '<td>' . $row['date_of_comment'] . '</td>';
                 echo "<td class='keno'>
-                        <a href='javascript:void(0);' >Read</a>
+                        <a href='?contact_id=".$row['id']."' ><button class='table_button cyan'>Προβολή</button></a>                     
                     </td>";
                 echo '</tr>';
             }
@@ -212,26 +122,47 @@ function print_size_of_table($link, $table){
         </div>
     </div>
 
-
-    <?php
-    /*
-    if (isset($_SESSION['submit'])) {
-        if ($_SESSION['submit'] == "NOT AVAILABLE USERNAME") {
-            echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_USERNAME");</script>';
-            $_SESSION['submit'] = null;
-        } else if ($_SESSION['submit'] == "NOT AVAILABLE EMAIL") {
-            echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_EMAIL");</script>';
-            $_SESSION['submit'] = null;
-        } else if ($_SESSION['submit'] == "USER CREATED") {
-            echo '<script type="text/javascript">openAlertMessage("USER_CREATED");</script>';
-            $_SESSION['submit'] = null;
-        } else if ($_SESSION['submit'] == "ACTION CREATED") {
-            echo '<script type="text/javascript">openAlertMessage("ACTION_CREATED");</script>';
-            $_SESSION['submit'] = null;
+    <script>
+        function openForm(id) {
+            document.getElementById(id).style.display = "block";
+            window.onkeydown = function(event) {
+                if ( event.keyCode === 27 ) {
+                    closeForm(id);
+                }
+            };
         }
+        function closeForm(id) {
+            document.getElementById(id).style.display = "none";
+        }
+    </script>
+
+    <!-- pop up παράθυρο για την προβολή μιας φόρμας επικοινωνίας -->
+    <div class="form-popup" id="FORM_FOR_CONTACT">
+        <form class="form-container">
+            <h3>Προβολή φόρμας</h3>
+            <?php
+            if (isset($_GET['contact_id'])) {
+                include("connect_to_database.php");
+                $id = $_GET['contact_id'];
+                $query = "SELECT * FROM contact WHERE id=$id;";
+                $results = mysqli_query($link, $query);
+                $row = mysqli_fetch_array($results);
+                echo "<div style='font-size: 20px'><b>Όνομα:</b> ".$row['first_name']."<br>
+                <b>Επίθετο:</b> ".$row['last_name']."<br>
+                <b>Email:</b> ".$row['email']."<br>
+                <b>Ημερομηνία:</b> ".$row['date_of_comment']."<br>
+                <b>Σχόλιο:</b><br>".$row['comment']."</div>";
+            }
+            ?>
+            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_CONTACT')">κλείσιμο</button>
+        </form>
+    </div>
+    <?php
+    if (isset($_GET['contact_id'])) {
+        echo '<script type="text/javascript">'."openForm('FORM_FOR_CONTACT');".'</script>';
     }
-    */
     ?>
+
 </div>
 
 <!-----------------Go to top button----------------->

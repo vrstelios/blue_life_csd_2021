@@ -13,51 +13,6 @@ session_start();
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include("connect_to_database.php");
-        if ($_POST['submit'] == 'Καταχώρηση χρήστη'){
-            if (isset($_POST['username'])) {
-                $username = $_POST['username'];
-            } else {
-                $username = null;
-            }
-            if (isset($_POST['email'])) {
-                $email = $_POST['email'];
-            } else {
-                $email = null;
-            }
-            if (isset($_POST['firstname'])) {
-                $firstname = $_POST['firstname'];
-            } else {
-                $firstname = null;
-            }
-            if (isset($_POST['lastname'])) {
-                $lastname = $_POST['lastname'];
-            } else {
-                $lastname = null;
-            }
-            if (isset($_POST['pass'])) {
-                $password = $_POST['pass'];
-            } else {
-                $password = null;
-            }
-
-            $query1 = "SELECT id FROM user WHERE username='$username'";
-            $query2 = "SELECT id FROM user WHERE email='$email'";
-            $results1 = mysqli_query($link, $query1);
-            $results2 = mysqli_query($link, $query2);
-
-            if (mysqli_num_rows($results1) > 0) {
-                $_SESSION['submit'] = "NOT AVAILABLE USERNAME";
-            } else if (mysqli_num_rows($results2) > 0) {
-                $_SESSION['submit'] = "NOT AVAILABLE EMAIL";
-            }
-            else {
-                $query = "INSERT INTO user (username, password, first_name, last_name, email)
-                          VALUES ('$username', '$password', '$firstname', '$lastname', '$email');";
-                if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                    $_SESSION['submit'] = "USER CREATED";
-                }
-            }
-        }
         if ($_POST['submit'] == 'Καταχώρηση δράσης') {
             if (isset($_POST['title'])) {
                 $title = $_POST['title'];
@@ -79,10 +34,86 @@ session_start();
             } else {
                 $date = null;
             }
-            if (isset($_FILES['image']['name'])) {
-                $image = $_FILES['image']['name'];
+
+            // Αποθήκευση εικόνας στον server στο directory images/Uploads/Action_Images/ και ονόματος της εικόνας στην βάση δεδομένων
+            $targetDir = "images/Uploads/Action_Images/";
+            $fileName = basename($_FILES["image"]["name"]);
+
+            function generateRandomString($length) {
+                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $charactersLength = strlen($characters);
+                $randomString = '';
+                for ($i = 0; $i < $length; $i++) {
+                    $randomString .= $characters[rand(0, $charactersLength - 1)];
+                }
+                return $randomString;
+            }
+            $fileName =  generateRandomString(5) . $fileName;
+
+            $targetFilePath = $targetDir . $fileName;
+            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+
+            if(!empty($_FILES["image"]["name"])) {
+                $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
+                if (in_array($fileType, $allowTypes)) {
+                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
+                    }
+                }
+            }
+
+            if (isset($_POST['subject'])) {
+                $description = $_POST['subject'];
             } else {
-                $image = null;
+                $description = null;
+            }
+
+            $query = "SELECT id FROM action WHERE title='$title'";
+            $results = mysqli_query($link, $query);
+
+            if (mysqli_num_rows($results) > 0) { // unique title
+                $_SESSION['submit'] = "NOT AVAILABLE TITLE";
+            } else {
+                // εισάγουμε τα στοιχεία της δράσης στο db
+                $query = "INSERT INTO action (title,date,location,description,image,link)
+                  VALUES ('$title','$date','$location','$description','$fileName','$link_info');";
+                if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                    $_SESSION['submit'] = "ACTION CREATED";
+                }
+                // τροποποιούμε το name της εικόνας με βάση το id της δράσης για να είναι το όνομα μοναδικό
+                $query = "SELECT id FROM action WHERE title='$title'";
+                $results = mysqli_query($link, $query);
+                $row = mysqli_fetch_array($results);
+
+                $_FILES["image"]["name"] = 'A' . $row['id'] . $fileName;;
+                $new_filename = $_FILES["image"]["name"];
+
+                $query = "UPDATE action SET image=$new_filename WHERE title=$title";
+                mysqli_query($link, $query);
+                //echo "The file ".$new_filename. " has been uploaded.";
+            }
+
+        }
+
+        if ($_POST['submit'] == 'Ενημέρωση των δεδομένων της δράσης') {
+            if (isset($_POST['title'])) {
+                $title = $_POST['title'];
+            } else {
+                $title = null;
+            }
+            if (isset($_POST['location'])) {
+                $location = $_POST['location'];
+            } else {
+                $location = null;
+            }
+            if (isset($_POST['link'])) {
+                $link_info = $_POST['link'];
+            } else {
+                $link_info = null;
+            }
+            if (isset($_POST['date'])) {
+                $date = $_POST['date'];
+            } else {
+                $date = null;
             }
             if (isset($_POST['subject'])) {
                 $description = $_POST['subject'];
@@ -90,12 +121,62 @@ session_start();
                 $description = null;
             }
 
-            $query = "INSERT INTO action (title,date,location,description,image,link)
-                  VALUES ('$title','$date','$location','$description','$image','$link_info');";
-            if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                $_SESSION['submit'] = "ACTION CREATED";
+            $query = "SELECT id,image FROM action WHERE title='$title'";
+            $results = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($results);
+            $id = $row['id'];
+
+            if (isset($_FILES['image']['name'])) {
+                $image = $_FILES['image']['name'];
+            } else {
+                $image = $row['image'];
             }
+
+
+            // Αποθήκευση εικόνας στον server στο directory images/Uploads/Action_Images/ και ονόματος της εικόνας στην βάση δεδομένων
+            $targetDir = "images/Uploads/Action_Images/";
+            $fileName = basename($_FILES["image"]["name"]);
+
+            $fileName =  generateRandomString(5) . $fileName;
+
+            $targetFilePath = $targetDir . $fileName;
+            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+
+            if(!empty($_FILES["image"]["name"])) {
+                $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
+                if (in_array($fileType, $allowTypes)) {
+                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
+                    }
+                }
+            }
+
+            $query = "SELECT id FROM action WHERE title='$title' AND id!=$id";
+            $results = mysqli_query($link, $query);
+
+            if (mysqli_num_rows($results) > 0) {
+                $_SESSION['submit'] = "EDIT NOT AVAILABLE TITLE";
+            } else {
+                // επαναεισάγουμε τα στοιχεία της δράσης στο db
+                $query = "UPDATE action SET title='$title', date='$date', location='$location',
+                  description='$description', image='$fileName', link='$link_info' WHERE id=$id;";
+                if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
+                    $_SESSION['submit'] = "EDIT ACTION SAVED";
+                }
+                // τροποποιούμε το name της εικόνας με βάση το id της δράσης για να είναι το όνομα μοναδικό
+                $query = "SELECT id FROM action WHERE title='$title'";
+                $results = mysqli_query($link, $query);
+                $row = mysqli_fetch_array($results);
+
+                $_FILES["image"]["name"] = 'A' . $row['id'] . $fileName;;
+                $new_filename = $_FILES["image"]["name"];
+
+                $query = "UPDATE action SET image=$new_filename WHERE title=$title";
+                mysqli_query($link, $query);
+                //echo "The file ".$new_filename. " has been uploaded (for edit).";
+            }
+
         }
+
         @mysqli_close($link);
     }
 
@@ -117,7 +198,7 @@ session_start();
 
 <!---------------Σελίδα διαχείρησης--------------->
 <?php
-// αν ο χρήστης δεν είναι ο admin και προσπαθήσει να φορτώσει την σελίδα Admin.php τότε φορτώνεται η σελίδα UnauthorizedProfile.php για την ασφάλεια και απόκρυψη των στοιχείων
+// αν ο χρήστης δεν είναι ο admin και προσπαθήσει να φορτώσει την σελίδα Admin_action.php τότε φορτώνεται η σελίδα UnauthorizedProfile.php για την ασφάλεια και απόκρυψη των στοιχείων
 if ($_SESSION['connected_id'] != 1){
     header("Location: UnauthorizedProfile.php");
 }
@@ -139,106 +220,8 @@ function print_size_of_table($link, $table){
         <a href="Admin_user.php">Χρήστες</a>
         <a href="Admin_action.php">Δράσεις</a>
         <a href="Admin_user_in_action.php">Χρήστες σε Δράσεις</a>
-        <a href="Admin_contact.php">Επικοινωνία</a>
+        <a href="Admin_contact.php">Επικοινωνία χρηστών</a>
     </div>
-
-    <!-- pop up form για προσθήκη νέου χρήστη από τον διαχειριστή -->
-    <div class="form-popup" id="FORM_FOR_USER" role="dialog">
-        <form action="Admin.php" method="post" class="form-container">
-            <h3>Δημιουργία χρήστη</h3>
-            <span>* Υποχρεωτικά πεδία</span><br>
-            <p>
-                <label for="username"><b>Username</b><span>*</span>
-                    <input type="text" placeholder="Γράψε username" name="username" required>
-                </label>
-            </p>
-            <p>
-                <label for="email"><b>Email</b><span>*</span>
-                    <input type="email" placeholder="Γράψε Email" name="email" required>
-                </label>
-            </p>
-            <p>
-                <label for="first_name"><b>Όνομα</b><span>*</span>
-                    <input type="text" placeholder="Γράψε Όνομα" name="firstname" required>
-                </label>
-            </p>
-            <p>
-                <label for="last_name"><b>Επίθετο</b><span>*</span>
-                    <input type="text" placeholder="Γράψε Επίθετο" name="lastname" required>
-                </label>
-            </p>
-            <p>
-                <label for="password"><b>Κωδικός</b><span>*</span>
-                    <input type="password" placeholder="Γράψε κωδικό" name="pass" required>
-                </label>
-            </p>
-            <input name="submit" type="submit" value="Καταχώρηση χρήστη" class="btn"/>
-            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_USER')">Ακύρωση</button>
-        </form>
-    </div>
-
-    <!-- pop up form για την τροποποίηση των στοιχείων ενός χρήστη -->
-    <div class="form-popup" id="FORM_FOR_EDIT_USER" role="dialog">
-        <form action="Admin.php" method="post" class="form-container">
-            <h3>Τροποποίηση των δεδομένων του χρήστη</h3>
-
-            <p>
-                <label for="username"><b>Username</b>
-                    <input type="text" placeholder="Γράψε username" name="username" required>
-                </label>
-            </p>
-            <p>
-                <label for="email"><b>Email</b>
-                    <input type="email" placeholder="Γράψε Email" name="email" required>
-                </label>
-            </p>
-            <p>
-                <label for="first_name"><b>Όνομα</b>
-                    <input type="text" placeholder="Γράψε Όνομα" name="firstname" required>
-                </label>
-            </p>
-            <p>
-                <label for="last_name"><b>Επίθετο</b>
-                    <input type="text" placeholder="Γράψε Επίθετο" name="lastname" required>
-                </label>
-            </p>
-            <p>
-                <label for="age"><b>Ηλικία</b>
-                    <input type="number" placeholder="Γράψε Ηλικία" name="age">
-                </label>
-            </p>
-            <p>
-                <label for="region"><b>Περιοχή</b>
-                    <input type="text" placeholder="Γράψε Περιοχή" name="region">
-                </label>
-            </p>
-            <p>
-                <label for="password"><b>Κωδικός</b>
-                    <input type="password" placeholder="Γράψε κωδικό" name="pass" required>
-                </label>
-            </p>
-            <p class="input_image">
-                <label for="image"><b>Εικόνα</b></label>
-                <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα">
-            </p>
-            <input name="submit" type="submit" value="Αποθήκευση" class="btn"/>
-            <button type="button" class="btn_cancel" onclick="closeEditForm()">Ακύρωση</button>
-        </form>
-    </div>
-
-    <script>
-        function openEditForm(user_id) {
-            document.getElementById('FORM_FOR_EDIT_USER').style.display = "block";
-            window.onkeydown = function(event) {
-                if ( event.keyCode === 27 ) {
-                    closeEditForm();
-                }
-            };
-        }
-        function closeEditForm() {
-            document.getElementById('FORM_FOR_EDIT_USER').style.display = "none";
-        }
-    </script>
 
     <script>
         function openForm(id) {
@@ -254,20 +237,6 @@ function print_size_of_table($link, $table){
         }
     </script>
 
-    <div class="alert red" id="NOT_AVAILABLE_USERNAME">
-        <span class="closeBtn" onclick="closeAlertMessage('NOT_AVAILABLE_USERNAME')">&times;</span>
-        <strong>Αποτυχία δημιουργίας χρήστη!</strong> Το συγκεκριμένο username χρησιμοποιείται
-    </div>
-
-    <div class="alert red" id="NOT_AVAILABLE_EMAIL">
-        <span class="closeBtn" onclick="closeAlertMessage('NOT_AVAILABLE_EMAIL')">&times;</span>
-        <strong>Αποτυχία δημιουργίας χρήστη!</strong> Το συγκεκριμένο email χρησιμοποιείται
-    </div>
-
-    <div class="alert" id="USER_CREATED">
-        <span class="closeBtn" onclick="closeAlertMessage('USER_CREATED')">&times;</span>
-        <strong>Επιτυχία!</strong> Ο χρήστης δημιουργήθηκε
-    </div>
 
     <script>
         function openAlertMessage(id) {
@@ -335,11 +304,12 @@ function print_size_of_table($link, $table){
             echo '<td>' . $row['date'] . '</td>';
             echo '<td>' . $row['location'] . '</td>';
             echo '<td>' . $row['description'] . '</td>';
-            echo '<td>' . $row['image'] . '</td>';
+            echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
+            //echo '<td>' . $row['image'] . '</td>';
             echo '<td>' . $row['link'] . '</td>';
             echo "<td class='keno'>
-                   <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                   <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                   <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                   <a href='Admin_action.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                </td>";
             echo '</tr>';
         }
@@ -364,35 +334,82 @@ function print_size_of_table($link, $table){
             <h3>Δημιουργία δράσης</h3>
             <span>* Υποχρεωτικά πεδία</span><br>
             <p>
-                <label for="title"><b>Τίτλος</b><span>*</span>
+                <label for="title"><b>Τίτλος</b><span>*</span><br>
                     <input type="text" placeholder="Δώσε τίτλο" name="title" required>
                 </label>
             </p>
             <p>
-                <label for="location"><b>Τοποθεσία</b><span>*</span>
+                <label for="location"><b>Τοποθεσία</b><span>*</span><br>
                     <input type="text" placeholder="Δώσε τοποθεσία" name="location" required>
                 </label>
             </p>
             <p>
-                <label for="link"><b>Link</b>
+                <label for="link"><b>Link</b><br>
                     <input type="url" placeholder="Δώσε link" name="link">
                 </label>
             </p>
             <p>
-                <label for="date"><b>Ημερομηνία</b><span>*</span>
+                <label for="date"><b>Ημερομηνία</b><span>*</span><br>
                     <input type="date" placeholder="Δώσε ημερομηνία" name="date" required>
                 </label>
             </p>
             <p class="input_image">
-                <label for="image"><b>Εικόνα</b><span>*</span></label>
+                <label for="image"><b>Εικόνα</b><span>*</span></label><br>
                 <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" required>
             </p>
             <p style="width: 100%">
-                <label for="subject"><b>Λεπτομέρειες</b><span>*</span></label>
+                <label for="subject"><b>Λεπτομέρειες</b><span>*</span></label><br>
                 <textarea placeholder="Δώσε περισσότερες πληροφορίες..." name="subject" id="subject" required></textarea>
             </p>
             <input name="submit" type="submit" value="Καταχώρηση δράσης" class="btn"/>
             <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_ACTION')">Ακύρωση</button>
+        </form>
+    </div>
+
+    <!-- pop up form για την τροποποίηση των δεδομένων μιας δράσης από τον διαχειριστή -->
+    <div class="form-popup" id="FORM_FOR_EDIT_ACTION">
+        <form action="Admin_action.php" method="post" enctype="multipart/form-data" class="form-container">
+            <h3>Τροποποίηση των δεδομένων της δράσης</h3>
+            <?php
+            if (isset($_GET['edit_action'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
+                include("connect_to_database.php");
+                $id = $_GET['edit_action'];
+                $query = "SELECT * FROM action WHERE id=$id;";
+                $results = mysqli_query($link, $query);
+                $row = mysqli_fetch_array($results);
+                echo '<p>
+                    <label for="title"><b>Τίτλος</b><br>
+                        <input type="text" placeholder="Δώσε τίτλο" name="title" value="'.$row['title'].'" required>
+                    </label>
+                </p>
+                <p>
+                    <label for="location"><b>Τοποθεσία</b><br>
+                        <input type="text" placeholder="Δώσε τοποθεσία" name="location" value="'.$row['location'].'" required>
+                    </label>
+                </p>
+                <p>
+                    <label for="link"><b>Link</b><br>
+                        <input type="url" placeholder="Δώσε link" name="link" value="'.$row['link'].'" >
+                    </label>
+                </p>
+                <p>
+                    <label for="date"><b>Ημερομηνία</b><br>
+                        <input type="date" placeholder="Δώσε ημερομηνία" name="date" value="'.$row['date'].'" required>
+                    </label>
+                </p>
+                <p class="input_image">
+                    <label for="image"><b>Εικόνα</b></label><br>
+                    <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" value="'.$row['image'].'" required>
+                </p>
+                <p style="width: 100%">
+                    <label for="subject"><b>Λεπτομέρειες</b></label><br>
+                    <textarea placeholder="Δώσε περισσότερες πληροφορίες..." name="subject" id="subject" required>'.$row['description'].'</textarea>
+                </p>
+                ';
+            }
+            ?>
+            <input name="submit" type="submit" value="Ενημέρωση των δεδομένων της δράσης" class="btn"/>
+            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_EDIT_ACTION')">Ακύρωση</button>
         </form>
     </div>
 
@@ -401,6 +418,26 @@ function print_size_of_table($link, $table){
         <strong>Επιτυχία!</strong> Η δράση καταχωρήθηκε
     </div>
 
+    <div class="alert" id="EDIT_ACTION_SAVED">
+        <span class="closeBtn" onclick="closeAlertMessage('EDIT_ACTION_SAVED')">&times;</span>
+        <strong>Επιτυχία!</strong> Τα δεδομένα της δράσης τροποποιήθηκαν
+    </div>
+
+    <div class="alert red" id="NOT_AVAILABLE_TITLE">
+        <span class="closeBtn" onclick="closeAlertMessage('NOT_AVAILABLE_TITLE')">&times;</span>
+        <strong>Αποτυχία δημιουργίας δράσης!</strong> Ο συγκεκριμένος τίτλος χρησιμοποιείται
+    </div>
+
+    <div class="alert red" id="EDIT_NOT_AVAILABLE_TITLE">
+        <span class="closeBtn" onclick="closeAlertMessage('NOT_AVAILABLE_TITLE')">&times;</span>
+        <strong>Αποτυχία τροποποίησης της δράσης!</strong> Ο συγκεκριμένος τίτλος χρησιμοποιείται
+    </div>
+
+    <?php
+    if (isset($_GET['edit_action'])) { // ο χρήστης έχει πατήσει το μολύβι για τροποιήσει τα δεδομένα ενός χρήστη και η μεταβλητή $_GET['edit_user'] έχει το id αυτού του χρήστη
+        echo '<script type="text/javascript">'."openForm('FORM_FOR_EDIT_ACTION');".'</script>';
+    }
+    ?>
 
     <!-- pop up form για προσθήκη νέας δράσης από τον διαχειριστή -->
     <div class="form-popup" id="FORM_FOR_CONTACT">
@@ -417,19 +454,43 @@ function print_size_of_table($link, $table){
         </form>
     </div>
 
+    <!-- pop up παράθυρο για την προβολή μιας εικόνας μιας δράσης -->
+    <div class="form-popup" id="FORM_FOR_ACTION_IMAGE">
+        <form class="form-container">
+            <?php
+            if (isset($_GET['action_image'])) {
+                include("connect_to_database.php");
+                $id = $_GET['action_image'];
+                $query = "SELECT title, image FROM action WHERE id=$id;";
+                $results = mysqli_query($link, $query);
+                $row = mysqli_fetch_array($results);
+                echo '<h3>Προβολή εικόνας της δράσης '.$row["title"].'</h3><br>
+                <img height="400px" alt="action image" src="images/Uploads/Action_Images/'.$row["image"].'">';
+            }
+            ?>
+            <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_ACTION_IMAGE')">κλείσιμο</button>
+        </form>
+    </div>
+
+    <?php
+    if (isset($_GET['action_image'])) {
+        echo '<script type="text/javascript">'."openForm('FORM_FOR_ACTION_IMAGE');".'</script>';
+    }
+    ?>
+
     <?php
     if (isset($_SESSION['submit'])) {
-        if ($_SESSION['submit'] == "NOT AVAILABLE USERNAME") {
-            echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_USERNAME");</script>';
-            $_SESSION['submit'] = null;
-        } else if ($_SESSION['submit'] == "NOT AVAILABLE EMAIL") {
-            echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_EMAIL");</script>';
-            $_SESSION['submit'] = null;
-        } else if ($_SESSION['submit'] == "USER CREATED") {
-            echo '<script type="text/javascript">openAlertMessage("USER_CREATED");</script>';
-            $_SESSION['submit'] = null;
-        } else if ($_SESSION['submit'] == "ACTION CREATED") {
+        if ($_SESSION['submit'] == "ACTION CREATED") {
             echo '<script type="text/javascript">openAlertMessage("ACTION_CREATED");</script>';
+            $_SESSION['submit'] = null;
+        } else if ($_SESSION['submit'] == "NOT AVAILABLE TITLE") {
+            echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_TITLE");</script>';
+            $_SESSION['submit'] = null;
+        } else if ($_SESSION['submit'] == "EDIT ACTION SAVED") {
+            echo '<script type="text/javascript">openAlertMessage("EDIT_ACTION_SAVED");</script>';
+            $_SESSION['submit'] = null;
+        }else if ($_SESSION['submit'] == "EDIT NOT AVAILABLE TITLE") {
+            echo '<script type="text/javascript">openAlertMessage("EDIT_NOT_AVAILABLE_TITLE");</script>';
             $_SESSION['submit'] = null;
         }
     }

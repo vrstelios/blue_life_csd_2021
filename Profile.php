@@ -114,12 +114,31 @@ session_start();
     </div>
 </div>
 
+<?php
+// αν ο χρήστης δεν είναι συνδεδεμένος τότε δεν έχει πρόσβαση στα στοιχεία
+if (!isset($_SESSION['connected_id'])){
+    header("Location: UnauthorizedProfile.php");
+}
+?>
+
 <!---------------user--------------->
 <div class="page_user">
     <div class="profile_img container">
         <button>
-            <img src="images/Main/blank-profile-picture.png" alt="error_img" style="width:250px;height:250px ">
-            <div class="centered">Προσθέστε εικόνα</div>
+            <?php
+            $id = $_SESSION['connected_id'];
+            include("connect_to_database.php");
+            $query = "SELECT image FROM user WHERE id=$id";
+            $results = $results = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($results);
+            if ($row['image'] == null){
+                echo '<img src="images/Main/blank-profile-picture.png" alt="error_img" style="max-width:500px; max-height:500px ">';
+                echo '<div class="centered">Προσθέστε εικόνα</div>';
+            } else {
+                echo '<img src="images/Uploads/User_images/' . $row['image'] . '/" alt="profile user" style="max-width:500px; max-height:400px ">';
+                echo '<div class="centered">Τροποποιήστε την εικόνα</div>';
+            }
+            ?>
         </button>
     </div>
 
