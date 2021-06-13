@@ -132,10 +132,10 @@ if (!isset($_SESSION['connected_id'])){
             $results = $results = mysqli_query($link, $query);
             $row = mysqli_fetch_array($results);
             if ($row['image'] == null){
-                echo '<img src="images/Main/blank-profile-picture.png" alt="error_img" style="max-width:500px; max-height:500px ">';
+                echo '<img src="images/Main/blank-profile-picture.png" alt="error_img" style="max-width:400px; max-height:350px ">';
                 echo '<div class="centered">Προσθέστε εικόνα</div>';
             } else {
-                echo '<img src="images/Uploads/User_images/' . $row['image'] . '/" alt="profile user" style="max-width:500px; max-height:400px ">';
+                echo '<img src="images/Uploads/User_images/' . $row['image'] . '/" alt="profile user" style="max-width:400px; max-height:350px ">';
                 echo '<div class="centered">Τροποποιήστε την εικόνα</div>';
             }
             ?>

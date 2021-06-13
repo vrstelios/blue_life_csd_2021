@@ -10,6 +10,19 @@ session_start();
     <link rel="stylesheet" href="styles_main.css">
     <link rel="stylesheet" href="styles_admin.css">
     <?php
+    if (isset($_GET['delete_action']) && $_SESSION['connected_id']==1) { // ο admin έχει πατήσει τον κάδο για να διαγράψει μία δράση και η μεταβλητή $_GET['delete_action'] έχει το id αυτής της δράσης
+        delete_action($_GET['delete_action']);
+    }
+
+    function delete_action($delete_action_id)
+    {
+        include("connect_to_database.php");
+        $query = "DELETE FROM action WHERE id=$delete_action_id";
+        mysqli_query($link, $query);
+        $_SESSION['action_deleted'] = "ACTION DELETED";
+    }
+
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include("connect_to_database.php");
@@ -305,15 +318,13 @@ function print_size_of_table($link, $table){
             echo '<td>' . $row['location'] . '</td>';
             echo '<td>' . $row['description'] . '</td>';
             echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
-            //echo '<td>' . $row['image'] . '</td>';
             echo '<td>' . $row['link'] . '</td>';
             echo "<td class='keno'>
                    <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                   <a href='Admin_action.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                   <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
                </td>";
             echo '</tr>';
         }
-        //mysqli_close($link);
         ?>
 
         </table>
@@ -433,6 +444,12 @@ function print_size_of_table($link, $table){
         <strong>Αποτυχία τροποποίησης της δράσης!</strong> Ο συγκεκριμένος τίτλος χρησιμοποιείται
     </div>
 
+    <!--Εμφάνιση μηνύματος όταν διαγραφεί μία δράση-->
+    <div class="alert" id="DELETE_ACTION">
+        <span class="closeBtn" onclick="closeAlertMessage('DELETE_ACTION')">&times;</span>
+        <strong>Η δράση διαγράφτηκε!</strong>
+    </div>
+
     <?php
     if (isset($_GET['edit_action'])) { // ο χρήστης έχει πατήσει το μολύβι για τροποιήσει τα δεδομένα ενός χρήστη και η μεταβλητή $_GET['edit_user'] έχει το id αυτού του χρήστη
         echo '<script type="text/javascript">'."openForm('FORM_FOR_EDIT_ACTION');".'</script>';
@@ -492,6 +509,12 @@ function print_size_of_table($link, $table){
         }else if ($_SESSION['submit'] == "EDIT NOT AVAILABLE TITLE") {
             echo '<script type="text/javascript">openAlertMessage("EDIT_NOT_AVAILABLE_TITLE");</script>';
             $_SESSION['submit'] = null;
+        }
+    }
+    if (isset($_SESSION['action_deleted'])){
+        if ($_SESSION['action_deleted'] == "ACTION DELETED"){
+            echo '<script type="text/javascript">openAlertMessage("DELETE_ACTION");</script>';
+            $_SESSION['action_deleted'] = null;
         }
     }
     ?>

@@ -10,96 +10,18 @@ session_start();
     <link rel="stylesheet" href="styles_main.css">
     <link rel="stylesheet" href="styles_admin.css">
     <?php
-    /*
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-        include("connect_to_database.php");
-        if ($_POST['submit'] == 'Καταχώρηση χρήστη'){
-            if (isset($_POST['username'])) {
-                $username = $_POST['username'];
-            } else {
-                $username = null;
-            }
-            if (isset($_POST['email'])) {
-                $email = $_POST['email'];
-            } else {
-                $email = null;
-            }
-            if (isset($_POST['firstname'])) {
-                $firstname = $_POST['firstname'];
-            } else {
-                $firstname = null;
-            }
-            if (isset($_POST['lastname'])) {
-                $lastname = $_POST['lastname'];
-            } else {
-                $lastname = null;
-            }
-            if (isset($_POST['pass'])) {
-                $password = $_POST['pass'];
-            } else {
-                $password = null;
-            }
-
-            $query1 = "SELECT id FROM user WHERE username='$username'";
-            $query2 = "SELECT id FROM user WHERE email='$email'";
-            $results1 = mysqli_query($link, $query1);
-            $results2 = mysqli_query($link, $query2);
-
-            if (mysqli_num_rows($results1) > 0) {
-                $_SESSION['submit'] = "NOT AVAILABLE USERNAME";
-            } else if (mysqli_num_rows($results2) > 0) {
-                $_SESSION['submit'] = "NOT AVAILABLE EMAIL";
-            }
-            else {
-                $query = "INSERT INTO user (username, password, first_name, last_name, email)
-                          VALUES ('$username', '$password', '$firstname', '$lastname', '$email');";
-                if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                    $_SESSION['submit'] = "USER CREATED";
-                }
-            }
-        }
-        if ($_POST['submit'] == 'Καταχώρηση δράσης') {
-            if (isset($_POST['title'])) {
-                $title = $_POST['title'];
-            } else {
-                $title = null;
-            }
-            if (isset($_POST['location'])) {
-                $location = $_POST['location'];
-            } else {
-                $location = null;
-            }
-            if (isset($_POST['link'])) {
-                $link_info = $_POST['link'];
-            } else {
-                $link_info = null;
-            }
-            if (isset($_POST['date'])) {
-                $date = $_POST['date'];
-            } else {
-                $date = null;
-            }
-            if (isset($_FILES['image']['name'])) {
-                $image = $_FILES['image']['name'];
-            } else {
-                $image = null;
-            }
-            if (isset($_POST['subject'])) {
-                $description = $_POST['subject'];
-            } else {
-                $description = null;
-            }
-
-            $query = "INSERT INTO action (title,date,location,description,image,link)
-                  VALUES ('$title','$date','$location','$description','$image','$link_info');";
-            if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                $_SESSION['submit'] = "ACTION CREATED";
-            }
-        }
-        @mysqli_close($link);
+    if (isset($_GET['delete_user']) && isset($_GET['delete_action'])  && $_SESSION['connected_id']==1) {
+        // ο admin έχει πατήσει τον κάδο για να αφαιρέσει έναν χρήστη από κάποια δράση
+        delete_user_in_action($_GET['delete_user'], $_GET['delete_action']);
     }
-*/
+
+    function delete_user_in_action($delete_user_id, $delete_action_id)
+    {
+        include("connect_to_database.php");
+        $query = "DELETE FROM user_in_action WHERE user_id=$delete_user_id AND action_id=$delete_action_id";
+        mysqli_query($link, $query);
+        $_SESSION['remove_user_from_action'] = "REMOVE USER FROM ACTION";
+    }
     ?>
 </head>
 <body>
@@ -196,7 +118,7 @@ function print_size_of_table($link, $table){
                      <td>".$row['title']."</td>
                      <td>".$row['date_joined']."</td>";
                 echo "<td class='keno'>
-                     <a href='Admin_user_in_action.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                     <a href='?delete_user=" . $row['user_id'] .  "&delete_action=" . $row['action_id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                      </tr>";
             }
             //mysqli_close($link);
@@ -213,22 +135,19 @@ function print_size_of_table($link, $table){
     </div>
 
 
-    <?php /*
-    if (isset($_SESSION['submit'])) {
-        if ($_SESSION['submit'] == "NOT AVAILABLE USERNAME") {
-            echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_USERNAME");</script>';
-            $_SESSION['submit'] = null;
-        } else if ($_SESSION['submit'] == "NOT AVAILABLE EMAIL") {
-            echo '<script type="text/javascript">openAlertMessage("NOT_AVAILABLE_EMAIL");</script>';
-            $_SESSION['submit'] = null;
-        } else if ($_SESSION['submit'] == "USER CREATED") {
-            echo '<script type="text/javascript">openAlertMessage("USER_CREATED");</script>';
-            $_SESSION['submit'] = null;
-        } else if ($_SESSION['submit'] == "ACTION CREATED") {
-            echo '<script type="text/javascript">openAlertMessage("ACTION_CREATED");</script>';
-            $_SESSION['submit'] = null;
+    <!--Εμφάνιση μηνύματος ότι ένας χρήστης διαγράφτηκε από μία δράση-->
+    <div class="alert" id="DELETE_USER_FROM_ACTION">
+        <span class="closeBtn" onclick="closeAlertMessage('DELETE_USER_FROM_ACTION')">&times;</span>
+        <strong>Ο χρήστης αποχώρησε από τη δράση!</strong>
+    </div>
+
+    <?php
+    if (isset($_SESSION['delete_user']) && isset($_SESSION['delete_action'])){
+        if ($_SESSION['remove_user_from_action'] == "REMOVE USER FROM ACTION"){
+            echo '<script type="text/javascript">openAlertMessage("DELETE_USER_FROM_ACTION");</script>';
+            $_SESSION['remove_user_from_action'] = null;
         }
-    }*/
+    }
     ?>
 </div>
 

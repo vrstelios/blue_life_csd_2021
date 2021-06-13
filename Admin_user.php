@@ -10,22 +10,18 @@ session_start();
     <link rel="stylesheet" href="styles_main.css">
     <link rel="stylesheet" href="styles_admin.css">
     <?php
-    if (isset($_GET['leave_action'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
-        user_leaves_action($_GET['leave_action']);
+    if (isset($_GET['delete_user'])  && $_SESSION['connected_id']==1) { // ο admin έχει πατήσει τον κάδο για να διαγράψει ένα χρήστη και η μεταβλητή $_GET['delete_user'] έχει το id αυτού του χρήστη
+        delete_user($_GET['delete_user']);
     }
 
-    function user_leaves_action($leave_action_id)
+    function delete_user($delete_user_id)
     {
         include("connect_to_database.php");
-        if (!isset($_SESSION['connected_id'])){ // αν ο χρήστης δεν είναι συνδεδεμένος πρέπει πρώτα να συνδεθεί
-            echo '<script  type="text/javascript">openAlertMessage_connect_first();</script>';
-        } else {
-            $id = $_SESSION['connected_id'];
-            $query = "DELETE FROM user_in_action WHERE user_id='$id' AND action_id=$leave_action_id";
-            mysqli_query($link, $query);
-            $_SESSION['user_leaves_action'] = "user_leaves_action_";
-        }
+        $query = "DELETE FROM user WHERE id=$delete_user_id";
+        mysqli_query($link, $query);
+        $_SESSION['user_deleted'] = "USER DELETED";
     }
+
     function generateRandomString($length) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -293,7 +289,7 @@ function print_size_of_table($link, $table){
                 } else {
                     echo "<td class='keno'>
                     <a href='?edit_user=" . $row['id'] . "'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                    <a href='?leave_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                    <a href='?delete_user=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                      </tr>";
                 }
             }
@@ -460,26 +456,17 @@ function print_size_of_table($link, $table){
         <strong>Επιτυχία!</strong> Τα δεδομένα του χρήστη τροποποιήθηκαν
     </div>
 
+    <!--Εμφάνιση μηνύματος όταν διαγραφεί ένας χρήστης-->
+    <div class="alert" id="DELETE_USER">
+        <span class="closeBtn" onclick="closeAlertMessage('DELETE_USER')">&times;</span>
+        <strong>Ο χρήστης διαγράφτηκε!</strong>
+    </div>
+
     <?php
     if (isset($_GET['edit_user'])) { // ο χρήστης έχει πατήσει το μολύβι για τροποιήσει τα δεδομένα ενός χρήστη και η μεταβλητή $_GET['edit_user'] έχει το id αυτού του χρήστη
         echo '<script type="text/javascript">'."openForm('FORM_FOR_EDIT_USER');".'</script>';
     }
     ?>
-
-    <!--Εμφάνιση μηνύματος ότι ο χρήστης αποχώρησε από την δράση-->
-    <div class="alert" id="user_leaves_action">
-        <span class="closeBtn" onclick="closeAlertMessage('user_leaves_action')">&times;</span>
-        <strong>Αποχώρησες από τη δράση!</strong>
-    </div>
-    <?php
-    if (isset($_SESSION['user_leaves_action'])) {
-        if ($_SESSION['user_leaves_action'] == "user_leaves_action_") {
-            echo '<script  type="text/javascript">openAlertMessage("user_leaves_action");</script>';
-            $_SESSION['user_leaves_action'] = null;
-        }
-    }
-    ?>
-    <!--τέλος εμφάνισης μηνύματος-->
 
     <script>
         function openAlertMessage(id) {
@@ -537,6 +524,12 @@ function print_size_of_table($link, $table){
         } else if ($_SESSION['submit'] == "EDIT USER SAVED") {
             echo '<script type="text/javascript">openAlertMessage("EDIT_USER_SAVED");</script>';
             $_SESSION['submit'] = null;
+        }
+    }
+    if (isset($_SESSION['user_deleted'])){
+        if ($_SESSION['user_deleted'] == "USER DELETED"){
+            echo '<script type="text/javascript">openAlertMessage("DELETE_USER");</script>';
+            $_SESSION['user_deleted'] = null;
         }
     }
     ?>
