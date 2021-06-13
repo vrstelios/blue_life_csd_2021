@@ -235,15 +235,7 @@ function print_size_of_table($link, $table){
             print_size_of_table($link,'action');
             ?>
             <button class="table_button" onclick="openForm('FORM_FOR_ACTION')">προσθήκη δράσης</button>
-            <button class="table_button">Ταξινόμηση</button>
-        </p>
-
-        <form action="Admin_action.php" method="post">
-            <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
-            <button type="submit" name="submit">Αναζήτηση</button>
-        </form>
-
-        <?php
+            <?php
             // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
             include ("connect_to_database.php");
             if (isset($_GET['page_no']) && $_GET['page_no']!="") {
@@ -275,7 +267,13 @@ function print_size_of_table($link, $table){
             echo       "<a href='Admin_action.php?page_no=".$page_no."&sortBy_location'> ". 'Τοποθεσία' . "</a>";
             echo   "</div>";
             echo "</div>";
-        ?>
+            ?>
+        </p>
+
+        <form action="Admin_action.php" method="post">
+            <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
+            <button type="submit" name="submit" class="table_button_search">Αναζήτηση</button>
+        </form>
 
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)

@@ -218,11 +218,7 @@ ul > li:before {
 
 }
 
-.my_table{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 
 /* to pio kalo apo ta katw
 ul {
@@ -253,7 +249,8 @@ ul {
     text-decoration: none;
     cursor: pointer;
 }
-.navbar a:hover, .dropdown:hover .dropbtn {
+
+.sort_dropdown a:hover, .sort_dropdown:hover .dropbtn {
     background-color: #4CAF50;
     color: white;
 }
@@ -285,7 +282,7 @@ ul {
 .sort_dropdown:hover .sort_dropdown-content {
     display: block;
 }
-
+/*
 input[type=button], input[type=submit], input[type=reset] {
     background-color: #4CAF50;
     border: none;
@@ -298,7 +295,4 @@ input[type=button], input[type=submit], input[type=reset] {
     border-radius: 6px;
     text-align: center;
 
-}
-.form-button[type=submit]{
-    background-color: #4CAF50;
-}
+}*/

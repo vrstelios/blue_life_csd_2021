@@ -58,49 +58,47 @@ function print_size_of_table($link, $table){
             <?php //εμφανίζουμε το πλήθος των σχόλιων των χρηστών
             print_size_of_table($link,'contact');
             ?>
-            <button class="table_button">Ταξινόμηση</button>
+            <?php
+            // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
+            include ("connect_to_database.php");
+            if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+                $page_no = $_GET['page_no'];
+            } else {
+                $page_no = 1;
+            }
+
+            $total_records_per_page = 10;
+
+            $offset = ($page_no-1) * $total_records_per_page;
+            $previous_page = $page_no - 1;
+            $next_page = $page_no + 1;
+            $adjacents = "2";
+
+            //6
+            $result_count = mysqli_query($link, "SELECT COUNT(*) As total_records FROM `contact`");
+            $total_records = mysqli_fetch_array($result_count);
+            $total_records = $total_records['total_records'];
+            $total_no_of_pages = ceil($total_records / $total_records_per_page);
+            $second_last = $total_no_of_pages - 1; // total pages minus 1
+
+            echo "<div class='sort_dropdown'>
+                <button class='sort_dropbtn'>Ταξινόμηση</button>
+                <div class='sort_dropdown-content'>";
+            echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_id'> ". 'id' . "</a>";
+            echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_firstname'> ". 'Όνομα' . "</a>";
+            echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_lastname'> ". 'Επίθετο' . "</a>";
+            echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_email'> ". 'Email' . "</a>";
+            echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_date'> ". 'Ημερομηνία' . "</a>";
+            echo   "</div>";
+            echo "</div>";
+
+            ?>
         </p>
 
         <form action="Admin_contact.php" method="post">
             <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
-            <button type="submit" name="submit">Αναζήτηση</button>
+            <button type="submit" name="submit" class="table_button_search">Αναζήτηση</button>
         </form>
-
-        <?php
-        // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
-        include ("connect_to_database.php");
-        if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-            $page_no = $_GET['page_no'];
-        } else {
-            $page_no = 1;
-        }
-
-        $total_records_per_page = 10;
-
-        $offset = ($page_no-1) * $total_records_per_page;
-        $previous_page = $page_no - 1;
-        $next_page = $page_no + 1;
-        $adjacents = "2";
-
-        //6
-        $result_count = mysqli_query($link, "SELECT COUNT(*) As total_records FROM `contact`");
-        $total_records = mysqli_fetch_array($result_count);
-        $total_records = $total_records['total_records'];
-        $total_no_of_pages = ceil($total_records / $total_records_per_page);
-        $second_last = $total_no_of_pages - 1; // total pages minus 1
-
-        echo "<div class='sort_dropdown'>
-                <button class='sort_dropbtn'>Ταξινόμηση</button>
-                <div class='sort_dropdown-content'>";
-        echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_id'> ". 'id' . "</a>";
-        echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_firstname'> ". 'Όνομα' . "</a>";
-        echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_lastname'> ". 'Επίθετο' . "</a>";
-        echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_email'> ". 'Email' . "</a>";
-        echo       "<a href='Admin_contact.php?page_no=".$page_no."&sortBy_contact_date'> ". 'Ημερομηνία' . "</a>";
-        echo   "</div>";
-        echo "</div>";
-
-        ?>
 
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)

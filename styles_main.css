@@ -521,6 +521,29 @@ nav {
 .closeBtn:hover {
     color: black;
 }
+
+.my_table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table_button_search {
+    padding: 6px 10px;
+    margin: 4px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.table_button_search:active {
+    transform: translateY(4px);
+}
+
 /*--- Για τα alert μηνύματα ---*/
 
 /* Για το Go to top button*/

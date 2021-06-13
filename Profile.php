@@ -242,50 +242,48 @@ if (!isset($_SESSION['connected_id'])){
     <div class="actions-table">
         <p>
             <a href="Actions.php"> <button class="table_button">Συμμετοχή σε δράση</button></a>
-            <button class="table_button">Ταξινόμηση</button>
+            <?php
+            // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
+            include ("connect_to_database.php");
+            //?if (isset($_SESSION['connected_id'])) {
+            if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+                $page_no = $_GET['page_no'];
+            } else {
+                $page_no = 1;
+            }
+
+            $total_records_per_page = 10;
+
+            $offset = ($page_no-1) * $total_records_per_page;
+            $previous_page = $page_no - 1;
+            $next_page = $page_no + 1;
+            $adjacents = "2";
+
+            //6
+            $result_count = mysqli_query($link, "SELECT COUNT(*) As total_records FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id 
+                      WHERE user_in_action.user_id = $current_user_id");
+            $total_records = mysqli_fetch_array($result_count);
+            $total_records = $total_records['total_records'];
+            $total_no_of_pages = ceil($total_records / $total_records_per_page);
+            $second_last = $total_no_of_pages - 1; // total pages minus 1
+
+            echo "<div class='sort_dropdown'>
+                    <button class='sort_dropbtn'>Ταξινόμηση</button>
+                        <div class='sort_dropdown-content'>";
+            echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_id_action'> ". 'id' . "</a>";
+            echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_title'> ". 'Τίτλος' . "</a>";
+            echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_date'> ". 'Ημερομηνία' . "</a>";
+            echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_location'> ". 'Τοποθεσία' . "</a>";
+            echo   "</div>";
+            echo "</div>";
+
+            ?>
         </p>
 
         <form action="Profile.php" method="post">
             <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
-            <button type="submit" name="submit">Αναζήτηση</button>
+            <button type="submit" name="submit" class="table_button_search">Αναζήτηση</button>
         </form>
-
-        <?php
-        // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
-        include ("connect_to_database.php");
-        //?if (isset($_SESSION['connected_id'])) {
-        if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-            $page_no = $_GET['page_no'];
-        } else {
-            $page_no = 1;
-        }
-
-        $total_records_per_page = 10;
-
-        $offset = ($page_no-1) * $total_records_per_page;
-        $previous_page = $page_no - 1;
-        $next_page = $page_no + 1;
-        $adjacents = "2";
-
-        //6
-        $result_count = mysqli_query($link, "SELECT COUNT(*) As total_records FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id 
-                      WHERE user_in_action.user_id = $current_user_id");
-        $total_records = mysqli_fetch_array($result_count);
-        $total_records = $total_records['total_records'];
-        $total_no_of_pages = ceil($total_records / $total_records_per_page);
-        $second_last = $total_no_of_pages - 1; // total pages minus 1
-
-        echo "<div class='sort_dropdown'>
-                    <button class='sort_dropbtn'>Ταξινόμηση</button>
-                        <div class='sort_dropdown-content'>";
-        echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_id_action'> ". 'id' . "</a>";
-        echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_title'> ". 'Τίτλος' . "</a>";
-        echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_date'> ". 'Ημερομηνία' . "</a>";
-        echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_location'> ". 'Τοποθεσία' . "</a>";
-        echo   "</div>";
-        echo "</div>";
-
-        ?>
 
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
@@ -344,15 +342,15 @@ if (!isset($_SESSION['connected_id'])){
             // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
             //7
             if (isset($_GET['sortBy_id_action'])) {
-                $query = "SELECT * FROM action ORDER BY id LIMIT $offset, $total_records_per_page";
+                $query = "SELECT * FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id WHERE user_in_action.user_id = $current_user_id ORDER BY id LIMIT $offset, $total_records_per_page";
             }elseif (isset($_GET['sortBy_title'])) {
-                $query = "SELECT * FROM action ORDER BY title LIMIT $offset, $total_records_per_page";
+                $query = "SELECT * FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id WHERE user_in_action.user_id = $current_user_id ORDER BY title LIMIT $offset, $total_records_per_page";
             }elseif (isset($_GET['sortBy_date'])) {
-                $query = "SELECT * FROM action ORDER BY date LIMIT $offset, $total_records_per_page";
+                $query = "SELECT * FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id WHERE user_in_action.user_id = $current_user_id ORDER BY date LIMIT $offset, $total_records_per_page";
             }elseif (isset($_GET['sortBy_location'])) {
-                $query = "SELECT * FROM action ORDER BY location LIMIT $offset, $total_records_per_page";
+                $query = "SELECT * FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id WHERE user_in_action.user_id = $current_user_id ORDER BY location LIMIT $offset, $total_records_per_page";
             }else {
-                $query = "SELECT * FROM action LIMIT $offset, $total_records_per_page";
+                $query = "SELECT * FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id WHERE user_in_action.user_id = $current_user_id LIMIT $offset, $total_records_per_page";
             }
 
             $results = mysqli_query($link, $query);
@@ -566,7 +564,7 @@ if (isset($_SESSION['user_leaves_action'])) {
         $row = mysqli_fetch_array($results);
         echo '<p class="input_image">
                 <label for="image"><b>Εικόνα</b><br>
-                    <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" value="'.$row['image'].'">
+                    <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" value="'.$row['image'].'" required>
                 </label>
             </p>';
         ?>
@@ -592,6 +590,31 @@ if (isset($_SESSION['user_leaves_action'])) {
 <?php
 if (isset($_GET['edit_my_profile'])) { // ο χρήστης έχει πατήσει το μολύβι για τροποιήσει τα δεδομένα του και η μεταβλητή $_GET['edit_my_profile'] έχει το id του
     echo '<script type="text/javascript">'."openForm('FORM_FOR_EDIT_USER');".'</script>';
+}
+?>
+
+<!-- pop up παράθυρο για την προβολή μιας εικόνας μιας δράσης -->
+<div class="form-popup" id="FORM_FOR_ACTION_IMAGE">
+    <form class="form-container">
+        <?php
+        if (isset($_GET['action_image'])) {
+            include("connect_to_database.php");
+            $id = $_GET['action_image'];
+            $query = "SELECT title, image FROM action WHERE id=$id;";
+            $results = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($results);
+            echo '<h3>Προβολή εικόνας της δράσης '.$row["title"].'</h3><br>
+                <div style="display: flex;align-items: center;justify-content: center;">
+                <img height="400px" alt="action image" src="images/Uploads/Action_Images/'.$row["image"].'"></div>';
+        }
+        ?>
+        <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_ACTION_IMAGE')">κλείσιμο</button>
+    </form>
+</div>
+
+<?php
+if (isset($_GET['action_image'])) {
+    echo '<script type="text/javascript">'."openForm('FORM_FOR_ACTION_IMAGE');".'</script>';
 }
 ?>
 

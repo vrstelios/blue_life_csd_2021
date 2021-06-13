@@ -225,16 +225,7 @@ function print_size_of_table($link, $table){
             print_size_of_table($link,'user');
             ?>
             <button class="table_button" onclick="openForm('FORM_FOR_USER')">προσθήκη χρήστη</button>
-            <button class="table_button">Ταξινόμηση</button>
-        </p>
-
-        <form action="Admin_user.php" method="post">
-            <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
-            <!--input name="search" type="submit" value="Αναζήτηση" class="btn" placeholder="Πληκτρολογήστε εδώ"/-->
-            <button type="submit" name="submit">Αναζήτηση</button>
-        </form>
-
-        <?php
+            <?php
             // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
 
             //prepaging("SELECT COUNT(*) As total_records FROM `user`");
@@ -273,7 +264,14 @@ function print_size_of_table($link, $table){
             echo   "</div>";
             echo "</div>";
 
-        ?>
+            ?>
+        </p>
+
+        <form action="Admin_user.php" method="post">
+            <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
+            <!--input name="search" type="submit" value="Αναζήτηση" class="btn" placeholder="Πληκτρολογήστε εδώ"/-->
+            <button type="submit" name="submit" class="table_button_search">Αναζήτηση</button>
+        </form>
 
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
@@ -527,7 +525,7 @@ function print_size_of_table($link, $table){
                 $_SESSION['user_id'] = $id;
                 echo '<p class="input_image">
                     <label for="image"><b>Εικόνα</b></label><br>
-                    <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" value="'.$row['image'].'">
+                    <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" value="'.$row['image'].'" required>
                 </p>';
             }
             ?>
