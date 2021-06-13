@@ -32,6 +32,28 @@ session_start();
         return $randomString;
     }
 
+    function prepaging( $query){
+        include ("connect_to_database.php");
+        if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+            $page_no = $_GET['page_no'];
+        } else {
+            $page_no = 1;
+        }
+        $total_records_per_page = 10;
+
+        $offset = ($page_no-1) * $total_records_per_page;
+        $previous_page = $page_no - 1;
+        $next_page = $page_no + 1;
+        $adjacents = "2";
+
+        //6
+        $result_count = mysqli_query($link, $query);
+        $total_records = mysqli_fetch_array($result_count);
+        $total_records = $total_records['total_records'];
+        $total_no_of_pages = ceil($total_records / $total_records_per_page);
+        $second_last = $total_no_of_pages - 1; // total pages minus 1
+    }
+
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
@@ -230,11 +252,15 @@ function print_size_of_table($link, $table){
 
         <form action="Admin_user.php" method="post">
             <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
+            <!--input name="search" type="submit" value="Αναζήτηση" class="btn" placeholder="Πληκτρολογήστε εδώ"/-->
             <button type="submit" name="submit">Αναζήτηση</button>
         </form>
 
         <?php
             // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
+
+            //prepaging("SELECT COUNT(*) As total_records FROM `user`");
+
             include ("connect_to_database.php");
             if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                 $page_no = $_GET['page_no'];
@@ -254,7 +280,7 @@ function print_size_of_table($link, $table){
             $total_records = mysqli_fetch_array($result_count);
             $total_records = $total_records['total_records'];
             $total_no_of_pages = ceil($total_records / $total_records_per_page);
-            $second_last = $total_no_of_pages - 1; // total pages minus 1
+            $second_last = $total_no_of_pages - 1; // total pages minus 1 */
 
             echo "<div class='sort_dropdown'>
                             <button class='sort_dropbtn'>Ταξινόμηση</button>                    
@@ -271,23 +297,103 @@ function print_size_of_table($link, $table){
 
         ?>
 
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
+            //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
+            $search = $_POST["search"];
+            $results = null;
+            if (is_numeric($search)) {
+                $search = intval($search);
+                $query = ("SELECT * FROM  user  WHERE id=$search OR age=$search");
+            } else {
+                $query = ("SELECT * FROM  user  WHERE username LIKE '%{$search}%' OR email LIKE '%{$search}%' OR last_name LIKE '%{$search}%' OR first_name LIKE '%{$search}%'  OR region LIKE '%{$search}%'");
+            }
+            $results = mysqli_query($link, $query);
+            $num_results = mysqli_num_rows($results);
+            if ($num_results == 0) {    // αν δεν υπάρχουν αποτελέσματα
+                echo "<h3>Δεν βρέθηκαν αποτελέσματα αναζήτησης για " . $search ." !</h3>";
+            } else {    // αν υπάρχουν αποτελέσματα στην αναζήτηση
+                //prepaging( $query);
+                /*
+                include ("connect_to_database.php");
+                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+                    $page_no = $_GET['page_no'];
+                } else {
+                    $page_no = 1;
+                }
 
+                $total_records_per_page = 10;
 
-        <table>
-            <tr>
-                <th>id</th>
-                <th>Username</th>
-                <th>Κωδικός</th>
-                <th>Όνομα</th>
-                <th>Επίθετο</th>
-                <th>Email</th>
-                <th>Ηλικία</th>
-                <th>Περιοχή</th>
-                <th>Εικόνα</th>
-                <th class="keno"></th>
-            </tr>
+                $offset = ($page_no-1) * $total_records_per_page;
+                $previous_page = $page_no - 1;
+                $next_page = $page_no + 1;
+                $adjacents = "2";
 
-            <?php // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
+                //6
+                $query2 = "SELECT COUNT(*) As total_records FROM user WHERE username LIKE '%{$search}%' OR email LIKE '%{$search}%' OR last_name LIKE '%{$search}%' OR first_name LIKE '%{$search}%'  OR region LIKE '%{$search}%'";
+                $result_count = mysqli_query($link, $query2);
+                $total_records = mysqli_fetch_array($result_count);
+                $total_records = $total_records['total_records'];
+                $total_no_of_pages = ceil($total_records / $total_records_per_page);
+                $second_last = $total_no_of_pages - 1; // total pages minus 1 */
+
+                echo "<h3>Αποτελέσματα αναζήτησης</h3>
+                       <table>
+                        <tr>
+                       <th>id</th>
+                       <th>Username</th>
+                       <th>Όνομα</th>
+                       <th>Επίθετο</th>
+                       <th>Email</th>
+                       <th>Ηλικία</th>
+                       <th>Περιοχή</th>
+                       <th>Εικόνα</th>";
+                echo '<th class="keno"></th>';
+                echo '</tr>';
+                while ($row = mysqli_fetch_array($results)) {
+                    echo '<tr>';
+                    echo '<td>' . $row['id'] . '</td>';
+                    echo '<td>' . $row['username'] . '</td>';
+                    echo '<td>' . $row['first_name'] . '</td>';
+                    echo '<td>' . $row['last_name'] . '</td>';
+                    echo '<td>' . $row['email'] . '</td>';
+                    echo '<td>' . $row['age'] . '</td>';
+                    echo '<td>' . $row['region'] . '</td>';
+                    echo '<td>' . $row['image'] . '</td>';
+                    if ($row['id'] == 1) { //ο admin δεν μπορεί να αλλάξει τον κωδικό ή/και τα στοιχεία του
+                        echo "<td class='keno'>";
+                    } else {
+                        echo "<td class='keno'>
+                        <a href='?edit_user=" . $row['id'] . "'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                        <a href='?delete_user=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>";
+                    }
+                    echo '</tr>';
+                }
+                @mysqli_free_result($results);
+                echo '</table>';
+                //include("show_number_of_pages.php");
+                //echo '<div class="table_page" style="padding: 10px 20px 0px; border-top: dotted 1px #CCC;">
+                //        <strong>Σελίδα '. $page_no.'/'.$total_no_of_pages .'</strong>
+                //  </div>';
+            }
+            $_POST["search"] = null;
+
+        } else { // αν ο χρήστης δεν πατήσει το κουμπί για αναζήτηση (δεν κληθεί η POST)
+            //echo '<h4>'.'DEN KANEI method post == Αναζήτηση' . '</h4>';
+            echo '<table>
+                    <tr>
+                        <th>id</th>
+                        <th>Username</th>
+                        <th>Κωδικός</th>
+                        <th>Όνομα</th>
+                        <th>Επίθετο</th>
+                        <th>Email</th>
+                        <th>Ηλικία</th>
+                        <th>Περιοχή</th>
+                        <th>Εικόνα</th>
+                        <th class="keno"></th>
+                </tr>';
+            // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
             //7
             if (isset($_GET['sortBy_id'])) {
                 $query = "SELECT * FROM user ORDER BY id LIMIT $offset, $total_records_per_page";
@@ -308,18 +414,19 @@ function print_size_of_table($link, $table){
             }
 
             $result = mysqli_query($link, $query);
-            while($row = mysqli_fetch_array($result)){
+
+            while ($row = mysqli_fetch_array($result)) {
                 echo "<tr>
-                     <td>".$row['id']."</td>
-                     <td>".$row['username']."</td>
-                     <td>".$row['password']."</td>
-                     <td>".$row['first_name']."</td>
-                     <td>".$row['last_name']."</td>
-                     <td>".$row['email']."</td>
-                     <td>".$row['age']."</td>
-                     <td>".$row['region']."</td>";
-                echo '<td><a href="?user_image='.$row['id'].'">' . $row['image'] . '</a></td>';
-                if ($row['id'] == 1){ //ο admin δεν μπορεί να αλλάξει τον κωδικό ή/και τα στοιχεία του
+                     <td>" . $row['id'] . "</td>
+                     <td>" . $row['username'] . "</td>
+                     <td>" . $row['password'] . "</td>
+                     <td>" . $row['first_name'] . "</td>
+                     <td>" . $row['last_name'] . "</td>
+                     <td>" . $row['email'] . "</td>
+                     <td>" . $row['age'] . "</td>
+                     <td>" . $row['region'] . "</td>";
+                echo '<td><a href="?user_image=' . $row['id'] . '">' . $row['image'] . '</a></td>';
+                if ($row['id'] == 1) { //ο admin δεν μπορεί να αλλάξει τον κωδικό ή/και τα στοιχεία του
                     echo "<td class='keno'> </tr>";
                 } else {
                     echo "<td class='keno'>
@@ -328,16 +435,14 @@ function print_size_of_table($link, $table){
                      </tr>";
                 }
             }
-            ?>
-        </table>
-
-        <?php //εμφανίζουμε τη λίστα των σελίδων
-        include("show_number_of_pages.php");
+            echo '</table>';
+            include("show_number_of_pages.php");
+            echo '<div class="table_page" style="padding: 10px 20px 0px; border-top: dotted 1px #CCC;">
+                        <strong>Σελίδα '. $page_no.'/'.$total_no_of_pages .'</strong>
+                  </div>';
+        }
         ?>
 
-        <div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-            <strong>Σελίδα <?php echo $page_no."/".$total_no_of_pages; ?></strong>
-        </div>
     </div>
 
     <!-- pop up form για προσθήκη νέου χρήστη από τον διαχειριστή -->

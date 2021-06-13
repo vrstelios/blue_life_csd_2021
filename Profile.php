@@ -203,7 +203,7 @@ if (!isset($_SESSION['connected_id'])){
             <button class="table_button">Ταξινόμηση</button>
         </p>
 
-        <form action="Admin_user.php" method="post">
+        <form action="Profile.php" method="post">
             <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
             <button type="submit" name="submit">Αναζήτηση</button>
         </form>
@@ -245,6 +245,102 @@ if (!isset($_SESSION['connected_id'])){
 
         ?>
 
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
+            //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
+            $search = $_POST["search"];
+            $query = "SELECT * FROM  action  WHERE id LIKE '%{$search}%' OR title LIKE '%{$search}%' OR date LIKE '%{$search}%' OR description LIKE '%{$search}%'  OR location LIKE '%{$search}%'";
+            $results = mysqli_query($link, $query);
+            $num_results = mysqli_num_rows($results);
+            if ($num_results == 0) {    // αν δεν υπάρχουν αποτελέσματα
+                echo "<h3>Δεν βρέθηκαν αποτελέσματα αναζήτησης για " . $search ." !</h3>";
+            } else {    // αν υπάρχουν αποτελέσματα στην αναζήτηση
+                echo "<h3>Αποτελέσματα αναζήτησης</h3>";
+                echo "<table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Τίτλος</th>
+                            <th>Ημερομηνία</th>
+                            <th>Τοποθεσία</th>
+                            <th>Περιγραφή</th>
+                            <th>Εικόνα</th>
+                            <th>Σύνδεσμος</th>
+                            <th class='keno'></th>
+                        </tr>";
+                while ($row = mysqli_fetch_array($results)) {
+                    echo '<tr>';
+                    echo '<td>' . $row['id'] . '</td>';
+                    echo '<td>' . $row['title'] . '</td>';
+                    echo '<td>' . $row['date'] . '</td>';
+                    echo '<td>' . $row['location'] . '</td>';
+                    echo '<td>' . $row['description'] . '</td>';
+                    echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
+                    echo '<td>' . $row['link'] . '</td>';
+                    echo "<td class='keno'>
+                           <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
+                       </td>";
+                    echo '</tr>';
+                }
+                @mysqli_free_result($results);
+                echo '</table>';
+            }
+            $_POST["search"] = null;
+
+        } else { // αν ο χρήστης δεν πατήσει το κουμπί για αναζήτηση (δεν κληθεί η POST)
+            //echo '<h4>'.'DEN KANEI method post == Αναζήτηση' . '</h4>';
+            echo "<table>
+                        <tr>
+                            <th>id</th>
+                            <th>Τίτλος</th>
+                            <th>Ημερομηνία</th>
+                            <th>Τοποθεσία</th>
+                            <th>Περιγραφή</th>
+                            <th>Εικόνα</th>
+                            <th>Σύνδεσμος</th>
+                            <th class='keno'></th>
+                        </tr>";
+            // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
+            //7
+            if (isset($_GET['sortBy_id_action'])) {
+                $query = "SELECT * FROM action ORDER BY id LIMIT $offset, $total_records_per_page";
+            }elseif (isset($_GET['sortBy_title'])) {
+                $query = "SELECT * FROM action ORDER BY title LIMIT $offset, $total_records_per_page";
+            }elseif (isset($_GET['sortBy_date'])) {
+                $query = "SELECT * FROM action ORDER BY date LIMIT $offset, $total_records_per_page";
+            }elseif (isset($_GET['sortBy_location'])) {
+                $query = "SELECT * FROM action ORDER BY location LIMIT $offset, $total_records_per_page";
+            }else {
+                $query = "SELECT * FROM action LIMIT $offset, $total_records_per_page";
+            }
+
+            $results = mysqli_query($link, $query);
+
+            while ($row = mysqli_fetch_array($results)) {
+                echo '<tr>';
+                echo '<td>' . $row['id'] . '</td>';
+                echo '<td>' . $row['title'] . '</td>';
+                echo '<td>' . $row['date'] . '</td>';
+                echo '<td>' . $row['location'] . '</td>';
+                echo '<td>' . $row['description'] . '</td>';
+                echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
+                echo '<td>' . $row['link'] . '</td>';
+                echo "<td class='keno'>
+                           <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
+                      </td>";
+                echo '</tr>';
+            }
+
+            echo '</table>';
+            include("show_number_of_pages.php");
+            echo '<div class="table_page" style="padding: 10px 20px 0px; border-top: dotted 1px #CCC;">
+                        <strong>Σελίδα '. $page_no.'/'.$total_no_of_pages .'</strong>
+                  </div>';
+        }
+        ?>
+
+
+
+        <!-- old
         <table>
             <tr>
                 <th>ID</th>
@@ -255,6 +351,7 @@ if (!isset($_SESSION['connected_id'])){
                 <th>Σύνδεσμος</th>
                 <th class="keno"></th>
             </tr>
+            -->
 
             <?php //εμφανίζουμε τον πίνακα των δράσεων που συμμετέχει ο συγκεκριμένος χρήστης, σελιδοποιημένο κατά 10
             //include ("connect_to_database.php");
@@ -284,6 +381,8 @@ if (!isset($_SESSION['connected_id'])){
                 $total_records = $total_records['total_records'];
                 $total_no_of_pages = ceil($total_records / $total_records_per_page);
                 $second_last = $total_no_of_pages - 1; // total pages minus 1 */
+
+            /*
                 $query = "SELECT action.id, action.title, action.date, action.location, action.description, action.link 
                       FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id 
                       WHERE user_in_action.user_id = $current_user_id";
@@ -316,18 +415,18 @@ if (!isset($_SESSION['connected_id'])){
                     </td>";
                     echo '</tr>';
                 }
-
+*/
             ?>
 
         </table>
 
         <?php //εμφανίζουμε τη λίστα των σελίδων
-        include("show_number_of_pages.php");
+        //include("show_number_of_pages.php");
         ?>
 
-        <div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-            <strong>Σελίδα <?php echo $page_no."/".$total_no_of_pages; ?></strong>
-        </div>
+        <!--div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+            <strong>Σελίδα <?php //echo $page_no."/".$total_no_of_pages; ?></strong>
+        </div-->
     </div>
 </div>
 

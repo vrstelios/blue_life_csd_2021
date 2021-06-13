@@ -286,6 +286,107 @@ function print_size_of_table($link, $table){
             echo "</div>";
         ?>
 
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
+            //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
+            //!include ("connect_to_database.php");
+            $search = $_POST["search"];
+            //$results = null;
+            $query = "SELECT * FROM  action  WHERE id LIKE '%{$search}%' OR title LIKE '%{$search}%' OR date LIKE '%{$search}%' OR description LIKE '%{$search}%'  OR location LIKE '%{$search}%'";
+            $results = mysqli_query($link, $query);
+            $num_results = mysqli_num_rows($results);
+            if ($num_results == 0) {    // αν δεν υπάρχουν αποτελέσματα
+                echo "<h3>Δεν βρέθηκαν αποτελέσματα αναζήτησης για " . $search ." !</h3>";
+            } else {    // αν υπάρχουν αποτελέσματα στην αναζήτηση
+                echo "<h3>Αποτελέσματα αναζήτησης</h3>";
+                echo "<table>
+                        <tr>
+                            <th>id</th>
+                            <th>Τίτλος</th>
+                            <th>Ημερομηνία</th>
+                            <th>Τοποθεσία</th>
+                            <th>Περιγραφή</th>
+                            <th>Εικόνα</th>
+                            <th>Σύνδεσμος</th>
+                            <th class='keno'></th>
+                        </tr>";
+                while ($row = mysqli_fetch_array($results)) {
+                    echo '<tr>';
+                    echo '<td>' . $row['id'] . '</td>';
+                    echo '<td>' . $row['title'] . '</td>';
+                    echo '<td>' . $row['date'] . '</td>';
+                    echo '<td>' . $row['location'] . '</td>';
+                    echo '<td>' . $row['description'] . '</td>';
+                    echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
+                    echo '<td>' . $row['link'] . '</td>';
+                    echo "<td class='keno'>
+                   <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                   <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
+               </td>";
+                    echo '</tr>';
+                }
+                @mysqli_free_result($results);
+                echo '</table>';
+            }
+            $_POST["search"] = null;
+
+        } else { // αν ο χρήστης δεν πατήσει το κουμπί για αναζήτηση (δεν κληθεί η POST)
+            //echo '<h4>'.'DEN KANEI method post == Αναζήτηση' . '</h4>';
+            echo "<table>
+                        <tr>
+                            <th>id</th>
+                            <th>Τίτλος</th>
+                            <th>Ημερομηνία</th>
+                            <th>Τοποθεσία</th>
+                            <th>Περιγραφή</th>
+                            <th>Εικόνα</th>
+                            <th>Σύνδεσμος</th>
+                            <th class='keno'></th>
+                        </tr>";
+            // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
+            //7
+            if (isset($_GET['sortBy_id_action'])) {
+                $query = "SELECT * FROM action ORDER BY id LIMIT $offset, $total_records_per_page";
+            }elseif (isset($_GET['sortBy_title'])) {
+                $query = "SELECT * FROM action ORDER BY title LIMIT $offset, $total_records_per_page";
+            }elseif (isset($_GET['sortBy_date'])) {
+                $query = "SELECT * FROM action ORDER BY date LIMIT $offset, $total_records_per_page";
+            }elseif (isset($_GET['sortBy_location'])) {
+                $query = "SELECT * FROM action ORDER BY location LIMIT $offset, $total_records_per_page";
+            }else {
+                $query = "SELECT * FROM action LIMIT $offset, $total_records_per_page";
+            }
+
+            $results = mysqli_query($link, $query);
+
+            while ($row = mysqli_fetch_array($results)) {
+                echo '<tr>';
+                echo '<td>' . $row['id'] . '</td>';
+                echo '<td>' . $row['title'] . '</td>';
+                echo '<td>' . $row['date'] . '</td>';
+                echo '<td>' . $row['location'] . '</td>';
+                echo '<td>' . $row['description'] . '</td>';
+                echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
+                echo '<td>' . $row['link'] . '</td>';
+                echo "<td class='keno'>
+                           <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                           <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
+                      </td>";
+                echo '</tr>';
+            }
+
+            echo '</table>';
+            include("show_number_of_pages.php");
+            echo '<div class="table_page" style="padding: 10px 20px 0px; border-top: dotted 1px #CCC;">
+                        <strong>Σελίδα '. $page_no.'/'.$total_no_of_pages .'</strong>
+                  </div>';
+        }
+        ?>
+
+
+
+
+        <!--old
         <table>
             <tr>
                 <th>id</th>
@@ -297,9 +398,11 @@ function print_size_of_table($link, $table){
                 <th>Σύνδεσμος</th>
                 <th class="keno"></th>
             </tr>
+            -->
 
         <?php // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
         //include ("connect_to_database.php");
+        /*
         if (isset($_GET['sortBy_id_action'])) {
             $query = "SELECT * FROM action ORDER BY id LIMIT $offset, $total_records_per_page";
         }elseif (isset($_GET['sortBy_title'])) {
@@ -327,17 +430,17 @@ function print_size_of_table($link, $table){
                    <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
                </td>";
             echo '</tr>';
-        }
+        }*/
         ?>
-        </table>
+        <!--/table-->
 
         <?php //εμφανίζουμε τη λίστα των σελίδων
-        include("show_number_of_pages.php");
+        //include("show_number_of_pages.php");
         ?>
 
-        <div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-            <strong>Σελίδα <?php echo $page_no."/".$total_no_of_pages; ?></strong>
-        </div>
+        <!--div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+            <strong>Σελίδα <?php //echo $page_no."/".$total_no_of_pages; ?></strong>
+        </div-->
     </div>
 
     <script>

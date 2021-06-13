@@ -61,7 +61,7 @@ function print_size_of_table($link, $table){
             <button class="table_button">Ταξινόμηση</button>
         </p>
 
-        <form action="Admin_user.php" method="post">
+        <form action="Admin_contact.php" method="post">
             <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
             <button type="submit" name="submit">Αναζήτηση</button>
         </form>
@@ -102,6 +102,96 @@ function print_size_of_table($link, $table){
 
         ?>
 
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
+            //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
+            $search = $_POST["search"];
+            $query = ("SELECT * FROM  contact  WHERE id LIKE '%{$search}%' OR email LIKE '%{$search}%' OR last_name LIKE '%{$search}%' OR date_of_comment LIKE '%{$search}%' OR comment LIKE '%{$search}%'  OR first_name LIKE '%{$search}%'");
+            $results = mysqli_query($link, $query);
+            $num_results = mysqli_num_rows($results);
+            if ($num_results == 0) {    // αν δεν υπάρχουν αποτελέσματα
+                echo "<h3>Δεν βρέθηκαν αποτελέσματα αναζήτησης για " . $search ." !</h3>";
+            } else {    // αν υπάρχουν αποτελέσματα στην αναζήτηση
+                echo "<h3>Αποτελέσματα αναζήτησης</h3>";
+                echo "<table>
+                        <tr>
+                            <th>id</th>
+                            <th>Όνομα</th>
+                            <th>Επίθετο</th>
+                            <th>Email</th>
+                            <th>Ημερομηνία</th>
+                            <th class='keno'></th>
+                        </tr>";
+                while ($row = mysqli_fetch_array($results)) {
+                    echo '<tr>';
+                    echo '<td>' . $row['id'] . '</td>';
+                    echo '<td>' . $row['first_name'] . '</td>';
+                    echo '<td>' . $row['last_name'] . '</td>';
+                    echo '<td>' . $row['email'] . '</td>';
+                    echo '<td>' . $row['date_of_comment'] . '</td>';
+                    echo "<td class='keno'>
+                              <a href='?contact_id=".$row['id']."' ><button class='table_button cyan'>Προβολή</button></a>                     
+                          </td>";
+                    echo '</tr>';
+                }
+                @mysqli_free_result($results);
+                echo '</table>';
+            }
+            $_POST["search"] = null;
+
+        } else { // αν ο χρήστης δεν πατήσει το κουμπί για αναζήτηση (δεν κληθεί η POST)
+            //echo '<h4>'.'DEN KANEI method post == Αναζήτηση' . '</h4>';
+            echo "<table>
+                        <tr>
+                            <th>id</th>
+                            <th>Όνομα</th>
+                            <th>Επίθετο</th>
+                            <th>Email</th>
+                            <th>Ημερομηνία</th>
+                            <th class='keno'></th>
+                        </tr>";
+            // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
+            //7
+            if (isset($_GET['sortBy_contact_id'])) {
+                $query = "SELECT * FROM contact ORDER BY id LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_contact_firstname'])) {
+                $query = "SELECT * FROM contact ORDER BY first_name LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_contact_lastname'])) {
+                $query = "SELECT * FROM contact ORDER BY last_name LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_contact_email'])) {
+                $query = "SELECT * FROM contact ORDER BY email LIMIT $offset, $total_records_per_page";
+            } elseif (isset($_GET['sortBy_contact_date'])) {
+                $query = "SELECT * FROM contact ORDER BY date_of_comment LIMIT $offset, $total_records_per_page";
+            } else {
+                $query = "SELECT * FROM contact LIMIT $offset, $total_records_per_page";
+            }
+
+            $results = mysqli_query($link, $query);
+
+            while ($row = mysqli_fetch_array($results)) {
+                echo '<tr>';
+                echo '<td>' . $row['id'] . '</td>';
+                echo '<td>' . $row['first_name'] . '</td>';
+                echo '<td>' . $row['last_name'] . '</td>';
+                echo '<td>' . $row['email'] . '</td>';
+                echo '<td>' . $row['date_of_comment'] . '</td>';
+                echo "<td class='keno'>
+                        <a href='?contact_id=".$row['id']."' ><button class='table_button cyan'>Προβολή</button></a>                     
+                    </td>";
+                echo '</tr>';
+            }
+
+            echo '</table>';
+            include("show_number_of_pages.php");
+            echo '<div class="table_page" style="padding: 10px 20px 0px; border-top: dotted 1px #CCC;">
+                        <strong>Σελίδα '. $page_no.'/'.$total_no_of_pages .'</strong>
+                  </div>';
+        }
+        ?>
+
+
+
+        <!-- old
         <table>
             <tr>
                 <th>id</th>
@@ -111,9 +201,11 @@ function print_size_of_table($link, $table){
                 <th>Ημερομηνία</th>
                 <th class="keno"></th>
             </tr>
+            -->
 
             <?php // εμφανίζουμε τον πίνακα των σχόλιων με τα στοιχεία τους, σελιδοποιημένο κατά 10
             //include ("connect_to_database.php");
+            /*
             if (isset($_GET['sortBy_contact_id'])) {
                 $query = "SELECT * FROM contact ORDER BY id LIMIT $offset, $total_records_per_page";
             } elseif (isset($_GET['sortBy_contact_firstname'])) {
@@ -144,16 +236,17 @@ function print_size_of_table($link, $table){
                     </td>";
                 echo '</tr>';
             }
+            */
             ?>
         </table>
 
         <?php //εμφανίζουμε τη λίστα των σελίδων σαν μενού κάτω από τον πίνακα
-        include("show_number_of_pages.php");
+        //include("show_number_of_pages.php");
         ?>
 
-        <div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+        <!--div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
             <strong>Σελίδα <?php echo $page_no."/".$total_no_of_pages; ?></strong>
-        </div>
+        </div-->
     </div>
 
     <script>

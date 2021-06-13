@@ -73,7 +73,7 @@ function print_size_of_table($link, $table){
             <button class="table_button">Ταξινόμηση</button>
         </p>
 
-        <form action="Admin_user.php" method="post">
+        <form action="Admin_user_in_action.php" method="post">
             <input type="text" placeholder="Πληκτρολογήστε εδώ" name="search">
             <button type="submit" name="submit">Αναζήτηση</button>
         </form>
@@ -115,7 +115,107 @@ function print_size_of_table($link, $table){
 
         ?>
 
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
+            //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
+            //!include ("connect_to_database.php");
+            $search = $_POST["search"];
+            //$results = null;
+            $query =  "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
+                      FROM user, user_in_action, action
+                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id AND (user_in_action.user_id  LIKE '%{$search}%' OR user_in_action.action_id LIKE '%{$search}%' OR user.username LIKE '%{$search}%' OR action.title LIKE '%{$search}%' OR user_in_action.date_joined LIKE '%{$search}%')";
+            $results = mysqli_query($link, $query);
+            $num_results = mysqli_num_rows($results);
+            if ($num_results == 0) {    // αν δεν υπάρχουν αποτελέσματα
+                echo "<h3>Δεν βρέθηκαν αποτελέσματα αναζήτησης για " . $search ." !</h3>";
+            } else {    // αν υπάρχουν αποτελέσματα στην αναζήτηση
+                echo "<table>
+                        <tr>
+                            <th>id χρήστη</th>
+                            <th>id δράσης</th>
+                            <th>Username συμμετέχοντα</th>
+                            <th>Τίτλος δράσης</th>
+                            <th>Ημερομηνία δήλωσης συμμετοχής</th>
+                            <th class='keno'></th>
+                        </tr>";
+                while($row = mysqli_fetch_array($results)){
+                    echo "<tr>
+                     <td>".$row['user_id']."</td>
+                     <td>".$row['action_id']."</td>
+                     <td>".$row['username']."</td>
+                     <td>".$row['title']."</td>
+                     <td>".$row['date_joined']."</td>";
+                    echo "<td class='keno'>
+                     <a href='?delete_user=" . $row['user_id'] .  "&delete_action=" . $row['action_id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                     </tr>";
+                }
+                @mysqli_free_result($results);
+                echo '</table>';
+            }
+            $_POST["search"] = null;
 
+        } else { // αν ο χρήστης δεν πατήσει το κουμπί για αναζήτηση (δεν κληθεί η POST)
+            //echo '<h4>'.'DEN KANEI method post == Αναζήτηση' . '</h4>';
+            echo "<table>
+                        <tr>
+                            <th>id χρήστη</th>
+                            <th>id δράσης</th>
+                            <th>Username συμμετέχοντα</th>
+                            <th>Τίτλος δράσης</th>
+                            <th>Ημερομηνία δήλωσης συμμετοχής</th>
+                            <th class='keno'></th>
+                        </tr>";
+            // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
+            //7
+            if (isset($_GET['sortBy_action_id'])) {
+                $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
+                      FROM user, user_in_action, action
+                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id ORDER BY user_in_action.action_id LIMIT $offset, $total_records_per_page";
+            }elseif (isset($_GET['sortBy_username1'])) {
+                $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
+                      FROM user, user_in_action, action
+                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id ORDER BY user.username LIMIT $offset, $total_records_per_page";
+            }elseif (isset($_GET['sortBy_user_id'])) {
+                $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
+                      FROM user, user_in_action, action
+                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id ORDER BY user_in_action.user_id LIMIT $offset, $total_records_per_page";
+            }elseif (isset($_GET['sortBy_title1'])) {
+                $query =  "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
+                      FROM user, user_in_action, action
+                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id ORDER BY action.title LIMIT $offset, $total_records_per_page";
+            }elseif (isset($_GET['sortBy_date_joined'])) {
+                $query =  "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
+                      FROM user, user_in_action, action
+                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id ORDER BY user_in_action.date_joined LIMIT $offset, $total_records_per_page";
+            }else {
+                $query =  "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
+                      FROM user, user_in_action, action
+                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id LIMIT $offset, $total_records_per_page";
+            }
+
+            $result = mysqli_query($link, $query);
+            while($row = mysqli_fetch_array($result)){
+                echo "<tr>
+                     <td>".$row['user_id']."</td>
+                     <td>".$row['action_id']."</td>
+                     <td>".$row['username']."</td>
+                     <td>".$row['title']."</td>
+                     <td>".$row['date_joined']."</td>";
+                echo "<td class='keno'>
+                     <a href='?delete_user=" . $row['user_id'] .  "&delete_action=" . $row['action_id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                     </tr>";
+            }
+            echo '</table>';
+            include("show_number_of_pages.php");
+            echo '<div class="table_page" style="padding: 10px 20px 0px; border-top: dotted 1px #CCC;">
+                        <strong>Σελίδα '. $page_no.'/'.$total_no_of_pages .'</strong>
+                  </div>';
+        }
+        ?>
+
+
+
+        <!--old
         <table>
             <tr>
                 <th>id χρήστη</th>
@@ -125,10 +225,12 @@ function print_size_of_table($link, $table){
                 <th>Ημερομηνία δήλωσης συμμετοχής</th>
                 <th class="keno"></th>
             </tr>
+            -->
 
             <?php // εμφανίζουμε τον πίνακα των χρηστών που συμμετέχουν σε κάποια δράση με τα στοιχεία τους, σελιδοποιημένο κατά 10
             //include ("connect_to_database.php");
             //7
+            /*
             if (isset($_GET['sortBy_action_id'])) {
                 $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
                       FROM user, user_in_action, action
@@ -171,17 +273,17 @@ function print_size_of_table($link, $table){
                 echo "<td class='keno'>
                      <a href='?delete_user=" . $row['user_id'] .  "&delete_action=" . $row['action_id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
                      </tr>";
-            }
+            }*/
             ?>
         </table>
 
         <?php //εμφανίζουμε τη λίστα των σελίδων
-        include("show_number_of_pages.php");
+        //include("show_number_of_pages.php");
         ?>
 
-        <div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-            <strong>Σελίδα <?php echo $page_no."/".$total_no_of_pages; ?></strong>
-        </div>
+        <!--div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+            <strong>Σελίδα <?php //echo $page_no."/".$total_no_of_pages; ?></strong>
+        </div-->
     </div>
 
 
