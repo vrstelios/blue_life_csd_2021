@@ -73,10 +73,11 @@ session_start();
     echo "<h3>";
     echo $row['title'] ;
     echo "</h3>";
-    echo '<img src="../images/2.Categories/Animals_shark.jpg" alt="corals and fishes"  >';
+    echo '<img src="../images/2.Categories/Animals_turtle.jpg" alt="turtle in the beach"  >';
     echo "<p>";
     echo $row['description'] ;
     echo "</p>";
+
     ?>
     <!--<h3>Θαλάσσια είδη υπό εξαφάνιση</h3>-->
 
