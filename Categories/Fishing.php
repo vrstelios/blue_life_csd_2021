@@ -39,9 +39,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=23";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo '<img src="../images/2.Categories/Fishing_boat.jpg" alt="fishing" >';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Ο κίνδυνος κατάρρευσης του κλάδου της αλιείας</h3>-->
 
@@ -72,9 +76,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=24";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo '<img src="../images/2.Categories/Fishing_ship1.jpg" alt="ships" >';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Οι θαλάσσιες μεταφορές και το παγκόσμιο εμπόριο</h3>-->
 
@@ -113,9 +121,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=25";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo ' <img src="../images/2.Categories/Fishing_ship2.jpg" alt="fish" >';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Ο COVID-19 μειώνει το παγκόσμιο θαλάσσιο εμπόριο</h3>-->
 
@@ -141,6 +153,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
+    echo "<br>";
     echo $row['description'] ;
     ?>
     <!--Πηγές: <br>

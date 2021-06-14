@@ -39,9 +39,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=20";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo '<img src="../images/2.Categories/Animals_seabed.jpg" alt="sharks" >';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Βασικές κατηγορίες θαλάσσιων ζώων</h3>-->
 
@@ -66,9 +70,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=21";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo '<img src="../images/2.Categories/Animals_shark.jpg" alt="corals and fishes"  >';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Θαλάσσια είδη υπό εξαφάνιση</h3>-->
 
@@ -99,6 +107,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
+    echo "<br>";
     echo $row['description'] ;
     ?>
     <!--Πηγές: <br>

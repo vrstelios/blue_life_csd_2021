@@ -42,7 +42,10 @@ session_start();
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
         echo '<img src="../images/4.Did-you-know-that/iceberg.jpg" alt="iceberg" >';
+        echo "<li>";
         echo $row['title'] ;
+        echo "</li>";
+        echo "<p>";
         echo $row['description'] ;
         ?>
         <!--<img src="images/4.Did-you-know-that/iceberg.jpg" alt="iceberg" >
@@ -54,8 +57,12 @@ session_start();
         $query = "SELECT * FROM article WHERE id=28";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
+        echo "<li>";
         echo $row['title'] ;
+        echo "</li>";
+        echo "<p>";
         echo $row['description'] ;
+        echo "</p>";
         ?>
 
         <!--<li>Υπάρχει ένα "φύλλο" πάγου μεγαλύτερο από τις ηπειρωτικές Ηνωμένες Πολιτείες.</li>
@@ -67,8 +74,12 @@ session_start();
         $query = "SELECT * FROM article WHERE id=29";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
-        echo $row['title'] ;
-        echo $row['description'] ;
+         echo "<li>";
+         echo $row['title'] ;
+         echo "</li>";
+         echo "<p>";
+         echo $row['description'] ;
+         echo "</p>";
         ?>
         <!--<li>Ένα παγόβουνο θα μπορούσε να τροφοδοτήσει ένα εκατομμύριο ανθρώπους με πόσιμο νερό για πέντε χρόνια</li>
         <p>Ένα μεγάλο παγόβουνο από την Ανταρκτική περιέχει περισσότερα από 20 δισεκατομμύρια γαλόνια νερού.Γι αυτό μια
@@ -79,8 +90,12 @@ session_start();
         $query = "SELECT * FROM article WHERE id=30";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
+        echo "<li>";
         echo $row['title'] ;
+        echo "</li>";
+        echo "<p>";
         echo $row['description'] ;
+        echo "</p>";
         ?>
 
         <!--<li>Το νερό στο κάτω μέρος του ωκεανού είναι απίστευτα ζεστό.</li>
@@ -92,8 +107,12 @@ session_start();
         $query = "SELECT * FROM article WHERE id=31";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
+        echo "<li>";
         echo $row['title'] ;
+        echo "</li>";
+        echo "<p>";
         echo $row['description'] ;
+        echo "</p>";
         ?>
         <!--<li>Το νερό από τον πάγο του θαλλασινού νερού είναι πόσιμο</li>
         <p>Δεν μπορείτε να πιείτε θαλασσινό νερό, αλλά μπορείτε να πιείτε πάγο από θαλασσινό νερό. Ο φρέσκος πάγος έχει
@@ -104,8 +123,12 @@ session_start();
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
         echo ' <img src="../images/4.Did-you-know-that/seabed.jpg" alt="uderwater life" >';
-        echo $row['title'] ;
-        echo $row['description'] ;
+         echo "<li>";
+         echo $row['title'] ;
+         echo "</li>";
+         echo "<p>";
+         echo $row['description'] ;
+         echo "</p>";
         ?>
 
         <!--<img src="images/4.Did-you-know-that/seabed.jpg" alt="uderwater life" >
@@ -118,8 +141,12 @@ session_start();
         $query = "SELECT * FROM article WHERE id=33";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
-        echo $row['title'] ;
-        echo $row['description'] ;
+         echo "<li>";
+         echo $row['title'] ;
+         echo "</li>";
+         echo "<p>";
+         echo $row['description'] ;
+         echo "</p>";
         ?>
 
        <!-- <li>Ο ωκεανός φιλοξενεί σχεδόν το 95% όλης της ζωής</li>
@@ -132,8 +159,12 @@ session_start();
         $query = "SELECT * FROM article WHERE id=34";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
+        echo "<li>";
         echo $row['title'] ;
+        echo "</li>";
+        echo "<p>";
         echo $row['description'] ;
+        echo "</p>";
         ?>
 
        <!-- <li>Περισσότερο από το 90 τοις εκατό των μορφών ζωής του πλανήτη δεν έχουν ανακαλυφθεί ακόμα καθώς βρίσκονται υποβρύχια.</li>
@@ -145,8 +176,12 @@ session_start();
         $query = "SELECT * FROM article WHERE id=35";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
+        echo "<li>";
         echo $row['title'] ;
+        echo "</li>";
+        echo "<p>";
         echo $row['description'] ;
+        echo "</p>";
         ?>
 
         <!--<li>Υπάρχουν 3 εκατομμύρια ναυάγια στον ωκεανό</li>
@@ -157,8 +192,12 @@ session_start();
         $query = "SELECT * FROM article WHERE id=36";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
-        echo $row['title'] ;
-        echo $row['description'] ;
+         echo "<li>";
+         echo $row['title'] ;
+         echo "</li>";
+         echo "<p>";
+         echo $row['description'] ;
+         echo "</p>";
         ?>
 
         <!--<li>Υπάρχει αρκετός χρυσός στον ωκεανό για να έχει ο καθένας μας 9 κιλά</li>
@@ -169,8 +208,12 @@ session_start();
         $query = "SELECT * FROM article WHERE id=37";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
+        echo "<li>";
         echo $row['title'] ;
+        echo "</li>";
+        echo "<p>";
         echo $row['description'] ;
+        echo "</p>";
         ?>
 
         <!--<li>Η Τάφρος των Μαριανών (Mariana Trench) είναι το βαθύτερο σημείο των ωκεανών του πλανήτη</li>
@@ -182,8 +225,12 @@ session_start();
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
         echo '<img src="../images/4.Did-you-know-that/scuba-diving.jpg" alt="ship underwater" >';
+        echo "<li>";
         echo $row['title'] ;
+        echo "</li>";
+        echo "<p>";
         echo $row['description'] ;
+        echo "</p>";
         ?>
 
 
@@ -194,8 +241,12 @@ session_start();
         $query = "SELECT * FROM article WHERE id=39";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
+        echo "<li>";
         echo $row['title'] ;
+        echo "</li>";
+        echo "<p>";
         echo $row['description'] ;
+        echo "</p>";
         ?>
 
         <!--<li>Ο ωκεανός είναι η μεγαλύτερη πηγή οξυγόνου μας</li>
@@ -209,6 +260,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
+    echo "<br>";
     echo $row['description'] ;
     ?>
     <!--Πηγές: <br>
