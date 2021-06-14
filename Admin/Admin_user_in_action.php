@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Σελίδα διαχείρισης</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_admin.css">
     <?php
     if (isset($_GET['delete_user']) && isset($_GET['delete_action'])  && $_SESSION['connected_id']==1) {
@@ -17,7 +17,7 @@ session_start();
 
     function delete_user_in_action($delete_user_id, $delete_action_id)
     {
-        include("connect_to_database.php");
+        include("../General-components/connect_to_database.php");
         $query = "DELETE FROM user_in_action WHERE user_id=$delete_user_id AND action_id=$delete_action_id";
         mysqli_query($link, $query);
         $_SESSION['remove_user_from_action'] = "REMOVE_USER_FROM_ACTION";
@@ -31,7 +31,7 @@ session_start();
 </header>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">
@@ -42,10 +42,10 @@ session_start();
 <?php
 // αν ο χρήστης δεν είναι ο admin και προσπαθήσει να φορτώσει την σελίδα Admin_user_in_action.php τότε φορτώνεται η σελίδα UnauthorizedProfile.php για την ασφάλεια και απόκρυψη των στοιχείων
 if ($_SESSION['connected_id'] != 1){
-    header("Location: UnauthorizedProfile.php");
+    header("Location: ../Profile/UnauthorizedProfile.php");
 }
 $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-include("connect_to_database.php");
+include("../General-components/connect_to_database.php");
 
 function print_size_of_table($link, $table){
     $query = "SELECT COUNT(*) FROM $table";
@@ -72,7 +72,7 @@ function print_size_of_table($link, $table){
             ?>
             <?php
             // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
-            include ("connect_to_database.php");
+            include("../General-components/connect_to_database.php");
             if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                 $page_no = $_GET['page_no'];
             } else {
@@ -116,7 +116,7 @@ function print_size_of_table($link, $table){
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
             //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
-            //!include ("connect_to_database.php");
+            //!include ("../General-components/connect_to_database.php");
             $search = $_POST["search"];
             //$results = null;
             $query =  "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
@@ -144,7 +144,7 @@ function print_size_of_table($link, $table){
                      <td>".$row['title']."</td>
                      <td>".$row['date_joined']."</td>";
                     echo "<td class='keno'>
-                     <a href='?delete_user=" . $row['user_id'] .  "&delete_action=" . $row['action_id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                     <a href='?delete_user=" . $row['user_id'] .  "&delete_action=" . $row['action_id'] . "'><img src='../images/6.Admin/delete-bin.png' alt='delete'></a>
                      </tr>";
                 }
                 @mysqli_free_result($results);
@@ -200,11 +200,11 @@ function print_size_of_table($link, $table){
                      <td>".$row['title']."</td>
                      <td>".$row['date_joined']."</td>";
                 echo "<td class='keno'>
-                     <a href='?delete_user=" . $row['user_id'] .  "&delete_action=" . $row['action_id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                     <a href='?delete_user=" . $row['user_id'] .  "&delete_action=" . $row['action_id'] . "'><img src='../images/6.Admin/delete-bin.png' alt='delete'></a>
                      </tr>";
             }
             echo '</table>';
-            include("show_number_of_pages.php");
+            include("../General-components/show_number_of_pages.php");
             echo '<div class="table_page" style="padding: 10px 20px 0px; border-top: dotted 1px #CCC;">
                         <strong>Σελίδα '. $page_no.'/'.$total_no_of_pages .'</strong>
                   </div>';
@@ -245,10 +245,10 @@ function print_size_of_table($link, $table){
 </div>
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 
 </body>
 </html>

@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Blue Life</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_home.css">
 </head>
 <body>
@@ -16,16 +16,16 @@ session_start();
     <h1>Blue Life</h1>
 </header>
 <!---------------database--------------->
-<?php include("connect_to_database.php") ?>
+<?php include("../General-components/connect_to_database.php") ?>
 
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php")?>
+<?php include("../General-components/navigation.php") ?>
 
 
 <!---------------Title section--------------->
 <video autoplay muted loop id="myVideo">
-    <source src="images/1.Home/Sea-home.mp4" type="video/mp4">
+    <source src="../images/1.Home/Sea-home.mp4" type="video/mp4">
 </video>
 <div class="home-page-title">
     <?php
@@ -48,7 +48,7 @@ session_start();
 <div class="home_articles">
     <div class="row">
         <div class="column left">
-            <img src="images/1.Home/waves.jpg" alt="Wild sea"/>
+            <img src="../images/1.Home/waves.jpg" alt="Wild sea"/>
         </div>
         <div class="column right">
             <?php
@@ -103,10 +103,10 @@ session_start();
             <p>Σίγουρα όλοι μας θα έχουμε αναρωτηθεί κάποια στιγμή τι μπορούμε να κάνουμε για να συνεισφέρουμε ενεργά στην προστασία των θαλάσσιων κόσμων.<br>
                 Πάρε τώρα μέρος στις δράσεις που διοργανώνουμε και σώσε τις θάλασσες!
             </p>-->
-            <a href="Actions.php"><button class="youCanHelpHomeButton"> Δες πώς μπορείς να βοηθήσεις! </button></a>
+            <a href="../Actions/Actions.php"><button class="youCanHelpHomeButton"> Δες πώς μπορείς να βοηθήσεις! </button></a>
         </div>
         <div class="column right2">
-            <img src="images/1.Home/Home_helpSea.jpg" alt="You can do it"/>
+            <img src="../images/1.Home/Home_helpSea.jpg" alt="You can do it"/>
         </div>
     </div>
 </div>
@@ -114,7 +114,7 @@ session_start();
 <div class="home_articles">
     <div class="row">
         <div class="column left">
-            <img src="images/1.Home/bubbles.jpg" alt="Cute Bubbles"/>
+            <img src="../images/1.Home/bubbles.jpg" alt="Cute Bubbles"/>
         </div>
         <div class="column right">
             <?php
@@ -168,7 +168,7 @@ session_start();
             </p>-->
         </div>
         <div class="column right2">
-            <img src="images/1.Home/dry_water.jpg" alt="Wave"/>
+            <img src="../images/1.Home/dry_water.jpg" alt="Wave"/>
         </div>
     </div>
     <?php
@@ -189,23 +189,23 @@ session_start();
     <hr>
     <div class="gallery">
         <div class="box">
-            <span style="--i:1;"><img src="images/1.Home/Gallery-3d/wave.jpg" alt="Κύμα"></span>
-            <span style="--i:2;"><img src="images/1.Home/Gallery-3d/lake.jpg" alt="Λίμνη"></span>
-            <span style="--i:3;"><img src="images/1.Home/Gallery-3d/view-river.jpg" alt="Ποτάμι"></span>
-            <span style="--i:4;"><img src="images/1.Home/Gallery-3d/fish-tank.jpg" alt="Ψάρι"></span>
-            <span style="--i:5;"><img src="images/1.Home/Gallery-3d/wetland.jpg" alt="Υδροβιότοπος"></span>
-            <span style="--i:6;"><img src="images/1.Home/Gallery-3d/fishing-boat.jpg" alt="Ψάρεμα"></span>
-            <span style="--i:7;"><img src="images/1.Home/Gallery-3d/lake-mountain.jpg" alt="Λίμνη"></span>
-            <span style="--i:8;"><img src="images/1.Home/Gallery-3d/fish.jpg" alt="Ψάρια"></span>
+            <span style="--i:1;"><img src="../images/1.Home/Gallery-3d/wave.jpg" alt="Κύμα"></span>
+            <span style="--i:2;"><img src="../images/1.Home/Gallery-3d/lake.jpg" alt="Λίμνη"></span>
+            <span style="--i:3;"><img src="../images/1.Home/Gallery-3d/view-river.jpg" alt="Ποτάμι"></span>
+            <span style="--i:4;"><img src="../images/1.Home/Gallery-3d/fish-tank.jpg" alt="Ψάρι"></span>
+            <span style="--i:5;"><img src="../images/1.Home/Gallery-3d/wetland.jpg" alt="Υδροβιότοπος"></span>
+            <span style="--i:6;"><img src="../images/1.Home/Gallery-3d/fishing-boat.jpg" alt="Ψάρεμα"></span>
+            <span style="--i:7;"><img src="../images/1.Home/Gallery-3d/lake-mountain.jpg" alt="Λίμνη"></span>
+            <span style="--i:8;"><img src="../images/1.Home/Gallery-3d/fish.jpg" alt="Ψάρια"></span>
         </div>
     </div>
 </div>
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 
 
 </body>

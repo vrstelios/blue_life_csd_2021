@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Σελίδα διαχείρισης</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_admin.css">
     <?php
     ?>
@@ -19,7 +19,7 @@ session_start();
 </header>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">
@@ -30,10 +30,10 @@ session_start();
 <?php
 // αν ο χρήστης δεν είναι ο admin και προσπαθήσει να φορτώσει την σελίδα Admin_contact.php τότε φορτώνεται η σελίδα UnauthorizedProfile.php για την ασφάλεια και απόκρυψη των στοιχείων
 if ($_SESSION['connected_id'] != 1){
-    header("Location: UnauthorizedProfile.php");
+    header("Location: ../Profile/UnauthorizedProfile.php");
 }
 $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-include("connect_to_database.php");
+include("../General-components/connect_to_database.php");
 
 function print_size_of_table($link, $table){
     $query = "SELECT COUNT(*) FROM $table";
@@ -60,7 +60,7 @@ function print_size_of_table($link, $table){
             ?>
             <?php
             // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
-            include ("connect_to_database.php");
+            include("../General-components/connect_to_database.php");
             if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                 $page_no = $_GET['page_no'];
             } else {
@@ -180,7 +180,7 @@ function print_size_of_table($link, $table){
             }
 
             echo '</table>';
-            include("show_number_of_pages.php");
+            include("../General-components/show_number_of_pages.php");
             echo '<div class="table_page" style="padding: 10px 20px 0px; border-top: dotted 1px #CCC;">
                         <strong>Σελίδα '. $page_no.'/'.$total_no_of_pages .'</strong>
                   </div>';
@@ -209,7 +209,7 @@ function print_size_of_table($link, $table){
             <h3>Προβολή φόρμας</h3>
             <?php
             if (isset($_GET['contact_id'])) {
-                include("connect_to_database.php");
+                include("../General-components/connect_to_database.php");
                 $id = $_GET['contact_id'];
                 $query = "SELECT * FROM contact WHERE id=$id;";
                 $results = mysqli_query($link, $query);
@@ -233,10 +233,10 @@ function print_size_of_table($link, $table){
 </div>
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 
 </body>
 </html>

@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Ήξερες ότι...</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_dykt.css">
 </head>
 <body>
@@ -16,10 +16,10 @@ session_start();
     <h1>Blue Life</h1>
 </header>
 <!---------------database--------------->
-<?php include("connect_to_database.php") ?>
+<?php include("../General-components/connect_to_database.php") ?>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 
 <!---------------Title section--------------->
@@ -27,7 +27,7 @@ session_start();
     <div class='vidContain'>
         <div class='vid'>
             <video autoplay muted loop>
-                <source src="images/Main/Underwater2.mp4">
+                <source src="../images/Main/Underwater2.mp4">
             </video>
         </div>
         <h2>Ήξερες ότι...</h2>
@@ -41,7 +41,7 @@ session_start();
         $query = "SELECT * FROM article WHERE id=27";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
-        echo '<img src="images/4.Did-you-know-that/iceberg.jpg" alt="iceberg" >';
+        echo '<img src="../images/4.Did-you-know-that/iceberg.jpg" alt="iceberg" >';
         echo $row['title'] ;
         echo $row['description'] ;
         ?>
@@ -103,7 +103,7 @@ session_start();
         $query = "SELECT * FROM article WHERE id=32";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
-        echo ' <img src="images/4.Did-you-know-that/seabed.jpg" alt="uderwater life" >';
+        echo ' <img src="../images/4.Did-you-know-that/seabed.jpg" alt="uderwater life" >';
         echo $row['title'] ;
         echo $row['description'] ;
         ?>
@@ -181,7 +181,7 @@ session_start();
         $query = "SELECT * FROM article WHERE id=38";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
-        echo '<img src="images/4.Did-you-know-that/scuba-diving.jpg" alt="ship underwater" >';
+        echo '<img src="../images/4.Did-you-know-that/scuba-diving.jpg" alt="ship underwater" >';
         echo $row['title'] ;
         echo $row['description'] ;
         ?>
@@ -217,10 +217,10 @@ session_start();
 </div>
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 
 </body>
 </html>

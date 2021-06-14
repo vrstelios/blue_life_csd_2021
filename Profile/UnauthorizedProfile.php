@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Μη εξουσιοδοτημένο προφίλ</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_profile.css">
 </head>
 <body>
@@ -16,7 +16,7 @@ session_start();
 </header>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">

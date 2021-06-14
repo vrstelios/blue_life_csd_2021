@@ -6,13 +6,13 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Σελίδα διαχείρισης</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_admin.css">
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-        include("connect_to_database.php");
+        include("../General-components/connect_to_database.php");
         if ($_POST['submit'] == 'Καταχώρηση χρήστη'){
             if (isset($_POST['username'])) {
                 $username = $_POST['username'];
@@ -223,18 +223,6 @@ session_start();
         @mysqli_close($link);
     }
 
-    /*
-    if (isset($_GET['edit_user'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
-        include("connect_to_database.php");
-        $id = $_GET['edit_user'];
-
-
-        $query = "DELETE FROM user_in_action WHERE user_id='$id' AND action_id=$leave_action_id";
-        mysqli_query($link, $query);
-        $_SESSION['user_leaves_action'] = "user_leaves_action_";
-    }
-    */
-
     ?>
 </head>
 <body>
@@ -295,7 +283,7 @@ function print_size_of_table($link, $table){
             </tr>
 
             <?php // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
-            include ("connect_to_database.php");
+            include("connect_to_database.php");
             if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                 $page_no = $_GET['page_no'];
             } else {
@@ -330,8 +318,8 @@ function print_size_of_table($link, $table){
                      <td>".$row['region']."</td>
                      <td>".$row['image']."</td>";
                 echo "<td class='keno'>
-                    <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                    <a href='Admin.php'><img src='../images/6.Admin/edit.png' alt='edit'></a>
+                    <a href='Admin.php'><img src='../images/6.Admin/delete-bin.png' alt='delete'></a>
                      </tr>";
             }
             //mysqli_close($link);
@@ -625,8 +613,8 @@ function print_size_of_table($link, $table){
                 echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
                 echo '<td>' . $row['link'] . '</td>';
                 echo "<td class='keno'>
-                    <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                    <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                    <a href='?edit_action=".$row['id']. "'><img src='../images/6.Admin/edit.png' alt='edit'></a>
+                    <a href='Admin.php'><img src='../images/6.Admin/delete-bin.png' alt='delete'></a>
                 </td>";
                 echo '</tr>';
             }
@@ -822,8 +810,8 @@ function print_size_of_table($link, $table){
                 echo '<td>' . $row['title'] . '</td>';
                 echo '<td>' . $row['date_joined'] . '</td>';
                 echo "<td class='keno'>
-                        <a href='Admin.php'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                        <a href='Admin.php'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                        <a href='Admin.php'><img src='../images/6.Admin/edit.png' alt='edit'></a>
+                        <a href='Admin.php'><img src='../images/6.Admin/delete-bin.png' alt='delete'></a>
                     </td>";
                 echo '</tr>';
             }

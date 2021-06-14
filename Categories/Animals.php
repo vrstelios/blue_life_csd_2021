@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Ζώα στο νερό</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_categories.css">
 </head>
 <body>
@@ -16,17 +16,17 @@ session_start();
     <h1>Blue Life</h1>
 </header>
 <!---------------database--------------->
-<?php include("connect_to_database.php") ?>
+<?php include("../General-components/connect_to_database.php") ?>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">
     <div class='vidContain'>
         <div class='vid'>
             <video autoplay muted loop>
-                <source src="images/Main/Underwater.mp4">
+                <source src="../images/Main/Underwater.mp4">
             </video>
         </div>
         <h2>Ζώα στο νερό</h2>
@@ -40,7 +40,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
-    echo '<img src="images/2.Categories/Animals_seabed.jpg" alt="sharks" >';
+    echo '<img src="../images/2.Categories/Animals_seabed.jpg" alt="sharks" >';
     echo $row['description'] ;
     ?>
     <!--<h3>Βασικές κατηγορίες θαλάσσιων ζώων</h3>-->
@@ -67,7 +67,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
-    echo '<img src="images/2.Categories/Animals_shark.jpg" alt="corals and fishes"  >';
+    echo '<img src="../images/2.Categories/Animals_shark.jpg" alt="corals and fishes"  >';
     echo $row['description'] ;
     ?>
     <!--<h3>Θαλάσσια είδη υπό εξαφάνιση</h3>-->
@@ -108,24 +108,24 @@ session_start();
 
 <div class="animals_gallery">
     <div class="wrapper">
-        <img src="images/2.Categories/Gallery-an/turtle.jpg" alt="Χελώνα">
-        <img src="images/2.Categories/Gallery-an/crab.jpg" alt="Κάβουρας">
-        <img src="images/2.Categories/Gallery-an/jellyfish.jpg" alt="Τσούχτρα">
-        <img src="images/2.Categories/Gallery-an/seal.jpg" alt="Φώκια">
-        <img src="images/2.Categories/Gallery-an/dolphin.jpg" alt="Δελφίνι">
-        <img src="images/2.Categories/Gallery-an/fish.jpg" alt="Ψαράκια">
-        <img src="images/2.Categories/Gallery-an/air-dolphin.jpg" alt="Δελφίνι">
-        <img src="images/2.Categories/Gallery-an/sharks.jpg" alt="Καρχαρίες">
-        <img src="images/2.Categories/Gallery-an/hippocampus.jpg" alt="Ιππόκαμπος">
-        <img src="images/2.Categories/Gallery-an/red-fish.jpg" alt="Ψάρι-Νέμο">
+        <img src="../images/2.Categories/Gallery-an/turtle.jpg" alt="Χελώνα">
+        <img src="../images/2.Categories/Gallery-an/crab.jpg" alt="Κάβουρας">
+        <img src="../images/2.Categories/Gallery-an/jellyfish.jpg" alt="Τσούχτρα">
+        <img src="../images/2.Categories/Gallery-an/seal.jpg" alt="Φώκια">
+        <img src="../images/2.Categories/Gallery-an/dolphin.jpg" alt="Δελφίνι">
+        <img src="../images/2.Categories/Gallery-an/fish.jpg" alt="Ψαράκια">
+        <img src="../images/2.Categories/Gallery-an/air-dolphin.jpg" alt="Δελφίνι">
+        <img src="../images/2.Categories/Gallery-an/sharks.jpg" alt="Καρχαρίες">
+        <img src="../images/2.Categories/Gallery-an/hippocampus.jpg" alt="Ιππόκαμπος">
+        <img src="../images/2.Categories/Gallery-an/red-fish.jpg" alt="Ψάρι-Νέμο">
     </div>
 </div>
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 
 </body>
 </html>

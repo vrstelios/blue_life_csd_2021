@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Blue Life</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_results.css">
 </head>
 <body>
@@ -17,7 +17,7 @@ session_start();
 </header>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">
@@ -26,7 +26,7 @@ session_start();
 
 <!---------------Περιεχόμενο  σελίδας--------------->
 <?php
-include("connect_to_database.php");
+include("../General-components/connect_to_database.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["navigation_search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
     $navigation_search = $_POST["navigation_search"];
     //echo '<h4>'.'KANEI method post == Αναζήτηση, navigation_search= '. $navigation_search . '</h4>';
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["navigation_search"]!="") {
         while ($row2 = mysqli_fetch_array($results2)) { //
             echo "<div class='results_content'>";
             echo "<h3>" . preg_replace($pattern, $replacement, $row2['title']) . "</h3>";
-            echo "Αποτέλεσμα από σελίδα <a href=Actions.php> Actions.php </a>";
+            echo "Αποτέλεσμα από σελίδα <a href=../Actions/Actions.php> Actions.php </a>";
             echo "<p>" . preg_replace($pattern, $replacement, $row2['date']) . ", " . preg_replace($pattern, $replacement, $row2['location']) . "</p>";
             echo "<p>" . preg_replace($pattern, $replacement, $row2['description']) . "</p>";
             echo '</div>';
@@ -76,10 +76,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["navigation_search"]!="") {
 
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 
 
 </body>

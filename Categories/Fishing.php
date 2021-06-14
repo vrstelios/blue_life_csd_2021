@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Αλιεία/Εμπόριο</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_categories.css">
 </head>
 <body>
@@ -16,17 +16,17 @@ session_start();
     <h1>Blue Life</h1>
 </header>
 <!---------------database--------------->
-<?php include("connect_to_database.php") ?>
+<?php include("../General-components/connect_to_database.php") ?>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">
     <div class='vidContain'>
         <div class='vid'>
             <video autoplay muted loop>
-                <source src="images/Main/Underwater.mp4">
+                <source src="../images/Main/Underwater.mp4">
             </video>
         </div>
         <h2>Αλιεία/Εμπόριο</h2>
@@ -40,7 +40,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
-    echo '<img src="images/2.Categories/Fishing_boat.jpg" alt="fishing" >';
+    echo '<img src="../images/2.Categories/Fishing_boat.jpg" alt="fishing" >';
     echo $row['description'] ;
     ?>
     <!--<h3>Ο κίνδυνος κατάρρευσης του κλάδου της αλιείας</h3>-->
@@ -73,7 +73,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
-    echo '<img src="images/2.Categories/Fishing_ship1.jpg" alt="ships" >';
+    echo '<img src="../images/2.Categories/Fishing_ship1.jpg" alt="ships" >';
     echo $row['description'] ;
     ?>
     <!--<h3>Οι θαλάσσιες μεταφορές και το παγκόσμιο εμπόριο</h3>-->
@@ -114,7 +114,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
-    echo ' <img src="images/2.Categories/Fishing_ship2.jpg" alt="fish" >';
+    echo ' <img src="../images/2.Categories/Fishing_ship2.jpg" alt="fish" >';
     echo $row['description'] ;
     ?>
     <!--<h3>Ο COVID-19 μειώνει το παγκόσμιο θαλάσσιο εμπόριο</h3>-->
@@ -150,10 +150,10 @@ session_start();
 </div>
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 
 </body>
 </html>

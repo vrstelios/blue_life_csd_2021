@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Σελίδα διαχείρισης</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_admin.css">
     <?php
     if (isset($_GET['delete_action']) && $_SESSION['connected_id']==1) { // ο admin έχει πατήσει τον κάδο για να διαγράψει μία δράση και η μεταβλητή $_GET['delete_action'] έχει το id αυτής της δράσης
@@ -16,7 +16,7 @@ session_start();
 
     function delete_an_action($delete_action_id)
     {
-        include("connect_to_database.php");
+        include("../General-components/connect_to_database.php");
         $delete_query = 'DELETE FROM action WHERE id=$delete_action_id';
         //$query = "DELETE FROM action WHERE id='$delete_action_id'";
         mysqli_query($link, $delete_query);
@@ -25,7 +25,7 @@ session_start();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-        include("connect_to_database.php");
+        include("../General-components/connect_to_database.php");
         if ($_POST['submit'] == 'Καταχώρηση δράσης') {
             if (isset($_POST['title'])) {
                 $title = $_POST['title'];
@@ -71,8 +71,8 @@ session_start();
                 $row = mysqli_fetch_array($results);
                 $id = $row['id'];
 
-                // Αποθήκευση εικόνας στον server στο directory images/Uploads/Action_Images/ και ονόματος της εικόνας στην βάση δεδομένων
-                $targetDir = "images/Uploads/Action_Images/";
+                // Αποθήκευση εικόνας στον server στο directory ../images/Uploads/Action_Images/ και ονόματος της εικόνας στην βάση δεδομένων
+                $targetDir = "../images/Uploads/Action_Images/";
                 $fileName = basename($_FILES["image"]["name"]);
 
                 $fileType = pathinfo($fileName,PATHINFO_EXTENSION);
@@ -140,8 +140,8 @@ session_start();
 
         if ($_POST['submit'] == 'Ενημέρωση της εικόνας της δράσης') {
             $id = $_SESSION['action_id'];
-            // Αποθήκευση εικόνας στον server στο directory images/Uploads/Action_Images/ και ονόματος της εικόνας στην βάση δεδομένων
-            $targetDir = "images/Uploads/Action_Images/";
+            // Αποθήκευση εικόνας στον server στο directory ../images/Uploads/Action_Images/ και ονόματος της εικόνας στην βάση δεδομένων
+            $targetDir = "../images/Uploads/Action_Images/";
             $fileName = basename($_FILES["image"]["name"]);
 
             $fileType = pathinfo($fileName,PATHINFO_EXTENSION);
@@ -170,7 +170,7 @@ session_start();
 </header>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">
@@ -181,10 +181,10 @@ session_start();
 <?php
 // αν ο χρήστης δεν είναι ο admin και προσπαθήσει να φορτώσει την σελίδα Admin_action.php τότε φορτώνεται η σελίδα UnauthorizedProfile.php για την ασφάλεια και απόκρυψη των στοιχείων
 if ($_SESSION['connected_id'] != 1){
-    header("Location: UnauthorizedProfile.php");
+    header("Location: ../Profile/UnauthorizedProfile.php");
 }
 $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-include("connect_to_database.php");
+include("../General-components/connect_to_database.php");
 
 function print_size_of_table($link, $table){
     //εμφανίζουμε το πλήθος των συνολικών συμμετοχών στις δράσεις
@@ -213,7 +213,7 @@ function print_size_of_table($link, $table){
             <button class="table_button" onclick="openForm('FORM_FOR_ACTION')">προσθήκη δράσης</button>
             <?php
             // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
-            include ("connect_to_database.php");
+            include("../General-components/connect_to_database.php");
             if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                 $page_no = $_GET['page_no'];
             } else {
@@ -254,7 +254,7 @@ function print_size_of_table($link, $table){
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
             //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
-            //!include ("connect_to_database.php");
+            //!include ("../General-components/connect_to_database.php");
             $search = $_POST["search"];
             //$results = null;
             $query = "SELECT * FROM  action  WHERE id LIKE '%{$search}%' OR title LIKE '%{$search}%' OR date LIKE '%{$search}%' OR description LIKE '%{$search}%'  OR location LIKE '%{$search}%'";
@@ -285,9 +285,9 @@ function print_size_of_table($link, $table){
                     echo '<td>' . $row['link'] . '</td>';
                     echo "<td><a href='?action_id=".$row['id']."'><button class='table_button cyan'>Προβολή</button></a>";
                     echo "<td class='keno'>
-                   <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                   <a href='?edit_action_image=".$row['id']."'><img src='images/6.Admin/camera.png' alt='camera'></a>
-                   <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
+                   <a href='?edit_action=".$row['id']."'><img src='../images/6.Admin/edit.png' alt='edit'></a>
+                   <a href='?edit_action_image=".$row['id']."'><img src='../images/6.Admin/camera.png' alt='camera'></a>
+                   <a href='?delete_action=" . $row['id'] . "'><img src='../images/6.Admin/delete-bin.png' alt='delete'></a>                   
                </td>";
                     echo '</tr>';
                 }
@@ -335,15 +335,15 @@ function print_size_of_table($link, $table){
                 echo '<td>' . $row['link'] . '</td>';
                 echo "<td><a href='?action_id=".$row['id']."'><button class='table_button cyan'>Προβολή</button></a>";
                 echo "<td class='keno'>
-                           <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                           <a href='?edit_action_image=".$row['id']."'><img src='images/6.Admin/camera.png' alt='camera'></a>
-                           <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
+                           <a href='?edit_action=".$row['id']."'><img src='../images/6.Admin/edit.png' alt='edit'></a>
+                           <a href='?edit_action_image=".$row['id']."'><img src='../images/6.Admin/camera.png' alt='camera'></a>
+                           <a href='?delete_action=" . $row['id'] . "'><img src='../images/6.Admin/delete-bin.png' alt='delete'></a>                   
                       </td>";
                 echo '</tr>';
             }
 
             echo '</table>';
-            include("show_number_of_pages.php");
+            include("../General-components/show_number_of_pages.php");
             echo '<div class="table_page" style="padding: 10px 20px 0px; border-top: dotted 1px #CCC;">
                         <strong>Σελίδα '. $page_no.'/'.$total_no_of_pages .'</strong>
                   </div>';
@@ -425,7 +425,7 @@ function print_size_of_table($link, $table){
             <h3>Τροποποίηση των δεδομένων της δράσης</h3>
             <?php
             if (isset($_GET['edit_action'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
-                include("connect_to_database.php");
+                include("../General-components/connect_to_database.php");
                 $id = $_GET['edit_action'];
                 $query = "SELECT * FROM action WHERE id=$id;";
                 $results = mysqli_query($link, $query);
@@ -469,7 +469,7 @@ function print_size_of_table($link, $table){
             <h3>Τροποποίηση της εικόνας της δράσης</h3>
             <?php
             if (isset($_GET['edit_action_image'])) {
-                include("connect_to_database.php");
+                include("../General-components/connect_to_database.php");
                 $id = $_GET['edit_action_image'];
                 $query = "SELECT image FROM action WHERE id=$id;";
                 $results = mysqli_query($link, $query);
@@ -492,13 +492,13 @@ function print_size_of_table($link, $table){
             <h3>Προβολή δράσης</h3>
             <?php
             if (isset($_GET['action_id'])) {
-                include("connect_to_database.php");
+                include("../General-components/connect_to_database.php");
                 $id = $_GET['action_id'];
                 $query = "SELECT * FROM action WHERE id=$id;";
                 $results = mysqli_query($link, $query);
                 $row = mysqli_fetch_array($results);
                 echo "<div style='font-size: 20px'><b>Τίτλος:</b> ".$row['title']."<br>
-                <b>Εικόνα:</b><br><img src='images/Uploads/Action_Images/".$row["image"]."' alt='action image' style='max-width: 300px; max-height: 300px'><br>
+                <b>Εικόνα:</b><br><img src='../images/Uploads/Action_Images/".$row["image"]."' alt='action image' style='max-width: 300px; max-height: 300px'><br>
                 <b>Ημερομηνία:</b> ".$row['date']."<br>
                 <b>Σύνδεσμος:</b> ".$row['link']."<br>
                 <b>Περιγραφή:</b><br>".$row['description']."</div>";
@@ -556,14 +556,14 @@ function print_size_of_table($link, $table){
         <form class="form-container">
             <?php
             if (isset($_GET['action_image'])) {
-                include("connect_to_database.php");
+                include("../General-components/connect_to_database.php");
                 $id = $_GET['action_image'];
                 $query = "SELECT title, image FROM action WHERE id=$id;";
                 $results = mysqli_query($link, $query);
                 $row = mysqli_fetch_array($results);
                 echo '<h3>Προβολή εικόνας της δράσης '.$row["title"].'</h3><br>
                 <div style="display: flex;align-items: center;justify-content: center;">
-                <img height="400px" alt="action image" src="images/Uploads/Action_Images/'.$row["image"].'"></div>';
+                <img height="400px" alt="action image" src="../images/Uploads/Action_Images/'.$row["image"].'"></div>';
             }
             ?>
             <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_ACTION_IMAGE')">κλείσιμο</button>
@@ -605,10 +605,10 @@ function print_size_of_table($link, $table){
 </div>
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 
 </body>
 </html>

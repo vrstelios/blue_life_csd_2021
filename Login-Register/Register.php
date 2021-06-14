@@ -6,14 +6,14 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Εγγραφή</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_signup.css">
     <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($_POST['submit'] == 'Εγγραφή') {
                 $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-                include("connect_to_database.php");
+                include("../General-components/connect_to_database.php");
 
                 if (isset($_POST['username'])) {
                     $username = $_POST['username'];
@@ -61,7 +61,7 @@ session_start();
                       VALUES ('$username','$password','$firstname','$lastname','$email');";
                     if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
                         $_SESSION['submit'] = "USER CREATED";
-                        header("Location:Login.php");
+                        header("Location:Login-Register.php");
                     }
                 }
             }
@@ -76,14 +76,14 @@ session_start();
 </header>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">
     <div class='vidContain'>
         <div class='vid'>
             <video autoplay muted loop>
-                <source src="images/Main/Underwater2.mp4">
+                <source src="../images/Main/Underwater2.mp4">
             </video>
         </div>
         <h2>Εγγραφή</h2>
@@ -190,10 +190,10 @@ session_start();
 </div>
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 
 </body>
 </html>

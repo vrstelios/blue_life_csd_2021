@@ -1,20 +1,20 @@
 <!---------------Navigation bar--------------->
 <nav>
   <div class="navbar" id="navbar">
-    <a href="Home.php">Αρχική</a>
+    <a href="../Home/Home.php">Αρχική</a>
     <div class="dropdown">
       <button class="dropbtn">Κατηγορίες</button>
       <div class="dropdown-content">
-        <a href="Oceans.php" target="_self">Ωκεανοί</a>
-        <a href="Lakes-Rivers.php">Λίμνες/Ποτάμια</a>
-        <a href="Wetlands.php">Υδροβιότοποι</a>
-        <a href="Animals.php">Ζώα στο νερό</a>
-        <a href="Fishing.php">Αλιεία/Εμπόριο</a>
+        <a href="../Categories/Oceans.php" target="_self">Ωκεανοί</a>
+        <a href="../Categories/Lakes-Rivers.php">Λίμνες/Ποτάμια</a>
+        <a href="../Categories/Wetlands.php">Υδροβιότοποι</a>
+        <a href="../Categories/Animals.php">Ζώα στο νερό</a>
+        <a href="../Categories/Fishing.php">Αλιεία/Εμπόριο</a>
       </div>
     </div>
-    <a href="Actions.php">Δράσεις</a>
-    <a href="Did-you-know-that.php">Ήξερες ότι...</a>
-    <a href="Contact.php">Επικοινωνία</a>
+    <a href="../Actions/Actions.php">Δράσεις</a>
+    <a href="../Did-you-know-that/Did-you-know-that.php">Ήξερες ότι...</a>
+    <a href="../Contact/Contact.php">Επικοινωνία</a>
     <?php
         if (isset($_GET['logout'])) { // αν ο συνδεδεμένος χρήστης πατήσει τον σύνδεσμο 'Αποσύνδεση’ στο naxigation menu τότε προστήθεται το ?logout στο τέλος του url και έτσι αποσυνδέεται
             $_SESSION['connected_username'] = null;
@@ -26,16 +26,16 @@
                     <button class='dropbtn'>" . $_SESSION['connected_username'] . "</button>
                     <div class='dropdown-content'>";
             if ($_SESSION['connected_id'] == 1){
-                echo    "<a href='Admin_user.php' target='_self'> ". 'Σελίδα Διαχείρισης' . "</a>";
+                echo    "<a href='../Admin/Admin_user.php' target='_self'> ". 'Σελίδα Διαχείρισης' . "</a>";
             }
             if ($_SESSION['connected_id'] != 1){
-                echo        "<a href='Profile.php' target='_self'> ". 'Το προφίλ μου' . "</a>";
+                echo        "<a href='../Profile/Profile.php' target='_self'> ". 'Το προφίλ μου' . "</a>";
             }
-            echo        "<a href='Login.php?logout'> ". 'Αποσύνδεση' . "</a>";
+            echo        "<a href='../Login-Register/Login.php?logout'> " . 'Αποσύνδεση' . "</a>";
             echo   "</div>";
             echo "</div>";
         } else {
-            echo "<a href='Login.php'> ". 'Είσοδος/Εγγραφή' . "</a>";
+            echo "<a href='../Login-Register/Login.php'> " . 'Είσοδος/Εγγραφή' . "</a>";
         }
     ?>
 
@@ -50,7 +50,7 @@
 
       <a class="search-field">
           <!--form action="javascript:" class="search-bar" method="post"-->
-          <form action="Results.php" class="search-bar" method="post">
+          <form action="../Search%20Results/Results.php" class="search-bar" method="post">
               <input type="search" placeholder="Αναζητήστε" name="navigation_search" pattern=".*\S.*" required>
               <button type="submit" name="submit" class="search-btn">
                   <span class="styl">Search</span>

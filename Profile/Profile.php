@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Το προφίλ μου</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_profile.css">
     <?php
     if (isset($_GET['leave_action'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
@@ -16,7 +16,7 @@ session_start();
 
     function user_leaves_action($leave_action_id)
     {
-        include("connect_to_database.php");
+        include("../General-components/connect_to_database.php");
         if (!isset($_SESSION['connected_id'])){ // αν ο χρήστης δεν είναι συνδεδεμένος πρέπει πρώτα να συνδεθεί
             echo '<script  type="text/javascript">openAlertMessage_connect_first();</script>';
         } else {
@@ -28,7 +28,7 @@ session_start();
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        include("connect_to_database.php");
+        include("../General-components/connect_to_database.php");
         if ($_POST['submit'] == 'Ενημέρωση των δεδομένων μου') {
             if (isset($_POST['username'])) {
                 $username = $_POST['username'];
@@ -89,7 +89,7 @@ session_start();
         if ($_POST['submit'] == 'Ενημέρωση της εικόνας μου') {
             $id = $_SESSION['connected_id'];
             // Αποθήκευση εικόνας στον server στο directory images/Uploads/User_Images/ και ονόματος της εικόνας στην βάση δεδομένων
-            $targetDir = "images/Uploads/User_Images/";
+            $targetDir = "../images/Uploads/User_Images/";
             $fileName = basename($_FILES["image"]["name"]);
 
             $fileType = pathinfo($fileName,PATHINFO_EXTENSION);
@@ -121,14 +121,14 @@ session_start();
 </header>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">
     <div class='vidContain'>
         <div class='vid'>
             <video autoplay muted loop>
-                <source src="images/Main/Underwater2.mp4">
+                <source src="../images/Main/Underwater2.mp4">
             </video>
         </div>
         <h2>Το προφίλ μου</h2>
@@ -148,15 +148,15 @@ if (!isset($_SESSION['connected_id'])){
         <button style="cursor: pointer" onclick="openForm('FORM_FOR_EDIT_USER_IMAGE')">
             <?php
             $id = $_SESSION['connected_id'];
-            include("connect_to_database.php");
+            include("../General-components/connect_to_database.php");
             $query = "SELECT image FROM user WHERE id=$id";
             $results = $results = mysqli_query($link, $query);
             $row = mysqli_fetch_array($results);
             if ($row['image'] == null){
-                echo '<img src="images/Main/blank-profile-picture.png" alt="error_img" class="image_profile">';
+                echo '<img src="../images/Main/blank-profile-picture.png" alt="error_img" class="image_profile">';
                 echo '<div class="centered">Προσθέστε εικόνα</div>';
             } else {
-                echo '<img src="images/Uploads/User_images/' . $row['image'] . '/" alt="profile user" style="max-width:400px; max-height:350px ">';
+                echo '<img src="../images/Uploads/User_images/' . $row['image'] . '/" alt="profile user" style="max-width:400px; max-height:350px ">';
                 echo '<div class="centered">Τροποποιήστε την εικόνα</div>';
             }
             ?>
@@ -167,7 +167,7 @@ if (!isset($_SESSION['connected_id'])){
         <h3>Στοιχεία Λογαριασμού
         <?php
         if($_SESSION['connected_id']!=1){
-            echo '<img onclick="openEdit()" src="images/6.Admin/edit.png" alt="edit" style="cursor: pointer">';
+            echo '<img onclick="openEdit()" src="../images/6.Admin/edit.png" alt="edit" style="cursor: pointer">';
         }
         echo '</h3>';
         ?>
@@ -179,7 +179,7 @@ if (!isset($_SESSION['connected_id'])){
 
         <?php
         $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-        include("connect_to_database.php");
+        include("../General-components/connect_to_database.php");
 
         if (isset($_SESSION['connected_id'])){
             $current_user_id = $_SESSION['connected_id'];//'kogal';
@@ -205,7 +205,7 @@ if (!isset($_SESSION['connected_id'])){
             }
             @mysqli_free_result($results);
         } else {
-            header("Location: UnauthorizedProfile.php");
+            header("Location: ../Profile/UnauthorizedProfile.php");
         }
 
         ?>
@@ -223,10 +223,10 @@ if (!isset($_SESSION['connected_id'])){
     </h3>
     <div class="actions-table">
         <p>
-            <a href="Actions.php"> <button class="table_button">Συμμετοχή σε δράση</button></a>
+            <a href="Actions/Actions.php"> <button class="table_button">Συμμετοχή σε δράση</button></a>
             <?php
             // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
-            include ("connect_to_database.php");
+            include("../General-components/connect_to_database.php");
             //?if (isset($_SESSION['connected_id'])) {
             if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                 $page_no = $_GET['page_no'];
@@ -299,7 +299,7 @@ if (!isset($_SESSION['connected_id'])){
                     echo '<td>' . $row['link'] . '</td>';
                     echo "<td><a href='?action_id=".$row['id']."'><button class='table_button cyan'>Προβολή</button></a></td>";
                     echo "<td class='keno'>             
-                           <a href='?leave_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete' title='ακύρωση συμμετοχής'></a>                   
+                           <a href='?leave_action=" . $row['id'] . "'><img src='../images/6.Admin/delete-bin.png' alt='delete' title='ακύρωση συμμετοχής'></a>                   
                        </td>";
                     echo '</tr>';
                 }
@@ -347,13 +347,13 @@ if (!isset($_SESSION['connected_id'])){
                 echo '<td>' . $row['link'] . '</td>';
                 echo "<td><a href='?action_id=".$row['id']."'><button class='table_button cyan'>Προβολή</button></a></td>";
                 echo "<td class='keno'>
-                           <a href='?leave_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete' title='ακύρωση συμμετοχής'></a>                                     
+                           <a href='?leave_action=" . $row['id'] . "'><img src='../images/6.Admin/delete-bin.png' alt='delete' title='ακύρωση συμμετοχής'></a>                                     
                       </td>";
                 echo '</tr>';
             }
 
             echo '</table>';
-            include("show_number_of_pages.php");
+            include("../General-components/show_number_of_pages.php");
             echo '<div class="table_page" style="padding: 10px 20px 0px; border-top: dotted 1px #CCC;">
                         <strong>Σελίδα '. $page_no.'/'.$total_no_of_pages .'</strong>
                   </div>';
@@ -369,7 +369,7 @@ if (!isset($_SESSION['connected_id'])){
         <h3>Προβολή δράσης</h3>
         <?php
         if (isset($_GET['action_id'])) {
-            include("connect_to_database.php");
+            include("../General-components/connect_to_database.php");
             $id = $_GET['action_id'];
             $query = "SELECT * FROM action WHERE id=$id;";
             $results = mysqli_query($link, $query);
@@ -421,7 +421,7 @@ if (isset($_SESSION['user_leaves_action'])) {
         <h3>Τροποποίηση των δεδομένων του χρήστη</h3>
         <?php
 
-        include("connect_to_database.php");
+        include("../General-components/connect_to_database.php");
         $id = $_SESSION['connected_id'];
         $query = "SELECT * FROM user WHERE id=$id;";
         $results = mysqli_query($link, $query);
@@ -472,7 +472,7 @@ if (isset($_SESSION['user_leaves_action'])) {
     <form action="Profile.php" method="post" enctype="multipart/form-data" class="form-container">
         <h3>Αλλαγή εικόνας</h3>
         <?php
-        include("connect_to_database.php");
+        include("../General-components/connect_to_database.php");
         $id = $_SESSION['connected_id'];
         $query = "SELECT image FROM user WHERE id=$id;";
         $results = mysqli_query($link, $query);
@@ -516,7 +516,7 @@ if (isset($_GET['action_id'])) {
     <form class="form-container">
         <?php
         if (isset($_GET['action_image'])) {
-            include("connect_to_database.php");
+            include("../General-components/connect_to_database.php");
             $id = $_GET['action_image'];
             $query = "SELECT title, image FROM action WHERE id=$id;";
             $results = mysqli_query($link, $query);
@@ -576,10 +576,10 @@ if (isset($_SESSION['submit'])) {
 
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 
 </body>
 </html>

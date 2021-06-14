@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Δράσεις</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_actions.css">
 </head>
 <body>
@@ -17,14 +17,14 @@ session_start();
 </header>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">
     <div class='vidContain'>
         <div class='vid'>
             <video autoplay muted loop>
-                <source src="images/Main/Underwater.mp4">
+                <source src="../images/Main/Underwater.mp4">
             </video>
         </div>
         <h2>Δράσεις</h2>
@@ -45,7 +45,7 @@ session_start();
 
 <?php
 $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-include("connect_to_database.php");
+include("../General-components/connect_to_database.php");
 
 $query = "SELECT id, title, date, location, description, image, link 
                       FROM action";//" where id>9 or id=1";
@@ -59,8 +59,8 @@ while ($row = mysqli_fetch_array($results)) {
                 <div class="column text" >
                     <div>';
     echo                '<h3><b>' . $row['title'] . '</b></h3>';
-    echo            "<div class='calendar'>
-                        <img class='smallImage' src='images/3.Actions/calendar.png' alt='Calendar'>";
+    echo "<div class='calendar'>
+                        <img class='smallImage' src='../images/3.Actions/calendar.png' alt='Calendar'>";
     echo                $row['date'] . ', ' . $row['location'];
     echo            "</div> <br>";
     echo            "<p>" . $row['description'] . "</p>";
@@ -116,7 +116,7 @@ while ($row = mysqli_fetch_array($results)) {
 <?php
 function user_joins_action($action_id) {
     $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-    include("connect_to_database.php");
+    include("../General-components/connect_to_database.php");
     if (!isset($_SESSION['connected_id'])){ // αν ο χρήστης δεν είναι συνδεδεμένος πρέπει πρώτα να συνδεθεί
         $_SESSION['submit_action'] = "connect_first";
     } else {
@@ -152,10 +152,10 @@ if (isset($_SESSION['submit_action'])) {
 ?>
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 
 </body>
 </html>

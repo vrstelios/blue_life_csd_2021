@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Υδροβιότοποι</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_categories.css">
 </head>
 <body>
@@ -16,17 +16,17 @@ session_start();
     <h1>Blue Life</h1>
 </header>
 <!---------------database--------------->
-<?php include("connect_to_database.php") ?>
+<?php include("../General-components/connect_to_database.php") ?>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">
     <div class='vidContain'>
         <div class='vid'>
             <video autoplay muted loop>
-                <source src="images/Main/Underwater.mp4">
+                <source src="../images/Main/Underwater.mp4">
             </video>
         </div>
         <h2>Υδροβιότοποι</h2>
@@ -40,7 +40,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
-    echo '<img src="images/2.Categories/Wetlands_wetland1.jpg" alt="Υδροβιότοπος">';
+    echo '<img src="../images/2.Categories/Wetlands_wetland1.jpg" alt="Υδροβιότοπος">';
     echo $row['description'] ;
     ?>
     <!--<h3>Σημασία υδροβιότοπων</h3>-->
@@ -77,7 +77,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
-    echo '<img src="images/2.Categories/Wetlands_wetland2.jpg" alt="Υδροβιότοπος">';
+    echo '<img src="../images/2.Categories/Wetlands_wetland2.jpg" alt="Υδροβιότοπος">';
     echo $row['description'] ;
     ?>
     <!--<h3>Οι υδροβιότοποι στην Ελλάδα</h3>-->
@@ -107,7 +107,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
-    echo ' <img src="images/2.Categories/Wetlands_wetland3.jpg" alt="Υδροβιότοπος">';
+    echo ' <img src="../images/2.Categories/Wetlands_wetland3.jpg" alt="Υδροβιότοπος">';
     echo $row['description'] ;
     ?>
     <!--<h3>Σύμβαση Ραμσαρ για την Ελλάδα</h3>-->
@@ -155,9 +155,9 @@ session_start();
 </div>
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 </body>
 </html>

@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Σελίδα διαχείρισης</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_admin.css">
     <?php
     if (isset($_GET['delete_user'])  && $_SESSION['connected_id']==1) { // ο admin έχει πατήσει τον κάδο για να διαγράψει ένα χρήστη και η μεταβλητή $_GET['delete_user'] έχει το id αυτού του χρήστη
@@ -16,7 +16,7 @@ session_start();
 
     function delete_a_user($delete_user_id)
     {
-        include("connect_to_database.php");
+        include("../General-components/connect_to_database.php");
         $query = "DELETE FROM user WHERE id=$delete_user_id";
         mysqli_query($link, $query);
         $_SESSION['user_deleted'] = "USER DELETED";
@@ -24,7 +24,7 @@ session_start();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-        include("connect_to_database.php");
+        include("../General-components/connect_to_database.php");
         if ($_POST['submit'] == 'Καταχώρηση χρήστη'){
             if (isset($_POST['username'])) {
                 $username = $_POST['username'];
@@ -133,7 +133,7 @@ session_start();
             $id = $_SESSION['user_id'];
 
             // Αποθήκευση εικόνας στον server στο directory images/Uploads/User_Images/ και ονόματος της εικόνας στην βάση δεδομένων
-            $targetDir = "images/Uploads/User_Images/";
+            $targetDir = "../images/Uploads/User_Images/";
             $fileName = basename($_FILES["image"]["name"]);
 
             $fileType = pathinfo($fileName,PATHINFO_EXTENSION);
@@ -167,7 +167,7 @@ session_start();
 </header>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">
@@ -179,10 +179,10 @@ session_start();
 <?php
 // αν ο χρήστης δεν είναι ο admin και προσπαθήσει να φορτώσει την σελίδα Admin_user.php τότε φορτώνεται η σελίδα UnauthorizedProfile.php για την ασφάλεια και απόκρυψη των στοιχείων
 if ($_SESSION['connected_id'] != 1){
-    header("Location: UnauthorizedProfile.php");
+    header("Location: ../Profile/UnauthorizedProfile.php");
 }
 $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-include("connect_to_database.php");
+include("../General-components/connect_to_database.php");
 
 function print_size_of_table($link, $table){
     $query = "SELECT COUNT(*) FROM $table";
@@ -213,7 +213,7 @@ function print_size_of_table($link, $table){
 
             //prepaging("SELECT COUNT(*) As total_records FROM `user`");
 
-            include ("connect_to_database.php");
+            include("../General-components/connect_to_database.php");
             // Η σελιδοποίηση έγινε με βάση τον κώδικα στην σελίδα https://www.allphptricks.com/create-simple-pagination-using-php-and-mysqli/
             if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                 $page_no = $_GET['page_no'];
@@ -262,12 +262,14 @@ function print_size_of_table($link, $table){
             //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
             $search = $_POST["search"];
             $results = null;
-            if (is_numeric($search)) {
+            $query = "SELECT * FROM  user  WHERE id LIKE '{$search}' OR username LIKE '%{$search}%' OR email LIKE '%{$search}%' OR
+                           last_name LIKE '%{$search}%' OR first_name LIKE '%{$search}%'  OR region LIKE '%{$search}%' OR age LIKE '{$search}'";
+            /*if (is_numeric($search)) {
                 $search = intval($search);
                 $query = ("SELECT * FROM  user  WHERE id=$search OR age=$search");
             } else {
                 $query = ("SELECT * FROM  user  WHERE username LIKE '%{$search}%' OR email LIKE '%{$search}%' OR last_name LIKE '%{$search}%' OR first_name LIKE '%{$search}%'  OR region LIKE '%{$search}%'");
-            }
+            }*/
             $results = mysqli_query($link, $query);
             $num_results = mysqli_num_rows($results);
             if ($num_results == 0) {    // αν δεν υπάρχουν αποτελέσματα
@@ -301,9 +303,9 @@ function print_size_of_table($link, $table){
                         echo "<td class='keno'>";
                     } else {
                         echo "<td class='keno'>
-                        <a href='?edit_user=" . $row['id'] . "'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                        <a href='?edit_user_image=" . $row['id'] . "'><img src='images/6.Admin/camera.png' alt='camera'></a>
-                        <a href='?delete_user=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>";
+                        <a href='?edit_user=" . $row['id'] . "'><img src='../images/6.Admin/edit.png' alt='edit'></a>
+                        <a href='?edit_user_image=" . $row['id'] . "'><img src='../images/6.Admin/camera.png' alt='camera'></a>
+                        <a href='?delete_user=" . $row['id'] . "'><img src='../images/6.Admin/delete-bin.png' alt='delete'></a>";
                     }
                     echo '</tr>';
                 }
@@ -317,7 +319,6 @@ function print_size_of_table($link, $table){
                     <tr>
                         <th>id</th>
                         <th>Username</th>
-                        <th>Κωδικός</th>
                         <th>Όνομα</th>
                         <th>Επίθετο</th>
                         <th>Email</th>
@@ -352,7 +353,6 @@ function print_size_of_table($link, $table){
                 echo "<tr>
                      <td>" . $row['id'] . "</td>
                      <td>" . $row['username'] . "</td>
-                     <td>" . $row['password'] . "</td>
                      <td>" . $row['first_name'] . "</td>
                      <td>" . $row['last_name'] . "</td>
                      <td>" . $row['email'] . "</td>
@@ -363,14 +363,14 @@ function print_size_of_table($link, $table){
                     echo "<td class='keno'> </tr>";
                 } else {
                     echo "<td class='keno'>
-                    <a href='?edit_user=" . $row['id'] . "'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                    <a href='?edit_user_image=" . $row['id'] . "'><img src='images/6.Admin/camera.png' alt='camera'></a>
-                    <a href='?delete_user=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
+                    <a href='?edit_user=" . $row['id'] . "'><img src='../images/6.Admin/edit.png' alt='edit'></a>
+                    <a href='?edit_user_image=" . $row['id'] . "'><img src='../images/6.Admin/camera.png' alt='camera'></a>
+                    <a href='?delete_user=" . $row['id'] . "'><img src='../images/6.Admin/delete-bin.png' alt='delete'></a>
                      </tr>";
                 }
             }
             echo '</table>';
-            include("show_number_of_pages.php");
+            include("../General-components/show_number_of_pages.php");
             echo '<div class="table_page" style="padding: 10px 20px 0px; border-top: dotted 1px #CCC;">
                         <strong>Σελίδα '. $page_no.'/'.$total_no_of_pages .'</strong>
                   </div>';
@@ -420,7 +420,7 @@ function print_size_of_table($link, $table){
             <h3>Τροποποίηση των δεδομένων του χρήστη</h3>
             <?php
             if (isset($_GET['edit_user'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
-                include("connect_to_database.php");
+                include("../General-components/connect_to_database.php");
                 $id = $_GET['edit_user'];
                 $query = "SELECT * FROM user WHERE id=$id;";
                 $results = mysqli_query($link, $query);
@@ -474,7 +474,7 @@ function print_size_of_table($link, $table){
             <h3>Τροποποίηση της εικόνας του χρήστη</h3>
             <?php
             if (isset($_GET['edit_user_image'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
-                include("connect_to_database.php");
+                include("../General-components/connect_to_database.php");
                 $id = $_GET['edit_user_image'];
                 $query = "SELECT image FROM user WHERE id=$id;";
                 $results = mysqli_query($link, $query);
@@ -587,14 +587,14 @@ function print_size_of_table($link, $table){
         <form class="form-container">
             <?php
             if (isset($_GET['user_image'])) {
-                include("connect_to_database.php");
+                include("../General-components/connect_to_database.php");
                 $id = $_GET['user_image'];
                 $query = "SELECT username, image FROM user WHERE id=$id;";
                 $results = mysqli_query($link, $query);
                 $row = mysqli_fetch_array($results);
                 echo '<h3>Προβολή εικόνας του χρήστη '.$row["username"].'</h3><br>
                 <div style="display: flex;align-items: center;justify-content: center;">
-                <img height="400px" alt="user image" src="images/Uploads/User_Images/'.$row["image"].'/"></div>';
+                <img height="400px" alt="user image" src="../images/Uploads/User_Images/'.$row["image"].'/"></div>';
             }
             ?>
             <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_USER_IMAGE')">κλείσιμο</button>
@@ -642,10 +642,10 @@ function print_size_of_table($link, $table){
 </div>
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 
 </body>
 </html>

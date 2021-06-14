@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Blue Life - Ωκεανοί</title>
-    <link rel="icon" href="images/Main/BlueLife-icon.ico">
-    <link rel="stylesheet" href="styles_main.css">
+    <link rel="icon" href="../images/Main/BlueLife-icon.ico">
+    <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_categories.css">
 </head>
 <body>
@@ -16,10 +16,10 @@ session_start();
     <h1>Blue Life</h1>
 </header>
 <!---------------database--------------->
-<?php include("connect_to_database.php") ?>
+<?php include("../General-components/connect_to_database.php") ?>
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("../General-components/navigation.php") ?>
 
 <!---------------Title section--------------->
 <div class="page-title">
@@ -40,7 +40,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
-    echo '<img src="images/2.Categories/Oceans_map.jpg" alt="world map" >';
+    echo '<img src="../images/2.Categories/Oceans_map.jpg" alt="world map" >';
     echo $row['description'] ;
     ?>
     <!--<h3>Οι ωκεανοί και η προέλευση των ονομάτων τους</h3>-->
@@ -87,7 +87,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
-    echo '<img src="images/2.Categories/Oceans_beach.jpg" alt="plastic bottle on the beach" >';
+    echo '<img src="../images/2.Categories/Oceans_beach.jpg" alt="plastic bottle on the beach" >';
     echo $row['description'] ;
     ?>
     <!--<h3>Σημασία των ωκεανών και η αντιμετώπιση τους σήμερα</h3>-->
@@ -128,7 +128,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
-    echo '<img src="images/2.Categories/Oceans_wild-sea.jpg" alt="waves" >';
+    echo '<img src="../images/2.Categories/Oceans_wild-sea.jpg" alt="waves" >';
     echo $row['description'] ;
     ?>
     <!--<h3>Συνέπειες υπερεκμετάλλευσης της θάλασσας</h3>-->
@@ -174,9 +174,9 @@ session_start();
 </div>
 
 <!-----------------Go to top button----------------->
-<?php include("go_top_button.html"); ?>
+<?php include("../General-components/go_top_button.html"); ?>
 
 <!-----------------Footer----------------->
-<?php include("footer.html");?>
+<?php include("../General-components/footer.html");?>
 </body>
 </html>
