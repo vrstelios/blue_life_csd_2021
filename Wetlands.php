@@ -39,9 +39,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=16";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo '<img src="images/2.Categories/Wetlands_wetland1.jpg" alt="Υδροβιότοπος">';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Σημασία υδροβιότοπων</h3>-->
 
@@ -76,9 +80,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=17";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo '<img src="images/2.Categories/Wetlands_wetland2.jpg" alt="Υδροβιότοπος">';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Οι υδροβιότοποι στην Ελλάδα</h3>-->
 
@@ -106,9 +114,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=18";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo ' <img src="images/2.Categories/Wetlands_wetland3.jpg" alt="Υδροβιότοπος">';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Σύμβαση Ραμσαρ για την Ελλάδα</h3>-->
 
@@ -145,6 +157,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
+    echo "<br>";
     echo $row['description'] ;
     ?>
 

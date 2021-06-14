@@ -39,9 +39,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=8";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo '<img src="images/2.Categories/Oceans_map.jpg" alt="world map" >';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Οι ωκεανοί και η προέλευση των ονομάτων τους</h3>-->
 
@@ -86,9 +90,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=9";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo '<img src="images/2.Categories/Oceans_beach.jpg" alt="plastic bottle on the beach" >';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Σημασία των ωκεανών και η αντιμετώπιση τους σήμερα</h3>-->
 
@@ -127,9 +135,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=10";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo '<img src="images/2.Categories/Oceans_wild-sea.jpg" alt="waves" >';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Συνέπειες υπερεκμετάλλευσης της θάλασσας</h3>-->
     <!--<p> Η θαλάσσια ζωή και η βιοποικιλότητα στους ωκεανούς απειλούνται στις μέρες μας από την υπεραλίευση, τη
@@ -164,6 +176,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
+    echo "<br>";
     echo $row['description'] ;
     ?>
 

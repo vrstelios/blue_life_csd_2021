@@ -39,9 +39,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=12";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo '<img src="images/2.Categories/Lakes-Rivers_Lake1.jpg" alt="lake" >';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Λίμνες στην Ελλάδα</h3>-->
 
@@ -64,9 +68,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=13";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo '<img src="images/2.Categories/Lakes-Rivers_River.jpg" alt="lake">';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Μεγαλύτερες λίμνες του κόσμου</h3>-->
 
@@ -194,9 +202,13 @@ session_start();
     $query = "SELECT * FROM article WHERE id=14";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<h3>";
     echo $row['title'] ;
+    echo "</h3>";
     echo '<img src="images/2.Categories/Lakes-Rivers_Lake2.jpg" alt="river" >';
+    echo "<p>";
     echo $row['description'] ;
+    echo "</p>";
     ?>
     <!--<h3>Επεμβάσεις στους Ποταμούς</h3>-->
 
@@ -232,6 +244,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
+    echo "<br>";
     echo $row['description'] ;
     ?>
 

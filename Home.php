@@ -32,10 +32,12 @@ session_start();
     $query = "SELECT * FROM article WHERE id=1";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
-    echo "<div>";
+    echo "<div><h5><i>";
     echo $row['title'] ;
+    echo "</i></h5>";
+    echo "<h6><i>";
     echo $row['description'] ;
-    echo "</div>";
+    echo "</i></h6></div>";
     ?>
 
     <!--<div>
@@ -55,8 +57,12 @@ session_start();
             $query = "SELECT * FROM article WHERE id=2";
             $results = mysqli_query($link, $query);
             $row = mysqli_fetch_array($results);
+            echo "<h3>";
             echo $row['title'] ;
-            echo $row['description'] ;
+            echo "</h3>";
+            echo "<p>";
+            echo $row['description'];
+            echo "</p>";
             ?>
             <!--<h3>Το νερό, ο «μπλε χρυσός» </h3>
             <p>Σύμφωνα με μελέτη  (Water in Europe: Green tape or Blue Gold?) του European  Water Platform για το 2014,
@@ -81,8 +87,12 @@ session_start();
         $query = "SELECT * FROM article WHERE id=3";
         $results = mysqli_query($link, $query);
         $row = mysqli_fetch_array($results);
+        echo "<h5><i>";
         echo $row['title'] ;
+        echo "</i></h5>";
+        echo "<h6><i>";
         echo $row['description'] ;
+        echo "</i></h6>";
         ?>
         <!--<h5><i>"Το νερό είναι ψυχή της Γης"</i></h5>
         <h6><i>W.H. Auden&emsp;</i></h6>-->
@@ -96,8 +106,12 @@ session_start();
             $query = "SELECT * FROM article WHERE id=4";
             $results = mysqli_query($link, $query);
             $row = mysqli_fetch_array($results);
+            echo "<h3>";
             echo $row['title'] ;
+            echo "</h3>";
+            echo "<p>";
             echo $row['description'] ;
+            echo "</p>";
             ?>
             <!--<h3>Τι μπορείς να κάνεις;</h3>
             <p>Σίγουρα όλοι μας θα έχουμε αναρωτηθεί κάποια στιγμή τι μπορούμε να κάνουμε για να συνεισφέρουμε ενεργά στην προστασία των θαλάσσιων κόσμων.<br>
@@ -121,8 +135,12 @@ session_start();
             $query = "SELECT * FROM article WHERE id=5";
             $results = mysqli_query($link, $query);
             $row = mysqli_fetch_array($results);
+            echo "<h3>";
             echo $row['title'] ;
+            echo "</h3>";
+            echo "<p>";
             echo $row['description'] ;
+            echo "</p>";
             ?>
             <!--<h3>Σημασία του νερού...</h3>
             <p> Το νερό είναι ένας φυσικός πόρος που έχει μεγάλη σημασία γιατί είναι από τους βασικούς παράγοντες για τη
@@ -147,8 +165,12 @@ session_start();
             $query = "SELECT * FROM article WHERE id=6";
             $results = mysqli_query($link, $query);
             $row = mysqli_fetch_array($results);
+            echo "<h3>";
             echo $row['title'] ;
+            echo "</h3>";
+            echo "<p>";
             echo $row['description'] ;
+            echo "</p>";
             ?>
 
           <!--<h3>Όταν η έλλειψη νερού φτάσει στην πόρτα μας</h3>
@@ -176,6 +198,7 @@ session_start();
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
     echo $row['title'] ;
+    echo "<br>";
     echo $row['description'] ;
     ?>
     <!--Πηγές: <br>
