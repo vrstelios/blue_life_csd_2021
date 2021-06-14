@@ -214,6 +214,7 @@ function print_size_of_table($link, $table){
             //prepaging("SELECT COUNT(*) As total_records FROM `user`");
 
             include ("connect_to_database.php");
+            // Η σελιδοποίηση έγινε με βάση τον κώδικα στην σελίδα https://www.allphptricks.com/create-simple-pagination-using-php-and-mysqli/
             if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                 $page_no = $_GET['page_no'];
             } else {
@@ -272,29 +273,6 @@ function print_size_of_table($link, $table){
             if ($num_results == 0) {    // αν δεν υπάρχουν αποτελέσματα
                 echo "<h3>Δεν βρέθηκαν αποτελέσματα αναζήτησης για " . $search ." !</h3>";
             } else {    // αν υπάρχουν αποτελέσματα στην αναζήτηση
-                //prepaging( $query);
-                /*
-                include ("connect_to_database.php");
-                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                    $page_no = $_GET['page_no'];
-                } else {
-                    $page_no = 1;
-                }
-
-                $total_records_per_page = 10;
-
-                $offset = ($page_no-1) * $total_records_per_page;
-                $previous_page = $page_no - 1;
-                $next_page = $page_no + 1;
-                $adjacents = "2";
-
-                //6
-                $query2 = "SELECT COUNT(*) As total_records FROM user WHERE username LIKE '%{$search}%' OR email LIKE '%{$search}%' OR last_name LIKE '%{$search}%' OR first_name LIKE '%{$search}%'  OR region LIKE '%{$search}%'";
-                $result_count = mysqli_query($link, $query2);
-                $total_records = mysqli_fetch_array($result_count);
-                $total_records = $total_records['total_records'];
-                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                $second_last = $total_no_of_pages - 1; // total pages minus 1 */
 
                 echo "<h3>Αποτελέσματα αναζήτησης</h3>
                        <table>
@@ -331,15 +309,10 @@ function print_size_of_table($link, $table){
                 }
                 @mysqli_free_result($results);
                 echo '</table>';
-                //include("show_number_of_pages.php");
-                //echo '<div class="table_page" style="padding: 10px 20px 0px; border-top: dotted 1px #CCC;">
-                //        <strong>Σελίδα '. $page_no.'/'.$total_no_of_pages .'</strong>
-                //  </div>';
             }
             $_POST["search"] = null;
 
         } else { // αν ο χρήστης δεν πατήσει το κουμπί για αναζήτηση (δεν κληθεί η POST)
-            //echo '<h4>'.'DEN KANEI method post == Αναζήτηση' . '</h4>';
             echo '<table>
                     <tr>
                         <th>id</th>
@@ -673,7 +646,6 @@ function print_size_of_table($link, $table){
 
 <!-----------------Footer----------------->
 <?php include("footer.html");?>
-<?php //echo date("Y");?>
-<!--https://www.allphptricks.com/create-simple-pagination-using-php-and-mysqli/-->
+
 </body>
 </html>

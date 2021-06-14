@@ -187,64 +187,6 @@ function print_size_of_table($link, $table){
         }
         ?>
 
-
-
-        <!-- old
-        <table>
-            <tr>
-                <th>id</th>
-                <th>Όνομα</th>
-                <th>Επίθετο</th>
-                <th>Email</th>
-                <th>Ημερομηνία</th>
-                <th class="keno"></th>
-            </tr>
-            -->
-
-            <?php // εμφανίζουμε τον πίνακα των σχόλιων με τα στοιχεία τους, σελιδοποιημένο κατά 10
-            //include ("connect_to_database.php");
-            /*
-            if (isset($_GET['sortBy_contact_id'])) {
-                $query = "SELECT * FROM contact ORDER BY id LIMIT $offset, $total_records_per_page";
-            } elseif (isset($_GET['sortBy_contact_firstname'])) {
-                $query = "SELECT * FROM contact ORDER BY first_name LIMIT $offset, $total_records_per_page";
-            } elseif (isset($_GET['sortBy_contact_lastname'])) {
-                $query = "SELECT * FROM contact ORDER BY last_name LIMIT $offset, $total_records_per_page";
-            } elseif (isset($_GET['sortBy_contact_email'])) {
-                $query = "SELECT * FROM contact ORDER BY email LIMIT $offset, $total_records_per_page";
-            } elseif (isset($_GET['sortBy_contact_date'])) {
-                $query = "SELECT * FROM contact ORDER BY date_of_comment LIMIT $offset, $total_records_per_page";
-            } else {
-                $query = "SELECT * FROM contact LIMIT $offset, $total_records_per_page";
-            }
-
-            //7
-            //$query = "SELECT id, first_name, last_name, email, comment, date_of_comment
-            //              FROM contact LIMIT $offset, $total_records_per_page";
-            $results = mysqli_query($link, $query);
-            while ($row = mysqli_fetch_array($results)) {
-                echo '<tr>';
-                echo '<td>' . $row['id'] . '</td>';
-                echo '<td>' . $row['first_name'] . '</td>';
-                echo '<td>' . $row['last_name'] . '</td>';
-                echo '<td>' . $row['email'] . '</td>';
-                echo '<td>' . $row['date_of_comment'] . '</td>';
-                echo "<td class='keno'>
-                        <a href='?contact_id=".$row['id']."' ><button class='table_button cyan'>Προβολή</button></a>                     
-                    </td>";
-                echo '</tr>';
-            }
-            */
-            ?>
-        </table>
-
-        <?php //εμφανίζουμε τη λίστα των σελίδων σαν μενού κάτω από τον πίνακα
-        //include("show_number_of_pages.php");
-        ?>
-
-        <!--div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-            <strong>Σελίδα <?php echo $page_no."/".$total_no_of_pages; ?></strong>
-        </div-->
     </div>
 
     <script>
@@ -295,7 +237,6 @@ function print_size_of_table($link, $table){
 
 <!-----------------Footer----------------->
 <?php include("footer.html");?>
-<?php //echo date("Y");?>
-<!--https://www.allphptricks.com/create-simple-pagination-using-php-and-mysqli/-->
+
 </body>
 </html>

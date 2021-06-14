@@ -249,7 +249,6 @@ function print_size_of_table($link, $table){
 
 <!-----------------Footer----------------->
 <?php include("footer.html");?>
-<?php //echo date("Y");?>
-<!--https://www.allphptricks.com/create-simple-pagination-using-php-and-mysqli/-->
+
 </body>
 </html>
