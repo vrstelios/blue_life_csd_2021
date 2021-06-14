@@ -86,9 +86,9 @@ session_start();
             <!--input type="submit" name="submit" value="Είσοδος" class="btn_login"/ Αυτό ή-->
             <input type="submit" value="Είσοδος" class="btn_login"/> <!-- ...αυτό;-->
 
-            <button onclick="document.location='Register.php'" class="btn_SignUp">Δημιουργήστε τον δικό σας λογαριασμό!</button>
+            <button onclick="document.location='Register.php'" class="btn_SignUp">Δημιούργησε τον δικό σου λογαριασμό!</button>
 
-            <button class="btn_Forgot_your_Pass" id="btn-modal" name="forgot" onclick="showPopUp()">Ξεχάσατε τον κωδικό σας;</button>
+            <button class="btn_Forgot_your_Pass" id="btn-modal" name="forgot" onclick="showPopUp()">Ξέχασες τον κωδικό σου;</button>
             <div class="overlay" id="overlay">
                 <div class="modal" id="modal">
                     <button class="modal-close-btn" id="close-btn" onclick="ClosePopUp()">&times;</button>
