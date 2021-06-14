@@ -15,6 +15,8 @@ session_start();
 <header id="header">
     <h1>Blue Life</h1>
 </header>
+<!---------------database--------------->
+<?php include("connect_to_database.php") ?>
 
 <!---------------Navigation bar--------------->
 <?php include("navigation.php") ?>
@@ -33,9 +35,17 @@ session_start();
 
 <!---------------Λίμνες-Ποτάμια--------------->
 <div class="category_content">
-    <h3>Λίμνες στην Ελλάδα</h3>
-    <img src="images/2.Categories/Lakes-Rivers_Lake1.jpg" alt="lake" >
-    <p>Στην Ελλάδα υπάρχουν δεκάδες φυσικές και τεχνητές λίμνες καθώς και πολλές λιμνοθάλασσες. Οι περισσότερες
+    <?php
+    $query = "SELECT * FROM article WHERE id=12";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo '<img src="images/2.Categories/Lakes-Rivers_Lake1.jpg" alt="lake" >';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Λίμνες στην Ελλάδα</h3>-->
+
+    <!--<p>Στην Ελλάδα υπάρχουν δεκάδες φυσικές και τεχνητές λίμνες καθώς και πολλές λιμνοθάλασσες. Οι περισσότερες
         λίμνες περιέχουν γλυκό νερό και έχουν σχηματιστεί, κυρίως, μακριά από τις ακτές της θάλασσας ως αποτέλεσμα
         τεκτονικών ή ηφαιστειακών δυνάμεων ή από την τήξη των παγετώνων. Οι λιμνοθάλασσες, που είναι αβαθείς
         παράκτιες υδατοσυλλογές οι οποίες επικοινωνούν με τη θάλασσα μέσω ενός μικρότερου ή μεγαλύτερου ανοίγματος,
@@ -46,13 +56,21 @@ session_start();
         χείμαρρους ή ποτάμια ώστε να αποταμιεύουν το νερό τους για ποικίλους σκοπούς (άρδευση, γεωργία, ύδρευση κ.λπ.),
         είναι η σπουδαιότερη κατηγορία τεχνητών υγρότοπων στην Ελλάδα. Καλύπτουν σημαντική έκταση και έχουν συμβάλλει
         στη δημιουργία σημαντικών οικοσυστημάτων στο ελληνικό υγροτοπικό κεφάλαιο.
-    </p>
+    </p>-->
 </div>
 
 <div class="category_content">
-    <h3>Μεγαλύτερες λίμνες του κόσμου</h3>
-    <img src="images/2.Categories/Lakes-Rivers_River.jpg" alt="lake">
-    <p>Οι μεγαλύτερες σε έκταση λίμνες του κόσμου άνω των 10.000 τ.χλμ. είναι οι παρακάτω:</p>
+    <?php
+    $query = "SELECT * FROM article WHERE id=13";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo '<img src="images/2.Categories/Lakes-Rivers_River.jpg" alt="lake">';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Μεγαλύτερες λίμνες του κόσμου</h3>-->
+
+    <!--<p>Οι μεγαλύτερες σε έκταση λίμνες του κόσμου άνω των 10.000 τ.χλμ. είναι οι παρακάτω:</p>
     <table>
         <tr>
             <th ></th>
@@ -168,13 +186,21 @@ session_start();
             <td>Αφρική</td>
             <td>10.250 τ.χλμ.</td>
         </tr>
-    </table>
+    </table>-->
 </div>
 
 <div class="category_content">
-    <h3>Επεμβάσεις στους Ποταμούς</h3>
-    <img src="images/2.Categories/Lakes-Rivers_Lake2.jpg" alt="river" >
-    <p>Σήμερα παρουσιάζονται αναπτυξιακά σχέδια που αποτελούν νέο κύμα διευθετήσεων και επεμβάσεων για μερικούς
+    <?php
+    $query = "SELECT * FROM article WHERE id=14";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo '<img src="images/2.Categories/Lakes-Rivers_Lake2.jpg" alt="river" >';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Επεμβάσεις στους Ποταμούς</h3>-->
+
+    <!--<p>Σήμερα παρουσιάζονται αναπτυξιακά σχέδια που αποτελούν νέο κύμα διευθετήσεων και επεμβάσεων για μερικούς
         από τους τελευταίους μεγάλους ποταμούς, που έχουν μείνει ανεπηρέαστοι μέχρι σήμερα(Rosenberg & Bodaly, 1994).
         Εκτιμάται ότι μέχρι το έτος 2000 θα έχουν γίνει παρεμβάσεις στο 60% περίπου των ρευμάτων και ποταμών
         παγκοσμίως (Petts, 1989).
@@ -199,11 +225,20 @@ session_start();
         ποτάμιων συστημάτων.
         Τα ποτάμια παγκοσμίως συνεχίζουν να αποτελούν αντικείμενο συνεχών παρεμβάσεων, με σοβαρές επιπτώσεις στη
         δομή και τη λειτουργία τους.
-    </p>
+    </p>-->
 
-    Πηγές: <br>
+    <?php
+    $query = "SELECT * FROM article WHERE id=15";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo $row['description'] ;
+    ?>
+
+    <!--Πηγές: <br>
     <a href="https://el.m.wikipedia.org/wiki/%CE%9B%CE%AF%CE%BC%CE%BD%CE%B7?fbclid=IwAR3-bcybMW9c4D2CHFHRQHdq6-ywtWeeXQurY1o8rlrBlxo6Ymg5lx9fWG0" target="_blank">Βικιπαίδεια</a>,
     <a href="http://river.bio.auth.gr/language/el/2-%CF%84%CE%BF-%CE%B4%CE%AC%CE%BC%CE%B1%CF%83%CE%BC%CE%B1-%CF%84%CF%89%CE%BD-%CF%80%CE%BF%CF%84%CE%B1%CE%BC%CF%8E%CE%BD-%CE%BC%CE%AD%CF%83%CE%B1-%CE%B1%CF%80%CF%8C-%CF%84%CE%B7%CE%BD-%CE%B9%CF%83/?fbclid=IwAR2VHJaly6AkapSnnaL3Qg4nSSlawgNJfiX5dVoXCN32re-GfiNreGwUBt4" target="_blank">Μονάδα Ποιότητας Ποτάμιων Συστημάτων</a>
+    -->
 </div>
 
 <!-----------------Go to top button----------------->

@@ -15,6 +15,8 @@ session_start();
 <header id="header">
     <h1>Blue Life</h1>
 </header>
+<!---------------database--------------->
+<?php include("connect_to_database.php") ?>
 
 <!---------------Navigation bar--------------->
 <?php include("navigation.php") ?>
@@ -33,10 +35,18 @@ session_start();
 
 <!---------------Ζώα στο νερό--------------->
 <div class="category_content">
-    <h3>Βασικές κατηγορίες θαλάσσιων ζώων</h3>
-    <img src="images/2.Categories/Animals_seabed.jpg" alt="sharks" >
+    <?php
+    $query = "SELECT * FROM article WHERE id=20";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo '<img src="images/2.Categories/Animals_seabed.jpg" alt="sharks" >';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Βασικές κατηγορίες θαλάσσιων ζώων</h3>-->
 
-    <p> Τα θαλάσσια ζώα χωρίζονται σε 3 κύριες ομάδες: το ζωοπλαγκτόν, το νηκτό και το βένθος.<br>
+
+    <!--<p> Τα θαλάσσια ζώα χωρίζονται σε 3 κύριες ομάδες: το ζωοπλαγκτόν, το νηκτό και το βένθος.<br>
         Το <b>ζωοπλαγκτόν</b> αποτελείται από μικρούς ζωικούς οργανισμούς, οι οποίοι κινούνται με την βοήθεια των ρευμάτων
         και των κυμάτων. Στο ζωοπλαγκτόν ανήκουν επίσης τα αυγά των ψαριών και οι οργανισμοί στο στάδιο της νύμφης,
         που μεγαλώνοντας εντάσσονται στο νηκτό ή το βένθος.<br>
@@ -47,14 +57,22 @@ session_start();
         οι αστακοί, οι αστερίες, διάφορα σκουλήκια, σαλιγκάρια, μύδια και πολλά άλλα είδη. Μερικά είδη, όπως οι αστακοί,
         είναι σε θέση να κολυμπήσουν στο κατώτατο σημείο της υδάτινης στήλης, αλλά η επιβίωση τους εξαρτάται άμεσα από τον θαλάσσιο πυθμένα.<br>
         Η θαλάσσια πανίδα είναι πιο πλούσια στα ρηχά νερά απ’ ότι στα βαθιά λόγω της αυξημένης φωτεινότητας, που ευνοεί
-        την ανάπτυξη υδρόβιας βλάστησης. </p>
+        την ανάπτυξη υδρόβιας βλάστησης. </p>-->
 
 </div>
 
 <div class="category_content">
-    <h3>Θαλάσσια είδη υπό εξαφάνιση</h3>
-    <img src="images/2.Categories/Animals_shark.jpg" alt="corals and fishes"  >
-    <p> Το μεγαλύτερο ποσοστό του πλανήτη καλύπτεται από θάλασσα, καθώς οι ωκεανοί καταλαμβάνουν το μεγαλύτερο μέρος του.
+    <?php
+    $query = "SELECT * FROM article WHERE id=21";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo '<img src="images/2.Categories/Animals_shark.jpg" alt="corals and fishes"  >';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Θαλάσσια είδη υπό εξαφάνιση</h3>-->
+
+    <!--<p> Το μεγαλύτερο ποσοστό του πλανήτη καλύπτεται από θάλασσα, καθώς οι ωκεανοί καταλαμβάνουν το μεγαλύτερο μέρος του.
         Έτσι, εκτός από εμάς, στον πλανήτη αυτό κατοικούν και πολλά θαλάσσια ζώα. Πολλές φορές όμως, ο άνθρωπος δεν τα σέβεται
         και είτε από φόβο είτε για εμπορικούς σκοπούς, τα σκοτώνει. Δε γνωρίζει ότι μπορεί να του επιτίθενται για να προστατέψουν
         τον εαυτό τους ή ακόμα και τα μικρά τους. Οι ενέργειες αυτές του ανθρώπου, έχουν ως συνέπεια πολλά από τα θαλάσσια είδη να
@@ -75,10 +93,17 @@ session_start();
         χαρακτηρίζεται ως κρισίμως κινδυνεύον με αφανισμό από τη Διεθνή Ένωση Προστασίας Της Φύσης. Ο μισός περίπου πληθυσμός, γύρω στα 250-300 άτομα,
         ζει στην Ελλάδα.<br> <b>Η Όρκα </b>, που αναφέρεται κοινώς ως φάλαινα δολοφόνος (και σπανιότερα ως "Μαύρο ψάρι"), είναι μία από τις οδοντοφόρες
         φάλαινες. Οι Όρκες απαντώνται σε όλους τους ωκεανούς, από τις παγωμένες περιοχές της Αρκτικής και της Ανταρκτικής έως τις τροπικές θάλασσες.
-    </p>
-    Πηγές: <br>
+    </p>-->
+    <?php
+    $query = "SELECT * FROM article WHERE id=22";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo $row['description'] ;
+    ?>
+    <!--Πηγές: <br>
     <a href="https://www.helmepacadets.gr/gr/marine-environment/fauna?fbclid=IwAR2tbvq7Ek2lywmzHm_vbbJCexvNokr208XDHz0wzAImZrCAAy34Xx6WQEE" target="_blank">Ναυτιλοι της HELMEPA,</a>
-    <a href="https://www.wwf.gr/ti_kanoume/fysh/apeiloumena_eidh/?" target="_blank"> WWF</a>
+    <a href="https://www.wwf.gr/ti_kanoume/fysh/apeiloumena_eidh/?" target="_blank"> WWF</a>-->
 </div>
 
 <div class="animals_gallery">

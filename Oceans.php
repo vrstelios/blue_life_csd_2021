@@ -15,6 +15,8 @@ session_start();
 <header id="header">
     <h1>Blue Life</h1>
 </header>
+<!---------------database--------------->
+<?php include("connect_to_database.php") ?>
 
 <!---------------Navigation bar--------------->
 <?php include("navigation.php") ?>
@@ -33,10 +35,18 @@ session_start();
 
 <!---------------Ωκεανοί--------------->
 <div class="category_content">
-    <h3>Οι ωκεανοί και η προέλευση των ονομάτων τους</h3>
-    <img src="images/2.Categories/Oceans_map.jpg" alt="world map" >
+    <?php
+    $query = "SELECT * FROM article WHERE id=8";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo '<img src="images/2.Categories/Oceans_map.jpg" alt="world map" >';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Οι ωκεανοί και η προέλευση των ονομάτων τους</h3>-->
 
-    <p> <b>Ειρηνικός ωκεανός </b>
+
+    <!--<p> <b>Ειρηνικός ωκεανός </b>
         Ο μεγαλύτερος από όλους τους ωκεανούς, ο Ειρηνικός απλώνεται πάνω από 64 εκατομμύρια τετραγωνικά μίλια.
         Το όνομα Pacific προέρχεται από την έκφραση «Mar Pacifico» που χρησιμοποιήθηκε από τον Πορτογάλο εξερευνητή
         Ferdinand Magellan το 1520 για να περιγράψει τα γαλάζια νερά του ωκεανού καθώς το είδε.
@@ -68,13 +78,21 @@ session_start();
         <b>Νότιος Ωκεανός ή Ανταρκτικός Ωκεανός</b>
         Ο ωκεανός καλύπτει 20,32 εκατομμύρια τετραγωνικά μίλια στο νότιο ημισφαίριο. Το όνομα "Ανταρκτική" αναφέρεται
         στο αντίθετο της Αρκτικής. Ενώ ο Αρκτικός Ωκεανός βρίσκεται στο βορειότερο τμήμα της Γης, ο Ανταρκτικός ή
-        ο Νότιος Ωκεανός καλύπτει το νότιο τμήμα του πλανήτη.</p>
+        ο Νότιος Ωκεανός καλύπτει το νότιο τμήμα του πλανήτη.</p>-->
 </div>
 
 <div class="category_content">
-    <h3>Σημασία των ωκεανών και η αντιμετώπιση τους σήμερα</h3>
-    <img src="images/2.Categories/Oceans_beach.jpg" alt="plastic bottle on the beach" >
-    <p> «Οι ωκεανοί είναι το μεγαλύτερο οικοσύστημα στη Γη. Είναι το σύστημα που υποστηρίζει την ζωή στον πλανήτη.
+    <?php
+    $query = "SELECT * FROM article WHERE id=9";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo '<img src="images/2.Categories/Oceans_beach.jpg" alt="plastic bottle on the beach" >';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Σημασία των ωκεανών και η αντιμετώπιση τους σήμερα</h3>-->
+
+    <!--<p> «Οι ωκεανοί είναι το μεγαλύτερο οικοσύστημα στη Γη. Είναι το σύστημα που υποστηρίζει την ζωή στον πλανήτη.
         Οι ωκεανοί παράγουν τη μισή ποσότητα οξυγόνου που αναπνέουμε και σε αυτούς ανήκει το 97% του όγκου του νερού
         όλου του κόσμου. Οι ωκεανοί μάς παρέχουν το ένα έκτο της ζωικής πρωτεΐνης που καταναλώνουμε ως τροφή.
         Οι υγιείς ωκεανοί απορροφούν το διοξείδιο του άνθρακα από την ατμόσφαιρα και έτσι λειτουργούν ανασχετικά
@@ -101,13 +119,20 @@ session_start();
         Ελα όμως που από αυτούς τους ωκεανούς εξαρτάται η ζωή 800 εκατομμυρίων ανθρώπων στον πλανήτη, σύμφωνα με
         στοιχεία του FAO (Food and Agriculture Organization), είτε γιατί από αυτούς βιοπορίζονται είτε γιατί τα
         ψάρια και ό,τι άλλο προέρχεται από τη θάλασσα και τρώγεται είναι τροφή για τους πολίτες του κόσμου.
-    </p>
+    </p>-->
 </div>
 
 <div class="category_content">
-    <h3>Συνέπειες υπερεκμετάλλευσης της θάλασσας</h3>
-    <img src="images/2.Categories/Oceans_wild-sea.jpg" alt="waves" >
-    <p> Η θαλάσσια ζωή και η βιοποικιλότητα στους ωκεανούς απειλούνται στις μέρες μας από την υπεραλίευση, τη
+    <?php
+    $query = "SELECT * FROM article WHERE id=10";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo '<img src="images/2.Categories/Oceans_wild-sea.jpg" alt="waves" >';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Συνέπειες υπερεκμετάλλευσης της θάλασσας</h3>-->
+    <!--<p> Η θαλάσσια ζωή και η βιοποικιλότητα στους ωκεανούς απειλούνται στις μέρες μας από την υπεραλίευση, τη
         μόλυνση και πρόσφατα από το φαινόμενο του θερμοκηπίου. Αν και η χώρα μας δεν περιβάλλεται από ωκεανούς,
         είναι εν τούτοις δεμένη με το θαλάσσιο στοιχείο.
 
@@ -132,12 +157,20 @@ session_start();
         Η ανεξέλεγκτη εκμετάλλευση της θάλασσας πρέπει να σταματήσει. Η Greenpeace ζητά από τις κυβερνήσεις των
         κρατών να προχωρήσουν αμέσως στην προστασία των ωκεανών του πλανήτη μέσα από τη δημιουργία ενός δικτύου
         θαλάσσιων καταφυγίων. Ο καθορισμός των θαλάσσιων καταφυγίων είναι ένα απαραίτητο βήμα για πλούσιες και υγιείς θάλασσες.
-    </p>
+    </p>-->
 
-    Πηγές: <br>
+    <?php
+    $query = "SELECT * FROM article WHERE id=11";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo $row['description'] ;
+    ?>
+
+    <!--Πηγές: <br>
     <a href="https://www.mapsofworld.com/answers/world/named-worlds-oceans/?fbclid=IwAR0Mgnh1ZsiGEodtnuY_KWbS96peGPQOM2cdv4qYAt_XTzsbp23d9P3c0_g#Oceans.php" target="_blank" >Maps Of World</a>,
     <a href="https://www.sansimera.gr/worldays/39?fbclid=IwAR1Xn99gzTsOJ9rQp4kq1OshzuaFP1MfBASezTJ9urPFSDomGoPih9b28Qo" target="_blank">Σαν Σήμερα</a>,
-    <a href="https://www.efsyn.gr/nisides/159817_giati-ehoyme-anagki-toys-okeanoys" target="_blank">Η Εφημερίδα των Συντακτών</a>
+    <a href="https://www.efsyn.gr/nisides/159817_giati-ehoyme-anagki-toys-okeanoys" target="_blank">Η Εφημερίδα των Συντακτών</a>-->
 </div>
 
 <!-----------------Go to top button----------------->

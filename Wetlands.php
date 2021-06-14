@@ -15,6 +15,8 @@ session_start();
 <header id="header">
     <h1>Blue Life</h1>
 </header>
+<!---------------database--------------->
+<?php include("connect_to_database.php") ?>
 
 <!---------------Navigation bar--------------->
 <?php include("navigation.php") ?>
@@ -33,9 +35,17 @@ session_start();
 
 <!---------------Υδροβιότοποι--------------->
 <div class="category_content">
-    <h3>Σημασία υδροβιότοπων</h3>
-    <img src="images/2.Categories/Wetlands_wetland1.jpg" alt="Υδροβιότοπος">
-    <p>
+    <?php
+    $query = "SELECT * FROM article WHERE id=16";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo '<img src="images/2.Categories/Wetlands_wetland1.jpg" alt="Υδροβιότοπος">';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Σημασία υδροβιότοπων</h3>-->
+
+    <!--<p>
         Οι υγρότοποι είναι σημαντικοί όχι μόνο για το περιβάλλον αλλά και για τις τοπικές κοινωνίες και οικονομίες γιατί:
         -    Συγκεντρώνουν μεγάλο αριθμό ειδών, όχι μόνο αυτά που είναι ευρύτερα γνωστά, όπως τα φλαμίνγκο, οι πελεκάνοι, οι ερωδιοί,
         οι πελαργοί, οι πάπιες, αλλά και είδη που είναι σημαντικά για όλη την τροφική αλυσίδα. Οι υγρότοποι θεωρούνται σήμερα
@@ -58,13 +68,21 @@ session_start();
         -    Προσφέρονται για επιστημονική έρευνα, οικο-τουρισμό, ξεναγήσεις, επισκέψεις εκπαιδευτικού χαρακτήρα, παρατηρήσεις
         πουλιών- φυσικά κάτω από προϋποθέσεις λόγω της ευαισθησίας τους ως  οικοσυστήματα.
 
-    </p>
+    </p>-->
 </div>
 
 <div class="category_content">
-    <h3>Οι υδροβιότοποι στην Ελλάδα</h3>
-    <img src="images/2.Categories/Wetlands_wetland2.jpg" alt="Υδροβιότοπος">
-    <p>
+    <?php
+    $query = "SELECT * FROM article WHERE id=17";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo '<img src="images/2.Categories/Wetlands_wetland2.jpg" alt="Υδροβιότοπος">';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Οι υδροβιότοποι στην Ελλάδα</h3>-->
+
+    <!--<p>
         Η χώρα μας διαθέτει αρκετούς υδροβιότοπους, η συντριπτική πλειονότητα των οποίων βρίσκεται στο βόρειο τμήμα της.
         Συνολικά, στην απογραφή που έγινε από το Ελληνικό Κέντρο Βιοτόπων Υγρότοπων το 2000 καταγράφηκαν 411 υδροβιότοποι
         σε όλη τη χώρα συνολικής έκτασης 2 εκατομμυρίων στρεμμάτων. Δυστυχώς μόλις 10 από αυτούς χαρακτηρίστηκαν ως
@@ -80,13 +98,21 @@ session_start();
         Το πρόβλημα επιδεινώνεται από ανθρώπινες δραστηριότητες όπως εκχερσώσεις, επιχωματώσεις, δημιουργία δρόμων
         αλλά και από την αδιαφορία των κατοίκων και των τοπικών αρχών.
 
-    </p>
+    </p>-->
 </div>
 
 <div class="category_content">
-    <h3>Σύμβαση Ραμσαρ για την Ελλάδα</h3>
-    <img src="images/2.Categories/Wetlands_wetland3.jpg" alt="Υδροβιότοπος">
-    <p> Η αφύπνιση και η ενημέρωση των πολιτών για την αξία των υγροτόπων τόσο στο περιβάλλον όσο και στη διατήρηση
+    <?php
+    $query = "SELECT * FROM article WHERE id=18";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo ' <img src="images/2.Categories/Wetlands_wetland3.jpg" alt="Υδροβιότοπος">';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Σύμβαση Ραμσαρ για την Ελλάδα</h3>-->
+
+    <!--<p> Η αφύπνιση και η ενημέρωση των πολιτών για την αξία των υγροτόπων τόσο στο περιβάλλον όσο και στη διατήρηση
         της οικολογικής ισορροπίας επιδιώκεται κάθε χρόνο στις 2 Φεβρουαρίου από ποικίλους οργανισμούς και
         περιβαλλοντικές οργανώσεις. Κι αυτό γιατί η 2α Φεβρουαρίου έχει καθιερωθεί ως Παγκόσμια Ημέρα Υγροτόπων.
         Την ημέρα εκείνη το 1971 υπογράφηκε στην πόλη Ραμσάρ του Ιράν η διεθνής σύμβαση για την προστασία των υγροτόπων.
@@ -112,12 +138,20 @@ session_start();
         το INTERREG BalkanMed, η Ελλάδα διαθέτει 1.383 υγρότοπους και η συνολική τους έκταση είναι μεγαλύτερη από 200.000 εκτάρια.
 
         Τη μεγαλύτερη έκταση καταλαμβάνουν οι παράκτιοι υγρότοποι (εκβολές, δέλτα κ.λπ.), οι φυσικές και οι τεχνητές λίμνες,
-        ενώ παρατηρείται μεγάλο πλήθος τεχνητών λιμνών, εσωτερικών ελών και μικρών λιμνών.</p>
+        ενώ παρατηρείται μεγάλο πλήθος τεχνητών λιμνών, εσωτερικών ελών και μικρών λιμνών.</p>-->
 
-    Πηγές: <br>
+    <?php
+    $query = "SELECT * FROM article WHERE id=19";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo $row['description'] ;
+    ?>
+
+    <!--Πηγές: <br>
     <a href="http://medsos.gr/medsos/2009-01-22-13-00-20/2009-06-11-11-15-09/2009-08-26-13-16-50/631-2009-08-26-13-27-26.html" target="_blank">Δίκτυο Μεσόγειος</a>,
     <a href="https://www.businessdaily.gr/koinonia/10068_i-simasia-ton-ygrotopon-gia-periballon?fbclid=IwAR3E0YspybkPcyDk-tLYJ2nBWNcuK2XZJP39vH7ahpMCw1uIpvfP0RYsKrI" target="_blank"> Business Daily</a>,
-    <a href="https://www.maxmag.gr/perivallon/ydroviotopoi-sto-ellhniko-perivallon-h-shmasia-toys-gia-th-zwh/" target="_blank"> Max mag</a>
+    <a href="https://www.maxmag.gr/perivallon/ydroviotopoi-sto-ellhniko-perivallon-h-shmasia-toys-gia-th-zwh/" target="_blank"> Max mag</a>-->
 </div>
 
 <!-----------------Go to top button----------------->

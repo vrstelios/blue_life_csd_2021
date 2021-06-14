@@ -15,6 +15,8 @@ session_start();
 <header id="header">
     <h1>Blue Life</h1>
 </header>
+<!---------------database--------------->
+<?php include("connect_to_database.php") ?>
 
 <!---------------Navigation bar--------------->
 <?php include("navigation.php") ?>
@@ -33,9 +35,17 @@ session_start();
 
 <!---------------Αλιεία/Εμπόριο--------------->
 <div class="category_content">
-    <h3>Ο κίνδυνος κατάρρευσης του κλάδου της αλιείας</h3>
-    <img src="images/2.Categories/Fishing_boat.jpg" alt="fishing" >
-    <p>H αλιεία είναι μια δραστηριότητα ζωτικής σημασίας για τις κοινότητες των νησιωτικών και παράκτιων περιοχών
+    <?php
+    $query = "SELECT * FROM article WHERE id=23";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo '<img src="images/2.Categories/Fishing_boat.jpg" alt="fishing" >';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Ο κίνδυνος κατάρρευσης του κλάδου της αλιείας</h3>-->
+
+    <!--<p>H αλιεία είναι μια δραστηριότητα ζωτικής σημασίας για τις κοινότητες των νησιωτικών και παράκτιων περιοχών
         στην Ελλάδα εδώ και πολλές χιλιάδες χρόνια. Αρχαιοζωολογικές μελέτες έχουν δείξει ότι τα είδη των ψαριών
         που αλιεύονταν από τους ψαράδες του Αιγαίου 10.000 χρόνια πριν, είναι σε μεγάλο βαθμό τα ίδια με τα είδη
         που αποτελουν στόχο για τους παράκτιους αλιείς έως σήμερα.<br>
@@ -54,13 +64,21 @@ session_start();
         εκφορτώσεων της παράκτιας αλιείας που ξεπερνούσε το 50%.
         Το αποτέλεσμα των δεκαετιών λαθεμένων εθνικών και ευρωπαϊκών πολιτικών στον κλάδο της αλιείας, είναι σήμερα
         οι αλιείς να χρησιμοποιούν ολοένα μεγαλύτερα και πιο γρήγορα σκάφη, να μεταχειρίζονται σε μεγάλο βαθμό βελτιωμένες
-        μεθόδους και τεχνολογία, για να αλιεύουν ολοένα και λιγότερα ψάρια!</p>
+        μεθόδους και τεχνολογία, για να αλιεύουν ολοένα και λιγότερα ψάρια!</p>-->
 </div>
 
 <div class="category_content">
-    <h3>Οι θαλάσσιες μεταφορές και το παγκόσμιο εμπόριο</h3>
-    <img src="images/2.Categories/Fishing_ship1.jpg" alt="ships" >
-    <p>Με το λιμάνι του Πειραιά να βρίσκεται στην 7η θέση μεταξύ των μεγαλύτερων ευρωπαϊκών λιμανιών και στην
+    <?php
+    $query = "SELECT * FROM article WHERE id=24";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo '<img src="images/2.Categories/Fishing_ship1.jpg" alt="ships" >';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Οι θαλάσσιες μεταφορές και το παγκόσμιο εμπόριο</h3>-->
+
+    <!--<p>Με το λιμάνι του Πειραιά να βρίσκεται στην 7η θέση μεταξύ των μεγαλύτερων ευρωπαϊκών λιμανιών και στην
         38η στην παγκόσμια κατάταξη, γίνεται περισσότερο από ποτέ σαφής η συνεισφορά των θαλάσσιων μεταφορών
         στο εμπόριο στη χώρα μας και όχι μόνο. Άλλωστε, όπως τονίζεται από την Ένωση Ελλήνων Εφοπλιστών, επί
         αιώνες το παγκόσμιο εμπόριο και οι διεθνείς θαλάσσιες μεταφορές είναι αλληλένδετα.<br>
@@ -87,13 +105,21 @@ session_start();
         Όσον αφορά τη Διατλαντική Εμπορική Σχέση, ένας εποικοδομητικός εμπορικός διάλογος μεταξύ της Ε.Ε. και των ΗΠΑ
         για την αντιμετώπιση μελλοντικών γεωπολιτικών προκλήσεων είναι απαραίτητος. Και οι δύο εμπορικοί εταίροι θα
         πρέπει να επιβεβαιώσουν τη δέσμευσή τους να διατηρήσουν ελεύθερες και ανοιχτές τις αγορές θαλάσσιων μεταφορών
-        και να υποστηρίξουν ένα διαφανές και χωρίς διακρίσεις διμερές εμπορικό σύστημα.</p>
+        και να υποστηρίξουν ένα διαφανές και χωρίς διακρίσεις διμερές εμπορικό σύστημα.</p>-->
 </div>
 
 <div class="category_content">
-    <h3>Ο COVID-19 μειώνει το παγκόσμιο θαλάσσιο εμπόριο</h3>
-    <img src="images/2.Categories/Fishing_ship2.jpg" alt="fish" >
-    <p>Η πανδημία τάραξε τις παγκόσμιες θαλάσσιες μεταφορές θέτοντας νέα θεμέλια για μια μετασχηματισμένη βιομηχανία
+    <?php
+    $query = "SELECT * FROM article WHERE id=25";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo ' <img src="images/2.Categories/Fishing_ship2.jpg" alt="fish" >';
+    echo $row['description'] ;
+    ?>
+    <!--<h3>Ο COVID-19 μειώνει το παγκόσμιο θαλάσσιο εμπόριο</h3>-->
+
+    <!--<p>Η πανδημία τάραξε τις παγκόσμιες θαλάσσιες μεταφορές θέτοντας νέα θεμέλια για μια μετασχηματισμένη βιομηχανία
         και τις σχετικές αλυσίδες εφοδιασμού. Η UNCTAD αναμένει επιστροφή στην ανάπτυξη το 2021.
         Το παγκόσμιο θαλάσσιο εμπόριο θα βυθιστεί κατά 4,1% το 2020 λόγω της άνευ προηγουμένου διαταραχής που προκλήθηκε
         από τον COVID-19, εκτιμά η UNCTAD στην ανασκόπηση της για τις θαλάσσιες μεταφορές 2020, που κυκλοφόρησε στις 12 Νοεμβρίου.<br>
@@ -109,11 +135,18 @@ session_start();
         Η UNCTAD αναμένει ότι η ανάπτυξη του θαλάσσιου εμπορίου θα επιστρέψει σε θετικό έδαφος και θα επεκταθεί κατά
         4,8% το 2021, με την προϋπόθεση ότι θα ανακάμψει η παγκόσμια οικονομική παραγωγή. Υπογραμμίζει, ωστόσο, την
         ανάγκη για τον κλάδο των θαλάσσιων μεταφορών να υποστηρίξει την αλλαγή και να είναι καλά προετοιμασμένος για
-        έναν διαφορετικό κόσμο μετά το COVID-19.</p>
-    Πηγές: <br>
+        έναν διαφορετικό κόσμο μετά το COVID-19.</p>-->
+    <?php
+    $query = "SELECT * FROM article WHERE id=26";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo $row['description'] ;
+    ?>
+    <!--Πηγές: <br>
     <a href="https://e-nautilia.gr/covid-19-meiwnei-to-thalassio-emporio-h-viomixania-metamorfwnetai/?fbclid=IwAR0dBTQJN8o31hDeynKHd969hSKjboPprJY2JkueLKqncLicGQ7Fia6KGVA" target="_blank">e-Nautilia</a>,
     <a href="https://freesunday.gr/oikonomia/item/21453-oi-thalassies-metafores-kai-to-pagkosmio-emporio?fbclid=IwAR2hGgVfgiWeAl7I2v8jgeRPSHL9lGMhRn5L8Jtrjl51dVpd-6nE5zwFO-g" target="_blank">Free Sunday</a>,
-    <a href="https://archipelago.gr/ti-kanoume/thalassia-prostasia/aliia/?fbclid=IwAR3aOCdq1k6UhyMZH46a7O_hSaZOnzDDNuiReQryby8rvB_8UtDe4Y4A5L0" target="_blank">Αρχιπέλαγος</a>
+    <a href="https://archipelago.gr/ti-kanoume/thalassia-prostasia/aliia/?fbclid=IwAR3aOCdq1k6UhyMZH46a7O_hSaZOnzDDNuiReQryby8rvB_8UtDe4Y4A5L0" target="_blank">Αρχιπέλαγος</a>-->
 </div>
 
 <!-----------------Go to top button----------------->

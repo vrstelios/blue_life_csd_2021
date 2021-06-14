@@ -15,9 +15,12 @@ session_start();
 <header id="header">
     <h1>Blue Life</h1>
 </header>
+<!---------------database--------------->
+<?php include("connect_to_database.php") ?>
+
 
 <!---------------Navigation bar--------------->
-<?php include("navigation.php") ?>
+<?php include("navigation.php")?>
 
 
 <!---------------Title section--------------->
@@ -25,10 +28,18 @@ session_start();
     <source src="images/1.Home/Sea-home.mp4" type="video/mp4">
 </video>
 <div class="home-page-title">
-    <div>
+    <?php
+    $query = "SELECT * FROM article WHERE id=1";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo $row['description'] ;
+    ?>
+
+    <!--<div>
         <h5><i>"Πόσο άστοχο είναι να αποκαλούμε αυτόν τον πλανήτη Γη,<br> ενώ είναι εντελώς ξεκάθαρο ότι είναι Ωκεανός"</i></h5>
         <h6><i> Άρθουρ Κλαρκ&emsp;</i></h6>
-    </div>
+    </div>-->
 </div>
 
 <!---------------Περιεχόμενο αρχικής σελίδας--------------->
@@ -38,7 +49,14 @@ session_start();
             <img src="images/1.Home/waves.jpg" alt="Wild sea"/>
         </div>
         <div class="column right">
-            <h3>Το νερό, ο «μπλε χρυσός» </h3>
+            <?php
+            $query = "SELECT * FROM article WHERE id=2";
+            $results = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($results);
+            echo $row['title'] ;
+            echo $row['description'] ;
+            ?>
+            <!--<h3>Το νερό, ο «μπλε χρυσός» </h3>
             <p>Σύμφωνα με μελέτη  (Water in Europe: Green tape or Blue Gold?) του European  Water Platform για το 2014,
                 ο πλανήτης μας και όλος ο κόσμος εξαρτάται από το νερό.  Σε παγκόσμιο επίπεδο, το 70% της κατανάλωσης του
                 γλυκού νερού γίνεται από τη γεωργία, το 22% από τη βιομηχανία και 8% για τις εγχώριες δραστηριότητες μίας
@@ -49,7 +67,7 @@ session_start();
                 θα είναι το πολυτιμότερο εμπόρευμα στο κόσμο σε λίγα χρόνια και θα ξεπεράσει σε αξία πετρέλαιο και χρυσό, καθώς θα αναδειχθεί σε
                 νούμερο 1 αγαθό για το οποίο θα αυξάνεται η ζήτηση και θα μειώνεται η ποσότητά του. Oι προβλέψεις αναφέρουν ότι η ζήτηση για καθαρό
                 νερό θα αυξηθεί έως το 2030, με ρυθμούς διπλάσιους σε σχέση με του πετρελαίου, ενώ η  Citigroup εκτιμά ότι περίπου το ένα τρίτο του παγκόσμιου πληθυσμού δεν θα έχει πρόσβαση σε πόσιμο νερό μέχρι το 2025. Αυτή τη στιγμή, πάνω από το 35% του παγκόσμιου
-                πληθυσμού, ή 2,7 δισεκατομμύρια άνθρωποι, δεν έχουν πρόσβαση σε ασφαλές πόσιμο νερό, σύμφωνα με τον ΟΗΕ.</p>
+                πληθυσμού, ή 2,7 δισεκατομμύρια άνθρωποι, δεν έχουν πρόσβαση σε ασφαλές πόσιμο νερό, σύμφωνα με τον ΟΗΕ.</p>-->
         </div>
     </div>
 </div>
@@ -57,18 +75,32 @@ session_start();
 <!-----------------Φωτογραφία με ρητό----------------->
 <div class="section">
     <div>
-        <h5><i>"Το νερό είναι ψυχή της Γης"</i></h5>
-        <h6><i>W.H. Auden&emsp;</i></h6>
+        <?php
+        $query = "SELECT * FROM article WHERE id=3";
+        $results = mysqli_query($link, $query);
+        $row = mysqli_fetch_array($results);
+        echo $row['title'] ;
+        echo $row['description'] ;
+        ?>
+        <!--<h5><i>"Το νερό είναι ψυχή της Γης"</i></h5>
+        <h6><i>W.H. Auden&emsp;</i></h6>-->
     </div>
 </div>
 
 <div class="home_articles">
     <div class="row">
         <div class="column left2">
-            <h3>Τι μπορείς να κάνεις;</h3>
+            <?php
+            $query = "SELECT * FROM article WHERE id=4";
+            $results = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($results);
+            echo $row['title'] ;
+            echo $row['description'] ;
+            ?>
+            <!--<h3>Τι μπορείς να κάνεις;</h3>
             <p>Σίγουρα όλοι μας θα έχουμε αναρωτηθεί κάποια στιγμή τι μπορούμε να κάνουμε για να συνεισφέρουμε ενεργά στην προστασία των θαλάσσιων κόσμων.<br>
                 Πάρε τώρα μέρος στις δράσεις που διοργανώνουμε και σώσε τις θάλασσες!
-            </p>
+            </p>-->
             <a href="Actions.php"><button class="youCanHelpHomeButton"> Δες πώς μπορείς να βοηθήσεις! </button></a>
         </div>
         <div class="column right2">
@@ -83,7 +115,14 @@ session_start();
             <img src="images/1.Home/bubbles.jpg" alt="Cute Bubbles"/>
         </div>
         <div class="column right">
-            <h3>Σημασία του νερού...</h3>
+            <?php
+            $query = "SELECT * FROM article WHERE id=5";
+            $results = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($results);
+            echo $row['title'] ;
+            echo $row['description'] ;
+            ?>
+            <!--<h3>Σημασία του νερού...</h3>
             <p> Το νερό είναι ένας φυσικός πόρος που έχει μεγάλη σημασία γιατί είναι από τους βασικούς παράγοντες για τη
                 ζωή και την ανάπτυξη. Τα τελευταία χρόνια το αγαθό αυτό βρίσκεται σε ανεπάρκεια, παρ’ ότι ένας παρατηρητής
                 που θα ατένιζε τη Γη από το διάστημα θα τη χαρακτήριζε ως “γαλάζιο πλανήτη” λόγω του άφθονου νερού που
@@ -94,15 +133,23 @@ session_start();
                 κατανεμημένο σε όλες τις περιοχές του πλανήτη και αν ο παρατηρητής πλησίαζε τη Γη θα έβλεπε σε άλλες
                 περιοχές πλημμύρες και σε άλλες λειψυδρία.</p>
             <p>Νερό είναι το φυσικό στοιχείο το οποίο προκύπτει από την χημική ένωση των μορίων υδρογόνου και οξυγόνου.
-                Στη Χημεία το νερό συμβολίζεται ως H2O.</p>
+                Στη Χημεία το νερό συμβολίζεται ως H2O.</p>-->
         </div>
     </div>
 </div>
 
 <div class="home_articles">
     <div class="row">        
-        <div class="column left2"> 
-          <h3>Όταν η έλλειψη νερού φτάσει στην πόρτα μας</h3>
+        <div class="column left2">
+            <?php
+            $query = "SELECT * FROM article WHERE id=6";
+            $results = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($results);
+            echo $row['title'] ;
+            echo $row['description'] ;
+            ?>
+
+          <!--<h3>Όταν η έλλειψη νερού φτάσει στην πόρτα μας</h3>
             <p>Συνήθως το περιβαλλοντικό ζήτημα που μονοπωλεί τις παγκόσμιες συνόδους είναι η κλιματική αλλαγή. Αλλά εξίσου σημαντικό είναι
                 και το θέμα των αποθεμάτων νερού σε όλο τον κόσμο. Το πρόβλημα της έλλειψης νερού αλλά και οι τρόποι καλύτερης διαχείρισης
                 των υδάτινων πόρων βρίσκονται στο επίκεντρο του όγδοου Παγκόσμιου Συμβουλίου Υδάτων (World Water Council) που συνεδριάζει αυτές
@@ -116,16 +163,24 @@ session_start();
                 «Σύμφωνα με τη γνώση που έχουμε σήμερα, είναι πιθανό να αντιμετωπίσουμε πολλά τέτοια προβλήματα στο μέλλον. (…) Το μήνυμα που θέλουμε
                 να περάσουμε από το WWC είναι ότι και οι πολιτικοί πρέπει να καταλάβουν ότι αυτό που συμβαίνει τώρα σε μακρινές περιοχές,
                 μπορεί να συμβεί μελλοντικά και στη δική μας πόρτα. Πρέπει να προετοιμαστούμε ολοι καλύτερα για το μέλλον», σημειώνει τέλος ο επικεφαλής του WWC.
-            </p>
+            </p>-->
         </div>
         <div class="column right2">
             <img src="images/1.Home/dry_water.jpg" alt="Wave"/>
         </div>
     </div>
-    Πηγές: <br>
+    <?php
+    $query = "SELECT * FROM article WHERE id=7";
+    $results = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($results);
+    echo $row['title'] ;
+    echo $row['description'] ;
+    ?>
+    <!--Πηγές: <br>
     <a href="https://www.protothema.gr/economy/article/429012/ble-hrusos-poso-axizei-to-nero-tou-planiti-/" target="_blank">Πρώτο Θέμα</a>,
     <a href="https://www.deyamp.gr/oikologia-periballon-nero/to-nero-kai-i-simasia-tou/" target="_blank"> Δ.Ε.Υ.Α.Μ.Π</a>,
     <a href="https://www.dw.com/el/%CF%8C%CF%84%CE%B1%CE%BD-%CE%B7-%CE%AD%CE%BB%CE%BB%CE%B5%CE%B9%CF%88%CE%B7-%CE%BD%CE%B5%CF%81%CE%BF%CF%8D-%CF%86%CF%84%CE%AC%CF%83%CE%B5%CE%B9-%CF%83%CF%84%CE%B7%CE%BD-%CF%80%CF%8C%CF%81%CF%84%CE%B1-%CE%BC%CE%B1%CF%82/a-43039279" target="_blank"> DW</a>
+    -->
 </div>
 
 <div class="home_articles">
