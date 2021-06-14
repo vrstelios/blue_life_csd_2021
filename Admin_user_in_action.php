@@ -114,7 +114,7 @@ function print_size_of_table($link, $table){
         </form>
 
         <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
+        if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
             //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
             //!include ("connect_to_database.php");
             $search = $_POST["search"];

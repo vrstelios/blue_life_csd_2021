@@ -143,10 +143,10 @@ session_start();
             $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
             if(!empty($_FILES["image"]["name"])) {
-                $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
-                if (in_array($fileType, $allowTypes)) {
+                //$allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
+                //if (in_array($fileType, $allowTypes)) {
                     move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
-                }
+                //}
             }
 
             $query = "UPDATE user SET image='$fileName' WHERE id=$id;";
@@ -257,7 +257,7 @@ function print_size_of_table($link, $table){
         </form>
 
         <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
+        if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
             //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
             $search = $_POST["search"];
             $results = null;

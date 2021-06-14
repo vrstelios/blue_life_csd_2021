@@ -64,7 +64,9 @@ while ($row = mysqli_fetch_array($results)) {
     echo                $row['date'] . ', ' . $row['location'];
     echo            "</div> <br>";
     echo            "<p>" . $row['description'] . "</p>";
-    echo            "<a href=" . $row['link'] . " target='_blank'> Περισσότερες πληροφορίες</a>";
+    if ($row['link']!="" && $row['link']!=null){
+        echo "<a href=" . $row['link'] . " target='_blank'> Περισσότερες πληροφορίες</a>";
+    }
     echo            "</div>
                 </div>";
 

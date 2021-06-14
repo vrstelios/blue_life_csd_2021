@@ -27,7 +27,7 @@ session_start();
 <!---------------Περιεχόμενο  σελίδας--------------->
 <?php
 include("connect_to_database.php");
-if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["navigation_search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
+if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["navigation_search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
     $navigation_search = $_POST["navigation_search"];
     //echo '<h4>'.'KANEI method post == Αναζήτηση, navigation_search= '. $navigation_search . '</h4>';
 
