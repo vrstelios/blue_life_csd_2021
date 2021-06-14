@@ -35,10 +35,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["navigation_search"]!="") { 
                           description LIKE '%{$navigation_search}%'  OR page LIKE '%{$navigation_search}%'"; // to page LIKe να φύγει??????
     $results = mysqli_query($link, $query);
 
+    $query2 = "SELECT * FROM action WHERE title LIKE '%{$navigation_search}%' OR description LIKE '%{$navigation_search}%'  OR date LIKE '%{$navigation_search}%' OR
+                          location LIKE '%{$navigation_search}%'";
+    $results2 = mysqli_query($link, $query2);
 
     $num_results = mysqli_num_rows($results);
-    echo "<div class='results_content'>";
-    if ($num_results == 0) {    // αν δεν υπάρχουν αποτελέσματα
+    $num_results2 = mysqli_num_rows($results2);
+
+    echo "<div class='results'>";
+    if ($num_results == 0 AND $num_results2==0) {    // αν δεν υπάρχουν αποτελέσματα
         echo "<h3>Δεν βρέθηκαν αποτελέσματα αναζήτησης για " . $navigation_search ." !</h3>";
     } else {    // αν υπάρχουν αποτελέσματα στην αναζήτηση
 
@@ -50,6 +55,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["navigation_search"]!="") { 
             echo "<h3>" . preg_replace($pattern, $replacement, $row['title']) . "</h3>";
             echo "Αποτέλεσμα από σελίδα <a href=".$row['page'].">".$row['page']."</a>";
             echo "<p>" . preg_replace($pattern, $replacement, $row['description']) . "</p>";
+            echo '</div>';
+            echo '<hr>';
+        }
+
+        while ($row2 = mysqli_fetch_array($results2)) { //
+            echo "<div class='results_content'>";
+            echo "<h3>" . preg_replace($pattern, $replacement, $row2['title']) . "</h3>";
+            echo "Αποτέλεσμα από σελίδα <a href=Actions.php> Actions.php </a>";
+            echo "<p>" . preg_replace($pattern, $replacement, $row2['date']) . ", " . preg_replace($pattern, $replacement, $row2['location']) . "</p>";
+            echo "<p>" . preg_replace($pattern, $replacement, $row2['description']) . "</p>";
             echo '</div>';
             echo '<hr>';
         }
