@@ -20,7 +20,7 @@ session_start();
         include("connect_to_database.php");
         $query = "DELETE FROM user_in_action WHERE user_id=$delete_user_id AND action_id=$delete_action_id";
         mysqli_query($link, $query);
-        $_SESSION['remove_user_from_action'] = "REMOVE USER FROM ACTION";
+        $_SESSION['remove_user_from_action'] = "REMOVE_USER_FROM_ACTION";
     }
     ?>
 </head>
@@ -212,76 +212,6 @@ function print_size_of_table($link, $table){
         ?>
 
 
-
-        <!--old
-        <table>
-            <tr>
-                <th>id χρήστη</th>
-                <th>id δράσης</th>
-                <th>Username συμμετέχοντα</th>
-                <th>Τίτλος δράσης</th>
-                <th>Ημερομηνία δήλωσης συμμετοχής</th>
-                <th class="keno"></th>
-            </tr>
-            -->
-
-            <?php // εμφανίζουμε τον πίνακα των χρηστών που συμμετέχουν σε κάποια δράση με τα στοιχεία τους, σελιδοποιημένο κατά 10
-            //include ("connect_to_database.php");
-            //7
-            /*
-            if (isset($_GET['sortBy_action_id'])) {
-                $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
-                      FROM user, user_in_action, action
-                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id ORDER BY user_in_action.action_id LIMIT $offset, $total_records_per_page";
-            }elseif (isset($_GET['sortBy_username1'])) {
-                $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
-                      FROM user, user_in_action, action
-                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id ORDER BY user.username LIMIT $offset, $total_records_per_page";
-            }elseif (isset($_GET['sortBy_user_id'])) {
-                $query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
-                      FROM user, user_in_action, action
-                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id ORDER BY user_in_action.user_id LIMIT $offset, $total_records_per_page";
-            }elseif (isset($_GET['sortBy_title1'])) {
-                $query =  "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
-                      FROM user, user_in_action, action
-                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id ORDER BY action.title LIMIT $offset, $total_records_per_page";
-            }elseif (isset($_GET['sortBy_date_joined'])) {
-                $query =  "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
-                      FROM user, user_in_action, action
-                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id ORDER BY user_in_action.date_joined LIMIT $offset, $total_records_per_page";
-            }else {
-                $query =  "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
-                      FROM user, user_in_action, action
-                      WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id LIMIT $offset, $total_records_per_page";
-            }
-
-            //7
-            //$query = "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
-            //              FROM user, user_in_action, action
-             //             WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id
-             //             LIMIT $offset, $total_records_per_page";
-            $result = mysqli_query($link, $query);
-            while($row = mysqli_fetch_array($result)){
-                echo "<tr>
-                     <td>".$row['user_id']."</td>
-                     <td>".$row['action_id']."</td>
-                     <td>".$row['username']."</td>
-                     <td>".$row['title']."</td>
-                     <td>".$row['date_joined']."</td>";
-                echo "<td class='keno'>
-                     <a href='?delete_user=" . $row['user_id'] .  "&delete_action=" . $row['action_id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
-                     </tr>";
-            }*/
-            ?>
-        </table>
-
-        <?php //εμφανίζουμε τη λίστα των σελίδων
-        //include("show_number_of_pages.php");
-        ?>
-
-        <!--div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-            <strong>Σελίδα <?php //echo $page_no."/".$total_no_of_pages; ?></strong>
-        </div-->
     </div>
 
 
@@ -291,9 +221,22 @@ function print_size_of_table($link, $table){
         <strong>Ο χρήστης αποχώρησε από τη δράση!</strong>
     </div>
 
+    <script>
+        function openAlertMessage(id) {
+            document.getElementById(id).style.display = "block";
+            setTimeout(hideElement, 7000) //milliseconds
+            function hideElement() {
+                closeAlertMessage(id);
+            }
+        }
+        function closeAlertMessage(id) {
+            document.getElementById(id).style.display = "none";
+        }
+    </script>
+
     <?php
-    if (isset($_SESSION['delete_user']) && isset($_SESSION['delete_action'])){
-        if ($_SESSION['remove_user_from_action'] == "REMOVE USER FROM ACTION"){
+    if (isset($_SESSION['remove_user_from_action'])){
+        if ($_SESSION['remove_user_from_action'] == "REMOVE_USER_FROM_ACTION"){
             echo '<script type="text/javascript">openAlertMessage("DELETE_USER_FROM_ACTION");</script>';
             $_SESSION['remove_user_from_action'] = null;
         }

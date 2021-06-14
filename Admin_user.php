@@ -11,10 +11,10 @@ session_start();
     <link rel="stylesheet" href="styles_admin.css">
     <?php
     if (isset($_GET['delete_user'])  && $_SESSION['connected_id']==1) { // ο admin έχει πατήσει τον κάδο για να διαγράψει ένα χρήστη και η μεταβλητή $_GET['delete_user'] έχει το id αυτού του χρήστη
-        delete_user($_GET['delete_user']);
+        delete_a_user($_GET['delete_user']);
     }
 
-    function delete_user($delete_user_id)
+    function delete_a_user($delete_user_id)
     {
         include("connect_to_database.php");
         $query = "DELETE FROM user WHERE id=$delete_user_id";
@@ -341,6 +341,7 @@ function print_size_of_table($link, $table){
                     } else {
                         echo "<td class='keno'>
                         <a href='?edit_user=" . $row['id'] . "'><img src='images/6.Admin/edit.png' alt='edit'></a>
+                        <a href='?edit_user_image=" . $row['id'] . "'><img src='images/6.Admin/camera.png' alt='camera'></a>
                         <a href='?delete_user=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>";
                     }
                     echo '</tr>';

@@ -11,14 +11,15 @@ session_start();
     <link rel="stylesheet" href="styles_admin.css">
     <?php
     if (isset($_GET['delete_action']) && $_SESSION['connected_id']==1) { // ο admin έχει πατήσει τον κάδο για να διαγράψει μία δράση και η μεταβλητή $_GET['delete_action'] έχει το id αυτής της δράσης
-        delete_action($_GET['delete_action']);
+        delete_an_action($_GET['delete_action']);
     }
 
-    function delete_action($delete_action_id)
+    function delete_an_action($delete_action_id)
     {
         include("connect_to_database.php");
-        $query = "DELETE FROM action WHERE id=$delete_action_id";
-        mysqli_query($link, $query);
+        $delete_query = 'DELETE FROM action WHERE id=$delete_action_id';
+        //$query = "DELETE FROM action WHERE id='$delete_action_id'";
+        mysqli_query($link, $delete_query);
         $_SESSION['action_deleted'] = "ACTION DELETED";
     }
 
@@ -374,64 +375,6 @@ function print_size_of_table($link, $table){
         }
         ?>
 
-
-
-
-        <!--old
-        <table>
-            <tr>
-                <th>id</th>
-                <th>Τίτλος</th>
-                <th>Ημερομηνία</th>
-                <th>Τοποθεσία</th>
-                <th>Περιγραφή</th>
-                <th>Εικόνα</th>
-                <th>Σύνδεσμος</th>
-                <th class="keno"></th>
-            </tr>
-            -->
-
-        <?php // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
-        //include ("connect_to_database.php");
-        /*
-        if (isset($_GET['sortBy_id_action'])) {
-            $query = "SELECT * FROM action ORDER BY id LIMIT $offset, $total_records_per_page";
-        }elseif (isset($_GET['sortBy_title'])) {
-            $query = "SELECT * FROM action ORDER BY title LIMIT $offset, $total_records_per_page";
-        }elseif (isset($_GET['sortBy_date'])) {
-            $query = "SELECT * FROM action ORDER BY date LIMIT $offset, $total_records_per_page";
-        }elseif (isset($_GET['sortBy_location'])) {
-            $query = "SELECT * FROM action ORDER BY location LIMIT $offset, $total_records_per_page";
-        }else {
-            $query = "SELECT * FROM action LIMIT $offset, $total_records_per_page";
-        }
-
-        $results = mysqli_query($link, $query);
-        while ($row = mysqli_fetch_array($results)) {
-            echo '<tr>';
-            echo '<td>' . $row['id'] . '</td>';
-            echo '<td>' . $row['title'] . '</td>';
-            echo '<td>' . $row['date'] . '</td>';
-            echo '<td>' . $row['location'] . '</td>';
-            echo '<td>' . $row['description'] . '</td>';
-            echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
-            echo '<td>' . $row['link'] . '</td>';
-            echo "<td class='keno'>
-                   <a href='?edit_action=".$row['id']."'><img src='images/6.Admin/edit.png' alt='edit'></a>
-                   <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>
-               </td>";
-            echo '</tr>';
-        }*/
-        ?>
-        <!--/table-->
-
-        <?php //εμφανίζουμε τη λίστα των σελίδων
-        //include("show_number_of_pages.php");
-        ?>
-
-        <!--div class="table_page" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-            <strong>Σελίδα <?php //echo $page_no."/".$total_no_of_pages; ?></strong>
-        </div-->
     </div>
 
     <script>

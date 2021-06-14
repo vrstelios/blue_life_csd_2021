@@ -218,19 +218,6 @@ ul > li:before {
 
 }
 
-
-
-/* to pio kalo apo ta katw
-ul {
-    width: 100px;
-    position: relative;
-
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-
- */
-
 /* sort and search */
 .sort_dropdown {
     float: right;
