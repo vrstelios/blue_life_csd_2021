@@ -45,14 +45,14 @@ function print_size_of_table($link, $table){
 
 <div class="admin-page">
 
-    <div class="navbar" id="navbar_admin">
+    <div class="admin_bar" id="navbar_admin">
         <a href="Admin_user.php">Χρήστες</a>
         <a href="Admin_action.php">Δράσεις</a>
         <a href="Admin_user_in_action.php">Χρήστες σε Δράσεις</a>
         <a href="Admin_contact.php">Επικοινωνία χρηστών</a>
     </div>
 
-    <h3>Επικοινωνία χρηστών</h3>
+    <h3 style="padding-top: 40px">Επικοινωνία χρηστών</h3>
     <div class="contact-table">
         <p>ΟΛΕΣ ΟΙ ΦΟΡΜΕΣ
             <?php //εμφανίζουμε το πλήθος των σχόλιων των χρηστών

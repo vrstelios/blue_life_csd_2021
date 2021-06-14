@@ -67,6 +67,10 @@
     cursor: pointer;
 }
 
+.cyan {
+    background-color: #1f5362;
+}
+
 .table_button:active {
     transform: translateY(4px);
 }

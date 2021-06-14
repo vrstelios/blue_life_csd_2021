@@ -23,17 +23,6 @@ session_start();
         $_SESSION['action_deleted'] = "ACTION DELETED";
     }
 
-    function generateRandomString($length) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
-
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include("connect_to_database.php");
@@ -58,23 +47,6 @@ session_start();
             } else {
                 $date = null;
             }
-
-            // Αποθήκευση εικόνας στον server στο directory images/Uploads/Action_Images/ και ονόματος της εικόνας στην βάση δεδομένων
-            $targetDir = "images/Uploads/Action_Images/";
-            $fileName = basename($_FILES["image"]["name"]);
-
-            $fileName =  generateRandomString(5) . $fileName;
-
-            $targetFilePath = $targetDir . $fileName;
-            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-
-            if(!empty($_FILES["image"]["name"])) {
-                $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
-                if (in_array($fileType, $allowTypes)) {
-                    move_uploaded_file($_FILES["image"]["name"], $targetFilePath);
-                }
-            }
-
             if (isset($_POST['subject'])) {
                 $description = $_POST['subject'];
             } else {
@@ -88,22 +60,35 @@ session_start();
                 $_SESSION['submit'] = "NOT AVAILABLE TITLE";
             } else {
                 // εισάγουμε τα στοιχεία της δράσης στο db
-                $query = "INSERT INTO action (title,date,location,description,image,link)
-                  VALUES ('$title','$date','$location','$description','$fileName','$link_info');";
+                $query = "INSERT INTO action (title,date,location,description,link)
+                  VALUES ('$title','$date','$location','$description','$link_info');";
                 if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
                     $_SESSION['submit'] = "ACTION CREATED";
                 }
-                // τροποποιούμε το name της εικόνας με βάση το id της δράσης για να είναι το όνομα μοναδικό
+
                 $query = "SELECT id FROM action WHERE title='$title'";
                 $results = mysqli_query($link, $query);
                 $row = mysqli_fetch_array($results);
+                $id = $row['id'];
 
-                $_FILES["image"]["name"] = 'A' . $row['id'] . $fileName;;
-                $new_filename = $_FILES["image"]["name"];
+                // Αποθήκευση εικόνας στον server στο directory images/Uploads/Action_Images/ και ονόματος της εικόνας στην βάση δεδομένων
+                $targetDir = "images/Uploads/Action_Images/";
+                $fileName = basename($_FILES["image"]["name"]);
 
-                $query = "UPDATE action SET image=$new_filename WHERE title=$title";
+                $fileType = pathinfo($fileName,PATHINFO_EXTENSION);
+                $fileName =  'Action'.$id.'.'.$fileType;
+
+                $targetFilePath = $targetDir . $fileName;
+                $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+
+                if(!empty($_FILES["image"]["name"])) {
+                    $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
+                    if (in_array($fileType, $allowTypes)) {
+                        move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
+                    }
+                }
+                $query = "UPDATE action SET image='$fileName' WHERE id=$id;";
                 mysqli_query($link, $query);
-                //echo "The file ".$new_filename. " has been uploaded.";
             }
 
         }
@@ -145,7 +130,7 @@ session_start();
             } else {
                 // επαναεισάγουμε τα στοιχεία της δράσης στο db
                 $query = "UPDATE action SET title='$title', date='$date', location='$location',
-                  description='$description', image='$fileName', link='$link_info' WHERE id=$id;";
+                  description='$description', link='$link_info' WHERE id=$id;";
                 if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
                     $_SESSION['submit'] = "EDIT ACTION SAVED";
                 }
@@ -154,11 +139,13 @@ session_start();
         }
 
         if ($_POST['submit'] == 'Ενημέρωση της εικόνας της δράσης') {
+            $id = $_SESSION['action_id'];
             // Αποθήκευση εικόνας στον server στο directory images/Uploads/Action_Images/ και ονόματος της εικόνας στην βάση δεδομένων
             $targetDir = "images/Uploads/Action_Images/";
             $fileName = basename($_FILES["image"]["name"]);
 
-            $fileName =  generateRandomString(5) . $fileName;
+            $fileType = pathinfo($fileName,PATHINFO_EXTENSION);
+            $fileName =  'Action'.$id.'.'.$fileType;
 
             $targetFilePath = $targetDir . $fileName;
             $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
@@ -166,22 +153,10 @@ session_start();
             if(!empty($_FILES["image"]["name"])) {
                 $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
                 if (in_array($fileType, $allowTypes)) {
-                    move_uploaded_file($_FILES["image"]["name"], $targetFilePath);
+                    move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
                 }
             }
-
-            $id = $_SESSION['action_id'];
-
-            $query = "UPDATE action SET image='$fileName' WHERE id=$id";
-            if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
-                $_SESSION['submit'] = "EDIT ACTION IMAGE SAVED";
-            }
-
-            // τροποποιούμε το name της εικόνας με βάση το id της δράσης για να είναι το όνομα μοναδικό
-            $_FILES["image"]["name"] = 'A' . $id . $fileName;;
-            $new_filename = $_FILES["image"]["name"];
-
-            $query = "UPDATE action SET image=$new_filename WHERE id=$id";
+            $query = "UPDATE action SET image='$fileName' WHERE id=$id;";
             mysqli_query($link, $query);
         }
         @mysqli_close($link);
@@ -222,14 +197,14 @@ function print_size_of_table($link, $table){
 
 <div class="admin-page">
 
-    <div class="navbar" id="navbar_admin">
+    <div class="admin_bar" id="navbar_admin">
         <a href="Admin_user.php">Χρήστες</a>
         <a href="Admin_action.php">Δράσεις</a>
         <a href="Admin_user_in_action.php">Χρήστες σε Δράσεις</a>
         <a href="Admin_contact.php">Επικοινωνία χρηστών</a>
     </div>
 
-    <h3>Δράσεις</h3>
+    <h3 style="padding-top: 40px">Δράσεις</h3>
     <div class="actions-table">
         <p>ΟΛΕΣ ΟΙ ΔΡΑΣΕΙΣ
             <?php //εμφανίζουμε το πλήθος των δράσεων

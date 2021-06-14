@@ -528,6 +528,12 @@ nav {
     justify-content: center;
 }
 
+@media screen and (max-width: 800px) {
+    .alert {
+        width: 80%;
+    }
+}
+
 .table_button_search {
     padding: 6px 10px;
     margin: 4px;
