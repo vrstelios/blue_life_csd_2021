@@ -211,14 +211,14 @@ function print_size_of_table($link, $table){
 
 <div class="admin-page">
 
-    <div class="navbar" id="navbar_admin">
+    <div class="admin_bar" id="navbar_admin">
         <a href="Admin_user.php">Χρήστες</a>
         <a href="Admin_action.php">Δράσεις</a>
         <a href="Admin_user_in_action.php">Χρήστες σε Δράσεις</a>
         <a href="Admin_contact.php">Επικοινωνία χρηστών</a>
     </div>
 
-    <h3>Χρήστες</h3>
+    <h3 style="padding-top: 40px">Χρήστες</h3>
     <div class="users-table">
         <p>ΟΛΟΙ ΟΙ ΧΡΗΣΤΕΣ
             <?php //εμφανίζουμε το πλήθος των χρηστών

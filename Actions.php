@@ -68,10 +68,9 @@ while ($row = mysqli_fetch_array($results)) {
     echo            "</div>
                 </div>";
 
-    echo            "<form method='post' class='column button'>";
-    echo                "<input type='submit' name='button_user_joins_action#" . $row['id'] . "' value=' Θέλω να συμμετέχω και εγώ ' class='buttonJoinActions'/>";
-
-    echo            "</form>";
+    echo            "<div class='column button'><form method='post' class='formJoinActions'>";
+    echo                "<input type='submit' name='button_user_joins_action#" . $row['id'] . "' value='Θέλω να συμμετέχω και εγώ' class='buttonJoinActions'/>";
+    echo            "</form></div>";
     echo    "</div>";
     echo "</article>";
     $action_id = $row['id'];

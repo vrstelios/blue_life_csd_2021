@@ -179,12 +179,47 @@ span {
     }
 }
 /*--- Για τη σελίδα διαχείρησης ---*/
+
 #navbar_admin {
-    width: 48%;
+    width: 692px;
     margin: auto;
     height: auto;
 }
 
+.admin_bar {
+    overflow: hidden;
+    background-color: #f6f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin_bar a {
+    float: left;
+    font-size: 20px;
+    color: #1687a7;
+    font-weight: bold;
+    text-align: center;
+    padding: 14px 24px;
+    text-decoration: none;
+}
+
+.admin_bar a:hover {
+    background-color: #1687a7;
+    color: #f6f5f5;
+}
+
+@media screen and (max-width: 750px) {
+    #navbar_admin {
+        width: 100%;
+        height: auto;
+    }
+
+    .admin_bar a {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+}
 
 /*
 *, :before, :after {

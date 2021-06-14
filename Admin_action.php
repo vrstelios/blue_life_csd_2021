@@ -144,7 +144,7 @@ session_start();
             } else {
                 // επαναεισάγουμε τα στοιχεία της δράσης στο db
                 $query = "UPDATE action SET title='$title', date='$date', location='$location',
-                  description='$description', image='$fileName', link='$link_info' WHERE id=$id;";
+                  description='$description', link='$link_info' WHERE id=$id;";
                 if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
                     $_SESSION['submit'] = "EDIT ACTION SAVED";
                 }
@@ -221,14 +221,14 @@ function print_size_of_table($link, $table){
 
 <div class="admin-page">
 
-    <div class="navbar" id="navbar_admin">
+    <div class="admin_bar" id="navbar_admin">
         <a href="Admin_user.php">Χρήστες</a>
         <a href="Admin_action.php">Δράσεις</a>
         <a href="Admin_user_in_action.php">Χρήστες σε Δράσεις</a>
         <a href="Admin_contact.php">Επικοινωνία χρηστών</a>
     </div>
 
-    <h3>Δράσεις</h3>
+    <h3 style="padding-top: 40px">Δράσεις</h3>
     <div class="actions-table">
         <p>ΟΛΕΣ ΟΙ ΔΡΑΣΕΙΣ
             <?php //εμφανίζουμε το πλήθος των δράσεων
