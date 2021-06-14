@@ -22,17 +22,6 @@ session_start();
         $_SESSION['user_deleted'] = "USER DELETED";
     }
 
-    function generateRandomString($length) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
-
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include("connect_to_database.php");
@@ -141,11 +130,14 @@ session_start();
         }
 
         if ($_POST['submit'] == 'Ενημέρωση της εικόνας του χρήστη') {
+            $id = $_SESSION['user_id'];
+
             // Αποθήκευση εικόνας στον server στο directory images/Uploads/User_Images/ και ονόματος της εικόνας στην βάση δεδομένων
             $targetDir = "images/Uploads/User_Images/";
             $fileName = basename($_FILES["image"]["name"]);
 
-            $fileName =  generateRandomString(5) . $fileName;
+            $fileType = pathinfo($fileName,PATHINFO_EXTENSION);
+            $fileName =  'User'.$id.'.'.$fileType;
 
             $targetFilePath = $targetDir . $fileName;
             $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
@@ -153,23 +145,14 @@ session_start();
             if(!empty($_FILES["image"]["name"])) {
                 $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
                 if (in_array($fileType, $allowTypes)) {
-                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
-                    }
+                    move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
                 }
             }
-
-            $id = $_SESSION['user_id'];
 
             $query = "UPDATE user SET image='$fileName' WHERE id=$id;";
             if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
                 $_SESSION['submit'] = "EDIT USER IMAGE SAVED";
             }
-
-            $_FILES["image"]["name"] = 'U' . $id . $fileName;;
-            $new_filename = $_FILES["image"]["name"];
-
-            $query = "UPDATE user SET image=$new_filename WHERE id=$id;";
-            mysqli_query($link, $query);
         }
 
         @mysqli_close($link);

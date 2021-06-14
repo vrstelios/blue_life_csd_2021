@@ -27,16 +27,6 @@ session_start();
         }
     }
 
-    function generateRandomString($length) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         include("connect_to_database.php");
         if ($_POST['submit'] == 'Ενημέρωση των δεδομένων μου') {
@@ -97,11 +87,13 @@ session_start();
         }
 
         if ($_POST['submit'] == 'Ενημέρωση της εικόνας μου') {
+            $id = $_SESSION['connected_id'];
             // Αποθήκευση εικόνας στον server στο directory images/Uploads/User_Images/ και ονόματος της εικόνας στην βάση δεδομένων
             $targetDir = "images/Uploads/User_Images/";
             $fileName = basename($_FILES["image"]["name"]);
 
-            $fileName =  generateRandomString(5) . $fileName;
+            $fileType = pathinfo($fileName,PATHINFO_EXTENSION);
+            $fileName =  'User'.$id.'.'.$fileType;
 
             $targetFilePath = $targetDir . $fileName;
             $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
@@ -109,22 +101,14 @@ session_start();
             if(!empty($_FILES["image"]["name"])) {
                 $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
                 if (in_array($fileType, $allowTypes)) {
-                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
-                    }
+                    move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
                 }
             }
-
-            $id = $_SESSION['connected_id'];
 
             $query = "UPDATE user SET image='$fileName' WHERE id=$id;";
             if ($results = mysqli_query($link, $query)) { // έλεγχος αν εκτελέστηκε επιτυχώς το ερώτημα στην βάση
                 $_SESSION['submit'] = "EDIT USER IMAGE SAVED";
             }
-
-            $_FILES["image"]["name"] = 'U' . $id . $fileName;;
-            $new_filename = $_FILES["image"]["name"];
-
-            $query = "UPDATE user SET image=$new_filename WHERE id=$id;";
             mysqli_query($link, $query);
         }
     }
@@ -289,7 +273,7 @@ if (!isset($_SESSION['connected_id'])){
         if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
             //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
             $search = $_POST["search"];
-            $query = "SELECT * FROM  action  WHERE id LIKE '%{$search}%' OR title LIKE '%{$search}%' OR date LIKE '%{$search}%' OR description LIKE '%{$search}%'  OR location LIKE '%{$search}%'";
+            $query = "SELECT * FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id WHERE id LIKE '%{$search}%' OR title LIKE '%{$search}%' OR date LIKE '%{$search}%' OR description LIKE '%{$search}%'  OR location LIKE '%{$search}%'";
             $results = mysqli_query($link, $query);
             $num_results = mysqli_num_rows($results);
             if ($num_results == 0) {    // αν δεν υπάρχουν αποτελέσματα
@@ -302,9 +286,9 @@ if (!isset($_SESSION['connected_id'])){
                             <th>Τίτλος</th>
                             <th>Ημερομηνία</th>
                             <th>Τοποθεσία</th>
-                            <th>Περιγραφή</th>
                             <th>Εικόνα</th>
                             <th>Σύνδεσμος</th>
+                            <th></th>
                             <th class='keno'></th>
                         </tr>";
                 while ($row = mysqli_fetch_array($results)) {
@@ -313,9 +297,9 @@ if (!isset($_SESSION['connected_id'])){
                     echo '<td>' . $row['title'] . '</td>';
                     echo '<td>' . $row['date'] . '</td>';
                     echo '<td>' . $row['location'] . '</td>';
-                    echo '<td>' . $row['description'] . '</td>';
                     echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
                     echo '<td>' . $row['link'] . '</td>';
+                    echo "<td><a href='?action_id=".$row['id']."'><button class='table_button cyan'>Προβολή</button></a></td>";
                     echo "<td class='keno'>
                            <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
                        </td>";
@@ -361,9 +345,9 @@ if (!isset($_SESSION['connected_id'])){
                 echo '<td>' . $row['title'] . '</td>';
                 echo '<td>' . $row['date'] . '</td>';
                 echo '<td>' . $row['location'] . '</td>';
-                echo '<td>' . $row['description'] . '</td>';
                 echo '<td><a href="?action_image='.$row['id'].'">' . $row['image'] . '</a></td>';
                 echo '<td>' . $row['link'] . '</td>';
+                echo "<td><a href='?action_id=".$row['id']."'><button class='table_button cyan'>Προβολή</button></a></td>";
                 echo "<td class='keno'>
                            <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
                       </td>";
@@ -468,6 +452,28 @@ if (!isset($_SESSION['connected_id'])){
             <strong>Σελίδα <?php //echo $page_no."/".$total_no_of_pages; ?></strong>
         </div-->
     </div>
+</div>
+
+<!-- pop up form για την προβολή μιας δράσης -->
+<div class="form-popup" id="FORM_FOR_ACTION_VIEW">
+    <form class="form-container">
+        <h3>Προβολή δράσης</h3>
+        <?php
+        if (isset($_GET['action_id'])) {
+            include("connect_to_database.php");
+            $id = $_GET['action_id'];
+            $query = "SELECT * FROM action WHERE id=$id;";
+            $results = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($results);
+            echo "<div style='font-size: 20px'><b>Τίτλος:</b> ".$row['title']."<br>
+                <b>Εικόνα:</b><br><img src='images/Uploads/Action_Images/".$row["image"]."' alt='action image' style='max-width: 300px; max-height: 300px'><br>
+                <b>Ημερομηνία:</b> ".$row['date']."<br>
+                <b>Σύνδεσμος:</b> ".$row['link']."<br>
+                <b>Περιγραφή:</b><br>".$row['description']."</div>";
+        }
+        ?>
+        <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_ACTION_VIEW')">κλείσιμο</button>
+    </form>
 </div>
 
 <!--Εμφάνιση μηνύματος ότι ο χρήστης αποχώρησε από την δράση-->
@@ -590,6 +596,9 @@ if (isset($_SESSION['user_leaves_action'])) {
 <?php
 if (isset($_GET['edit_my_profile'])) { // ο χρήστης έχει πατήσει το μολύβι για τροποιήσει τα δεδομένα του και η μεταβλητή $_GET['edit_my_profile'] έχει το id του
     echo '<script type="text/javascript">'."openForm('FORM_FOR_EDIT_USER');".'</script>';
+}
+if (isset($_GET['action_id'])) {
+    echo '<script type="text/javascript">'."openForm('FORM_FOR_ACTION_VIEW');".'</script>';
 }
 ?>
 
