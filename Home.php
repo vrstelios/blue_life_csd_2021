@@ -32,8 +32,10 @@ session_start();
     $query = "SELECT * FROM article WHERE id=1";
     $results = mysqli_query($link, $query);
     $row = mysqli_fetch_array($results);
+    echo "<div>";
     echo $row['title'] ;
     echo $row['description'] ;
+    echo "</div>";
     ?>
 
     <!--<div>
