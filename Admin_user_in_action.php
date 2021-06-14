@@ -126,7 +126,7 @@ function print_size_of_table($link, $table){
             $num_results = mysqli_num_rows($results);
             if ($num_results == 0) {    // αν δεν υπάρχουν αποτελέσματα
                 echo "<h3>Δεν βρέθηκαν αποτελέσματα αναζήτησης για " . $search ." !</h3>";
-            } else {    // αν υπάρχουν αποτελέσματα στην αναζήτηση
+            } else { // αν υπάρχουν αποτελέσματα στην αναζήτηση
                 echo "<table>
                         <tr>
                             <th>id χρήστη</th>

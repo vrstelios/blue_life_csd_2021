@@ -210,10 +210,8 @@ if (!isset($_SESSION['connected_id'])){
 
         ?>
     </div>
-    <br>
-    <br>
 
-    <h3>Οι Δράσεις μου
+    <h3 style="padding-top: 40px">Οι Δράσεις μου
         <?php //εμφανίζουμε το πλήθος των δράσεων που συμμετέχει ο συγκεκριμένος χρήστης
         if (isset($_SESSION['connected_id'])) {
             $query = "SELECT COUNT(*) FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id WHERE user_in_action.user_id = $current_user_id";
@@ -288,7 +286,7 @@ if (!isset($_SESSION['connected_id'])){
                             <th>Τοποθεσία</th>
                             <th>Εικόνα</th>
                             <th>Σύνδεσμος</th>
-                            <th></th>
+                            <th class='keno'></th>
                             <th class='keno'></th>
                         </tr>";
                 while ($row = mysqli_fetch_array($results)) {
@@ -318,9 +316,9 @@ if (!isset($_SESSION['connected_id'])){
                             <th>Τίτλος</th>
                             <th>Ημερομηνία</th>
                             <th>Τοποθεσία</th>
-                            <th>Περιγραφή</th>
                             <th>Εικόνα</th>
                             <th>Σύνδεσμος</th>
+                            <th class='keno'></th>
                             <th class='keno'></th>
                         </tr>";
             // εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10
