@@ -268,7 +268,7 @@ if (!isset($_SESSION['connected_id'])){
         </form>
 
         <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
+        if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
             //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
             $search = $_POST["search"];
             $query = "SELECT * FROM user_in_action INNER JOIN action ON user_in_action.action_id = action.id WHERE id LIKE '%{$search}%' OR title LIKE '%{$search}%' OR date LIKE '%{$search}%' OR description LIKE '%{$search}%'  OR location LIKE '%{$search}%'";
@@ -299,7 +299,7 @@ if (!isset($_SESSION['connected_id'])){
                     echo '<td>' . $row['link'] . '</td>';
                     echo "<td><a href='?action_id=".$row['id']."'><button class='table_button cyan'>Προβολή</button></a></td>";
                     echo "<td class='keno'>
-                           <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
+                           <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete' title='ακύρωση συμμετοχής'></a>                   
                        </td>";
                     echo '</tr>';
                 }
@@ -347,7 +347,7 @@ if (!isset($_SESSION['connected_id'])){
                 echo '<td>' . $row['link'] . '</td>';
                 echo "<td><a href='?action_id=".$row['id']."'><button class='table_button cyan'>Προβολή</button></a></td>";
                 echo "<td class='keno'>
-                           <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete'></a>                   
+                           <a href='?delete_action=" . $row['id'] . "'><img src='images/6.Admin/delete-bin.png' alt='delete' title='ακύρωση συμμετοχής'></a>                   
                       </td>";
                 echo '</tr>';
             }

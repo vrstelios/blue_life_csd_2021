@@ -13,3 +13,21 @@
     background-color: white;
     padding: 1% 10% 1% 10%;
 }
+
+@media screen and (max-width: 1200px) {
+    .results_content {
+        padding: 2% 8% 2% 8%;
+    }
+    .results {
+        padding: 1% 4% 1% 4%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .results_content {
+        padding: 2% 4% 2% 4%;
+    }
+    .results {
+        padding: 1% 2% 1% 2%;
+    }
+}
