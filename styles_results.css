@@ -1,0 +1,10 @@
+.results_content * {
+    box-sizing: border-box;
+}
+
+.results_content {
+    padding: 2% 16% 2% 16%;
+    text-align: justify;
+    background-color: white;
+    display: inline-block;
+}

@@ -39,18 +39,20 @@
         }
     ?>
 
-    <!--<div class="search-box">
+    <!--old search
+    <div class="search-box">
       <input type="text" class="search-box-input" placeholder="Αναζήτησε..">
       <button class="search-box-btn">
         <i class="search-box-icon material-icons"><img src="images/Main/magnifying-glass-blue.png" alt="search" style="width:16px;height:16px "></i>
       </button>
     </div>
-
   </div>-->
+
       <a class="search-field">
-          <form action="javascript:" class="search-bar">
-              <input type="search" name="search" pattern=".*\S.*" required>
-              <button class="search-btn" type="submit">
+          <!--form action="javascript:" class="search-bar" method="post"-->
+          <form action="Results.php" class="search-bar" method="post">
+              <input type="search" placeholder="Αναζητήστε" name="navigation_search" pattern=".*\S.*" required>
+              <button type="submit" name="submit" class="search-btn">
                   <span class="styl">Search</span>
               </button>
           </form>
@@ -58,6 +60,8 @@
       <div class="title_menu hide" id="title_menu">Blue Life</div>
       <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="displayMobileMenuButton()">&#9776;</a>
   </div>
+
+
 
   <script>
     function displayMobileMenuButton() { // για κινητό, εμφανίζει το μενού πάνω δεξιά με 3 γραμμές
