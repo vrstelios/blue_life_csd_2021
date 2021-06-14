@@ -309,7 +309,6 @@ if (!isset($_SESSION['connected_id'])){
             $_POST["search"] = null;
 
         } else { // αν ο χρήστης δεν πατήσει το κουμπί για αναζήτηση (δεν κληθεί η POST)
-            //echo '<h4>'.'DEN KANEI method post == Αναζήτηση' . '</h4>';
             echo "<table>
                         <tr>
                             <th>id</th>

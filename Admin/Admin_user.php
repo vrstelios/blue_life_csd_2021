@@ -16,6 +16,7 @@ session_start();
 
     function delete_a_user($delete_user_id)
     {
+        $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include("../General-components/connect_to_database.php");
         $query = "DELETE FROM user WHERE id=$delete_user_id";
         mysqli_query($link, $query);
@@ -23,7 +24,7 @@ session_start();
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+        $link = 1;
         include("../General-components/connect_to_database.php");
         if ($_POST['submit'] == 'Καταχώρηση χρήστη'){
             if (isset($_POST['username'])) {
@@ -145,7 +146,7 @@ session_start();
             if(!empty($_FILES["image"]["name"])) {
                 //$allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
                 //if (in_array($fileType, $allowTypes)) {
-                    move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
+                move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
                 //}
             }
 
@@ -210,11 +211,9 @@ function print_size_of_table($link, $table){
             <button class="table_button" onclick="openForm('FORM_FOR_USER')">προσθήκη χρήστη</button>
             <?php
             // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
-
-            //prepaging("SELECT COUNT(*) As total_records FROM `user`");
-
-            include("../General-components/connect_to_database.php");
             // Η σελιδοποίηση έγινε με βάση τον κώδικα στην σελίδα https://www.allphptricks.com/create-simple-pagination-using-php-and-mysqli/
+            include("../General-components/connect_to_database.php");
+
             if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                 $page_no = $_GET['page_no'];
             } else {
@@ -259,17 +258,10 @@ function print_size_of_table($link, $table){
 
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
-            //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
             $search = $_POST["search"];
             $results = null;
             $query = "SELECT * FROM  user  WHERE id LIKE '{$search}' OR username LIKE '%{$search}%' OR email LIKE '%{$search}%' OR
                            last_name LIKE '%{$search}%' OR first_name LIKE '%{$search}%'  OR region LIKE '%{$search}%' OR age LIKE '{$search}'";
-            /*if (is_numeric($search)) {
-                $search = intval($search);
-                $query = ("SELECT * FROM  user  WHERE id=$search OR age=$search");
-            } else {
-                $query = ("SELECT * FROM  user  WHERE username LIKE '%{$search}%' OR email LIKE '%{$search}%' OR last_name LIKE '%{$search}%' OR first_name LIKE '%{$search}%'  OR region LIKE '%{$search}%'");
-            }*/
             $results = mysqli_query($link, $query);
             $num_results = mysqli_num_rows($results);
             if ($num_results == 0) {    // αν δεν υπάρχουν αποτελέσματα

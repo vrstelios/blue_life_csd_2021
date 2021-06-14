@@ -11,15 +11,13 @@ session_start();
     <link rel="stylesheet" href="styles_signin.css">
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        //$link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+
         include_once("../General-components/connect_to_database.php");
-        //$_SESSION['connected_id'] = 0; //temporary μόνο και μόνο για να μην εμφανίζεται warning στο navigation.php
+
         if (isset($_POST['user'])) { // ο χρήστης έχει δώσει κάποια τιμή στο πεδίο username του Login-Register.php ( και έχει πατήσει το κουμπί Είσοδος)
-            //echo '<br>' . $username . '<br>';
+
             $username = $_POST['user'];
             if (isset($_POST['pass'])) { // ο χρήστης έχει δώσει επίσης κάποια τιμή στο πεδίο password του Login-Register.php
-                //echo $password . '<br>';
-                //echo '<h1>' ."YPARXEI TO \$_POST['pass']!!!!!!!" . '</h1>';
                 $password = $_POST['pass'];
 
                     $query = "SELECT id, password FROM user WHERE username='$username' "; // έλεγχος του username αν υπάρχει στη βάση
@@ -93,9 +91,6 @@ session_start();
                 <div class="modal" id="modal">
                     <button class="modal-close-btn" id="close-btn" onclick="ClosePopUp()">&times;</button>
                     <p>Ξέχασες τον κωδικό σου; Κανένα πρόβλημα! Στείλε μας μήνυμα στο email <a href="mailto:bluelifeauth@gmail.com"><i>bluelifeauth@gmail.com</i></a> και θα σου στείλουμε εμείς τον καινούριο σου κωδικό.</p>
-                   <!-- <label class="email_register"><b>Διεύθυνση email</b></label><br/>
-                    <input type="text_email" placeholder="Γράψε email" size="37"><br/><br/>
-                    <button class="btn_submit" onclick="ClosePopUp()">Υποβολή</button>-->
                 </div>
             </div>
         </form>

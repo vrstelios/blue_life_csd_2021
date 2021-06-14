@@ -29,7 +29,6 @@ session_start();
 include("../General-components/connect_to_database.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["navigation_search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
     $navigation_search = $_POST["navigation_search"];
-    //echo '<h4>'.'KANEI method post == Αναζήτηση, navigation_search= '. $navigation_search . '</h4>';
 
     $query = "SELECT * FROM article WHERE title LIKE '%{$navigation_search}%' OR
                           description LIKE '%{$navigation_search}%'  OR page LIKE '%{$navigation_search}%'"; // to page LIKe να φύγει??????

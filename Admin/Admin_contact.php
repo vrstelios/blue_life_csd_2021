@@ -102,7 +102,6 @@ function print_size_of_table($link, $table){
 
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
-            //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
             $search = $_POST["search"];
             $query = ("SELECT * FROM  contact  WHERE id LIKE '%{$search}%' OR email LIKE '%{$search}%' OR last_name LIKE '%{$search}%' OR date_of_comment LIKE '%{$search}%' OR comment LIKE '%{$search}%'  OR first_name LIKE '%{$search}%'");
             $results = mysqli_query($link, $query);
@@ -138,7 +137,6 @@ function print_size_of_table($link, $table){
             $_POST["search"] = null;
 
         } else { // αν ο χρήστης δεν πατήσει το κουμπί για αναζήτηση (δεν κληθεί η POST)
-            //echo '<h4>'.'DEN KANEI method post == Αναζήτηση' . '</h4>';
             echo "<table>
                         <tr>
                             <th>id</th>

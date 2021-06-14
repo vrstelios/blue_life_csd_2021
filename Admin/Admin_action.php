@@ -16,6 +16,7 @@ session_start();
 
     function delete_an_action($delete_action_id)
     {
+        $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include("../General-components/connect_to_database.php");
         $delete_query = 'DELETE FROM action WHERE id=$delete_action_id';
         //$query = "DELETE FROM action WHERE id='$delete_action_id'";
@@ -213,7 +214,9 @@ function print_size_of_table($link, $table){
             <button class="table_button" onclick="openForm('FORM_FOR_ACTION')">προσθήκη δράσης</button>
             <?php
             // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
+            // Η σελιδοποίηση έγινε με βάση τον κώδικα στην σελίδα https://www.allphptricks.com/create-simple-pagination-using-php-and-mysqli/
             include("../General-components/connect_to_database.php");
+
             if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                 $page_no = $_GET['page_no'];
             } else {
@@ -253,8 +256,6 @@ function print_size_of_table($link, $table){
 
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
-            //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
-            //!include ("../General-components/connect_to_database.php");
             $search = $_POST["search"];
             //$results = null;
             $query = "SELECT * FROM  action  WHERE id LIKE '%{$search}%' OR title LIKE '%{$search}%' OR date LIKE '%{$search}%' OR description LIKE '%{$search}%'  OR location LIKE '%{$search}%'";

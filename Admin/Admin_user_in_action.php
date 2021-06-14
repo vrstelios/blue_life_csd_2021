@@ -17,6 +17,7 @@ session_start();
 
     function delete_user_in_action($delete_user_id, $delete_action_id)
     {
+        $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include("../General-components/connect_to_database.php");
         $query = "DELETE FROM user_in_action WHERE user_id=$delete_user_id AND action_id=$delete_action_id";
         mysqli_query($link, $query);
@@ -115,10 +116,8 @@ function print_size_of_table($link, $table){
 
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" AND @$_POST["search"]!="") { // αν ο χρήστης πατήσει το κουμπί για αναζήτηση ( κληθεί η POST)
-            //echo '<h4>'.'KANEI method post == Αναζήτηση' . '</h4>';
-            //!include ("../General-components/connect_to_database.php");
             $search = $_POST["search"];
-            //$results = null;
+
             $query =  "SELECT user_in_action.user_id, user_in_action.action_id, user.username, action.title, user_in_action.date_joined
                       FROM user, user_in_action, action
                       WHERE user.id=user_in_action.user_id AND user_in_action.action_id=action.id AND (user_in_action.user_id  LIKE '%{$search}%' OR user_in_action.action_id LIKE '%{$search}%' OR user.username LIKE '%{$search}%' OR action.title LIKE '%{$search}%' OR user_in_action.date_joined LIKE '%{$search}%')";
@@ -153,7 +152,6 @@ function print_size_of_table($link, $table){
             $_POST["search"] = null;
 
         } else { // αν ο χρήστης δεν πατήσει το κουμπί για αναζήτηση (δεν κληθεί η POST)
-            //echo '<h4>'.'DEN KANEI method post == Αναζήτηση' . '</h4>';
             echo "<table>
                         <tr>
                             <th>id χρήστη</th>
