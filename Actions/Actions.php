@@ -10,8 +10,8 @@ session_start();
     <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_actions.css">
     <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $action_id = $_SESSION['action_id'];
+        if (isset($_GET['pressed_action'])) {
+            $action_id = $_GET['pressed_action'];
             $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
             include("../General-components/connect_to_database.php");
             if (!isset($_SESSION['connected_id'])) { // αν ο χρήστης δεν είναι συνδεδεμένος πρέπει πρώτα να συνδεθεί
@@ -96,33 +96,27 @@ while ($row = mysqli_fetch_array($results)) {
     echo            "</div>
                 </div>";
 
-    echo            "<div class='column button'><form action='Actions.php' method='post' class='formJoinActions'>";
+    echo            "<div class='column button'>";
     $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
     include("../General-components/connect_to_database.php");
+    $action_id = $row['id'];
     if (!isset($_SESSION['connected_id'])){ // αν ο χρήστης δεν είναι συνδεδεμένος πρέπει πρώτα να συνδεθεί
-        echo "<input type='submit' name='button_user_joins_action#" . $row['id'] . "' value='Θέλω να συμμετέχω και εγώ' class='buttonJoinActions'/>";
+        echo "<a href='?pressed_action=$action_id'><button class='buttonJoinActions'>Θέλω να συμμετέχω και εγώ</button></a>";
     } else {
         $id = $_SESSION['connected_id'];
-        $action_id = $row['id'];
         $query = "SELECT user_id FROM user_in_action WHERE user_id=$id AND action_id=$action_id";
         $results2 = mysqli_query($link, $query);
         $num_results = mysqli_num_rows($results2);
         if ($num_results == 0){ //ο χρήστης δεν συμμετέχει ήδη σε αυτή την δράση
-            echo "<input type='submit' name='button_user_joins_action#" . $row['id'] . "' value='Θέλω να συμμετέχω και εγώ' class='buttonJoinActions'/>";
+            echo "<a href='?pressed_action=$action_id'><button class='buttonJoinActions'>Θέλω να συμμετέχω και εγώ</button></a>";
         } else {
-            echo "<input type='submit' name='button_user_joins_action#" . $row['id'] . "' value='ακύρωση συμμετοχής' class='buttonJoinActions' style='background-color: #f44336;'/>";
+            echo "<a href='?pressed_action=$action_id'><button class='buttonJoinActions' style='background-color: #f44336;'>ακύρωση συμμετοχής</button></a>";
         }
     }
     //echo                "<input type='submit' name='button_user_joins_action#" . $row['id'] . "' value='Θέλω να συμμετέχω και εγώ' class='buttonJoinActions'/>";
-    echo            "</form></div>";
+    echo            "</div>";
     echo    "</div>";
     echo "</article>";
-    $action_id = $row['id'];
-    $action_button_pressed = 'button_user_joins_action#' . $action_id;
-
-    if(array_key_exists($action_button_pressed, $_POST)) { // αν ο χρήστης πατήσει το κουμπί join action με name = $action_button_pressed
-        $_SESSION['action_id'] = $action_id;
-    }
 }
 
 ?>
