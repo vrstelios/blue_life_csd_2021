@@ -373,7 +373,7 @@ if (!isset($_SESSION['connected_id'])){
             $results = mysqli_query($link, $query);
             $row = mysqli_fetch_array($results);
             echo "<div style='font-size: 20px'><b>Τίτλος:</b> ".$row['title']."<br>
-                <b>Εικόνα:</b><br><img src='images/Uploads/Action_Images/".$row["image"]."' alt='action image' style='max-width: 300px; max-height: 300px'><br>
+                <b>Εικόνα:</b><br><img src='../images/Uploads/Action_Images/".$row["image"]."' alt='action image' style='max-width: 300px; max-height: 300px'><br>
                 <b>Ημερομηνία:</b> ".$row['date']."<br>
                 <b>Σύνδεσμος:</b> ".$row['link']."<br>
                 <b>Περιγραφή:</b><br>".$row['description']."</div>";
@@ -521,7 +521,7 @@ if (isset($_GET['action_id'])) {
             $row = mysqli_fetch_array($results);
             echo '<h3>Προβολή εικόνας της δράσης "'.$row["title"].'"</h3><br>
                 <div style="display: flex;align-items: center;justify-content: center;">
-                <img height="400px" alt="action image" src="images/Uploads/Action_Images/'.$row["image"].'"></div>';
+                <img height="400px" alt="action image" src="../images/Uploads/Action_Images/'.$row["image"].'"></div>';
         }
         ?>
         <button type="button" class="btn_cancel" onclick="closeForm('FORM_FOR_ACTION_IMAGE')">κλείσιμο</button>
