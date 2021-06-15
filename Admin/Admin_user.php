@@ -298,7 +298,7 @@ function print_size_of_table($link, $table){
                     echo '<td>' . $row['email'] . '</td>';
                     echo '<td>' . $row['age'] . '</td>';
                     echo '<td>' . $row['region'] . '</td>';
-                    echo '<td>' . $row['image'] . '</td>';
+                    echo '<td><a href="?user_image=' . $row['id'] . '">' . $row['image'] . '</a></td>';
                     if ($row['id'] == 1) { //ο admin δεν μπορεί να αλλάξει τον κωδικό ή/και τα στοιχεία του
                         echo "<td class='keno'>";
                     } else {
@@ -417,7 +417,6 @@ function print_size_of_table($link, $table){
     <!-- pop up form για την τροποποίηση των στοιχείων ενός χρήστη -->
     <div class="form-popup" id="FORM_FOR_EDIT_USER" role="dialog">
         <form action="Admin_user.php" method="post" enctype="multipart/form-data" class="form-container">
-            <h3>Τροποποίηση των δεδομένων του χρήστη</h3>
             <?php
             if (isset($_GET['edit_user'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
                 include("../General-components/connect_to_database.php");
@@ -426,6 +425,7 @@ function print_size_of_table($link, $table){
                 $results = mysqli_query($link, $query);
                 $row = mysqli_fetch_array($results);
                 $_SESSION['user_id'] = $id;
+                echo '<h3>Τροποποίηση των δεδομένων του χρήστη '.$row['username'].'</h3>';
                 echo '<p>
                 <label for="username"><b>Username</b><br>
                     <input type="text" placeholder="Γράψε username" name="username" value="'.$row['username'].'" required>
@@ -471,15 +471,15 @@ function print_size_of_table($link, $table){
     <!-- pop up form για την τροποποίηση της εικόνας ενός χρήστη -->
     <div class="form-popup" id="FORM_FOR_EDIT_USER_IMAGE" role="dialog">
         <form action="Admin_user.php" method="post" enctype="multipart/form-data" class="form-container">
-            <h3>Τροποποίηση της εικόνας του χρήστη</h3>
             <?php
             if (isset($_GET['edit_user_image'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
                 include("../General-components/connect_to_database.php");
                 $id = $_GET['edit_user_image'];
-                $query = "SELECT image FROM user WHERE id=$id;";
+                $query = "SELECT username,image FROM user WHERE id=$id;";
                 $results = mysqli_query($link, $query);
                 $row = mysqli_fetch_array($results);
                 $_SESSION['user_id'] = $id;
+                echo '<h3>Τροποποίηση της εικόνας του χρήστη '.$row['username'].'</h3>';
                 echo '<p class="input_image">
                     <label for="image"><b>Εικόνα</b></label><br>
                     <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" value="'.$row['image'].'" required>

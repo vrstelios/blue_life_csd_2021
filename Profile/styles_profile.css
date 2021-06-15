@@ -261,16 +261,13 @@ ul > li:before {
 }
 
 .sort_dropdown .sort_dropbtn {
-    float: right;
-    padding: 6px 10px;
-    margin: 4px;
+    border: none;
+    outline: none;
     color: white;
     background-color: #4CAF50;
-    border: none;
+    padding: 6px 10px;
+    margin: 4px;
     border-radius: 6px;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 .sort_dropdown a:hover, .sort_dropdown:hover .dropbtn {
