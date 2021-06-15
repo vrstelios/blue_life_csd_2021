@@ -18,7 +18,7 @@ session_start();
     {
         $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
         include("../General-components/connect_to_database.php");
-        $delete_query = 'DELETE FROM action WHERE id=$delete_action_id';
+        $delete_query = "DELETE FROM action WHERE id=$delete_action_id";
         //$query = "DELETE FROM action WHERE id='$delete_action_id'";
         mysqli_query($link, $delete_query);
         $_SESSION['action_deleted'] = "ACTION DELETED";
