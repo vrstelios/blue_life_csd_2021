@@ -80,9 +80,7 @@ session_start();
             <label class="pass"><b> Κωδικός </b></label>
             <input type="password" placeholder="Εισάγετε Κωδικό" name="pass" size="35" required>
 
-            <!--button class="btn_login">Είσοδος</button   Παλιό-->
-            <!--input type="submit" name="submit" value="Είσοδος" class="btn_login"/ Αυτό ή-->
-            <input type="submit" value="Είσοδος" class="btn_login"/> <!-- ...αυτό;-->
+            <input type="submit" value="Είσοδος" class="btn_login"/>
 
             <button onclick="document.location='Register.php'" class="btn_SignUp">Δημιούργησε τον δικό σου λογαριασμό!</button>
 

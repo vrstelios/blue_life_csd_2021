@@ -80,7 +80,7 @@ while ($row = mysqli_fetch_array($results)) {
     echo '<article class="action">
              <div class="action_row">
                 <div class="column image">';
-    echo            '<img src="images/Uploads/Action_Images/' . $row['image'] . '/" alt="Άνθωπος κάτω από το νερό!"/>';
+    echo            '<img src="../images/Uploads/Action_Images/' . $row['image'] . '/" alt="Άνθωπος κάτω από το νερό!"/>';
     echo        '</div>
                 <div class="column text" >
                     <div>';
