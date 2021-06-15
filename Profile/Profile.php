@@ -223,7 +223,7 @@ if (!isset($_SESSION['connected_id'])){
     </h3>
     <div class="actions-table">
         <p>
-            <a href="Actions/Actions.php"> <button class="table_button">Συμμετοχή σε δράση</button></a>
+            <a href="../Actions/Actions.php"> <button class="table_button">Συμμετοχή σε δράση</button></a>
             <?php
             // προεργασίες του paging (εμφανίζουμε τον πίνακα των χρηστών με τα στοιχεία τους, σελιδοποιημένο κατά 10)
             include("../General-components/connect_to_database.php");
