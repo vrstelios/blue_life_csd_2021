@@ -30,7 +30,7 @@ session_start();
 <div class="home-page-title">
     <?php
     $query = "SELECT * FROM article WHERE id=1";
-    $results = mysqli_query($link, $query);
+    $results = mysqli_query($link, $query); // Το error που εμφανίζεται εδώ είναι "εικονικό", δεν προκαλεί κανένα πρόβλημα. Το ίδιο error υπάρχει και σε κάποιες άλλες σελίδες
     $row = mysqli_fetch_array($results);
     echo "<div><h5><i>";
     echo $row['title'] ;
@@ -40,10 +40,6 @@ session_start();
     echo "</i></h6></div>";
     ?>
 
-    <!--<div>
-        <h5><i>"Πόσο άστοχο είναι να αποκαλούμε αυτόν τον πλανήτη Γη,<br> ενώ είναι εντελώς ξεκάθαρο ότι είναι Ωκεανός"</i></h5>
-        <h6><i> Άρθουρ Κλαρκ&emsp;</i></h6>
-    </div>-->
 </div>
 
 <!---------------Περιεχόμενο αρχικής σελίδας--------------->
