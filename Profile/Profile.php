@@ -250,7 +250,7 @@ if (!isset($_SESSION['connected_id'])){
             $second_last = $total_no_of_pages - 1; // total pages minus 1
 
             echo "<div class='sort_dropdown'>
-                    <button class='sort_dropbtn'>Ταξινόμηση</button>
+                        <button class='sort_dropbtn'>Ταξινόμηση</button>
                         <div class='sort_dropdown-content'>";
             echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_id_action'> ". 'id' . "</a>";
             echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_title'> ". 'Τίτλος' . "</a>";
@@ -258,7 +258,6 @@ if (!isset($_SESSION['connected_id'])){
             echo       "<a href='Profile.php?page_no=".$page_no."&sortBy_location'> ". 'Τοποθεσία' . "</a>";
             echo   "</div>";
             echo "</div>";
-
             ?>
         </p>
 
@@ -520,7 +519,7 @@ if (isset($_GET['action_id'])) {
             $query = "SELECT title, image FROM action WHERE id=$id;";
             $results = mysqli_query($link, $query);
             $row = mysqli_fetch_array($results);
-            echo '<h3>Προβολή εικόνας της δράσης '.$row["title"].'</h3><br>
+            echo '<h3>Προβολή εικόνας της δράσης "'.$row["title"].'"</h3><br>
                 <div style="display: flex;align-items: center;justify-content: center;">
                 <img height="400px" alt="action image" src="images/Uploads/Action_Images/'.$row["image"].'"></div>';
         }
@@ -547,7 +546,7 @@ if (isset($_GET['action_image'])) {
 
 <div class="alert" id="EDIT_USER_SAVED">
     <span class="closeBtn" onclick="closeAlertMessage('EDIT_USER_SAVED')">&times;</span>
-    <strong>Επιτυχία!</strong> Τα δεδομένα του χρήστη τροποποιήθηκαν
+    <strong>Επιτυχία!</strong> Τα δεδομένα σου τροποποιήθηκαν
 </div>
 
 <div class="alert" id="EDIT_USER_IMAGE_SAVED">

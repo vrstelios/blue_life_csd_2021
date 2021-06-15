@@ -422,8 +422,7 @@ function print_size_of_table($link, $table){
 
     <!-- pop up form για την τροποποίηση των δεδομένων μιας δράσης από τον διαχειριστή -->
     <div class="form-popup" id="FORM_FOR_EDIT_ACTION">
-        <form action="Admin_action.php" method="post" enctype="multipart/form-data" class="form-container">
-            <h3>Τροποποίηση των δεδομένων της δράσης</h3>
+        <form action="Admin_action.php" method="post" class="form-container">
             <?php
             if (isset($_GET['edit_action'])) { // ο χρήστης έχει πατήσει τον κάδο για να αποχωρήσει από κάποια δράση και η μεταβλητή $_GET['leave_action'] έχει το id αυτής της δράσης
                 include("../General-components/connect_to_database.php");
@@ -432,6 +431,7 @@ function print_size_of_table($link, $table){
                 $results = mysqli_query($link, $query);
                 $row = mysqli_fetch_array($results);
                 $_SESSION['action_id'] = $id;
+                echo '<h3>Τροποποίηση των δεδομένων της δράσης "'.$row['title'].'"</h3>';
                 echo '<p>
                     <label for="title"><b>Τίτλος</b><br>
                         <input type="text" placeholder="Δώσε τίτλο" name="title" value="'.$row['title'].'" required>
@@ -467,15 +467,15 @@ function print_size_of_table($link, $table){
     <!-- pop up form για την τροποποίηση των δεδομένων μιας δράσης από τον διαχειριστή -->
     <div class="form-popup" id="FORM_FOR_EDIT_ACTION_IMAGE">
         <form action="Admin_action.php" method="post" enctype="multipart/form-data" class="form-container">
-            <h3>Τροποποίηση της εικόνας της δράσης</h3>
             <?php
             if (isset($_GET['edit_action_image'])) {
                 include("../General-components/connect_to_database.php");
                 $id = $_GET['edit_action_image'];
-                $query = "SELECT image FROM action WHERE id=$id;";
+                $query = "SELECT title,image FROM action WHERE id=$id;";
                 $results = mysqli_query($link, $query);
                 $row = mysqli_fetch_array($results);
                 $_SESSION['action_id'] = $id;
+                echo '<h3>Τροποποίηση της εικόνας της δράσης "'.$row['title'].'"</h3>';
                 echo '<p class="input_image">
                     <label for="image"><b>Εικόνα</b></label><br>
                     <input type="file" id="img" name="image" accept="image/*" placeholder="Δώσε εικόνα" value="'.$row['image'].'" required>

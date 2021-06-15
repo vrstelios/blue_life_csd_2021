@@ -9,6 +9,32 @@ session_start();
     <link rel="icon" href="../images/Main/BlueLife-icon.ico">
     <link rel="stylesheet" href="../General-components/styles_main.css">
     <link rel="stylesheet" href="styles_actions.css">
+    <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $action_id = $_SESSION['action_id'];
+            $link = 1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+            include("../General-components/connect_to_database.php");
+            if (!isset($_SESSION['connected_id'])) { // αν ο χρήστης δεν είναι συνδεδεμένος πρέπει πρώτα να συνδεθεί
+                $_SESSION['submit_action'] = "connect_first";
+            } else {
+                $id = $_SESSION['connected_id'];
+                $query = "SELECT user_id FROM user_in_action WHERE user_id=$id AND action_id=$action_id";
+                $results = mysqli_query($link, $query);
+                $num_results = mysqli_num_rows($results);
+
+                if ($num_results == 0) { //ο χρήστης δεν συμμετέχει ήδη σε αυτή την δράση
+                    $_SESSION['submit_action'] = "joined_action";
+                    $query = "INSERT INTO user_in_action (user_id, action_id, date_joined) 
+                      VALUES ('$id', '$action_id', CURRENT_DATE())";
+                    mysqli_query($link, $query);
+                } else {
+                    $query = "DELETE FROM user_in_action WHERE user_id=$id AND action_id=$action_id";
+                    mysqli_query($link, $query);
+                    $_SESSION['submit_action'] = "cancel_join";
+                }
+            }
+        }
+    ?>
 </head>
 <body>
 
@@ -70,8 +96,24 @@ while ($row = mysqli_fetch_array($results)) {
     echo            "</div>
                 </div>";
 
-    echo            "<div class='column button'><form method='post' class='formJoinActions'>";
-    echo                "<input type='submit' name='button_user_joins_action#" . $row['id'] . "' value='Θέλω να συμμετέχω και εγώ' class='buttonJoinActions'/>";
+    echo            "<div class='column button'><form action='Actions.php' method='post' class='formJoinActions'>";
+    $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
+    include("../General-components/connect_to_database.php");
+    if (!isset($_SESSION['connected_id'])){ // αν ο χρήστης δεν είναι συνδεδεμένος πρέπει πρώτα να συνδεθεί
+        echo "<input type='submit' name='button_user_joins_action#" . $row['id'] . "' value='Θέλω να συμμετέχω και εγώ' class='buttonJoinActions'/>";
+    } else {
+        $id = $_SESSION['connected_id'];
+        $action_id = $row['id'];
+        $query = "SELECT user_id FROM user_in_action WHERE user_id=$id AND action_id=$action_id";
+        $results2 = mysqli_query($link, $query);
+        $num_results = mysqli_num_rows($results2);
+        if ($num_results == 0){ //ο χρήστης δεν συμμετέχει ήδη σε αυτή την δράση
+            echo "<input type='submit' name='button_user_joins_action#" . $row['id'] . "' value='Θέλω να συμμετέχω και εγώ' class='buttonJoinActions'/>";
+        } else {
+            echo "<input type='submit' name='button_user_joins_action#" . $row['id'] . "' value='ακύρωση συμμετοχής' class='buttonJoinActions' style='background-color: #f44336;'/>";
+        }
+    }
+    //echo                "<input type='submit' name='button_user_joins_action#" . $row['id'] . "' value='Θέλω να συμμετέχω και εγώ' class='buttonJoinActions'/>";
     echo            "</form></div>";
     echo    "</div>";
     echo "</article>";
@@ -79,7 +121,7 @@ while ($row = mysqli_fetch_array($results)) {
     $action_button_pressed = 'button_user_joins_action#' . $action_id;
 
     if(array_key_exists($action_button_pressed, $_POST)) { // αν ο χρήστης πατήσει το κουμπί join action με name = $action_button_pressed
-        user_joins_action($action_id);
+        $_SESSION['action_id'] = $action_id;
     }
 }
 
@@ -95,9 +137,9 @@ while ($row = mysqli_fetch_array($results)) {
     <strong>Ουπς!</strong> Για να δηλώσεις συμμετοχή σε μια δράση πρέπει πρώτα να συνδεθείς!
 </div>
 
-<div class="alert" id="already_joined">
-    <span class="closeBtn" onclick="closeAlertMessage('already_joined')">&times;</span>
-    <strong>Συμμετέχεις ήδη στην δράση!</strong>
+<div class="alert" id="cancel_join">
+    <span class="closeBtn" onclick="closeAlertMessage('cancel_join')">&times;</span>
+    <strong>Αποχώρησες από τη δράση!</strong>
 </div>
 
 <script>
@@ -114,28 +156,6 @@ while ($row = mysqli_fetch_array($results)) {
 </script>
 
 <?php
-function user_joins_action($action_id) {
-    $link=1; // άχρηστη γραμμή κώδικα, απλά για να μην εμφανίζει error στην μεταβλητή $link παρακάτω
-    include("../General-components/connect_to_database.php");
-    if (!isset($_SESSION['connected_id'])){ // αν ο χρήστης δεν είναι συνδεδεμένος πρέπει πρώτα να συνδεθεί
-        $_SESSION['submit_action'] = "connect_first";
-    } else {
-        $id = $_SESSION['connected_id'];
-        $query = "SELECT user_id FROM user_in_action WHERE user_id=$id AND action_id=$action_id";
-        $results = mysqli_query($link, $query);
-        $num_results = mysqli_num_rows($results);
-
-        if ($num_results == 0){ //ο χρήστης δεν συμμετέχει ήδη σε αυτή την δράση
-            $_SESSION['submit_action'] = "joined_action";
-            $query = "INSERT INTO user_in_action (user_id, action_id, date_joined) 
-                  VALUES ('$id', '$action_id', CURRENT_DATE())";
-            mysqli_query($link, $query);
-        } else {
-            $_SESSION['submit_action'] = "already_joined";
-        }
-    }
-}
-
 if (isset($_SESSION['submit_action'])) {
     if ($_SESSION['submit_action'] == "connect_first") {
         echo '<script  type="text/javascript">openAlertMessage("connect_first");</script>';
@@ -143,12 +163,11 @@ if (isset($_SESSION['submit_action'])) {
     } else if ($_SESSION['submit_action'] == "joined_action") {
         echo '<script  type="text/javascript">openAlertMessage("joined_action");</script>';
         $_SESSION['submit_action'] = null;
-    } else if ($_SESSION['submit_action'] == "already_joined") {
-        echo '<script  type="text/javascript">openAlertMessage("already_joined");</script>';
+    } else if ($_SESSION['submit_action'] == "cancel_join") {
+        echo '<script  type="text/javascript">openAlertMessage("cancel_join");</script>';
         $_SESSION['submit_action'] = null;
     }
 }
-
 ?>
 
 <!-----------------Go to top button----------------->
