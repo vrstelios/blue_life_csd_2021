@@ -10,7 +10,7 @@ To Blue Life είναι μια μια ιστοσελίδα που αναπτύξ
 ![Screenshot_4](https://user-images.githubusercontent.com/56198786/128641777-91a56892-1545-457c-bb32-f6e6b1e3da24.png)
 ![Screenshot_7](https://user-images.githubusercontent.com/56198786/128641783-f4beee48-86f7-4aeb-82df-4455b0a94f21.png)
 
-# Προβολή σε κινητό
+# Προβολή σε κινητό <br>
 <img src="https://user-images.githubusercontent.com/56134371/128642128-6b3d4d56-1396-43da-a98a-436f067ceddf.png" width="250">
 <img src="https://user-images.githubusercontent.com/56134371/128642136-f5c2ffb0-128c-47c7-998c-f831b2b0472d.png" width="250">
 <img src="https://user-images.githubusercontent.com/56134371/128642143-d14bc65a-a485-43c6-9bf8-a365a3403f1c.png" width="250">
